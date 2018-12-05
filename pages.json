@@ -13,7 +13,7 @@
 			}
 		},
 		 
-		{
+		{ 
 			"path": "pages/cart/cart",
 			"style": {
 				"navigationBarTitleText": "购物车" 
@@ -28,7 +28,7 @@
 		}, 
 		 
 		{
-			"path": "pages/category/categorySearch",
+			"path": "pages/category/search",
 			"style": {
 				"navigationBarTitleText": "分类搜索" 
 			}
@@ -38,6 +38,78 @@
 			"path": "pages/myself/myself",
 			"style": {
 				"navigationBarTitleText": "个人中心" 
+			}
+		},
+		{
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址" 
+			}
+		},
+		{ 
+			"path": "pages/address/addAddress",
+			"style": {
+				"navigationBarTitleText": "增加收货地址" 
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单列表" 
+			}
+		},
+		{
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "反馈" 
+			}
+		},
+		{
+			"path": "pages/about/about",
+			"style": {
+				"navigationBarTitleText": "关于" 
+			}
+		},
+		{
+			"path": "pages/customerService/index",
+			"style": {
+				"navigationBarTitleText": "联系客服" 
+			}
+		},
+		{
+			"path": "pages/distribution/index",
+			"style": {
+				"navigationBarTitleText": "申请分销" 
+			}
+		},
+		{
+			"path": "pages/goods/goodsDetail",
+			"style": {
+				"navigationBarTitleText": "商品详情" 
+			}
+		},
+		{
+			"path": "pages/brand/brandList",
+			"style": {
+				"navigationBarTitleText": "品牌列表" 
+			}
+		},
+		{
+			"path": "pages/brand/search",
+			"style": {
+				"navigationBarTitleText": "品牌搜索" 
+			}
+		},
+		{
+			"path": "pages/service/afterOrder",
+			"style": {
+				"navigationBarTitleText": "售后管理" 
+			}
+		},
+		{
+			"path": "pages/coupon/coupon",
+			"style": {
+				"navigationBarTitleText": "优惠券" 
 			}
 		}
 	],

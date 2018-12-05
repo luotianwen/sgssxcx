@@ -6,7 +6,7 @@
 				<div class="header-bg1"></div>
 				<div class="header-info">
 					<h6 class="infoRight-title">假的</h6>
-					<p>查看或编辑个人资料</p>
+					 
 					<div class="header-infoRight"><span class="header-infoLeft" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/user/2018/11/IMG_20181121_151803.jpg), url();"></span>
 						 </div>
 				</div>
@@ -14,27 +14,70 @@
 			 
 			<div class="happyiIndex-list">
 				
-				<div class="listCent happyi-co2">我的订单<a href="/purchase/myOrder" class="happyi-left">40</a></div>
-				<div class="listCent happyi-co3">退换/售后<a href="/happyi/refundAfterSale" class="happyi-left">2</a></div>
-				<div class="listCent happyi-co4">收货地址 <a class="happyi-left"></a></div>
-				<div class="listCent happyi-co8">我的券<a class="happyi-left">3</a></div>
-				<div class="listCent happyi-co13">反馈<a class="happyi-left"></a></div>
+				<div class="listCent happyi-co2"  @click="goOrder()" >我的订单<a  class="happyi-left">40</a></div>
+				<div class="listCent happyi-co3" @click="goAfterOrder()">退换/售后<a   class="happyi-left">2</a></div>
+				<div class="listCent happyi-co4" @click="goAddress()">收货地址 <a class="happyi-left"></a></div>
+				<div class="listCent happyi-co8"  @click="goCoupon()">我的券<a class="happyi-left">3</a></div>
+				<div class="listCent happyi-co13"  @click="goFeedback()" >反馈<a class="happyi-left"></a></div>
 				<div class="listCent happyi-co13">账号安全<a class="happyi-left"></a></div>
-				<div class="listCent happyi-co13">客服<a class="happyi-left"></a></div>
-				<div class="listCent happyi-co1">申请分销<a class="happyi-left"></a></div>
+				<div class="listCent happyi-co13" @click="goCustomerService()">客服<a class="happyi-left"></a></div>
+				<div class="listCent happyi-co1" @click="goDistribution()">申请分销<a class="happyi-left"></a></div>
+				<div class="listCent happyi-co1" @click="goAbout()">关于<a class="happyi-left"></a></div>
 			</div>
 			 
-			<footer id="footer" class="clearfix"><a href="/" class="footer-see"><span class="see-icon"></span></a> <a href="/purchase"
-				 class="footer-purchase"><span class="purchase-icon"></span></a> <a href="/friend" class="footer-friend"><span
-					 class="friend-icon"></span></a> <a href="/happyi" class="footer-happyi active"><span class="happyi-icon"></span></a></footer>
-			<div id="prompt-view">
-				<!---->
-			</div>
+			 
+			 
 		</div>
 	</view>
 </template>
 
 <script>
+	export default {
+		methods: {
+			goAddress:function(){
+				uni.navigateTo({
+					url:"../address/address"
+				})
+			},
+			goOrder:function(){
+				uni.navigateTo({
+					url:"../order/order"
+				})
+			},
+			goFeedback:function(){
+				uni.navigateTo({
+					url:"../feedback/feedback"
+				})
+			},
+			goCustomerService:function(){
+				uni.navigateTo({
+					url:"../customerService/index"
+				})
+			},
+			goDistribution:function(){
+				uni.navigateTo({
+					url:"../distribution/index"
+				})
+			},
+			goAbout:function(){
+				uni.navigateTo({
+					url:"../about/about"
+				})
+			},
+			goCoupon:function(){
+				uni.navigateTo({
+					url:"../coupon/coupon"
+				})
+			},
+			goAfterOrder:function(){
+				uni.navigateTo({
+					url:"../service/afterOrder"
+				})
+			}
+			
+			
+			}
+		}
 </script>
 
 <style>
@@ -45,7 +88,7 @@
   position: relative;
   padding-top: 0.05rem;
   width: 100%;
-  height: 2.92rem;
+  height: 200upx;
   color: #fff;
   overflow: hidden;
 }
@@ -141,7 +184,7 @@
   padding-right: 0.4rem;
   width: 1.12rem;
   height: 1.12rem;
-  background: url(https://cs.h5.hongkzh.com/imgs/happyi/index/happyi-left1.png) no-repeat right center;
+   background: url(https://cs.h5.hongkzh.com/imgs/happyi/index/happyi-left1.png) no-repeat right center;  
   background-size: 0.2rem 0.34rem;
 }
 .header-infoRight input,

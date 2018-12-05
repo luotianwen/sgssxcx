@@ -13,7 +13,7 @@
 		 
 		<div class="goodsList-cent  " style="margin-top: 100upx;">
 			
-			<a href="/purchase/goodsDetails?type=1&amp;productId=01fa978f863848b087883b5a525141be" class="goodsList-list">
+			<a @click="goGoodDetail()" class="goodsList-list">
 				<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png), url();"></div>
 				<h6>女士包</h6><span>销量 1000</span>
 				<p>售价：¥66</p>
@@ -81,7 +81,7 @@
 				this.listData = []
 	
 			},
-	
+	 
 			onReachBottom() {
 	
 	
@@ -98,6 +98,11 @@
 				}, 300);
 			},
 			methods: {
+				goGoodDetail:function(){
+					uni.navigateTo({
+						url:"../goods/goodsDetail"
+					}) 
+				},
 				getList() {
 					var data = {
 						column: "id,post_id,title,author_name,cover,published_at" //需要的字段名

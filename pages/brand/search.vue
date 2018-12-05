@@ -7,7 +7,7 @@
 			</div>
 			 <div class="goodsList-cent  ">
 			 	
-			 	<a href="/purchase/goodsDetails?type=1&amp;productId=01fa978f863848b087883b5a525141be" class="goodsList-list">
+			 	<a @click="goGoodDetail()" class="goodsList-list">
 			 		<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png), url();"></div>
 			 		<h6>女士包</h6><span>销量 1000</span>
 			 		<p>售价：¥66</p>
@@ -44,11 +44,11 @@
 			 		<h6>沙发</h6><span>销量 1000</span>
 			 		<p>售价： ¥ 88 </p>
 			 	</a>
-			 	<a v-for="(value,key) in listData" :key="key"   click="goDetail(value)"   class="goodsList-list">
+			 <!-- 	<a v-for="(value,key) in listData" :key="key"   click="goDetail(value)"   class="goodsList-list">
 			 		<image  class="follow-centImg" :src="value.cover"></image> 
 			 		<p>{{value.title}}<p><span>销量 {{value.author_name}}</span>
 			 		<p>售价： ¥ 18 </p>
-			 	</a>
+			 	</a> -->
 			 	</div>
 			 
 			 
@@ -57,6 +57,104 @@
 </template>
 
 <script>
+	export default {
+			data() {
+				return {
+					 
+					listData: [],
+					last_id: "",
+					reload: false
+				}
+			},
+			onLoad() {
+	
+				this.getList();
+			},
+			onUnload() {
+	
+				this.listData = []
+	
+			},
+	 
+			onReachBottom() {
+	
+	
+				setTimeout(() => {
+					this.getList();
+				}, 300);
+			},
+			onPullDownRefresh() {
+				console.log('onPullDownRefresh');
+				this.listData = [];
+				setTimeout(() => {
+					this.getList();
+					uni.stopPullDownRefresh();
+				}, 300);
+			},
+			methods: {
+				goGoodDetail:function(){
+					uni.navigateTo({
+						url:"../goods/goodsDetail"
+					}) 
+				},
+				getList() {
+					var data = {
+						column: "id,post_id,title,author_name,cover,published_at" //需要的字段名
+					};
+					if (this.last_id) { //说明已有数据，目前处于上拉加载
+						data.minId = this.last_id;
+						data.time = new Date().getTime() + "";
+						data.pageSize = 10;
+					}
+					uni.request({
+						url: 'https://unidemo.dcloud.net.cn/api/news',
+						data: data,
+						success: (data) => {
+							if (data.statusCode == 200) {
+								let list = this.setTime(data.data);
+								this.listData = this.reload ? list : this.listData.concat(list);
+								this.last_id = list[list.length - 1].id;
+								this.reload = false;
+							}
+						},
+						fail: (data, code) => {
+							console.log('fail' + JSON.stringify(data));
+						}
+					})
+				},
+			    searchContent:function(){
+					this.getList();
+				},
+				goDetail: function(e) {
+	
+					let detail = {
+						author_name: e.author_name,
+						cover: e.cover,
+						id: e.id,
+						post_id: e.post_id,
+						published_at: e.published_at,
+						title: e.title
+					}
+					uni.navigateTo({
+						url: "../goods/goodsDetail?detailDate=" + JSON.stringify(detail)
+					})
+				},
+				setTime: function(items) {
+					var newItems = [];
+					items.forEach((e) => {
+						newItems.push({
+							author_name: e.author_name,
+							cover: e.cover,
+							id: e.id,
+							post_id: e.post_id,
+							published_at: e.published_at,
+							title: e.title
+						});
+					});
+					return newItems;
+				}
+			}
+		}
 </script>
 
 <style>

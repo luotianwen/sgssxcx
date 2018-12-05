@@ -82,7 +82,7 @@
 				goCategorySearch: function(e) {
 	 
 					uni.navigateTo({
-						url: "../category/categorySearch"
+						url: "../category/search"
 					})
 				},
 				 
@@ -93,8 +93,8 @@
 
 <style>
 	.goodsClassify {
-		padding-top: 7vh;
-		height: 93vh;
+		/* padding-top: 7vh;
+		height: 93vh; */
 	}
 
 	.goodsClassify-left {

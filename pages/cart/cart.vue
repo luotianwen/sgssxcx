@@ -1,16 +1,15 @@
 <template>
 	<view>
 		<div class="shoppingCarttop">
-			<header class="discount-header">  <strong class="header-right">编辑</strong></header>
+			<!-- <header class="discount-header">  <strong class="header-right">编辑</strong></header> -->
 			<div class="shoppingCart">
 				<div class="shoppingCart-list shoppingCart-list1">
-					<div id="listTitle0" class="shoppingCart-listTitle"><span>18911605673-1</span></div>
 					<div class="shoppingCart-listCent">
 						<div class="list-cent">
 							<div class="list-centLeft"><input type="checkbox" id="checkbox00" class="shoppingCart-input Cart-icon" value="f2f6904718214b369bb28c37b602de39"><label
 								 for="checkbox00" class="shoppingCart-icon Cart-icon"></label>
 								<div class="list-centRight ">
-									<div class="centRight-img" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png), url();">
+									<div class="centRight-img" @click="goGoodDetail()" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png), url();">
 										<!---->
 										<!---->
 										<!---->
@@ -116,6 +115,17 @@
 </template>
 
 <script>
+	export default {
+		data() {
+			},
+			methods: {
+			goGoodDetail:function(){
+				uni.navigateTo({
+					url:"../goods/goodsDetail"
+				}) 
+			}
+			}
+	}
 </script>
 
 <style>
@@ -155,7 +165,7 @@
   color: #EF593C;
 }
  .shoppingCarttop {
-  padding: 1.09rem 0.2rem 0.98rem;
+  padding: 20upx 10upx  10upx;
 }
 .shoppingCarttop .shoppingCart-select {
   background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon.png) no-repeat left center;
