@@ -19,7 +19,7 @@
 				<div class="listCent happyi-co4" @click="goAddress()">收货地址 <a class="happyi-left"></a></div>
 				<div class="listCent happyi-co8"  @click="goCoupon()">我的券<a class="happyi-left">3</a></div>
 				<div class="listCent happyi-co13"  @click="goFeedback()" >反馈<a class="happyi-left"></a></div>
-				<div class="listCent happyi-co13">账号安全<a class="happyi-left"></a></div>
+				<div class="listCent happyi-co13" @click="goAccount()">账号安全<a class="happyi-left"></a></div>
 				<div class="listCent happyi-co13" @click="goCustomerService()">客服<a class="happyi-left"></a></div>
 				<div class="listCent happyi-co1" @click="goDistribution()">申请分销<a class="happyi-left"></a></div>
 				<div class="listCent happyi-co1" @click="goAbout()">关于<a class="happyi-left"></a></div>
@@ -34,6 +34,11 @@
 <script>
 	export default {
 		methods: {
+			goAccount:function(){
+				uni.navigateTo({
+					url:"../myself/account"
+				})
+			},
 			goAddress:function(){
 				uni.navigateTo({
 					url:"../address/address"
@@ -63,7 +68,7 @@
 				uni.navigateTo({
 					url:"../about/about"
 				})
-			},
+			}, 
 			goCoupon:function(){
 				uni.navigateTo({
 					url:"../coupon/coupon"

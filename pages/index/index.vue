@@ -185,16 +185,9 @@
 			},
 			goDetail: function(e) {
 
-				let detail = {
-					author_name: e.author_name,
-					cover: e.cover,
-					id: e.id,
-					post_id: e.post_id,
-					published_at: e.published_at,
-					title: e.title
-				}
+			 
 				uni.navigateTo({
-					url: "../goods/goodsDetail?detailDate=" + JSON.stringify(detail)
+					url: "../goods/goodsDetail?detailDate=" 
 				})
 			},
 			setTime: function(items) {

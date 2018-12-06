@@ -111,6 +111,24 @@
 			"style": {
 				"navigationBarTitleText": "优惠券" 
 			}
+		},
+		{
+			"path": "pages/myself/account",
+			"style": {
+				"navigationBarTitleText": "账号安全" 
+			}
+		},
+		{
+			"path": "pages/myself/newPhone",
+			"style": {
+				"navigationBarTitleText": "绑定手机" 
+			}
+		},
+		{
+			"path": "pages/myself/newPassword",
+			"style": {
+				"navigationBarTitleText": "设置密码" 
+			}
 		}
 	],
 	"tabBar": {
