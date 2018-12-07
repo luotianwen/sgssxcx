@@ -1,7 +1,6 @@
 <template>
 	<view class="">
 		<div id="refundInfo">
-			<div class="circleBar-top"><span class="goback"></span> 退款进度</div>
 			<div class="refundInfo-top">
 				<p><strong>订单编号:</strong>11597661575</p>
 				<p><strong>退款进度:</strong><span>退款中</span></p>
@@ -60,7 +59,7 @@
 			</div>
 			<div id="prompt-view">
 				<!---->
-			</div>
+			</div> 
 		</div>
 	</view>
 </template>
@@ -69,9 +68,9 @@
 </script>
 
 <style>
-#refundInfo {
+/* #refundInfo {
   padding: 0.89rem 0 0.98rem;
-}
+} */
 .refundInfo-top {
   padding: 0.4rem 0 0.2rem 0.3rem;
   font-size: 0.26rem;

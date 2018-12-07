@@ -61,9 +61,7 @@
 			data() {
 				return {
 					 
-					listData: [],
-					last_id: "",
-					reload: false
+					listData: [] 
 				}
 			},
 			onLoad() {
@@ -71,8 +69,7 @@
 				this.getList();
 			},
 			onUnload() {
-	
-				this.listData = []
+	 
 	
 			},
 	 
@@ -98,61 +95,12 @@
 					}) 
 				},
 				getList() {
-					var data = {
-						column: "id,post_id,title,author_name,cover,published_at" //需要的字段名
-					};
-					if (this.last_id) { //说明已有数据，目前处于上拉加载
-						data.minId = this.last_id;
-						data.time = new Date().getTime() + "";
-						data.pageSize = 10;
-					}
-					uni.request({
-						url: 'https://unidemo.dcloud.net.cn/api/news',
-						data: data,
-						success: (data) => {
-							if (data.statusCode == 200) {
-								let list = this.setTime(data.data);
-								this.listData = this.reload ? list : this.listData.concat(list);
-								this.last_id = list[list.length - 1].id;
-								this.reload = false;
-							}
-						},
-						fail: (data, code) => {
-							console.log('fail' + JSON.stringify(data));
-						}
-					})
+					 
 				},
 			    searchContent:function(){
 					this.getList();
-				},
-				goDetail: function(e) {
-	
-					let detail = {
-						author_name: e.author_name,
-						cover: e.cover,
-						id: e.id,
-						post_id: e.post_id,
-						published_at: e.published_at,
-						title: e.title
-					}
-					uni.navigateTo({
-						url: "../goods/goodsDetail?detailDate=" + JSON.stringify(detail)
-					})
-				},
-				setTime: function(items) {
-					var newItems = [];
-					items.forEach((e) => {
-						newItems.push({
-							author_name: e.author_name,
-							cover: e.cover,
-							id: e.id,
-							post_id: e.post_id,
-							published_at: e.published_at,
-							title: e.title
-						});
-					});
-					return newItems;
-				}
+				} 
+				 
 			}
 		}
 </script>

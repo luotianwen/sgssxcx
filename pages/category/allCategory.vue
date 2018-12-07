@@ -5,7 +5,7 @@
 			<div class="goodsClassify-right"><img src="http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listpic.png">
 				<div class="goodsClassify-rightTitle"><strong></strong> <span>户外分类</span></div>
 				<div class="goodsClassify-rightCent clearfix">
-					<a @click=goCategorySearch()><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp4.png), url();"></span>
+					<a @click="goCategorySearch()"><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp4.png), url();"></span>
 						<p>篮球</p>
 					</a>
 					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png), url();"></span>
@@ -54,35 +54,13 @@
 			 
 			methods: {
 				getList() {
-					var data = {
-						column: "id,post_id,title,author_name,cover,published_at" //需要的字段名
-					};
-					if (this.last_id) { //说明已有数据，目前处于上拉加载
-						data.minId = this.last_id;
-						data.time = new Date().getTime() + "";
-						data.pageSize = 10;
-					}
-					uni.request({
-						url: 'https://unidemo.dcloud.net.cn/api/news',
-						data: data,
-						success: (data) => {
-							if (data.statusCode == 200) {
-								let list = this.setTime(data.data);
-								this.listData = this.reload ? list : this.listData.concat(list);
-								this.last_id = list[list.length - 1].id;
-								this.reload = false;
-							}
-						},
-						fail: (data, code) => {
-							console.log('fail' + JSON.stringify(data));
-						}
-					})
+					 
 				},
 				 
 				goCategorySearch: function(e) {
-	 
+	  
 					uni.navigateTo({
-						url: "../category/search"
+						url: "../category/csearch"
 					})
 				},
 				 

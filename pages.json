@@ -28,7 +28,7 @@
 		}, 
 		 
 		{
-			"path": "pages/category/search",
+			"path": "pages/category/csearch",
 			"style": {
 				"navigationBarTitleText": "分类搜索" 
 			}
@@ -128,6 +128,30 @@
 			"path": "pages/myself/newPassword",
 			"style": {
 				"navigationBarTitleText": "设置密码" 
+			}
+		},
+		{
+			"path": "pages/service/afterOrderDetail",
+			"style": {
+				"navigationBarTitleText": "售后详情" 
+			}
+		},
+		{
+			"path": "pages/order/orderDetail",
+			"style": {
+				"navigationBarTitleText": "订单详情" 
+			}
+		},
+		{
+			"path": "pages/order/logistics",
+			"style": {
+				"navigationBarTitleText": "物流详情" 
+			}
+		},
+		{
+			"path": "pages/order/applyAfter",
+			"style": {
+				"navigationBarTitleText": "申请售后" 
 			}
 		}
 	],

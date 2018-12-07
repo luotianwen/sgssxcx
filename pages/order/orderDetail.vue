@@ -1,8 +1,8 @@
 <template>
 	<view class="">
-		<div id="myOrderInfo">
-			<header class="discount-header"><span class="goback"></span> 订单详情</header>
-			<div class="confirmOrder-address">
+		<div id="myOrderInfo"> 
+			 
+			<div class="confirmOrder-address"> 
 				<div class="address-bg"></div>
 				<div class="address-cent">
 					<h6>
@@ -98,9 +98,9 @@
 </script>
 
 <style>
-	#myOrderInfo {
+/* 	#myOrderInfo {
   padding: 0.89rem 0 0.98rem;
-}
+} */
 .confirmOrder-address {
   height: 1.6rem;
   width: 100%;

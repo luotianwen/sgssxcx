@@ -4,10 +4,10 @@
 			<div class="myOrder-tab"><span class="active">全部</span><span class="">待支付</span> <span class="">待收货</span><span
 				 class="">已完成</span><span class="">已取消</span></div>
 			<div class="confirmOrder-cent">
-				<div class="confirmOrder-centList">
+				<div class="confirmOrder-centList" >
 					<div class="centList-title"><span class="headName"> </span><span class="titleState">待收货</span></div>
 					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
+						<div class="centList-cent clearfix" @click="goDetail()">
 							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119203538.png), url();">
 
 							</div>
@@ -20,7 +20,7 @@
 					</div>
 					<div class="centList-butt">
 						<div class="buttState6 clearfix">
-							<!----> <span class="buttState-btn">查看物流</span>
+							<!----> <span class="buttState-btn" @click="goLogistics()">查看物流</span>
 							<!----> <span class="buttState-btn">确认收货</span></div>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 						</div>
 					</div>
 					<div class="centList-butt">
-						<div class="buttState6 clearfix"><span class="buttState-btn">申请售后</span>
+						<div class="buttState6 clearfix"><span class="buttState-btn"  @click="goApplyAfter()">申请售后</span>
 							<!----> <span class="buttState-btn">删除订单</span>
 							<!---->
 						</div>
@@ -214,6 +214,26 @@
 </template>
 
 <script>
+	
+	export default {
+		methods: {
+			goLogistics:function(){
+				uni.navigateTo({
+					url:"../order/logistics"
+				})
+			},
+			goDetail:function(){
+				uni.navigateTo({
+					url:"../order/orderDetail"
+				})
+			} ,
+			goApplyAfter:function(){
+				uni.navigateTo({
+					url:"../order/applyAfter"
+				})
+			}
+			}
+		}
 </script>
 
 <style>

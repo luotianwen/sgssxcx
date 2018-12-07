@@ -2,9 +2,10 @@
 	<view>
 		<page-head :title="title"></page-head>
 		<view class="page-body">
-			<div class="purchase-header">
-				<div class="header-sear" @click=goSearch()>请输入商品名称</div><strong class="header-news">14</strong> <span class="header-cart" @click=goCart()></span>
-			</div>
+			<view class="purchase-header">
+				<view class="header-sear" @click=goSearch()>请输入商品名称</view><strong class="header-news">14</strong> <span class="header-cart"
+				 @click=goCart()></span>
+			</view>
 			<view class="page-section page-section-spacing swiper">
 				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;">
 					<swiper-item v-for="item in itemList" :key="item">
@@ -17,76 +18,82 @@
 			</view>
 		</view>
 		<view>
-			<div class="consult "><span>运动户外</span><span>健康生活</span><span>悠氧播报</span> </div>
-			<div class="header-butt "><a>优惠券</strong><span>满300减50</span></a> <a>优惠券<i></i></strong><span>满100减20</span></a>
+			<view class="consult "><span>运动户外</span><span>健康生活</span><span>悠氧播报</span> </view>
+			<view class="header-butt "><a>优惠券 <span>满300减50</span></a> <a>优惠券<i></i> <span>满100减20</span></a>
+			</view>
+		</view>
+		 
+			<div class="purchase-band">
+					<span style="float: left;font-size: 30upx; "> 品牌馆</span>
+					<span style="float: right;font-size: 30upx; "  @click="goBrandList()">更多</span>
+				</div>
+		 
+		<view>
+			<div class="purchase-nav  ">
+				<span @click="goBrandSearch()" style="background-image: url( );">阿迪</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png);">Nike</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp5.png);">彪马</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp1.png);">李宁</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp2.png);">汉道</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp7.png);">卡帕</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png);">匡威</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png);">特步</span>
+				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png);">狼爪</span>
 			</div>
-		</view>
-		<view>
-			<div class="purchase-band"><span style="float: left;font-size: 22upx; "> 品牌馆</span><span style="float: right;font-size: 22upx; " @click="goBrandList()">更多</span></div>
-		</view>
-		<view>
-			<div class="purchase-nav clearfix"><span @click="goBrandSearch()" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png), url();">阿迪</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png), url();">Nike</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp5.png), url();">彪马</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp1.png), url();">李宁</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp2.png), url();">汉道</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp7.png), url();">卡帕</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png), url();">匡威</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png), url();">特步</span><span
-				 style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/09/sy_gd.png), url();">狼爪</span></div>
 		</view>
 		<view>
 			<div class="purchase-band"><span style="float: left;font-size: 30upx; "> 商品列表</span> </div>
 		</view>
 		<view class="uni-list">
 			<div class="goodsList-cent  ">
-				
-				<a  @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png), url();"></div>
+
+				<a @click="goDetail()" class="goodsList-list">
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png);"></div>
 					<h6>女士包</h6><span>销量 1000</span>
 					<p>售价：¥66</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119202901.jpg), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119202901.jpg);"></div>
 					<h6>女衣服</h6><span>销量 1000</span>
 					<p>售价：¥38</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119203538.png), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119203538.png);"></div>
 					<h6>荣耀</h6><span>销量 1000</span>
 					<p>售价：¥100</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/12/20181203152319.png), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/12/20181203152319.png);"></div>
 					<h6>蓝牙音箱</h6><span>销量 1000</span>
 					<p>售价：¥49</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119205303.png), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119205303.png);"></div>
 					<h6>休闲包</h6><span>销量 1000</span>
 					<p>售价：¥88</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/11/20181114091039.png), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/11/20181114091039.png);"></div>
 					<h6>闹钟</h6><span>销量 1000</span>
 					<p>售价：¥0.49</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181113091034.jpg), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181113091034.jpg);"></div>
 					<h6>奥康</h6><span>销量 1000</span>
 					<p>售价：¥0.8</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/12/20181203201134.png), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/12/20181203201134.png);"></div>
 					<h6>洗手机</h6><span>销量 1000</span>
 					<p>售价：¥79</p>
 				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1bd6e64da75c4014b385ae9bdf0a6798/images/shop/product/2018/12/20181201113309.jpg), url();"></div>
+					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1bd6e64da75c4014b385ae9bdf0a6798/images/shop/product/2018/12/20181201113309.jpg);"></div>
 					<h6>沙发</h6><span>销量 1000</span>
 					<p>售价： ¥ 88 </p>
 				</a>
-				<a v-for="(value,key) in listData" :key="key"   click="goDetail(value)"   class="goodsList-list">
-					<image  class="follow-centImg" :src="value.cover"></image> 
-					<p>{{value.title}}<p><span>销量 {{value.author_name}}</span>
-					<p>售价： ¥ 18 </p>
+				<a v-for="(value,key) in listData" :key="key" click="goDetail(value)" class="goodsList-list">
+					<image class="follow-centImg" :src="value.cover"></image>
+					<p>{{value.title}}
+						<p><span>销量 {{value.author_name}}</span>
+							<p>售价： ¥ 18 </p>
 				</a>
-				</div>
-				
+			</div>
+
 		</view>
-		 
+
 	</view>
 </template>
 <script>
@@ -103,7 +110,7 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-
+        imgsrc:'http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png',
 
 
 				listData: [],
@@ -162,32 +169,32 @@
 					}
 				})
 			},
-			
-			goBrandList:function(){
+
+			goBrandList: function() {
 				uni.navigateTo({
-					url:"../brand/brandList"
-				}) 
+					url: "../brand/brandList"
+				})
 			},
-			goBrandSearch:function(){
+			goBrandSearch: function() {
 				uni.navigateTo({
-					url:"../brand/search"
-				}) 
+					url: "../brand/search"
+				})
 			},
-			goSearch:function(){
+			goSearch: function() {
 				uni.navigateTo({
-					url:"../search/search"
-				}) 
+					url: "../search/search"
+				})
 			},
-			goCart:function(){
+			goCart: function() {
 				uni.switchTab({
-					 url:"../cart/cart"
-				}) 
+					url: "../cart/cart"
+				})
 			},
 			goDetail: function(e) {
 
-			 
+
 				uni.navigateTo({
-					url: "../goods/goodsDetail?detailDate=" 
+					url: "../goods/goodsDetail?detailDate="
 				})
 			},
 			setTime: function(items) {
@@ -322,7 +329,7 @@
 		border-radius: 100px;
 	}
 
-	 
+
 
 	.page-body-info {
 		background-color: transparent;
@@ -350,7 +357,7 @@
 	}
 
 	.purchase-nav {
-		padding: 0 32upx 50upx;
+		padding: 0 32upx 0upx;
 	}
 
 	.purchase-nav span {
@@ -363,7 +370,7 @@
 		font-size: 22upx;
 		color: #666666;
 		background: no-repeat top center;
-		background-size: 86upx 86upx;
+		background-size: 100upx 100upx;
 	}
 
 	.consult {
@@ -377,7 +384,7 @@
 
 	.consult span {
 		float: left;
-		  padding-top: 6%;  
+		padding-top: 6%;
 		text-align: center;
 		width: 33%;
 		display: block;
@@ -396,6 +403,7 @@
 		height: 120upx;
 		font-size: 0;
 		background-color: #fff;
+		border-color: #1AAD19;
 	}
 
 	.header-butt a {
