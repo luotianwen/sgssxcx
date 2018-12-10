@@ -1,164 +1,141 @@
 <template>
-	<view>
-		<div class="goodsClassify">
-			<div class="goodsClassify-left"><span>户外</span><span class="active">体育</span><span class="">服装</span></div>
-			<div class="goodsClassify-right"><img src="http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listpic.png">
-				<div class="goodsClassify-rightTitle"><strong></strong> <span>户外分类</span></div>
-				<div class="goodsClassify-rightCent clearfix">
-					<a @click="goCategorySearch()"><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp4.png), url();"></span>
-						<p>篮球</p>
-					</a>
-					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png), url();"></span>
-						<p>鞋</p>
-					</a>
-					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp2.png), url();"></span>
-						<p>足球</p>
-					</a>
-					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp1.png), url();"></span>
-						<p>羽毛球</p>
-					</a>
-					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp5.png), url();"></span>
-						<p>乒乓球</p>
-					</a>
-					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png), url();"></span>
-						<p>滑雪板</p>
-					</a>
-					<a><span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp7.png), url();"></span>
-						<p>台球</p>
-					</a>
-					</div>
-			</div>
-		</div>
+	<view class="container">
+		<view class="page-body">
+			<scroll-view class="nav-left" scroll-y :style="'height:'+height+'px'">
+				<view class="nav-left-item" @click="categoryClickMain(item,index)" :key="index" :class="index==categoryActive?'active':''"
+				    v-for="(item,index) in categoryList">
+					{{item.name}}
+				</view>
+			</scroll-view>
+			 
+			<scroll-view class="nav-right" scroll-y :scroll-top="scrollTop" @scroll="scroll" :style="'height:'+height+'px'" scroll-with-animation>
+				 <image lazy-load :src="logo" class="nav-right-pic"  ></image> 
+				<view :id="index==0?'first':''" @click="goCategorySearch(item)" class="nav-right-item" v-for="item in subCategoryList" :key="item">
+					<image lazy-load :src="item.logo" />
+					<view>{{item.name}}</view>
+				</view>
+				 
+			</scroll-view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import service from '../../service.js';
+
 	export default {
-			data() {
-				return {
-					
-					listData: [],
-					 
-				}
-			},
-			onLoad() {
-// this.getList();
-				 
-			},
-			onUnload() {
-	
-				this.listData = []
-	
-			},
-	
-			 
-			methods: {
-				getList() {
-					 
-				},
-				 
-				goCategorySearch: function(e) {
-	  
-					uni.navigateTo({
-						url: "../category/csearch"
-					})
-				},
+		data() {
+			return {
+				categoryList: [],
+				logo:"",
+				subCategoryList: [],
+				height: 0,
+				categoryActive: 0,
+				scrollTop: 0,
+				scrollHeight: 0  
 				 
 			}
+		},
+		methods: {
+			goCategorySearch: function(e) {
+					uni.navigateTo({
+						url: "../category/search?title="+e.name+"&categoryId="+e.categoryId
+					})
+			},
+			scroll(e) {
+				this.scrollHeight = e.detail.scrollHeight;
+			},
+			categoryClickMain(categroy, index) {
+				this.logo=categroy.logo;
+				this.categoryActive = index;
+				this.scrollTop = -this.scrollHeight * index;
+				uni.request({
+					url: service.getSubCategory(),
+					data:{categoryId:categroy.categoryId},
+					success: (data) => {
+						if (data.statusCode == 200&&data.data.code == 0) {
+							this.subCategoryList = data.data.data;
+							 
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			},
+			getCategory() {
+				uni.request({
+					url: service.getCategory(),
+					success: (data) => {
+						if (data.statusCode == 200&&data.data.code == 0) {
+							this.categoryList = data.data.data;
+							this.categoryClickMain(this.categoryList[0],0);
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+				 
+			},
+			 
+		},
+		onLoad: function () {
+			this.getCategory();
+			this.height = uni.getSystemInfoSync().windowHeight ;
+			 
 		}
-	
+	}
 </script>
 
 <style>
-	.goodsClassify {
-		/* padding-top: 7vh;
-		height: 93vh; */
+	.page-body {
+		display: flex;
 	}
 
-	.goodsClassify-left {
+	.nav {
+		display: flex;
+		width: 100%;
+	}
+
+	.nav-left {
+		width: 30%;
+	}
+
+	.nav-left-item {
+		height: 100upx;
+		border-right: solid 1px #E0E0E0;
+		border-bottom: solid 1px #E0E0E0;
+		font-size: 30upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.nav-right {
+		width: 70%;
+	}
+    .nav-right-pic{
+		width: 520upx;
+		height: 200upx;
+		/* margin: 35upx auto 0; */
+		display: block;
+	}
+	.nav-right-item {
+		width: 28%;
+		height: 220upx;
 		float: left;
-		padding-bottom: 2%;
-		width: 1.7rem;
-		height: 98%;
-		overflow-y: auto;
-		border-right: 1px solid #eee;
-	}
-
-	.goodsClassify-left span {
-		margin-top: 0.35rem;
-		display: block;
-		width: 1.64rem;
-		height: 0.36rem;
-		line-height: 0.36rem;
-		font-size: 0.28rem;
-		color: #333333;
 		text-align: center;
-		border-left: 0.06rem solid #fff;
+		padding: 11upx;
+		font-size: 28upx;
 	}
 
-	.goodsClassify-left .active {
-		width: 1.64rem;
-		border-left: 0.06rem solid #0092ff;
-		color: #0092ff;
+	.nav-right-item image {
+		width: 100upx;
+		height: 100upx;
 	}
 
-	.goodsClassify-right {
-		padding-left: 1.71rem;
-		color: #333333;
-	}
-
-	.goodsClassify-right img {
-		margin: 0.35rem auto 0;
-		display: block;
-		width: 5.2rem;
-		height: 2rem;
-	}
-
-	.goodsClassify-rightTitle {
-		position: relative;
-		height: 1.06rem;
-		line-height: 1rem;
-		font-size: 0.23rem;
-		text-align: center;
-	}
-
-	.goodsClassify-rightTitle strong {
-		position: absolute;
-		top: 45%;
-		left: 50%;
-		z-index: 100;
-		margin-left: -1.33rem;
-		display: block;
-		width: 2.66rem;
-		border-top: 1px solid #eee;
-	}
-
-	.goodsClassify-rightTitle span {
-		position: relative;
-		z-index: 101;
-		padding: 0 0.25rem;
-		background: #fff;
-	}
-
-	.goodsClassify-rightCent {
-		font-size: 0;
-	}
-
-	.goodsClassify-rightCent a {
-		margin-bottom: 0.4rem;
-		float: left;
-		width: 33%;
-		text-align: center;
-		font-size: 0.24rem;
-		color: #333;
-	}
-
-	.goodsClassify-rightCent span {
-		margin-bottom: 0.05rem;
-		display: inline-block;
-		width: 1.1rem;
-		height: 1.1rem;
-		border-radius: 50%;
-		background-size: 100%;
+	.active {
+		color: #007AFF;
 	}
 </style>

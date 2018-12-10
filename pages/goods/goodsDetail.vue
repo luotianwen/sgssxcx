@@ -1,74 +1,93 @@
 <template>
 	<view class="">
-		<div id="goodsDetails">
-			<!-- <div class="goodsDetails-header clearfix"><span class="goodsDetails-gobk"></span> <span class="goodsDetails-more"></span>
-				<span class="goodsDetails-cart"></span></div> -->
-			<aside class="purchase-slider">
-				<div class="swiper-container swiper-container-horizontal swiper-container-ios">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide swiper-slide-active" style="width: 375px; margin-right: 30px;"><img src="http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/11/20181114091039.png"
-							 class="lazy"></div>
-					</div>
-					<div class="swiper-pagination swiper-pagination-fraction"><span class="swiper-pagination-current">1</span> / <span
-						 class="swiper-pagination-total">1</span></div><span class="swiper-notification" aria-live="assertive"
-					 aria-atomic="true"></span>
-				</div>
-			</aside>
-			<div class="goodsDetails-title">
-				<h6>闹钟</h6>
-				<div class="title-money clearfix"><span class="title-moneyNum"><span>¥</span>0.49</span><span class="title-moneyRight">月销55笔</span></div>
-			</div>
-			<!-- <div class="goodsDetails-comment" style="display: none;">
-				<div class="goodsDetails-commentTitle"><b>商品评价</b>&nbsp;(5545)<span>95.8%好评</span><strong class="purchase-more2"></strong></div>
-				<div class="comment-tab"><span>好评(555)</span> <span>中评(555)</span> <span>差评(555)</span></div>
-				<div class="comment-cent">
-					 
-				</div>
-			</div> -->
-			<!-- <div class="goodsDetails-shops">
-				<div class="shops-topHead clearfix"><strong style="background-image: url( http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/logo/2018/11/20181113184859.png ), url(  );"></strong>
-					<h6>喵呜旺铺</h6>
-					<p>商品数量6</p><a href="/purchase/shopIndex?shopId=c26e1f42115b4479b1c57decad2e5985">进店逛逛</a>
-				</div>
-			</div> -->
-			<!---->
-			<div class="goodsDetails-InfoCent">
-				<div class="InfoCent-Img">
-					<p>
-						<span style="color: rgb(26, 26, 26); font-family:  Helvetica Neue , Helvetica, Arial,  Microsoft Yahei ,  Hiragino Sans GB ,  Heiti SC ,  WenQuanYi Micro Hei , sans-serif; font-size: 12px; white-space: normal;">&nbsp;
-							&nbsp; 动态闹钟是指闹钟铃声背景音乐上叠加天气播报等内容；小睡和冥想、动态闹钟功能需要升级固件之后才能支持；翻译功能只支持中英互翻；查限行、路况，需要在米家APP
-							中填写出行信息；查找手机，目前只支持查找小米手机；线性四麦设计，建议背靠 墙放置，在屏幕正面180°内互动，收音效果更好；不支持语音控制小米电视 / 盒子。</span></p>
-				</div>
-			</div>
-			<!---->
-			<div class="goodsDetails-butt"><a class="goodsDetails-buttBtn">加入购物车</a> <a class="goodsDetails-buttColor">立即购买</a></div>
-			<div id="mask" style="display: none;"></div>
-			<div class="goodsDetails-choice" style="display: none;"><span class="goodsDetails-choiceBtn">×</span>
-				<div class="choice-top clearfix"><strong style="background-image: url( http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/11/20181114091039.png ), url(  );"></strong>
+		<view id="goodsDetails">
+
+			<view class="page-section page-section-spacing swiper">
+				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;">
+					<swiper-item v-for="item in data.images" :key="item">
+						<view class="swiper-item  ">
+							<image :src="item" style="width: 100%;" />
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>
+
+			<view class="goodsDetails-title">
+				<h6>{{data.name}}</h6>
+				<view class="title-money clearfix"><span class="title-moneyNum"><span>¥</span>{{data.price}}</span><span class="title-moneyRight">月销{{data.sales}}笔</span></view>
+			</view>
+
+			<view class="goodsDetails-InfoCent">
+				<view class="InfoCent-Img">
+					<rich-text class="richText" :nodes="data.details"  ></rich-text>
+				</view>
+			</view>
+			 
+			<view class="goodsDetails-butt"><a class="goodsDetails-buttBtn">加入购物车</a> <a class="goodsDetails-buttColor">立即购买</a></view>
+			<view id="mask" style="display: none;"></view>
+			<view class="goodsDetails-choice" style="display: none;"><span class="goodsDetails-choiceBtn">×</span>
+				<view class="choice-top clearfix"><strong style="background-image: url( http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/11/20181114091039.png ), url(  );"></strong>
 					<p class="choice-topmt">价格：<span class="purchase-mons">¥0.49</span></p>
 					<p>已选：&nbsp;&nbsp;</p>
 					<!---->
-				</div>
-				<div class="goodsDetails-choiceCent">
-					<div class="choice-cent">
+				</view>
+				<view class="goodsDetails-choiceCent">
+					<view class="choice-cent">
 						<p>颜色</p><span class="">白</span>
-					</div>
-					<div class="choice-cent">
+					</view>
+					<view class="choice-cent">
 						<p>规格</p><span class="">17.9 x 46.9 x 12mm</span>
-					</div>
-					<div class="choice-butt">
+					</view>
+					<view class="choice-butt">
 						<p>购买数量</p>
-						<div class="choice-buttDiv clearfix"><span class="choice-buttBtn1">－</span> <input type="number" name="num">
-							<span class="choice-buttBtn2">＋</span></div>
-					</div>
-				</div>
-			</div>
-			 
-		</div>
+						<view class="choice-buttview clearfix"><span class="choice-buttBtn1">－</span> <input type="number" name="num">
+							<span class="choice-buttBtn2">＋</span></view>
+					</view>
+				</view>
+			</view>
+
+		</view>
 	</view>
 </template>
 
 <script>
+	import service from '../../service.js';
+	export default {
+		data() {
+			return {
+				goodsId: "",
+				data:"",
+				indicatorDots: false,
+				autoplay: true,
+				interval: 2000,
+				duration: 500,
+
+			}
+		},
+		onLoad(d) {
+			uni.setNavigationBarTitle({
+				title: d.name
+			})
+			this.goodsId=d.goodsId;
+			this.getDetail();
+		},
+		methods:{
+			getDetail:function(){
+				uni.request({
+					url: service.getGoodsByGooId(),
+					data:{goodsId:this.goodsId},
+					success: (data) => {
+						if (data.statusCode == 200&&data.data.code == 0) {
+							this.data =   data.data.data;
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			}
+		}
+	}
 </script>
 
 <style>
@@ -955,7 +974,7 @@
 		background: #fff;
 	}
 
-	.goodsDetails-choice>div {
+	.goodsDetails-choice>view {
 		margin: 0 0.3rem;
 		overflow: hidden;
 	}
@@ -1041,7 +1060,7 @@
 		line-height: 0.68rem;
 	}
 
-	.goodsDetails-choice .choice-butt .choice-buttDiv {
+	.goodsDetails-choice .choice-butt .choice-buttview {
 		position: absolute;
 		top: 0;
 		right: 0;

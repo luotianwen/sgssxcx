@@ -26,9 +26,8 @@
 				"navigationBarTitleText": "搜索" 
 			}
 		}, 
-		 
-		{
-			"path": "pages/category/csearch",
+		{ 
+			"path": "pages/category/search",
 			"style": {
 				"navigationBarTitleText": "分类搜索" 
 			}
@@ -186,7 +185,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#0faeff",
+		"navigationBarBackgroundColor": "#D1EEEE",
 		"backgroundColor": "#fbf9fe"
 	}
 }
