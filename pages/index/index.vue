@@ -22,12 +22,12 @@
 			<view class="header-butt "><a>优惠券 <span>满300减50</span></a> <a>优惠券<i></i> <span>满100减20</span></a>
 			</view>
 		</view>
-		 
-			<div class="purchase-band">
-					<span style="float: left;font-size: 30upx; "> 品牌馆</span>
-					<span style="float: right;font-size: 30upx; "  @click="goBrandList()">更多</span>
-				</div>
-		 
+
+		<div class="purchase-band">
+			<span style="float: left;font-size: 30upx; "> 品牌馆</span>
+			<span style="float: right;font-size: 30upx; " @click="goBrandList()">更多</span>
+		</div>
+
 		<view>
 			<div class="purchase-nav  ">
 				<span @click="goBrandSearch()" style="background-image: url( );">阿迪</span>
@@ -45,59 +45,29 @@
 			<div class="purchase-band"><span style="float: left;font-size: 30upx; "> 商品列表</span> </div>
 		</view>
 		<view class="uni-list">
-			<div class="goodsList-cent  ">
+			<view class="goodsList-cent  ">
 
-				<a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119204036.png);"></div>
-					<h6>女士包</h6><span>销量 1000</span>
-					<p>售价：¥66</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119202901.jpg);"></div>
-					<h6>女衣服</h6><span>销量 1000</span>
-					<p>售价：¥38</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119203538.png);"></div>
-					<h6>荣耀</h6><span>销量 1000</span>
-					<p>售价：¥100</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/12/20181203152319.png);"></div>
-					<h6>蓝牙音箱</h6><span>销量 1000</span>
-					<p>售价：¥49</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119205303.png);"></div>
-					<h6>休闲包</h6><span>销量 1000</span>
-					<p>售价：¥88</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/11/20181114091039.png);"></div>
-					<h6>闹钟</h6><span>销量 1000</span>
-					<p>售价：¥0.49</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181113091034.jpg);"></div>
-					<h6>奥康</h6><span>销量 1000</span>
-					<p>售价：¥0.8</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/0557b352f43e46758db45dc0dabe2c71/images/shop/product/2018/12/20181203201134.png);"></div>
-					<h6>洗手机</h6><span>销量 1000</span>
-					<p>售价：¥79</p>
-				</a><a @click="goDetail()" class="goodsList-list">
-					<div class="follow-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1bd6e64da75c4014b385ae9bdf0a6798/images/shop/product/2018/12/20181201113309.jpg);"></div>
-					<h6>沙发</h6><span>销量 1000</span>
-					<p>售价： ¥ 88 </p>
-				</a>
-				<a v-for="(value,key) in listData" :key="key" click="goDetail(value)" class="goodsList-list">
-					<image class="follow-centImg" :src="value.cover"></image>
-					<p>{{value.title}}
-						<p><span>销量 {{value.author_name}}</span>
-							<p>售价： ¥ 18 </p>
-				</a>
-			</div>
+				<view v-for="(value,key) in listData" :key="key" @click="goDetail(value)" class="goodsList-list">
+					<image class="follow-centImg" :src="value.logo"></image>
+					 
+					<view class="follow-centImgh6">{{value.name}}</view>
+					<view class="goodsList-listp">销量： {{value.sales}}</view>
+					<view class="goodsList-listp">售价：¥{{value.price}}</view>
+				</view>
+				<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
+			</view>
 
 		</view>
 
 	</view>
 </template>
 <script>
+	import loadMore from '../../components/load-more.vue'
+	import service from '../../service.js';
 	export default {
+		components: {
+			loadMore
+		},
 		data() {
 			return {
 				title: 'swiper',
@@ -110,12 +80,15 @@
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-        imgsrc:'http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png',
-
-
+				imgsrc: 'http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png',
 				listData: [],
-				last_id: "",
-				reload: false
+				loadingType: 0,
+				pageNumber: 1,
+				contentText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				}
 			}
 		},
 		onLoad() {
@@ -130,38 +103,41 @@
 
 		onReachBottom() {
 
-
+			if (this.loadingType !== 0) {
+				return;
+			}
+			console.log('onReachBottom');
+			this.loadingType = 1;
 			setTimeout(() => {
+				this.pageNumber++;
 				this.getList();
 			}, 300);
 		},
 		onPullDownRefresh() {
 			console.log('onPullDownRefresh');
-
+			this.listData = [];
 			setTimeout(() => {
+				this.pageNumber = 1;
 				this.getList();
 				uni.stopPullDownRefresh();
 			}, 300);
 		},
 		methods: {
 			getList() {
-				var data = {
-					column: "id,post_id,title,author_name,cover,published_at" //需要的字段名
-				};
-				if (this.last_id) { //说明已有数据，目前处于上拉加载
-					data.minId = this.last_id;
-					data.time = new Date().getTime() + "";
-					data.pageSize = 10;
-				}
+
 				uni.request({
-					url: 'https://unidemo.dcloud.net.cn/api/news',
-					data: data,
+					url: service.getHomeGoods(),
+					data: {
+						pageNumber: this.pageNumber
+					},
 					success: (data) => {
-						if (data.statusCode == 200) {
-							let list = this.setTime(data.data);
-							this.listData = this.reload ? list : this.listData.concat(list);
-							this.last_id = list[list.length - 1].id;
-							this.reload = false;
+						if (data.statusCode == 200 && data.data.code == 0) {
+							this.listData = this.listData.length == 0 ? data.data.data.list : this.listData.concat(data.data.data.list);
+							if (data.data.data.lastPage) {
+								this.loadingType = 2;
+								return;
+							}
+							this.loadingType = 0;
 						}
 					},
 					fail: (data, code) => {
@@ -194,23 +170,9 @@
 
 
 				uni.navigateTo({
-					url: "../goods/goodsDetail?detailDate="
+					url: "../goods/goodsDetail?goodsId=" + e.goodId + "&name=" + e.name
 				})
-			},
-			setTime: function(items) {
-				var newItems = [];
-				items.forEach((e) => {
-					newItems.push({
-						author_name: e.author_name,
-						cover: e.cover,
-						id: e.id,
-						post_id: e.post_id,
-						published_at: e.published_at,
-						title: e.title
-					});
-				});
-				return newItems;
-			}
+			} 
 		}
 	}
 </script>
@@ -242,7 +204,7 @@
 		background-size: cover;
 	}
 
-	.goodsList-list h6 {
+	.follow-centImgh6 {
 		padding-top: 0.05rem;
 		font-size: 0.3rem;
 		color: #333333;
@@ -254,20 +216,11 @@
 		white-space: inherit;
 	}
 
-	.goodsList-list span {
-		display: inline-block;
-		margin: 0.25rem 0;
-		padding: 0 0.1rem;
-		height: 0.3rem;
-		line-height: 0.3rem;
-		font-size: 0.2rem;
-		/* color: #fff; */
-		/* background: #FC8872; */
-		border-radius: 100px;
-	}
+	 
 
-	.goodsList-list p {
-		font-size: 0.24rem;
+	.goodsList-listp {
+		margin: 55upx 0;
+		font-size: 24upx;
 		color: #666;
 		overflow: hidden;
 		text-overflow: ellipsis;

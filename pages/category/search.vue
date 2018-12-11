@@ -3,19 +3,19 @@
 		<view>
 			<view class="goodsList-header">
 				<view class="newProduct-screen  ">
-					<view :class="['newProduct-screenspan',{'active':sortData==1}]" @click="getSelet(1)" >热销</view>
+					<view :class="['newProduct-screenspan',{'active':sortData==1}]" @click="getSelet(1)">热销</view>
 					<view :class="['newProduct-screenspan',{'active':sortData==2}]" @click="getSelet(2)">综合</view>
-					<view :class="['newProduct-screenspan',{'active':sortData==3}]" @click="getSelet(3)">价格 
-					<view class="collage-icon" v-if="sortValue=='asc'"></view>
-            <view class="collage-icon1" v-else-if="sortValue=='desc'"></view>
-           <view class="collage-icon2" v-else></view>
-					
+					<view :class="['newProduct-screenspan',{'active':sortData==3}]" @click="getSelet(3)">价格
+						<view class="collage-icon" v-if="sortValue=='asc'"></view>
+						<view class="collage-icon1" v-else-if="sortValue=='desc'"></view>
+						<view class="collage-icon2" v-else></view>
+
 					</view>
 				</view>
 			</view>
 			<view class="goodsList-cent  ">
 
-				<view @click="goGoodDetail(item)" class="goodsList-list"  v-for="item in listData" :key="item" >
+				<view @click="goGoodDetail(item)" class="goodsList-list" v-for="item in listData" :key="item">
 					<image class="follow-centImg" lazy-load :src="item.logo"></image>
 					<view class="follow-centImgh6">{{item.name}}</view>
 					<view class="goodsList-listp">销量： {{item.sales}}</view>
@@ -25,14 +25,14 @@
 			</view>
 		</view>
 	</view>
-</template>  
+</template>
 
 <script>
 	import loadMore from '../../components/load-more.vue'
 	import service from '../../service.js';
-	
+
 	export default {
-		
+
 		components: {
 			loadMore
 		},
@@ -40,10 +40,10 @@
 			return {
 				categoryId: "",
 				listData: [],
-				pageNumber:1,
-				sortData:1, 
-				sortId:"create_date",  //排序字段 综合create_date 价格 integral
-        sortValue:"",   //排序值 asc 升 desc 降
+				pageNumber: 1,
+				sortData: 1,
+				sortId: "create_date", //排序字段 综合create_date 价格 integral
+				sortValue: "", //排序值 asc 升 desc 降
 				loadingType: 0,
 				contentText: {
 					contentdown: "上拉显示更多",
@@ -59,8 +59,8 @@
 			})
 			this.getList();
 		},
-		 
-			
+
+
 		onReachBottom() {
 			if (this.loadingType !== 0) {
 				return;
@@ -76,7 +76,7 @@
 			console.log('onPullDownRefresh');
 			this.listData = [];
 			setTimeout(() => {
-				this.pageNumber=1;
+				this.pageNumber = 1;
 				this.getList();
 				uni.stopPullDownRefresh();
 			}, 300);
@@ -84,44 +84,47 @@
 		methods: {
 			goGoodDetail: function(e) {
 				uni.navigateTo({
-					url: "../goods/goodsDetail?goodsId="+e.goodId+"&name="+e.name
+					url: "../goods/goodsDetail?goodsId=" + e.goodId + "&name=" + e.name
 				})
 			},
-			getSelet:function(order){
-						this.sortData=order;
-						if(this.sortData==1){
-                this.sortId="1";
-                this.sortValue="";
-            }else if(this.sortData==3){
-                this.sortId="3";
-                if(this.sortValue=="asc"){
-                    this.sortValue="desc";
-                }else if(this.sortValue=="desc"){
-                    this.sortValue="asc";
-                }else{
-                    this.sortValue="asc";
-                }
-            }
-						else{
-							this.sortId="2";
-							this.sortValue="";
-						}
-						this.pageNumber=1;
-						this.listData=[];
-						 this.getList();
+			getSelet: function(order) {
+				this.sortData = order;
+				if (this.sortData == 1) {
+					this.sortId = "1";
+					this.sortValue = "";
+				} else if (this.sortData == 3) {
+					this.sortId = "3";
+					if (this.sortValue == "asc") {
+						this.sortValue = "desc";
+					} else if (this.sortValue == "desc") {
+						this.sortValue = "asc";
+					} else {
+						this.sortValue = "asc";
+					}
+				} else {
+					this.sortId = "2";
+					this.sortValue = "";
+				}
+				this.pageNumber = 1;
+				this.listData = [];
+				this.getList();
 			},
 			getList() {
-				
+
 				uni.request({
 					url: service.getCategoryGoods(),
-					data:{categoryId:this.categoryId,pageNumber:this.pageNumber,sortData:this.sortData},
+					data: {
+						categoryId: this.categoryId,
+						pageNumber: this.pageNumber,
+						sortData: this.sortData
+					},
 					success: (data) => {
-						if (data.statusCode == 200&&data.data.code == 0) {
-							this.listData = this.listData.length==0?  data.data.data.list : this.listData.concat( data.data.data.list);
-							 if (data.data.data.lastPage) {
-							 	this.loadingType = 2;
-							 	return;
-							 }
+						if (data.statusCode == 200 && data.data.code == 0) {
+							this.listData = this.listData.length == 0 ? data.data.data.list : this.listData.concat(data.data.data.list);
+							if (data.data.data.lastPage) {
+								this.loadingType = 2;
+								return;
+							}
 							this.loadingType = 0;
 						}
 					},
@@ -129,17 +132,18 @@
 						console.log('fail' + JSON.stringify(data));
 					}
 				})
-			} 
-			 
+			}
+
 
 		}
 	}
 </script>
 
 <style>
-	 .active {
-  color: #558ef0;
+	.active {
+		color: #558ef0;
 	}
+
 	.goodsList-header {
 		position: fixed;
 		top: 0;
@@ -193,17 +197,17 @@
 	}
 
 	.newProduct-screen .collage-icon {
-		background: url(  "http://127.0.0.1:8082//static/images/collage-icon.png") no-repeat center;
+		background: url("http://127.0.0.1:8082/static/images/up.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
 	.newProduct-screen .collage-icon1 {
-		background: url( "http://127.0.0.1:8082//static/images/collage-icon1.png") no-repeat center;
+		background: url("http://127.0.0.1:8082/static/images/down.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
 	.newProduct-screen .collage-icon2 {
-		background: url( "http://127.0.0.1:8082//static/images/collage-icon2.png") no-repeat center;
+		background: url("http://127.0.0.1:8082/static/images/collage-icon2.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
@@ -244,11 +248,11 @@
 		-webkit-line-clamp: 2;
 		white-space: inherit;
 	}
- 
+
 
 	.goodsList-listp {
 		margin: 55upx 0;
-		font-size:  24upx;
+		font-size: 24upx;
 		color: #666;
 		overflow: hidden;
 		text-overflow: ellipsis;
