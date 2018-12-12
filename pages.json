@@ -3,33 +3,38 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "悠氧商城"
+				"navigationBarTitleText": "悠氧商城",
+				 "enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/category/allCategory",
 			"style": {
-				"navigationBarTitleText": "悠氧分类" 
+				"navigationBarTitleText": "悠氧分类" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		 
 		{ 
 			"path": "pages/cart/cart",
 			"style": {
-				"navigationBarTitleText": "购物车" 
+				"navigationBarTitleText": "购物车" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		
 		{
 			"path": "pages/search/search",
 			"style": {
-				"navigationBarTitleText": "搜索" 
+				"navigationBarTitleText": "搜索" ,
+				 "enablePullDownRefresh": true
 			}
 		}, 
 		{ 
 			"path": "pages/category/search",
 			"style": {
-				"navigationBarTitleText": "分类搜索" 
+				"navigationBarTitleText": "分类搜索" ,
+				 "enablePullDownRefresh": true
 			}
 		}, 
 		 
@@ -42,7 +47,8 @@
 		{
 			"path": "pages/address/address",
 			"style": {
-				"navigationBarTitleText": "收货地址" 
+				"navigationBarTitleText": "收货地址" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		{ 
@@ -54,7 +60,8 @@
 		{
 			"path": "pages/order/order",
 			"style": {
-				"navigationBarTitleText": "订单列表" 
+				"navigationBarTitleText": "订单列表" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		{
@@ -90,25 +97,29 @@
 		{
 			"path": "pages/brand/brandList",
 			"style": {
-				"navigationBarTitleText": "品牌列表" 
+				"navigationBarTitleText": "品牌列表" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/brand/search",
 			"style": {
-				"navigationBarTitleText": "品牌搜索" 
+				"navigationBarTitleText": "品牌搜索" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/service/afterOrder",
 			"style": {
-				"navigationBarTitleText": "售后管理" 
+				"navigationBarTitleText": "售后管理" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/coupon/coupon",
 			"style": {
-				"navigationBarTitleText": "优惠券" 
+				"navigationBarTitleText": "优惠券" ,
+				 "enablePullDownRefresh": true
 			}
 		},
 		{
@@ -151,6 +162,12 @@
 			"path": "pages/order/applyAfter",
 			"style": {
 				"navigationBarTitleText": "申请售后" 
+			}
+		},
+		{
+			"path": "pages/test/slidelist",
+			"style": {
+				"navigationBarTitleText": "侧滑" 
 			}
 		}
 	],

@@ -7,27 +7,27 @@ const store = new Vuex.Store({
     state: {
         forcedLogin: false,
         hasLogin: false,
-        userName: "",
+        name: "",
 		tokenId:"",
 		headImg:"",
 		integral:"",
-		nickName:""
+		nickname:""
     },
     mutations: {
-        login(state, userName,tokenId,headImg,integral,nickName) {
-            state.userName = userName;
+        login(state, name,tokenId,headImg,integral,nickname) {
+            state.name = name;
 			state.tokenId = tokenId;
 			state.headImg = headImg;
 			state.integral = integral;
-			state.nickName = nickName;
+			state.nickname = nickname;
             state.hasLogin = true;
         },
         logout(state) {
-            state.userName =""
+            state.name =""
 			state.tokenId = ""
 			state.headImg = ""
 			state.integral ="";
-			state.nickName ="";
+			state.nickname ="";
             state.hasLogin = false;
         }
     }

@@ -23,6 +23,7 @@
 				<div class="listCent happyi-co13" @click="goCustomerService()">客服<a class="happyi-left"></a></div>
 				<div class="listCent happyi-co1" @click="goDistribution()">申请分销<a class="happyi-left"></a></div>
 				<div class="listCent happyi-co1" @click="goAbout()">关于<a class="happyi-left"></a></div>
+				<div class="listCent happyi-co1" @click="goSli()">侧滑<a class="happyi-left"></a></div>
 			</div>
 			 
 			 
@@ -34,6 +35,11 @@
 <script>
 	export default {
 		methods: {
+			goSli:function(){
+				uni.navigateTo({
+					url:"../test/slidelist"
+				})
+			},
 			goAccount:function(){
 				uni.navigateTo({
 					url:"../myself/account"

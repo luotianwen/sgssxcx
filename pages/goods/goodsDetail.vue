@@ -64,15 +64,9 @@
 
 <script>
 	import service from '../../service.js';
-	 import {
-	 	mapState,
-	 	mapMutations
-	 } from 'vuex'
-	 
+
 	export default {
-		computed: {
-			...mapState(['hasLogin'])
-		},
+
 		data() {
 			return {
 				goodsId: "",
@@ -88,11 +82,13 @@
 				spec2: "",
 				number: 1,
 				skuId: "",
-				 
+				hasLogin: false,
+				type: 0,
 			}
 		},
-		 
+
 		onLoad(d) {
+
 			uni.setNavigationBarTitle({
 				title: d.name
 			})
@@ -100,46 +96,61 @@
 			this.getDetail();
 		},
 		methods: {
-			...mapMutations(['login']),
+
 
 			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
+				//service.removeUser();
+
+				let _this = this;
+
+				if (_this.hasLogin) {
+					return;
+				}
+
+
 				uni.login({
-				  provider: 'weixin',
-				  success: function (loginRes) {
-				 
-					// 获取用户信息
-					uni.getUserInfo({
-					  provider: 'weixin',
-					  success: function (infoRes) {
-						 /* this.hasUserInfo = true;
-						  this.userInfo = infoRes.userInfo */
-						console.log('用户昵称为：' + JSON.stringify(infoRes.userInfo));
-						//this.login();
-						uni.request({
-							url: service.login(),
-							data: {
-								nickName:  infoRes.userInfo.nickName,
-								openId:"11",//infoRes.userInfo.openId,
-								avatarUrl:infoRes.userInfo.avatarUrl
-							},
-							success: (data) => {
-								if (data.statusCode == 200 && data.data.code == 0) {
-									var d=data.data.data;
-									console.log('用户昵称为：' + JSON.stringify(data.data.data));
-									//login(state, userName,tokenId,headImg,integral,nickName)
-									  this.login(d.name,d.tokenId,d.headImg,d.integral,d.nickname);
-								}
-							},
-							fail: (data, code) => {
-								console.log('fail' + JSON.stringify(data));
+					provider: 'weixin',
+					success: function(loginRes) {
+
+						// 获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: function(infoRes) {
+								/* this.hasUserInfo = true;
+								 this.userInfo = infoRes.userInfo */
+								//console.log('用户昵称为：' + JSON.stringify(infoRes.userInfo));
+								//this.login();
+								uni.request({
+									url: service.login(),
+									data: {
+										nickName: infoRes.userInfo.nickName,
+										openId: "11", //infoRes.userInfo.openId,
+										avatarUrl: infoRes.userInfo.avatarUrl
+									},
+									success: (data) => {
+										if (data.statusCode == 200 && data.data.code == 0) {
+											var d = data.data.data;
+											d.hasLogin = true;
+											//console.log('用户昵称为：' + JSON.stringify(d));
+											//console.log('用户昵称为：' + d.nickname);
+											service.setUser(d);
+											_this.addCartToService();
+											_this.show = false;
+										}
+
+									},
+									fail: (data, code) => {
+										console.log('fail' + JSON.stringify(data));
+
+									}
+								})
 							}
-						})
-					  }
-					});
-				  }
+						});
+					}
 				});
-		    },
-			 
+
+			},
+
 			//选择及时改变
 			getInfo: function(type, item) {
 				if (type == 1) {
@@ -183,31 +194,81 @@
 				}
 			},
 			addCart: function() {
-				
+				this.type = 0;
 				this.show = true;
-                if(this.skuId.length>0){
-					
-					this.skuId = "";
-					this.stock = 0;
-					this.price = "";
-					if(!this.hasLogin){
+				if (this.skuId.length > 0) {
+					this.hasLogin = service.getUser().hasLogin;
+
+					uni.showLoading({
+						title: '加载中'
+					});
+					if (!this.hasLogin) {
 						this.getUserInfo();
+					} else {
+						this.addCartToService();
 					}
-			    }
+					uni.hideLoading();
+				}
 
 			},
 			buy: function() {
-				 
+				this.type = 1;
 				this.show = true;
-				if(this.skuId.length>0){
-					
-					this.skuId = "";
-					this.stock = 0;
-					this.price = "";
-					if(!this.hasLogin){
+				if (this.skuId.length > 0) {
+
+					this.hasLogin = service.getUser().hasLogin;
+
+					uni.showLoading({
+						title: '加载中'
+					});
+					if (!this.hasLogin) {
 						this.getUserInfo();
+					} else {
+						this.addCartToService()
 					}
+
+					uni.hideLoading();
+
 				}
+			},
+			addCartToService: function() {
+
+
+				uni.request({
+					url: service.addCart(),
+					data: {
+						skuId: this.skuId,
+						tokenId: service.getUser().tokenId,
+						number: this.number,
+						type: this.type
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							if (this.type == 0) {
+								uni.showToast({
+									title: "加入购物车成功"
+								})
+							}
+							this.show=false;
+							this.skuId = "";
+							this.stock = 0;
+							this.price = "";
+							this.spec1 = "";
+							this.spec2 = "";
+							this.type = 0;
+						}
+
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						if (this.type == 0) {
+							uni.showToast({
+								title: "加入购物车失败"
+							})
+						}
+					}
+				})
+
 			},
 			getDetail: function() {
 				uni.request({
@@ -336,29 +397,7 @@
 		color: #333;
 	}
 
-
-
-	.goodsDetails-butt .goodsDetails-cuwux {
-		left: 1rem;
-		background: url(" https://h5.hongkzh.cn/imgs/purchase/shoppingCart/gwc-icon.png") no-repeat center;
-		background-size: 0.55rem 0.55rem;
-	}
-
-	.goodsDetails-butt .goodsDetails-news {
-		position: absolute;
-		top: 0.18rem;
-		left: 1.6rem;
-		display: block;
-		width: 0.26rem;
-		height: 0.26rem;
-		line-height: 0.26rem;
-		text-align: center;
-		background: #EF593C;
-		border-radius: 0.13rem;
-		color: #fff;
-		font-size: 0.2rem;
-	}
-
+ 
 
 
 	.goodsDetails-Btn1 {
