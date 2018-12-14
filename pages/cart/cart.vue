@@ -4,29 +4,33 @@
 			<view class="shoppingCart-list shoppingCart-list1">
 				<view class="shoppingCart-listCent">
 
-					<view class="list-cent" v-for="item in data" :key="item" >
-						<view class="list-centLeft">
-							<input type="checkbox" id="checkbox00" class="shoppingCart-input Cart-icon" :value="item.cartId">
-							<label for="checkbox00" class="shoppingCart-icon Cart-icon"></label>
+					<view class="list-cent" v-for="(item, index) in data" :key="index">
+						<view :class="['list-centLeft',{'swipeleft':item.className}]" @touchstart="touchStart($event,index)" @touchmove="touchMove($event,index,item)">
+							<view class="shoppingCart-icon">
+								<input type="checkbox" :checked="item.state" @click='checkedOne(index,item)'>
+							</view>
+							<!-- <label for="checkbox00" class="shoppingCart-icon Cart-icon"></label> -->
 							<view class="list-centRight ">
-								<image  class="centRight-img" @click="goGoodDetail(item)" :src="item.logo" ></image>
+								<image class="centRight-img" @click="goGoodDetail(item)" :src="item.logo"></image>
 
-							 
+
 								<view class="centRight-cent">
 									<view class="centRight-centh6">{{item.name}}</view>
 									<view class="centRight-centp">{{item.spec1}} &nbsp; {{item.spec2}}</view>
-									<view class="centRight-centdiv">应付:<span class="happyi-mon">¥{{item.price*item.number}}</span></view>
+									<view class="centRight-centdiv">应付:<span class="happyi-mon">¥{{item.price}}</span></view>
 								</view>
 							</view>
 							<view class="list-centData">
 								<view class="centData-num ">
-									<view class="centData-numspan centData-reduce">－</view> <input type="number" v-model="item.number">
-									<view class="centData-numspan centData-add">＋</view>
+									<view class="centData-numspan centData-reduce" @click="getReduce(item)">－</view> <input type="number" readonly
+									 v-model="item.number">
+									<view class="centData-numspan centData-add" @click="getAdd(item)">＋</view>
 								</view>
 								<!---->
 							</view>
+
 						</view>
-						<view class="list-centClose">
+						<view class="list-centClose" @tap="removeCart(item,index)">
 							<view class="list-centClosespan">删除</view>
 						</view>
 					</view>
@@ -37,8 +41,8 @@
 
 		</view>
 		<view class="shoppingCart-footer ">
-			<view class="shoppingCart-footerlabel" @click="getCheckedAll()" >全选</view>
-			<view class="shoppingCart-footerlabelstrong footer-btn">结算</view>
+			<view class="shoppingCart-footerlabel"> <input type='checkbox' :checked="ids.length === data.length" @click="getCheckedAll()">全选</view>
+			<view class="shoppingCart-footerlabelstrong footer-btn" @click="settlement()">结算</view>
 			<view class="shoppingCart-footerspan">¥{{price}}</view>
 		</view>
 
@@ -50,27 +54,258 @@
 	export default {
 		data() {
 			return {
-
 				data: [],
-        price:"",
+				price: 0,
+				ids: [],
+				swipeX: true,
+				swipeY: true,
+				x: "",
+				y: "",
+				X: "",
+				Y: "",
+				// 初始化全选按钮, 默认不选
+				isCheckedAll: false
 			}
 		},
 		onLoad(d) {
+
+			uni.showLoading({
+				title: '加载中'
+			});
+			//service.removeUser();
 			if (service.getUser().hasLogin) {
 				this.cartlist();
+			} else {
+				this.getUserInfo();
+
 			}
+
 		},
 		onPullDownRefresh() {
-			 
+			
+			this.isCheckedAll=false;
+			this.ids=[];
 			this.data = [];
+			this.price=0;
 			setTimeout(() => {
 				this.cartlist();
 				uni.stopPullDownRefresh();
 			}, 300);
 		},
 		methods: {
-			getCheckedAll:function(){
-				
+
+			touchStart: function(event, index) {
+				this.x = event.touches[0].pageX;
+				this.y = event.touches[0].pageY;
+				this.swipeX = true;
+				this.swipeY = true;
+			},
+			touchMove: function(event, index, _that) {
+				event.stopPropagation();
+				this.X = event.touches[0].pageX;
+				this.Y = event.touches[0].pageY;
+				// 左右滑动
+				if (this.swipeX && Math.abs(this.X - this.x) - Math.abs(this.Y - this.y) > 0) {
+					// 阻止事件冒泡
+					event.stopPropagation();
+					if (this.X - this.x > 10) { //右滑
+						event.preventDefault();
+						_that.className = false; //右滑收起
+						//console.log("右滑")
+					}
+					if (this.x - this.X > 10) { //左滑
+						event.preventDefault();
+						_that.className = true; //左滑展开
+
+					}
+					this.swipeY = false;
+				}
+
+
+			},
+			settlement: function() {
+				if (this.ids.length > 0) {
+					uni.navigateTo({
+						url: "../order/preorder"
+					})
+
+				} else {
+					uni.showToast({
+						title: '请选择商品',
+						duration: 2000
+					});
+				}
+			},
+			removeCart: function(item, index) {
+				uni.showLoading({
+					title: '加载中'
+				});
+				console.log("removeCart");
+				let self = this;
+				uni.request({
+					url: service.removeCart(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						cartId: item.cartId
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							let idIndex = self.ids.indexOf(item.cartId);
+							if (idIndex >= 0) {
+								self.ids.splice(idIndex, 1)
+							}
+							let _data = [];
+							self.data.forEach(function(cart) {
+								if (cart.cartId != item.cartId) {
+									//self.data.rem
+									_data.push(cart);
+								}
+
+							}, this)
+							self.data = _data;
+							//self.data.splice(index, 1)
+							self.getPrices();
+						}
+						uni.hideLoading();
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
+					}
+				});
+			},
+			//数量减
+			getReduce: function(item) {
+				if (item.number <= 1) {
+					item.number = 1;
+
+				} else {
+					item.number--;
+				}
+				this.getPrices();
+				this.syncSku(item);
+			},
+			//数量加
+			getAdd: function(item) {
+				if (item.number < item.stock) {
+					item.number++;
+				}
+				this.getPrices();
+				this.syncSku(item);
+			},
+			syncSku: function(item) {
+				uni.request({
+					url: service.syncCart(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						cartId: item.cartId,
+						number: item.number
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+
+
+						}
+
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+
+					}
+				});
+			},
+			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
+				//service.removeUser();
+
+				let _this = this;
+
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+
+						// 获取用户信息
+						uni.getUserInfo({
+							provider: 'weixin',
+							success: function(infoRes) {
+
+								uni.request({
+									url: service.login(),
+									data: {
+										nickName: infoRes.userInfo.nickName,
+										openId: "11", //infoRes.userInfo.openId,
+										avatarUrl: infoRes.userInfo.avatarUrl
+									},
+									success: (data) => {
+										if (data.statusCode == 200 && data.data.code == 0) {
+											var d = data.data.data;
+											d.hasLogin = true;
+											service.setUser(d);
+											_this.cartlist();
+										}
+
+									},
+									fail: (data, code) => {
+										console.log('fail' + JSON.stringify(data));
+
+									}
+								})
+							}
+						});
+					}
+				});
+
+			},
+			checkedOne: function(index, item) {
+				var self = this;
+				setTimeout(function() {
+					let id = item.cartId;
+					item.state = !item.state;
+					let idIndex = self.ids.indexOf(id);
+					//console.log(idIndex);
+					if (idIndex === -1) {
+
+						// 选中该checkbox
+						self.ids.push(id)
+					} else {
+						// 如果已经包含了该id, 则去除(单选按钮由选中变为非选中状态)
+						self.ids.splice(idIndex, 1)
+					}
+					self.getPrices();
+
+					//console.log(self.ids);
+				}, 0)
+
+			},
+			getPrices: function() {
+				this.price = 0;
+				let _this = this;
+				this.data.forEach(function(cart) {
+					if (cart.number < 1) {
+						cart.number = 1;
+					}
+					if (cart.state) {
+						_this.price = _this.price + (cart.number * cart.price);
+					}
+
+				}, this)
+			},
+			getCheckedAll: function() {
+				this.isCheckedAll = !this.isCheckedAll
+				if (this.isCheckedAll) {
+					// 全选时
+					this.ids = []
+					this.data.forEach(function(cart) {
+						cart.state = true;
+						this.ids.push(cart.cartId)
+					}, this)
+				} else {
+					this.ids = [];
+					this.data.forEach(function(cart) {
+						cart.state = false;
+
+					}, this)
+				}
+				this.getPrices();
 			},
 			cartlist: function() {
 
@@ -83,9 +318,11 @@
 						if (data.statusCode == 200 && data.data.code == 0) {
 							this.data = data.data.data;
 						}
+						uni.hideLoading();
 					},
 					fail: (data, code) => {
 						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
 					}
 				})
 			},
@@ -103,10 +340,6 @@
 		padding: 20upx 10upx 10upx;
 	}
 
-	.shoppingCarttop .shoppingCart-select {
-		background: url(http://127.0.0.1:8082/static/images/check.png) no-repeat left center;
-		background-size: 0.5rem 0.5rem;
-	}
 
 	.shoppingCart {
 		overflow: hidden;
@@ -138,34 +371,6 @@
 		border: none;
 	}
 
-	.shoppingCart-listTitle {
-		padding-left: 0.5rem;
-		margin-left: 0.09rem;
-		height: 0.8rem;
-		line-height: 0.8rem;
-		font-size: 0.26rem;
-		color: #333333;
-		background: url(http://127.0.0.1:8082/static/images/nocheck.png) no-repeat left center;
-		background-size: 0.5rem 0.5rem;
-	}
-
-	.shoppingCart-listTitle span {
-		display: block;
-		padding-left: 0.6rem;
-		height: 100%;
-		/* background: url(/imgs/purchase/shoppingCart/shoppingCart-gwl.png) no-repeat left center; */
-		background-size: 0.58rem 0.56rem;
-	}
-
-	.shoppingCart-listTitle strong {
-		margin: 0 0.1rem 0 0.2rem;
-		display: inline-block;
-		width: 0.36rem;
-		height: 0.36rem;
-		border-radius: 50%;
-		vertical-align: middle;
-		background-size: 100% 100%;
-	}
 
 	.list-cent {
 		position: relative;
@@ -178,10 +383,7 @@
 		opacity: 0;
 	}
 
-	.list-cent .shoppingCart-input:checked+.shoppingCart-icon {
-		/* background: url(/imgs/purchase/shoppingCart/shoppingCart-icon.png) no-repeat left center; */
-		background-size: 0.5rem 0.5rem;
-	}
+
 
 	.list-cent1 .list-centClose {
 		height: 2.8rem;
@@ -232,20 +434,12 @@
 		z-index: 100;
 		display: block;
 		margin-top: -0.3rem;
-		padding-left: 0.5rem;
+		/* padding-left: 0.5rem; */
 		height: 0.6rem;
 	}
 
-	.shoppingCart-icon {
-		z-index: 100;
-		background: url(http://127.0.0.1:8082/static/images/nocheck.png) no-repeat left center;
-		background-size: 0.5rem 0.5rem;
-	}
 
-	.addGoods-icon1 {
-		background: url(http://127.0.0.1:8082/static/images/check.png) no-repeat left center;
-		background-size: 0.5rem 0.5rem;
-	}
+
 
 	.centRight-img {
 		position: relative;
@@ -393,11 +587,11 @@
 
 	.shoppingCart-footerlabel {
 		display: inline-block;
-		padding-left: 0.65rem;
+		/* 	padding-left: 0.65rem; */
 		font-size: 0.26rem;
 		color: #333333;
-		background: url(http://127.0.0.1:8082/static/images/nocheck.png) no-repeat left center;
-		background-size: 0.5rem 0.5rem;
+		/* background: url(http://127.0.0.1:8082/static/images/nocheck.png) no-repeat left center; */
+		/* 	background-size: 0.5rem 0.5rem; */
 	}
 
 	.shoppingCart-footerlabelstrong {

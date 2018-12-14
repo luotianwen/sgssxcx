@@ -58,6 +58,13 @@
 			}
 		},
 		{
+			"path": "pages/order/preorder",
+			"style": {
+				"navigationBarTitleText": "订单结算"  
+			}
+		},
+		
+		{
 			"path": "pages/order/order",
 			"style": {
 				"navigationBarTitleText": "订单列表" ,

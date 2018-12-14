@@ -20,7 +20,12 @@ const login = function() {
 const addCart=function(){
 	return httpUrl + "shop/addCart";
 }
-
+const syncCart=function(){
+	return httpUrl + "shop/syncCart";
+}
+const removeCart=function(){
+	return httpUrl + "shop/removeCart";
+}
 const cartList=function(){
 	return httpUrl + "shop/cartList";
 }
@@ -30,7 +35,7 @@ const getUser = function () {
     let ret = '';
     ret = uni.getStorageSync(USERS_KEY);
     if (!ret) {
-        ret =  "{\"hasLogin\":true}" ;
+        ret =  "{\"hasLogin\":false}" ;
     }
     return JSON.parse(ret);
 }
@@ -52,5 +57,7 @@ export default {
 	getUser,
 	removeUser,
 	addCart,
-	cartList
+	cartList,
+	syncCart,
+	removeCart
 }
