@@ -1,4 +1,6 @@
 const httpUrl = "http://127.0.0.1:8081/v1/";
+const debug=true
+ 
 const getCategory = function() {
 	return httpUrl + "shop/allCategory";
 }
@@ -28,6 +30,9 @@ const removeCart=function(){
 }
 const cartList=function(){
 	return httpUrl + "shop/cartList";
+}
+const preorder=function(){
+	return httpUrl + "shop/preorder";
 }
 const USERS_KEY = 'SGSS_USERS_KEY';
 
@@ -59,5 +64,6 @@ export default {
 	addCart,
 	cartList,
 	syncCart,
-	removeCart
+	removeCart,
+	preorder
 }

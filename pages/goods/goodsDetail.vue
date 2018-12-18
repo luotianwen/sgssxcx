@@ -100,7 +100,7 @@
 
 			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
 				//service.removeUser();
-
+				 
 				let _this = this;
 
 				if (_this.hasLogin) {
@@ -195,41 +195,53 @@
 			},
 			addCart: function() {
 				this.type = 0;
-				this.show = true;
-				if (this.skuId.length > 0) {
-					this.hasLogin = service.getUser().hasLogin;
+				if (this.show) {
+					if (this.skuId.length > 0) {
+						this.hasLogin = service.getUser().hasLogin;
 
-					uni.showLoading({
-						title: '加载中'
-					});
-					if (!this.hasLogin) {
-						this.getUserInfo();
+						uni.showLoading({
+							title: '加载中'
+						});
+						if (!this.hasLogin) {
+							this.getUserInfo();
+						} else {
+							this.addCartToService();
+						}
+						uni.hideLoading();
 					} else {
-						this.addCartToService();
+						uni.showToast({
+							title: "请选择商品"
+						})
 					}
-					uni.hideLoading();
 				}
+				this.show = true;
 
 			},
 			buy: function() {
 				this.type = 1;
-				this.show = true;
-				if (this.skuId.length > 0) {
+				if (this.show) {
+					if (this.skuId.length > 0) {
 
-					this.hasLogin = service.getUser().hasLogin;
+						this.hasLogin = service.getUser().hasLogin;
 
-					uni.showLoading({
-						title: '加载中'
-					});
-					if (!this.hasLogin) {
-						this.getUserInfo();
+						uni.showLoading({
+							title: '加载中'
+						});
+						if (!this.hasLogin) {
+							this.getUserInfo();
+						} else {
+							this.addCartToService()
+						}
+
+						uni.hideLoading();
+
 					} else {
-						this.addCartToService()
+						uni.showToast({
+							title: "请选择商品"
+						})
 					}
-
-					uni.hideLoading();
-
 				}
+				this.show = true;
 			},
 			addCartToService: function() {
 
@@ -249,7 +261,7 @@
 									title: "加入购物车成功"
 								})
 							}
-							this.show=false;
+							this.show = false;
 							this.skuId = "";
 							this.stock = 0;
 							this.price = "";
@@ -397,7 +409,7 @@
 		color: #333;
 	}
 
- 
+
 
 
 	.goodsDetails-Btn1 {

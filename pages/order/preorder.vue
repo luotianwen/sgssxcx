@@ -1,87 +1,127 @@
 <template>
-	<view class="">
-		<div id="confirmOrder">
-			 
-			<div class="confirmOrder-address">
-				<div class="address-bg"></div>
-				<div class="address-cent">
-					<h6>请选择地址</h6><strong class="address-left"></strong>
-				</div>
-			</div>
-			<div class="confirmOrder-cent">
-				<div class="confirmOrder-centList">
-					<!-- <div class="centList-title"><span>逍遥子</span></div> -->
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centCent">
-								<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1bd6e64da75c4014b385ae9bdf0a6798/images/shop/product/2018/12/20181201113734.jpg), url();">
-								</div>
-								<div class="centList-centRight">
-									<h6 class="clearfix">童装<span class="centRight-h6"><span>×</span>1</span></h6>
-									<p>灰色<i>&nbsp;</i>小号</p>
-									<div class="happyi-mon"><span>¥</span>18</div>
-								</div>
-							</div>
-							 
-						 </div>
-					</div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centCent">
-								<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1bd6e64da75c4014b385ae9bdf0a6798/images/shop/product/2018/12/20181201113734.jpg), url();">
-								</div>
-								<div class="centList-centRight">
-									<h6 class="clearfix">童装<span class="centRight-h6"><span>×</span>1</span></h6>
-									<p>灰色<i>&nbsp;</i>小号</p>
-									<div class="happyi-mon"><span>¥</span>18</div>
-								</div>
-							</div>
-							 
-						</div>
-					</div>
-					<div class="centList-butt"  >
-						<span class="centList-buttLeft"  @click="getPreorder(3,list)">优惠券</span>
-						<span class="centList-buttCent">可用折扣券 张</span>
-						<strong class="centList-buttRight" @click="getMyCouponsByProductId(list)"></strong>
-					</div>
-				</div>
-			</div>
-			<div class="confirmOrder-footer"><span class="footer-money">¥18.00</span>
-				<div class="footer-money1">
-					<p>总额：<span>¥18</span></p>
-					<p>立减：<span>¥0.00</span></p>
-				</div><strong class="footer-btn">提交订单</strong>
-			</div>
-			<div id="mask" class=""></div>
-			 
-			<div id="confirmPayment" class="">
-				<h6 class="confirmPayment-title">确认付款<span></span></h6>
-				<div class="confirmPayment-countegral"><span>¥</span></div>
-				<div class="confirmPayment-user clearfix">支付用户<strong style="background-image: url(), url();"></strong><span></span></div>
-				<!---->
-				<div class="confirmPayment-btn1">支付</div>
-			</div>
-			<div id="colseInvalid" class="">
-				<h6 class="colseInvalid-title">抱歉，恁本单购买的以下商品因付款超时已无法购买</h6>
-				<div class="colseInvalid-cent"></div>
-				<div class="colseInvalid-butt clearfix"><span>返回购物车</span> <span class="btn">移除无效商品</span></div>
-			</div>
-			<div id="leaveTips" class="">
-				<h6>确认离开吗?</h6>
-				<div class="clearfix"><span class="leaveTips-btn">确认离开</span> <span>我在想想</span></div>
-			</div>
-			<div id="voucher" class="">
-				<h6 class="confirmPayment-title"><strong class="goods-totalRight"></strong> 优惠券<span></span></h6>
-				<div class="voucher-cent"></div>
-			</div>
-			<div id="prompt-view">
-				<!---->
-			</div>
+	<view id="confirmOrder">
+
+		<view class="confirmOrder-address">
+			<view class="address-bg"></view>
+			<view class="address-cent" v-show="!show">
+				<view class="address-centh6">请选择地址</view>
+				<view class="address-left"></view>
+			</view>
+			<view class="address-cent" v-show="show" v-if=data.address>
+				<view class="address-centh6">
+					<view class="address-name">{{data.address.consignee||''}} {{data.address.phone||''}}</view>
+				</view>
+				<view class="address-centp">{{data.address.provinceName}}{{data.address.cityName}}{{data.address.areaName}}{{data.address.address}}</view>
+				<view class="address-left"></view>
+			</view>
+		</view>
+		<view class="confirmOrder-cent">
+			<view class="confirmOrder-centList">
+
+				<view class="confirmOrder-listCent" v-for="(item, index) in data.carts" :key="index" v-if=data.carts>
+					<view class="centList-cent clearfix">
+						<view class="centList-centCent">
+							<image class="centRight-centImg" :src="item.logo"></image>
+							<view class="centList-centRight">
+								<view class="centList-centRighth6">{{item.name}}
+									<view class="centRight-h6 centRight-h6span">×{{item.number}}</view>
+								</view>
+								<view class="centList-centRightp">{{item.spec1}} &nbsp; {{item.spec1}}</view>
+								<view class="happyi-mon">
+									<view class="happyi-monspan">¥{{item.price}}</view>
+								</view>
+							</view>
+						</view>
+
+					</view>
+				</view>
+
+				<view class="centList-butt">
+					<span class="centList-buttLeft">优惠券</span>
+					<span class="centList-buttCent" v-if=data.coupons>可用折扣券{{data.coupons}}张</span>
+					<strong class="centList-buttRight" @click="getMyCouponsByProductId(list)"></strong>
+				</view>
+				<view class="centList-butt">
+					<span class="centList-buttLeft"> 运费 </span>
+					<span class="centList-buttCent">{{data.freight}}</span>
+				</view>
+			</view>
+		</view>
+		<view class="confirmOrder-footer">
+			<view class="footer-money">¥{{data.total}}</view>
+			<view class="footer-money1">
+				<p>总额：<span>¥{{data.product}}</span></p>
+				<p>立减：<span>¥{{data.coupon}}</span></p>
+			</view>
+			<view class="footer-btn">提交订单</view>
+		</view>
+
+
+
+
+		<div id="voucher" class="">
+			<h6 class="confirmPayment-title"><strong class="goods-totalRight"></strong> 优惠券<span></span></h6>
+			<div class="voucher-cent"></div>
 		</div>
+		<div id="prompt-view">
+			<!---->
+		</div>
+
 	</view>
 </template>
 
 <script>
+	import service from '../../service.js';
+
+	export default {
+
+		data() {
+			return {
+				show: false,
+				data: {
+					"product": 0,
+					"total": 0,
+					"coupon": 0,
+					"freight": 0, 
+				},
+				addressId:"",
+				cartId:"",
+				couponId:""
+			}
+		},
+
+		onLoad(d) {
+			this.cartId = d.cartId;
+            this.getPreorder();
+		},
+		methods: {
+			getPreorder: function() {
+
+				uni.request({
+					url: service.preorder(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						addressId:this.addressId,
+						cartId:this.cartId,
+						couponId:this.couponId
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							this.data = data.data.data;
+							if(this.data.address){
+								this.show=true;
+							}
+						}
+						uni.hideLoading();
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
+					}
+				})
+			}
+		}
+	}
 </script>
 
 <style>
@@ -97,7 +137,7 @@
 	.address-bg {
 		width: 100%;
 		height: 0.1rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/address-icon.png) no-repeat left top;
+		background: url(http://127.0.0.1:8082/static/images/address-icon.png) no-repeat left top;
 		background-size: 100% 0.1rem;
 	}
 
@@ -108,7 +148,7 @@
 		background-color: #fffde5;
 	}
 
-	.address-cent h6 {
+	.address-centh6 {
 		margin-bottom: 0.1rem;
 		font-size: 0.3rem;
 		font-weight: inherit;
@@ -129,7 +169,7 @@
 		margin-right: 0.25rem;
 	}
 
-	.address-cent p {
+	.address-centp {
 		font-size: 0.26rem;
 		color: #999;
 	}
@@ -141,7 +181,7 @@
 		margin-top: -0.24rem;
 		width: 0.48rem;
 		height: 0.48rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/happyi/index/happyi-left.png) no-repeat center;
+		background: url(http://127.0.0.1:8082/static/images/left.png) no-repeat center;
 		background-size: 0.48rem 0.48rem;
 	}
 
@@ -150,33 +190,6 @@
 		background: #fff;
 	}
 
-	/* .centList-title {
-		padding-left: 0.3rem;
-		height: 0.8rem;
-		line-height: 0.8rem;
-		font-size: 0.26rem;
-		color: #333333;
-		border-bottom: 1px solid #e2e2e2;
-	}
-
-	.centList-title span {
-		display: inline-block;
-		padding-left: 0.6rem;
-		min-width: 0.6rem;
-		height: 100%;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-gwl.png) no-repeat left center;
-		background-size: 0.58rem 0.56rem;
-	}
-
-	.centList-title strong {
-		margin: 0 0.1rem 0 0.2rem;
-		display: inline-block;
-		width: 0.36rem;
-		height: 0.36rem;
-		border-radius: 50%;
-		vertical-align: middle;
-		background-size: 100% 100%;
-	} */
 
 	.centList-cent {
 		position: relative;
@@ -211,31 +224,7 @@
 		height: 0.62rem;
 	}
 
-	.centList-centImg .shoppingCart-icon1 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon1.png) no-repeat center;
-		background-size: 100% 100%;
-	}
 
-	.centList-centImg .shoppingCart-icon2 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon2.png) no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.centList-centImg .shoppingCart-icon3 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon3.png) no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.centList-centImg .overtime {
-		position: absolute;
-		top: 0;
-		right: 0;
-		display: block;
-		width: 100%;
-		height: 100%;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/overtime.png) no-repeat center;
-		background-size: 100% 100%;
-	}
 
 	.centList-centRight {
 		position: relative;
@@ -243,7 +232,7 @@
 		height: 1.6rem;
 	}
 
-	.centList-centRight h6 {
+	.centList-centRighth6 {
 		margin-bottom: 0.05rem;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -258,12 +247,12 @@
 		color: #666;
 	}
 
-	.centList-centRight .centRight-h6 span {
+	.centList-centRight .centRight-h6span {
 		margin-right: 0.05rem;
 		vertical-align: -0.01rem;
 	}
 
-	.centList-centRight p {
+	.centList-centRightp {
 		font-size: 0.24rem;
 	}
 
@@ -275,7 +264,7 @@
 		color: #EF593C;
 	}
 
-	.centList-centRight .happyi-mon span {
+	.centList-centRight .happyi-monspan {
 		font-size: 0.24rem;
 	}
 
@@ -357,25 +346,20 @@
 		margin-top: -0.24rem;
 		width: 0.48rem;
 		height: 0.48rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/happyi/index/happyi-left.png) no-repeat center;
+		background: url(http://127.0.0.1:8082/static/images/left.png) no-repeat center;
 		background-size: 0.48rem 0.48rem;
 	}
 
 	.centList-buttLeft {
 		display: inline-block;
 		width: 0.9rem;
-		padding-left: 0.5rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/confirmOrder-icon5.png) no-repeat left center;
-		background-size: 0.4rem 0.4rem;
+
 		color: #333;
 	}
 
-	.centList-buttLeft1 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/confirmOrder-icon6.png) no-repeat left center;
-		background-size: 0.4rem 0.4rem;
-	}
 
-	 
+
+
 
 	.confirmOrder-footer {
 		position: fixed;
@@ -428,11 +412,13 @@
 		display: none;
 	}
 
-	 
+
 	.maskShow {
 		display: block !important;
-	} 
-	#confirmPayment,
+	}
+
+
+
 	#voucher {
 		display: none;
 		position: fixed;
@@ -440,215 +426,7 @@
 		bottom: 0;
 		z-index: 2000;
 		width: 100%;
-		background: #fff;
-	}
 
-	#confirmPayment {
-		height: 7rem;
-	}
-
-	.confirmPayment-title {
-		position: relative;
-		height: 1rem;
-		line-height: 1rem;
-		text-align: center;
-		font-size: 0.34rem;
-		color: #333333;
-		border-bottom: 1px solid #e2e2e2;
-	}
-
-	.confirmPayment-title span {
-		position: absolute;
-		right: 0.3rem;
-		top: 0;
-		display: block;
-		width: 0.6rem;
-		height: 100%;
-		background: url("https://cs.h5.hongkzh.com/imgs/friend/index/circleBar-close.png") no-repeat center;
-		background-size: 0.6rem 0.6rem;
-	}
-
-	.confirmPayment-countegral {
-		margin: 0.5rem 0 0.4rem;
-		font-size: 0.5rem;
-		color: #333;
-		text-align: center;
-	}
-
-	.confirmPayment-countegral strong {
-		display: inline-block;
-		padding-left: 0.44rem;
-		min-width: 0.4rem;
-		height: 100%;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
-		background-size: 0.35rem 0.35rem;
-	}
-
-	.confirmPayment-user,
-	.confirmPayment-balance {
-		padding-right: 0.3rem;
-		margin-left: 0.32rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
-		color: #333333;
-		border-bottom: 1px solid #e2e2e2;
-	}
-
-	.confirmPayment-user strong,
-	.confirmPayment-balance strong,
-	.confirmPayment-user span,
-	.confirmPayment-balance span {
-		float: right;
-	}
-
-	.confirmPayment-user span,
-	.confirmPayment-balance span {
-		margin-right: 0.2rem;
-	}
-
-	.confirmPayment-user span {
-		font-size: 0.28rem;
-		color: #666666;
-	}
-
-	.confirmPayment-user strong {
-		margin-top: 0.15rem;
-		width: 0.7rem;
-		height: 0.7rem;
-		border-radius: 50%;
-		background-size: 100% 100%;
-	}
-
-	.confirmPayment-balance strong,
-	.confirmPayment-balance span {
-		font-size: 0.28rem;
-	}
-
-	.confirmPayment-balance span {
-		height: 100%;
-		padding-left: 0.3rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-mons.png) no-repeat left 0.36rem;
-		background-size: 0.25rem 0.25rem;
-	}
-
-	.confirmPayment-balance strong {
-		color: #f44834;
-	}
-
-	.confirmPayment-btn,
-	.confirmPayment-btn1 {
-		margin: 0.9rem auto 0;
-		width: 90%;
-		height: 0.98rem;
-		line-height: 0.98rem;
-		text-align: center;
-		font-size: 0.32rem;
-		color: #EF593C;
-		border-radius: 0.1rem;
-		border: 0.02rem solid #EF593C;
-	}
-
-	.confirmPayment-btn1 {
-		background: #EF593C;
-		border-color: #EF593C;
-		color: #fff;
-	}
-
-	#colseInvalid {
-		display: none;
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		margin-left: -45%;
-		margin-top: -2.25rem;
-		z-index: 2000;
-		width: 90%;
-		height: 4.5rem;
-		background-color: #ffffff;
-		border-radius: 0.1rem;
-		overflow: hidden;
-	}
-
-	.colseInvalid-title {
-		padding: 0.5rem 0.5rem 0;
-		font-size: 0.3rem;
-		color: #333333;
-	}
-
-	.colseInvalid-cent {
-		padding: 0.3rem 0.5rem;
-		height: 1.62rem;
-		overflow-y: auto;
-	}
-
-	.colseInvalid-butt {
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: 0.9rem;
-		line-height: 0.9rem;
-		text-align: center;
-		border-top: 1px solid #e2e2e2;
-	}
-
-	.colseInvalid-butt span {
-		float: left;
-		width: 50%;
-		height: 100%;
-		font-size: 0.3rem;
-		color: #666666;
-	}
-
-	.colseInvalid-butt .btn {
-		color: #fff;
-		background-color: #d45048;
-	}
-
-	#leaveTips {
-		display: none;
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		margin-left: -2.7rem;
-		margin-top: -1.22rem;
-		z-index: 2000;
-		width: 5.4rem;
-		height: 2.44rem;
-		background-color: #ffffff;
-		border-radius: 0.1rem;
-		overflow: hidden;
-		font-size: 0.3rem;
-		text-align: center;
-		font-weight: bold;
-	}
-
-	#leaveTips h6 {
-		height: 1.44rem;
-		line-height: 1.44rem;
-		color: #333333;
-		border-bottom: 1px solid #e2e2e2;
-	}
-
-	#leaveTips div {
-		height: 1rem;
-		line-height: 1rem;
-	}
-
-	#leaveTips span {
-		float: left;
-		width: 50%;
-		color: #EF593C;
-	}
-
-	#leaveTips .leaveTips-btn {
-		width: 49.5%;
-		border-right: 1px solid #e2e2e2;
-		color: #999999;
-	}
-
-	#voucher {
 		height: 8rem;
 		background: #F5F5F5;
 	}
@@ -670,7 +448,7 @@
 		margin-top: 0.18rem;
 		padding-top: 0.5rem;
 		height: 1.9rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-bg.png) no-repeat center;
+		background: url(http://127.0.0.1:8082/static/images/purchase-bg.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 
@@ -702,14 +480,7 @@
 		color: #333333;
 	}
 
-	.coupon-list .purchase-icon2 {
-		margin: 0.12rem 0 0.13rem;
-		display: block;
-		width: 0.76rem;
-		height: 0.32rem;
-		background: url("https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-icon2.png") no-repeat 2.1rem center;
-		background-size: 0.76rem 0.32rem;
-	}
+
 
 	.coupon-list p {
 		font-size: 0.24rem;
@@ -733,8 +504,8 @@
 		padding-left: 0.4rem;
 		font-size: 0.28rem;
 		color: #EF593C;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
-		background-size: 0.3rem 0.3rem;
+		/* background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
+		background-size: 0.3rem 0.3rem; */
 		vertical-align: -0.01rem;
 	}
 
@@ -772,7 +543,7 @@
 	.coupon-list .coupon-lableIcon {
 		top: 0;
 		z-index: 10;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/coupon/coupon-lableIcon.png) no-repeat center;
+		/* background: url(https://cs.h5.hongkzh.com/imgs/purchase/coupon/coupon-lableIcon.png) no-repeat center; */
 		background-size: 100% 100%;
 	}
 

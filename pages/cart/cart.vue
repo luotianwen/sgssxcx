@@ -41,7 +41,7 @@
 
 		</view>
 		<view class="shoppingCart-footer ">
-			<view class="shoppingCart-footerlabel"> <input type='checkbox' :checked="ids.length === data.length" @click="getCheckedAll()">全选</view>
+			<view class="shoppingCart-footerlabel"> <input type='checkbox' :checked="ids.length!=0&&ids.length === data.length" @click="getCheckedAll()">全选</view>
 			<view class="shoppingCart-footerlabelstrong footer-btn" @click="settlement()">结算</view>
 			<view class="shoppingCart-footerspan">¥{{price}}</view>
 		</view>
@@ -126,7 +126,7 @@
 			settlement: function() {
 				if (this.ids.length > 0) {
 					uni.navigateTo({
-						url: "../order/preorder"
+						url: "../order/preorder?cartId="+this.ids.join(",")
 					})
 
 				} else {
@@ -326,9 +326,9 @@
 					}
 				})
 			},
-			goGoodDetail: function() {
+			goGoodDetail: function(item) {
 				uni.navigateTo({
-					url: "../goods/goodsDetail"
+					url: "../goods/goodsDetail?goodsId="+item.goodsId+"&name="+item.name
 				})
 			}
 		}

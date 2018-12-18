@@ -90,9 +90,9 @@
 					contentnomore: "没有更多数据了"
 				}
 			}
-		},
+		}, 
 		onLoad() {
-
+			service.removeUser();
 			this.getList();
 		},
 		onUnload() {
