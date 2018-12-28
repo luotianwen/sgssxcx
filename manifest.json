@@ -1,13 +1,16 @@
 {
     "name" : "yysc",
     "appid" : "__UNI__ADEA014",
-    "description" : "商城",
+    "description" : "悠氧商城",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
-        "modules" : {},
+        "modules" : {
+            "Payment" : {},
+            "OAuth" : {}
+        },
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
@@ -40,7 +43,19 @@
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "payment" : {
+                    "weixin" : {
+                        "appid" : "wx9dd950d3bf8accaf"
+                    }
+                },
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wx9dd950d3bf8accaf",
+                        "appsecret" : "bec973a1ef168477006ade3fef1a70ab"
+                    }
+                }
+            }
         }
     },
     /* SDK配置 */
@@ -48,9 +63,9 @@
     /* 快应用特有相关 */
     "mp-weixin" : {
         /* 小程序特有相关 */
-        "appid" : "",
+        "appid" : "wx9dd950d3bf8accaf",
         "setting" : {
-            "urlCheck" : true
+            "urlCheck" : false
         }
     }
 }

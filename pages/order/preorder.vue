@@ -21,7 +21,7 @@
 				<view class="confirmOrder-listCent" v-for="(item, index) in data.carts" :key="index" v-if=data.carts>
 					<view class="centList-cent clearfix">
 						<view class="centList-centCent">
-							<image class="centRight-centImg" :src="item.logo"></image>
+							<image class="centList-centImg" :src="item.logo"></image>
 							<view class="centList-centRight">
 								<view class="centList-centRighth6">{{item.name}}
 									<view class="centRight-h6 centRight-h6span">×{{item.number}}</view>
@@ -38,12 +38,12 @@
 
 				<view class="centList-butt">
 					<span class="centList-buttLeft">优惠券</span>
-					<span class="centList-buttCent" v-if=data.coupons>可用折扣券{{data.coupons}}张</span>
+					<span    >可用折扣券{{data.coupons}}张</span>
 					<strong class="centList-buttRight" @click="getMyCouponsByProductId(list)"></strong>
 				</view>
 				<view class="centList-butt">
 					<span class="centList-buttLeft"> 运费 </span>
-					<span class="centList-buttCent">{{data.freight}}</span>
+					<span  >{{data.freight}}</span>
 				</view>
 			</view>
 		</view>
@@ -53,7 +53,7 @@
 				<p>总额：<span>¥{{data.product}}</span></p>
 				<p>立减：<span>¥{{data.coupon}}</span></p>
 			</view>
-			<view class="footer-btn">提交订单</view>
+			<view class="footer-btn" @click="submitOrder()">提交订单</view>
 		</view>
 
 
@@ -96,20 +96,21 @@
 		},
 		methods: {
 			getPreorder: function() {
-
+                let _this=this;
 				uni.request({
 					url: service.preorder(),
 					data: {
 						tokenId: service.getUser().tokenId,
-						addressId:this.addressId,
-						cartId:this.cartId,
-						couponId:this.couponId
+						addressId:_this.addressId,
+						cartId:_this.cartId,
+						couponId:_this.couponId
 					},
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
-							this.data = data.data.data;
-							if(this.data.address){
-								this.show=true;
+							_this.data = data.data.data;
+							if(_this.data.address){
+								_this.show=true;
+								_this.addressId=_this.data.address.addressId;
 							}
 						}
 						uni.hideLoading();
@@ -119,6 +120,88 @@
 						uni.hideLoading();
 					}
 				})
+			},
+			submitOrder:function(){
+				uni.showLoading({
+					title: '提交中'
+				});
+				let _this=this; 
+				uni.request({
+					url: service.saveOrder(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						addressId:_this.addressId,
+						cartId:_this.cartId,
+						couponId:_this.couponId
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							_this.pay(data.data.data.ordersId);
+							
+							/* uni.navigateTo({
+							 	url:"../order/order"
+							 }) */ 
+						}
+						
+					}, 
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
+					}
+				})
+			},
+			pay:function(ordersId){
+				let _this=this;
+				uni.request({
+					url: service.orderPay(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						ordersId:ordersId,
+						type:1
+					},
+					success: (data) => { 
+						uni.hideLoading();
+						if (data.statusCode == 200 && data.data.code == 0) {
+							uni.requestPayment({ 
+								provider: 'wxpay', 
+								timeStamp: data.data.data.timeStamp,
+								nonceStr: data.data.data.nonceStr,
+								package: data.data.data.package,
+								signType: 'MD5',
+								paySign: data.data.data.sign,
+								success: function (res) {
+									
+									console.log('success:' + JSON.stringify(res));
+									uni.navigateTo({
+										url:"../order/order"
+									})
+								},
+								fail: function (err) {
+									console.log('fail:' + JSON.stringify(err));
+									uni.navigateTo({
+										url:"../order/order"
+									})
+								}
+							});
+							
+							/* uni.navigateTo({
+								url:"../order/order"
+							}) */
+						}
+						else{
+							uni.showToast({
+								title:data.data.msg 
+							})
+						}
+						
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
+					}
+				})
+				
+				
 			}
 		}
 	}
@@ -215,15 +298,7 @@
 		border: solid 1px #eeeeee;
 	}
 
-	.centList-centImg span {
-		position: absolute;
-		top: 0;
-		right: 0;
-		display: block;
-		width: 0.62rem;
-		height: 0.62rem;
-	}
-
+	 
 
 
 	.centList-centRight {
@@ -261,7 +336,7 @@
 		left: 0;
 		bottom: 0;
 		font-size: 0.3rem;
-		color: #EF593C;
+		 
 	}
 
 	.centList-centRight .happyi-monspan {
@@ -335,9 +410,7 @@
 		border-bottom: 1px solid #e2e2e2;
 	}
 
-	.centList-butt .centList-buttCent {
-		color: #EF593C;
-	}
+	 
 
 	.centList-butt .centList-buttRight {
 		position: absolute;
@@ -405,7 +478,7 @@
 
 	.confirmOrder-footer span {
 		font-size: 0.32rem;
-		color: #EF593C;
+		 
 	}
 
 	div#mask {
@@ -503,7 +576,7 @@
 		margin-left: 0.05rem;
 		padding-left: 0.4rem;
 		font-size: 0.28rem;
-		color: #EF593C;
+		 
 		/* background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
 		background-size: 0.3rem 0.3rem; */
 		vertical-align: -0.01rem;

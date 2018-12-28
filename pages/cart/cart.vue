@@ -222,7 +222,7 @@
 				uni.login({
 					provider: 'weixin',
 					success: function(loginRes) {
-
+						console.log(JSON.stringify(loginRes));
 						// 获取用户信息
 						uni.getUserInfo({
 							provider: 'weixin',

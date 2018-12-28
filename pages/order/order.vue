@@ -1,242 +1,345 @@
 <template>
-	<view class="">
-		<div id="myOrder">
-			<div class="myOrder-tab"><span class="active">全部</span><span class="">待支付</span> <span class="">待收货</span><span
-				 class="">已完成</span><span class="">已取消</span></div>
-			<div class="confirmOrder-cent">
-				<div class="confirmOrder-centList" >
-					<div class="centList-title"><span class="headName"> </span><span class="titleState">待收货</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix" @click="goDetail()">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181119203538.png), url();">
-
+	<view class="index">
+		<scroll-view id="tab-bar" class="swiper-tab" scroll-x :scroll-left="scrollLeft">
+			<view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list',tabIndex==index ? 'active' : '']" :id="tab.id"
+			 :data-current="index" @tap="tapTab">{{tab.name}}</view>
+		</scroll-view>
+		<swiper :current="tabIndex" class="swiper-box" duration="300" @change="changeTab">
+			<swiper-item v-for="(tab,index1) in newsitems" :key="index1">
+				<scroll-view class="list" scroll-y @scrolltolower="loadMore(index1)">
+					 
+						<div class="confirmOrder-centList" v-for="(newsitem,index2) in tab.data" :key="index2" @tap="goDetail(newsitem)">
+							<div class="centList-title"><span class="headName">{{newsitem.orderNumber}}</span><span class="titleState">{{states[""+newsitem.state]}}</span></div>
+							<div class="confirmOrder-listCent">
+								<div class="centList-cent clearfix" v-for="(sub,index3) in newsitem.subList" :key="index3">
+									<image :src="sub.logo"  class="centList-centImg" />
+									 
+									<div class="centList-centRight">
+										<h6 class="clearfix">{{sub.name}}<span class="centRight-h6"><span>×</span>{{sub.number}}</span></h6>
+										<p>{{sub.spec1}} &nbsp; {{sub.spec2}}</p>
+										<div class="happyi-mon"><span>¥</span>{{sub.price}}</div>
+									</div>
+								</div>
+								 
 							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">荣耀<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>蓝色 4G</p>
-								<div class="happyi-mon"><span>¥</span>100</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!----> <span class="buttState-btn" @click="goLogistics()">查看物流</span>
-							<!----> <span class="buttState-btn">确认收货</span></div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"> <span class="titleState">已完成</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/hkUserProductImg/2018/11/IMG_20181109_150828.jpg), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">键盘<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>
-									<!---->哈尼族</p>
-								<div class="happyi-mon"><span>¥</span>480</div>
+							<div class="centList-butt" v-if="newsitem.state!=20">
+								<!-- 10待付款20已付款30已发货40已取消50已完成 -->
+								<div class="buttState6 clearfix">
+									  <span class="buttState-btn" v-if="newsitem.state==10"  @tap="goPay(newsitem)">支付订单</span>
+									  <span class="buttState-btn" v-if="newsitem.state==50" @tap="goApplyAfter(newsitem)" >申请售后</span>
+									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goLogistics(newsitem)">确认收货</span>
+									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goLogistics(newsitem)">查看物流</span>
+									  <span class="buttState-btn" v-if="newsitem.state==40||newsitem.state==50"  @tap="goDelete(newsitem)" >删除订单</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix"><span class="buttState-btn"  @click="goApplyAfter()">申请售后</span>
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"><span class="headName"> </span><span class="titleState">已关闭</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/product/2018/05/xpp2.png), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">18911605671-2<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>白色 165L</p>
-								<div class="happyi-mon"><span>¥</span>222</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!---->
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"><span class="headName"> </span><span class="titleState">已关闭</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181112134303.png), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">风衣<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>绿色 xl</p>
-								<div class="happyi-mon"><span>¥</span>0.01</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!---->
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"><span class="headName"> </span><span class="titleState">已关闭</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1d4d01eee1b84673b668e21bbf496b19/images/shop/product/2018/11/t01b93770a74b4f311d.jpg), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">新产品<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>白加黑 长30cm宽20cm</p>
-								<div class="happyi-mon"><span>¥</span>3</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!---->
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"><span class="headName"> </span><span class="titleState">已关闭</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181112134303.png), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">风衣<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>绿色 xl</p>
-								<div class="happyi-mon"><span>¥</span>0.01</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!---->
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"><span class="headName"> </span><span class="titleState">已关闭</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181112134303.png), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">风衣<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>绿色 xl</p>
-								<div class="happyi-mon"><span>¥</span>0.01</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!---->
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
-				<!---->
-				<div class="confirmOrder-centList">
-					<div class="centList-title"><span class="headName"></span><span class="titleState">已关闭</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/8baaf29ad3d74653a9c1de503b60fc06/images/shop/product/2018/11/20181112134303.png), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">风衣<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>绿色 xl</p>
-								<div class="happyi-mon"><span>¥</span>0.01</div>
-							</div>
-						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix">
-							<!---->
-							<!----> <span class="buttState-btn">删除订单</span>
-							<!---->
-						</div>
-					</div>
-				</div>
+						 
+					 
 
 
+ 
 
+					<load-more :loadingType="tab.loadingType" :contentText="tab.contentText"></load-more>
+				</scroll-view>
+			</swiper-item>
 
+		</swiper>
 
-
-			</div>
-			<div id="prompt-view">
-				<!---->
-			</div>
-		</div>
 	</view>
+
+
 </template>
 
 <script>
-	
+	import service from '../../service.js';
+	import loadMore from '../../components/load-more.vue'
 	export default {
+		components: {
+			loadMore
+		},
+		data() {
+			return {
+				scrollLeft: 0,
+				isClickChange: false,
+				tabIndex: 0,
+				newsitems: [],
+				states: {
+					"10": "待支付",
+					"20": "待收货",
+					"30": "已发货",
+					"50": "已完成",
+					"40": "已取消"
+				},
+				type: '',
+				contentText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				},
+				tabBars: [{
+					name: '全部',
+					id: 'qb'
+				}, {
+					name: '待支付',
+					id: 'dzf'
+				}, {
+					name: '待收货',
+					id: 'dsh'
+				}, {
+					name: '已完成',
+					id: 'ywc'
+				}, {
+					name: '已取消',
+					id: 'yqx'
+				}]
+			}
+		},
+		onUnload() {
+
+			this.newsitems = []
+
+		},
+
+		onLoad() {
+			let ary = [];
+			for (let i = 0, length = this.tabBars.length; i < length; i++) {
+				let aryItem = {
+					pageNumber: 1,
+					loadingType: 0,
+					contentText: this.contentText,
+					data: []
+				};
+
+				ary.push(aryItem);
+			}
+			console.log(JSON.stringify(ary));
+			this.newsitems = ary;
+
+			if (service.getUser().hasLogin) {
+				this.getOrderList(0);
+			}
+
+		},
 		methods: {
-			goLogistics:function(){
-				uni.navigateTo({
-					url:"../order/logistics"
+			getOrderList: function(e) {
+				if (!service.getUser().hasLogin) {
+					return;
+				}
+				let _this = this;
+				uni.request({
+					url: service.orderList(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						pageNumber: _this.newsitems[e].pageNumber,
+						type: _this.type
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+
+							if (_this.newsitems[e].pageNumber == 1) {
+								_this.newsitems[e].data = data.data.data.list;
+							} else {
+								_this.newsitems[e].data = _this.newsitems[e].data.length == 0 ? data.data.data.list : _this.newsitems[e].data
+									.concat(data.data.data.list);
+							}
+							if (data.data.data.lastPage) {
+								_this.newsitems[e].loadingType = 2;
+								return;
+							} else {
+								_this.newsitems[e].loadingType = 0;
+							}
+							//console.log(JSON.stringify(_this.newsitems));
+							//console.log('this.loadingType' + this.loadingType);
+						}
+						uni.hideLoading();
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
+					}
 				})
 			},
-			goDetail:function(){
+			goLogistics: function() {
 				uni.navigateTo({
-					url:"../order/orderDetail"
+					url: "../order/logistics"
 				})
-			} ,
-			goApplyAfter:function(){
+			},
+			goDetail: function(e) {
 				uni.navigateTo({
-					url:"../order/applyAfter"
+					url: "../order/orderDetail"
 				})
+			},
+			goApplyAfter: function() {
+				uni.navigateTo({
+					url: "../order/applyAfter"
+				})
+			},
+
+			close(index1, index2) {
+				uni.showModal({
+					content: '是否删除本条信息？',
+					success: (res) => {
+						if (res.confirm) {
+							this.newsitems[index1].data.splice(index2, 1);
+						}
+					}
+				})
+			},
+			loadMore(e) {
+				console.log('loadMore' + this.newsitems[e].loadingType);
+				if (this.newsitems[e].loadingType !== 0) {
+					return;
+				}
+
+				setTimeout(() => {
+					this.newsitems[e].pageNumber++;
+					this.getOrderList(e);
+				}, 1000);
+			},
+
+			async changeTab(e) {
+				let index = e.target.current;
+				console.log("changeTab index" + index);
+				//this.newsitems[index].pageNumber = 1;
+				this.newsitems[index].loadingType = 0;
+				if (index == 0) {
+					this.type = '';
+				} else if (index == 1) {
+					this.type = '10';
+				} else if (index == 2) {
+					this.type = '20';
+				} else if (index == 3) {
+					this.type = '50';
+				} else if (index == 4) {
+					this.type = '40';
+				}
+				if (this.isClickChange) {
+					this.tabIndex = index;
+					this.isClickChange = false;
+					return;
+				}
+				let tabBar = await this.getElSize("tab-bar"),
+					tabBarScrollLeft = tabBar.scrollLeft;
+				let width = 0;
+
+				for (let i = 0; i < index; i++) {
+					let result = await this.getElSize(this.tabBars[i].id);
+					width += result.width;
+				}
+				let winWidth = uni.getSystemInfoSync().windowWidth,
+					nowElement = await this.getElSize(this.tabBars[index].id),
+					nowWidth = nowElement.width;
+				if (width + nowWidth - tabBarScrollLeft > winWidth) {
+					this.scrollLeft = width + nowWidth - winWidth;
+				}
+				if (width < tabBarScrollLeft) {
+					this.scrollLeft = width;
+				}
+				this.isClickChange = false;
+				this.tabIndex = index; //一旦访问data就会出问题
+				this.getOrderList(index);
+			},
+			getElSize(id) { //得到元素的size
+				return new Promise((res, rej) => {
+					uni.createSelectorQuery().select("#" + id).fields({
+						size: true,
+						scrollOffset: true
+					}, (data) => {
+						res(data);
+					}).exec();
+				})
+			},
+			async tapTab(e) { //点击tab-bar
+
+				let index = e.target.dataset.current;
+				console.log(this.tabIndex + "tapTab index" + index);
+				if (this.tabIndex === e.target.dataset.current) {
+					return false;
+				} else {
+					let tabBar = await this.getElSize("tab-bar"),
+						tabBarScrollLeft = tabBar.scrollLeft; //点击的时候记录并设置scrollLeft
+					this.scrollLeft = tabBarScrollLeft;
+					this.isClickChange = true;
+					this.tabIndex = e.target.dataset.current
+					//this.newsitems[index].pageNumber = 1;
+					this.newsitems[index].loadingType = 0;
+					if (index == 0) {
+						this.type = '';
+					} else if (index == 1) {
+						this.type = '10';
+					} else if (index == 2) {
+						this.type = '20';
+					} else if (index == 3) {
+						this.type = '50';
+					} else if (index == 4) {
+						this.type = '40';
+					}
+					this.getOrderList(index);
+				}
 			}
-			}
+
 		}
+	}
 </script>
 
 <style>
+	page {
+		display: flex;
+	}
+
+	.index {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		overflow: hidden;
+		height: 100%;
+	}
+
+	.list {
+		width: 750upx;
+		height: 100%;
+	}
+
+	.swiper-tab {
+		width: 100%;
+		white-space: nowrap;
+		line-height: 100upx;
+		height: 100upx;
+		border-bottom: 1px solid #c8c7cc;
+	}
+
+
+	.swiper-tab-list {
+		font-size: 30upx;
+		width: 150upx;
+		display: inline-block;
+		text-align: center;
+		color: #555;
+	}
+
+	.active {
+		color: #007AFF;
+	}
+
+	.swiper-box {
+		flex: 1;
+		width: 100%;
+		height: calc(100% - 100upx);
+	}
+
+	.loadmore {
+		height: 70upx;
+		width: 750upx;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.loadmore-text {
+		font-size: 30upx;
+		text-align: center;
+		color: #999999;
+	}
+
 	.myOrder-tab {
 		position: fixed;
 		top: 0upx;
@@ -270,7 +373,7 @@
 
 	.myOrder-tab .active {
 		color: #000;
-		border-bottom-color:#0092FF ;
+		border-bottom-color: #0092FF;
 	}
 
 	.myOrder-tab::-webkit-scrollbar {
@@ -294,25 +397,6 @@
 		font-size: 0.26rem;
 		color: #333333;
 		border-bottom: 1px solid #e2e2e2;
-	}
-
-	.centList-title .headName {
-		display: inline-block;
-		padding-left: 0.6rem;
-		min-width: 0.6rem;
-		height: 100%;
-		/* background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-gwl.png) no-repeat left center; */
-		background-size: 0.58rem 0.56rem;
-	}
-
-	.centList-title .headImg {
-		margin: 0 0.1rem 0 0.2rem;
-		display: inline-block;
-		width: 0.36rem;
-		height: 0.36rem;
-		border-radius: 50%;
-		vertical-align: middle;
-		background-size: 100% 100%;
 	}
 
 	.centList-title .titleState {
@@ -347,20 +431,7 @@
 		height: 0.62rem;
 	}
 
-	.centList-centImg .shoppingCart-icon1 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon1.png) no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.centList-centImg .shoppingCart-icon2 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon2.png) no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.centList-centImg .shoppingCart-icon3 {
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon3.png) no-repeat center;
-		background-size: 100% 100%;
-	}
+	 
 
 	.centList-centRight {
 		position: relative;
@@ -466,14 +537,6 @@
 		background: #fff;
 	}
 
-	.goods-total span,
-	.freight-total span {
-		float: right;
-		padding-left: 0.3rem;
-		height: 100%;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-mons.png) no-repeat left 0.33rem;
-		background-size: 0.25rem 0.25rem;
-	}
 
 	.goods-total {
 		margin-top: 0.2rem;
@@ -487,142 +550,5 @@
 	#refundAfterSale {
 		padding-top: 0.89rem;
 		overflow: hidden;
-	}
-
-	.confirmOrder-share {
-		padding: 0 0.27rem;
-	}
-
-	.confirmOrder-share .centList-title {
-		padding: 0 0.03rem;
-		height: 0.86rem;
-		line-height: 0.86rem;
-		border-bottom: none;
-	}
-
-	.confirmOrder-share .coupon-list {
-		position: relative;
-		padding-top: 0.35rem;
-		height: 3.05rem;
-		background: url("https://cs.h5.hongkzh.com/imgs/purchase/coupon/coupon-bg1.png") no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.confirmOrder-share .coupon-list .slide-img {
-		position: absolute;
-		display: block;
-		top: 0.34rem;
-		left: 0.34rem;
-		width: 1.4rem;
-		height: 1.4rem;
-		background: #eee;
-		background-size: 100% 100%;
-	}
-
-	.confirmOrder-share .coupon-list h6,
-	.confirmOrder-share .coupon-list .purchase-icon2,
-	.confirmOrder-share .coupon-list p {
-		position: relative;
-		z-index: 11;
-		padding: 0 0.2rem 0 2.04rem;
-	}
-
-	.confirmOrder-share .coupon-list h6 {
-		margin-top: 0.04rem;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		font-size: 0.3rem;
-		color: #333333;
-	}
-
-	.confirmOrder-share .coupon-list .purchase-icon2 {
-		margin: 0.12rem 0 0.08rem;
-		display: block;
-		width: 0.76rem;
-		height: 0.32rem;
-		background: url("https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-icon2.png") no-repeat 2rem center;
-		background-size: 0.76rem 0.32rem;
-	}
-
-	.confirmOrder-share .coupon-list p {
-		font-size: 0.24rem;
-		color: #666;
-	}
-
-	.confirmOrder-share .coupon-list .list-butt {
-		position: absolute;
-		left: 0;
-		bottom: 0.1rem;
-		padding: 0.2rem 4.5% 0;
-		width: 91%;
-		height: 1.2rem;
-		font-size: 0.26rem;
-		color: #666;
-		text-align: right;
-	}
-
-	.confirmOrder-share .coupon-list .list-buttMoney {
-		padding-left: 0.4rem;
-		font-size: 0.28rem;
-		color: #EF593C;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
-		background-size: 0.3rem 0.3rem;
-		vertical-align: -0.01rem;
-	}
-
-	.confirmOrder-share .coupon-list .list-btn,
-	.confirmOrder-share .coupon-list .list-btn1 {
-		margin: 0.15rem 0 0 0.2rem;
-		float: right;
-		width: 1.3rem;
-		height: 0.5rem;
-		line-height: 0.5rem;
-		text-align: center;
-		border-radius: 0.05rem;
-		font-size: 0.24rem;
-	}
-
-	.confirmOrder-share .coupon-list .list-btn {
-		color: #EF593C;
-		border: 1px solid #EF593C;
-	}
-
-	.confirmOrder-share .coupon-list .list-btn1 {
-		color: #666666;
-		border: 1px solid #CCCCCC;
-	}
-
-	.confirmOrder-share .coupon-lableIcon,
-	.confirmOrder-share .coupon-txt {
-		position: absolute;
-		left: 0.04rem;
-		display: block;
-		width: 1.09rem;
-		height: 1.09rem;
-	}
-
-	.confirmOrder-share .coupon-lableIcon {
-		top: 0.04rem;
-		z-index: 10;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/coupon/coupon-lableIcon.png) no-repeat center;
-		background-size: 100% 100%;
-	}
-
-	.confirmOrder-share .coupon-txt {
-		top: 0.06rem;
-		z-index: 100;
-		text-align: center;
-		font-size: 0.32rem;
-		color: #fff;
-		transform: rotate(-45deg);
-		-ms-transform: rotate(-45deg);
-		/* IE 9 */
-		-moz-transform: rotate(-45deg);
-		/* Firefox */
-		-webkit-transform: rotate(-45deg);
-		/* Safari 和 Chrome */
-		-o-transform: rotate(-45deg);
-		/* Opera */
 	}
 </style>

@@ -23,7 +23,7 @@
 							</div>
 							<div class="centList-centRight">
 								<h6 class="clearfix">轨道火车<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>彩色<i>&nbsp;</i>长 126.2mm X 宽 27mm X 高 60.8mm</p>
+								<p>彩色 &nbsp; 长 126.2mm X 宽 27mm X 高 60.8mm</p>
 								<div class="happyi-mon"><span>¥</span>299</div>
 							</div>
 							<!---->
@@ -43,7 +43,7 @@
 							</div>
 							<div class="centList-centRight">
 								<h6 class="clearfix">闹钟<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>白<i>&nbsp;</i>17.9 x 46.9 x 12mm</p>
+								<p>白 &nbsp; 17.9 x 46.9 x 12mm</p>
 								<div class="happyi-mon"><span>¥</span>0.49</div>
 							</div>
 							<!---->
@@ -76,17 +76,7 @@
 			<div class="confirmOrder-footer">应付: <span class="money">¥146.62</span> <strong class="footer-btn">支付<span id="footerData">11:39:35</span></strong>
 				<strong class="footer-btn1">取消订单</strong></div>
 			<div id="mask" class=""></div>
-			<div id="storageBox" class="">
-				<h6 class="storageBox-title"><span>存入储物箱</span></h6>
-				<div class="storageBox clearfix">
-					<div class="storageBox-left"><strong style="background-image: url(  ), url(  );"></strong>
-						<span><span>×</span></span></div>
-					<div class="storageBox-cent"></div>
-					<div class="storageBox-right"><strong class="storageBox-rightImg" style="background-image: url(  ), url(  );"></strong>
-						<strong class="storageBox-rightbg"></strong> <span></span></div>
-				</div>
-				<div class="storageBox-Btn clearfix"><span>取消</span> <span class="btnOK">确定</span></div>
-			</div>
+			 
 			<div id="prompt-view">
 				<!---->
 			</div>
@@ -98,7 +88,7 @@
 </script>
 
 <style>
-/* 	#myOrderInfo {
+/* 	#myOrderInfo { 
   padding: 0.89rem 0 0.98rem;
 } */
 .confirmOrder-address {

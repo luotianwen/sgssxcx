@@ -34,13 +34,22 @@ const cartList=function(){
 const preorder=function(){
 	return httpUrl + "shop/preorder";
 }
+const saveOrder=function(){
+	return httpUrl + "shop/saveOrder";
+}
+const orderList=function(){
+	return httpUrl + "shop/orderList";
+}
+const orderPay=function(){
+	return httpUrl + "shop/weixinpay";
+}
 const USERS_KEY = 'SGSS_USERS_KEY';
 
 const getUser = function () {
     let ret = '';
     ret = uni.getStorageSync(USERS_KEY);
     if (!ret) {
-        ret =  "{\"hasLogin\":false}" ;
+        ret =  "{ \"hasLogin\":false}" ;
     }
     return JSON.parse(ret);
 }
@@ -65,5 +74,8 @@ export default {
 	cartList,
 	syncCart,
 	removeCart,
-	preorder
+	preorder,
+	saveOrder,
+	orderList,
+	orderPay
 }

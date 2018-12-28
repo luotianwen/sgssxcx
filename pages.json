@@ -67,8 +67,7 @@
 		{
 			"path": "pages/order/order",
 			"style": {
-				"navigationBarTitleText": "订单列表" ,
-				 "enablePullDownRefresh": true
+				"navigationBarTitleText": "订单列表"  
 			}
 		},
 		{
@@ -175,6 +174,12 @@
 			"path": "pages/test/slidelist",
 			"style": {
 				"navigationBarTitleText": "侧滑" 
+			}
+		},
+		{
+			"path": "pages/test/tabbar",
+			"style": {
+				"navigationBarTitleText": "tab" 
 			}
 		}
 	],

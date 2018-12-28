@@ -261,6 +261,13 @@
 									title: "加入购物车成功"
 								})
 							}
+							else{
+								console.log(data.data.data.cartId);
+								  uni.navigateTo({
+									url: "../order/preorder?cartId="+data.data.data.cartId
+								})  
+								
+							}
 							this.show = false;
 							this.skuId = "";
 							this.stock = 0;
