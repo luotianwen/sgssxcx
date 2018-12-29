@@ -27,9 +27,9 @@
 								<div class="buttState6 clearfix">
 									  <span class="buttState-btn" v-if="newsitem.state==10"  @tap="goPay(newsitem)">支付订单</span>
 									  <span class="buttState-btn" v-if="newsitem.state==50" @tap="goApplyAfter(newsitem)" >申请售后</span>
-									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goLogistics(newsitem)">确认收货</span>
+									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goOrderOk(newsitem)">确认收货</span>
 									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goLogistics(newsitem)">查看物流</span>
-									  <span class="buttState-btn" v-if="newsitem.state==40||newsitem.state==50"  @tap="goDelete(newsitem)" >删除订单</span>
+									  <span class="buttState-btn" v-if="newsitem.state==40||newsitem.state==50"  @tap="goDelete(newsitem,index1,index2)" >删除订单</span>
 								</div>
 							</div>
 						</div>
@@ -121,6 +121,125 @@
 
 		},
 		methods: {
+			goOrderOk:function(order){
+				let _this=this;
+				uni.showModal({
+					content: '确认收到货？',
+					success: (res) => {
+						if (res.confirm) {
+							uni.request({
+								url: service.orderOk(),
+								data: {
+									tokenId: service.getUser().tokenId,
+									ordersId:order.orderNumber 
+								},
+								success: (data) => { 
+									uni.hideLoading();
+									if (data.statusCode == 200 && data.data.code == 0) {
+										 order.state=50;
+									}
+									else{
+										uni.showToast({
+											title:data.data.msg 
+										})
+									}
+									
+								},
+								fail: (data, code) => {
+									console.log('fail' + JSON.stringify(data));
+									uni.hideLoading();
+								}
+							})
+						}
+					}
+				})
+			},
+			goDelete:function(order,index1,index2){
+					let _this=this;
+				uni.showModal({
+					content: '是否删除本订单？',
+					success: (res) => {
+						if (res.confirm) {
+							uni.request({
+								url: service.orderDelete(),
+								data: {
+									tokenId: service.getUser().tokenId,
+									ordersId:order.orderNumber 
+								},
+								success: (data) => { 
+									uni.hideLoading();
+									if (data.statusCode == 200 && data.data.code == 0) {
+										  _this.newsitems[index1].data.splice(index2,1);
+									}
+									else{
+										uni.showToast({
+											title:data.data.msg 
+										})
+									}
+									
+								},
+								fail: (data, code) => {
+									console.log('fail' + JSON.stringify(data));
+									uni.hideLoading();
+								}
+							})
+						}
+					}
+				})
+				
+				
+			
+				
+			},
+			goPay:function(order){
+				let _this=this;
+				uni.request({
+					url: service.orderPay(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						ordersId:order.orderNumber,
+						type:1
+					},
+					success: (data) => { 
+						uni.hideLoading();
+						if (data.statusCode == 200 && data.data.code == 0) {
+							uni.requestPayment({ 
+								provider: 'wxpay', 
+								timeStamp: data.data.data.timeStamp,
+								nonceStr: data.data.data.nonceStr,
+								package: data.data.data.package,
+								signType: 'MD5',
+								paySign: data.data.data.sign,
+								success: function (res) {
+									
+									console.log('success:' + JSON.stringify(res));
+									order.state=20;
+								},
+								fail: function (err) {
+									console.log('fail:' + JSON.stringify(err));
+									 
+								}
+							});
+							
+							/* uni.navigateTo({
+								url:"../order/order"
+							}) */
+						}
+						else{
+							uni.showToast({
+								title:data.data.msg 
+							})
+						}
+						
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+						uni.hideLoading();
+					}
+				})
+				
+				
+			},
 			getOrderList: function(e) {
 				if (!service.getUser().hasLogin) {
 					return;
@@ -159,32 +278,23 @@
 					}
 				})
 			},
-			goLogistics: function() {
+			goLogistics: function(order) {
 				uni.navigateTo({
-					url: "../order/logistics"
+					url: "../order/logistics?expressName="+order.expressName+"&invoiceNo="+order.invoiceNo
 				})
 			},
-			goDetail: function(e) {
+			goDetail: function(order) {
 				uni.navigateTo({
-					url: "../order/orderDetail"
+					url: "../order/orderDetail?orderNumber="+order.orderNumber
 				})
 			},
-			goApplyAfter: function() {
+			goApplyAfter: function(order) {
 				uni.navigateTo({
-					url: "../order/applyAfter"
+					url: "../order/applyAfter?orderNumber="+order.orderNumber
 				})
 			},
 
-			close(index1, index2) {
-				uni.showModal({
-					content: '是否删除本条信息？',
-					success: (res) => {
-						if (res.confirm) {
-							this.newsitems[index1].data.splice(index2, 1);
-						}
-					}
-				})
-			},
+			 
 			loadMore(e) {
 				console.log('loadMore' + this.newsitems[e].loadingType);
 				if (this.newsitems[e].loadingType !== 0) {

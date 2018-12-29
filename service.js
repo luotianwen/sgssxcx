@@ -43,6 +43,15 @@ const orderList=function(){
 const orderPay=function(){
 	return httpUrl + "shop/weixinpay";
 }
+const orderDelete=function(){
+	return httpUrl + "shop/orderDelete";
+}
+const logistics=function(){
+	return httpUrl + "shop/logistics";
+}
+const orderOk=function(){
+	return httpUrl + "shop/orderOk";
+}
 const USERS_KEY = 'SGSS_USERS_KEY';
 
 const getUser = function () {
@@ -77,5 +86,8 @@ export default {
 	preorder,
 	saveOrder,
 	orderList,
-	orderPay
+	orderPay,
+	orderOk,
+	logistics,
+	orderDelete
 }
