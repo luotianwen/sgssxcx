@@ -235,7 +235,6 @@
   display: inline-block;
   padding-left: 0.3rem;
   color: #f44834;
-  background: url( https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-mons.png) no-repeat left 0.33rem;
   background-size: 0.28rem 0.28rem;
 }
 #refuseRefund {

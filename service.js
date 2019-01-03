@@ -49,8 +49,23 @@ const orderDelete=function(){
 const logistics=function(){
 	return httpUrl + "shop/logistics";
 }
+const saveAfterOrder=function(){
+	return httpUrl + "shop/saveAfterOrder";
+}
 const orderOk=function(){
 	return httpUrl + "shop/orderOk";
+}
+const orderDetail=function(){
+	return httpUrl + "shop/orderDetail";
+}
+const cancelOrder=function(){
+	return httpUrl + "shop/cancelOrder";
+}
+const afterOrderList=function(){
+	return httpUrl + "shop/afterOrderList";
+}
+const cancelAfterOrder=function(){
+	return httpUrl + "shop/cancelAfterOrder";
 }
 const USERS_KEY = 'SGSS_USERS_KEY';
 
@@ -89,5 +104,10 @@ export default {
 	orderPay,
 	orderOk,
 	logistics,
-	orderDelete
+	orderDelete,
+	saveAfterOrder,
+	orderDetail,
+	cancelOrder,
+	afterOrderList,
+	cancelAfterOrder
 }

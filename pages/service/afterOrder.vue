@@ -1,66 +1,163 @@
 <template>
-	<view class="">
-		<div id="refundAfterSale">
+ 
+		<view id="refundAfterSale">
 			 
 			<div class="confirmOrder-cent">
-				<div class="confirmOrder-centList" @click="goDetail()">
-					<div class="centList-title"> <span
-						 class="titleState">同意退款</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/hkUserProductImg/2018/11/IMG_20181109_150828.jpg), url();">
-								<!---->
-								<!---->
-								<!---->
-							</div>
+				
+				
+				<view class="confirmOrder-centList"  v-for="(newsitems,index2) in afterOrders" :key="index2" >
+					<view class="centList-title"  @tap="goDetail(newsitems)"> {{newsitems.orderNumber}} 
+						<view class="titleState state">{{states[""+newsitems.state]}}</view>
+					</view>
+					<view class="confirmOrder-listCent"  @tap="goDetail(newsitems)">
+				
+				
+						<div class="centList-cent clearfix" v-for="(sub,index3) in newsitems.subList" :key="index3">
+							<image :src="sub.logo" class="centList-centImg" />
+				
 							<div class="centList-centRight">
-								<h6 class="clearfix">键盘<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>
-									 哈尼族</p>
-								<div class="happyi-mon">480</div>
+								<h6 class="clearfix">{{sub.name}}<span class="centRight-h6"><span>×</span>{{sub.number}}</span></h6>
+								<p>{{sub.spec1}} &nbsp; {{sub.spec2}}</p>
+								<div class="happyi-mon"><span>¥</span>{{sub.price}}</div>
 							</div>
 						</div>
-					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix"><span class="buttState-btn">删除订单</span></div>
-					</div>
-				</div>
-				<div class="confirmOrder-centList">
-					<div class="centList-title"> <span class="titleState">取消退款</span></div>
-					<div class="confirmOrder-listCent">
-						<div class="centList-cent clearfix">
-							<div class="centList-centImg" style="background-image: url(http://test2.img.hongkzh.com/userfiles/f6e2576d6bbc43ce975268af3fdd30e3/images/shop/product/2018/11/QQ%E5%9B%BE%E7%89%8720181103113831.jpg), url();">
-								<!---->
-								<!---->
-								<!---->
+					</view>
+					
+						<div class="centList-butt">
+						<div class="buttState6 clearfix">
+							<span class="buttState-btn" v-if="newsitems.state==10||newsitems.state==12"  @tap="goCancel(newsitems)">取消申请</span>
+							<span class="buttState-btn" v-if="newsitems.state==20||newsitems.state==30"  @tap="changeOrder(newsitems)">更改发货单</span>
 							</div>
-							<div class="centList-centRight">
-								<h6 class="clearfix">顾家家居席梦思棕垫<span class="centRight-h6"><span>×</span>1</span></h6>
-								<p>椰棕 1350mm*2000mm</p>
-								<div class="happyi-mon">300</div>
-							</div>
-						</div>
 					</div>
-					<div class="centList-butt">
-						<div class="buttState6 clearfix"><span class="buttState-btn">删除订单</span></div>
-					</div>
-				</div>
-				<!---->
+				</view>
+					<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
+		 
 			</div>
-			<div id="prompt-view">
-				<!---->
-			</div>
-		</div>
+	 
 	</view>
 </template>
 
 <script>
-	
+	import service from '../../service.js';
+	import loadMore from '../../components/load-more.vue'
 	export default {
+		components: {
+			loadMore
+		},
+		data() {
+			return {
+			 
+				states: {
+					"10": "申请退货",
+					"12": "申请换货",
+					"20": "同意退货",
+					"30": "同意换货",
+					"50": "拒绝换货",
+					"60": "售后完成",
+					"40": "拒绝退货"
+				},
+				loadingType: 0,
+				pageNumber: 1,
+				contentText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				},
+				afterOrders: []
+			}
+		},
+		onLoad() {
+			this.afterOrderList();
+		},
+		onReachBottom() {
+		
+			if (this.loadingType !== 0) {
+				return;
+			}
+			console.log('onReachBottom');
+			this.loadingType = 1;
+			setTimeout(() => {
+				this.pageNumber++;
+				this.afterOrderList();
+			}, 300);
+		},
+		onPullDownRefresh() {
+			console.log('onPullDownRefresh');
+			this.listData = [];
+			setTimeout(() => {
+				this.pageNumber = 1;
+				this.afterOrderList();
+				uni.stopPullDownRefresh();
+			}, 300);
+		},
 		methods: {
-			goDetail:function(){
+			afterOrderList:function(){
+				uni.request({
+					url: service.afterOrderList(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						pageNumber: this.pageNumber
+					},
+					success: (data) => {
+						console.log(JSON.stringify(data.data.data.list))
+						if (data.statusCode == 200 && data.data.code == 0) {
+							this.afterOrders = this.afterOrders.length == 0 ? data.data.data.list : this.afterOrders.concat(data.data.data.list);
+							if (data.data.data.lastPage) {
+								this.loadingType = 2;
+								return;
+							}
+							this.loadingType = 0;
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			},
+			goCancel:function(newsitems){
+				
+						let _this=this;
+					uni.showModal({
+						content: '确认要取消？',
+						success: (res) => {
+							if (res.confirm) {
+								uni.request({
+									url: service.cancelAfterOrder(),
+									data: {
+										tokenId: service.getUser().tokenId,
+										afterOrderId:newsitems.afterOrderId
+									},
+									success: (data) => { 
+										uni.hideLoading();
+										if (data.statusCode == 200 && data.data.code == 0) {
+											  uni.showToast({
+											  	title: '操作成功',
+													duration:3000,
+											  	success() {
+											  		_this.pageNumber=1;
+														_this.afterOrderList();
+											  	}
+											  })
+										}
+										else{
+											uni.showToast({
+												title:data.data.msg 
+											})
+										}
+										
+									},
+									fail: (data, code) => {
+										console.log('fail' + JSON.stringify(data));
+										uni.hideLoading();
+									}
+								})
+							}
+						}
+					})
+			},
+			goDetail:function(newsitems){
 				uni.navigateTo({
-					url:"../service/afterOrderDetail"
+					url:"../service/afterOrderDetail?afterOrderId="+newsitems.afterOrderId
 				})
 			} 
 			}
@@ -117,14 +214,7 @@
   color: #333333;
   border-bottom: 1px solid #e2e2e2;
 }
-.centList-title .headName {
-  display: inline-block;
-  padding-left: 0.6rem;
-  min-width: 0.6rem;
-  height: 100%;
-  background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-gwl.png) no-repeat left center;
-  background-size: 0.58rem 0.56rem;
-}
+ 
 .centList-title .headImg {
   margin: 0 0.1rem 0 0.2rem;
   display: inline-block;
@@ -161,18 +251,7 @@
   width: 0.62rem;
   height: 0.62rem;
 }
-.centList-centImg .shoppingCart-icon1 {
-  background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon1.png) no-repeat center;
-  background-size: 100% 100%;
-}
-.centList-centImg .shoppingCart-icon2 {
-  background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon2.png) no-repeat center;
-  background-size: 100% 100%;
-}
-.centList-centImg .shoppingCart-icon3 {
-  background: url(https://cs.h5.hongkzh.com/imgs/purchase/shoppingCart/shoppingCart-icon3.png) no-repeat center;
-  background-size: 100% 100%;
-}
+ 
 .centList-centRight {
   position: relative;
   margin-left: 1.8rem;
@@ -262,14 +341,7 @@
   color: #333;
   background: #fff;
 }
-.goods-total span,
-.freight-total span {
-  float: right;
-  padding-left: 0.3rem;
-  height: 100%;
-  background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-mons.png) no-repeat left 0.33rem;
-  background-size: 0.25rem 0.25rem;
-}
+ 
 .goods-total {
   margin-top: 0.2rem;
   border-bottom: 1px solid #e2e2e2;
@@ -281,105 +353,7 @@
   /* padding-top: 0.89rem;
   overflow: hidden; */
 }
-.confirmOrder-share {
-  padding: 0 0.27rem;
-}
-.confirmOrder-share .centList-title {
-  padding: 0 0.03rem;
-  height: 0.86rem;
-  line-height: 0.86rem;
-  border-bottom: none;
-}
-.confirmOrder-share .coupon-list {
-  position: relative;
-  padding-top: 0.35rem;
-  height: 3.05rem;
-  background: url("https://cs.h5.hongkzh.com/imgs/purchase/coupon/coupon-bg1.png") no-repeat center;
-  background-size: 100% 100%;
-}
-.confirmOrder-share .coupon-list .slide-img {
-  position: absolute;
-  display: block;
-  top: 0.34rem;
-  left: 0.34rem;
-  width: 1.4rem;
-  height: 1.4rem;
-  background: #eee;
-  background-size: 100% 100%;
-}
-.confirmOrder-share .coupon-list h6,
-.confirmOrder-share .coupon-list .purchase-icon2,
-.confirmOrder-share .coupon-list p {
-  position: relative;
-  z-index: 11;
-  padding: 0 0.2rem 0 2.04rem;
-}
-.confirmOrder-share .coupon-list h6 {
-  margin-top: 0.04rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 0.3rem;
-  color: #333333;
-}
-.confirmOrder-share .coupon-list .purchase-icon2 {
-  margin: 0.12rem 0 0.08rem;
-  display: block;
-  width: 0.76rem;
-  height: 0.32rem;
-  background: url("https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-icon2.png") no-repeat 2rem center;
-  background-size: 0.76rem 0.32rem;
-}
-.confirmOrder-share .coupon-list p {
-  font-size: 0.24rem;
-  color: #666;
-}
-.confirmOrder-share .coupon-list .list-butt {
-  position: absolute;
-  left: 0;
-  bottom: 0.1rem;
-  padding: 0.2rem 4.5% 0;
-  width: 91%;
-  height: 1.2rem;
-  font-size: 0.26rem;
-  color: #666;
-  text-align: right;
-}
-.confirmOrder-share .coupon-list .list-buttMoney {
-  padding-left: 0.4rem;
-  font-size: 0.28rem;
-  color: #EF593C;
-  background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
-  background-size: 0.3rem 0.3rem;
-  vertical-align: -0.01rem;
-}
-.confirmOrder-share .coupon-list .list-btn,
-.confirmOrder-share .coupon-list .list-btn1 {
-  margin: 0.15rem 0 0 0.2rem;
-  float: right;
-  width: 1.3rem;
-  height: 0.5rem;
-  line-height: 0.5rem;
-  text-align: center;
-  border-radius: 0.05rem;
-  font-size: 0.24rem;
-}
-.confirmOrder-share .coupon-list .list-btn {
-  color: #EF593C;
-  border: 1px solid #EF593C;
-}
-.confirmOrder-share .coupon-list .list-btn1 {
-  color: #666666;
-  border: 1px solid #CCCCCC;
-}
-.confirmOrder-share .coupon-lableIcon,
-.confirmOrder-share .coupon-txt {
-  position: absolute;
-  left: 0.04rem;
-  display: block;
-  width: 1.09rem;
-  height: 1.09rem;
-}
+ 
   
 
 </style>

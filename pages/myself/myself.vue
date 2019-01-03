@@ -1,39 +1,40 @@
 <template>
-		<view id="happyiIndex">
-			<view class="happyiIndex-header">
-				<view class="header-bg">
-					<image :src="uerInfo.hasLogin ? uerInfo.headImg :avatarUrl"></image>
-				</view>
-				<view class="header-bg1"></view>
-				<view class="header-info">
-					<view class="infoRight-title">{{uerInfo.hasLogin ? uerInfo.name : '您未登录'}}</view>
+	<view id="happyiIndex">
+		<view class="happyiIndex-header">
+			<view class="header-bg">
+				<image :src="uerInfo.hasLogin ? uerInfo.headImg :avatarUrl"></image>
+			</view>
+			<view class="header-bg1"></view>
+			<view class="header-info">
+				<view class="infoRight-title">{{uerInfo.hasLogin ? uerInfo.name : '您未登录'}}</view>
 
-					<view class="header-infoRight">
-						<image :src="uerInfo.hasLogin ? uerInfo.headImg :avatarUrl" class="header-infoLeft"></image>
-					</view>
+				<view class="header-infoRight">
+					<image :src="uerInfo.hasLogin ? uerInfo.headImg :avatarUrl" class="header-infoLeft"></image>
 				</view>
 			</view>
+		</view>
 
-			<view class="happyiIndex-list">
+		<view class="happyiIndex-list">
 
-				<view class="listCent happyi-co2" @tap="goOrder()">我的订单<a class="happyi-left">{{orders}}</a></view>
-				<view class="listCent happyi-co3" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
-				<view class="listCent happyi-co4" @tap="goAddress()">收货地址 <a class="happyi-left"></a></view>
-				<view class="listCent happyi-co8" @tap="goCoupon()">我的券<a class="happyi-left">{{coupons}}</a></view>
-				<view class="listCent happyi-co13" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view>  
-				<view class="listCent happyi-co13" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
-				<view class="listCent happyi-co13" @tap="goCustomerService()">客服<a class="happyi-left"></a></view>
-				<view class="listCent happyi-co1" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
-				<view class="listCent happyi-co1" @tap="goAbout()">关于<a class="happyi-left"></a></view>
-				<view class="listCent happyi-co1" @tap="goSli()">侧滑<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co2" @tap="goOrder()">我的订单<a class="happyi-left">{{orders}}</a></view>
+			<view class="listCent happyi-co3" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
+			<view class="listCent happyi-co4" @tap="goAddress()">收货地址 <a class="happyi-left"></a></view>
+			<view class="listCent happyi-co8" @tap="goCoupon()">我的券<a class="happyi-left">{{coupons}}</a></view>
+			<view class="listCent happyi-co13" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view>
+			<view class="listCent happyi-co13" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co13" @tap="goCustomerService()">客服<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co1" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co1" @tap="goAbout()">关于<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co1" @tap="goSli()">侧滑<a class="happyi-left"></a></view>
 
-				<button type="primary" v-show="!uerInfo.hasLogin" open-type="getUserInfo" @getuserinfo="onGotUserInfo"> 登录</button>
-				 
-			</view>
-
-
+			<button class="deliverGoods-btn" type="primary" v-show="!uerInfo.hasLogin" open-type="getUserInfo" @getuserinfo="onGotUserInfo">
+				登录</button>
 
 		</view>
+
+
+
+	</view>
 </template>
 
 <script>
@@ -43,23 +44,23 @@
 			return {
 				avatarUrl: '',
 				uerInfo: {},
-				orders:0,
-				afterOrders:0,
-				coupons:0
+				orders: 0,
+				afterOrders: 0,
+				coupons: 0
 			}
 		},
 		onLoad(d) {
 			console.log(JSON.stringify(service.getUser()));
-			  //service.removeUser();
+			//service.removeUser();
 			if (service.getUser().hasLogin) {
 				this.login = true;
 				this.uerInfo = service.getUser();
 				//this.cartlist();
 			} else {
-				
+
 				//this.getUserInfo();
 
-			}  
+			}
 
 		},
 		methods: {
@@ -78,7 +79,7 @@
 							var d = data.data.data;
 							d.hasLogin = true;
 							service.setUser(d);
-							this.uerInfo =d; 
+							this.uerInfo = d;
 						}
 					},
 					fail: (data, code) => {
@@ -103,9 +104,16 @@
 				})
 			},
 			goOrder: function() {
-				uni.navigateTo({
-					url: "../order/order"
-				})
+				if (!service.getUser().hasLogin) {
+					uni.showToast({
+						icon: 'none',
+						title: '请登录'
+					})
+				} else {
+					uni.navigateTo({
+						url: "../order/order"
+					})
+				}
 			},
 			goFeedback: function() {
 				uni.navigateTo({
@@ -133,9 +141,16 @@
 				})
 			},
 			goAfterOrder: function() {
-				uni.navigateTo({
-					url: "../service/afterOrder"
-				})
+				if (!service.getUser().hasLogin) {
+					uni.showToast({
+						icon: 'none',
+						title: '请登录'
+					})
+				} else {
+					uni.navigateTo({
+						url: "../service/afterOrder"
+					})
+				}
 			}
 
 
@@ -643,5 +658,21 @@
 		height: 1.23rem;
 		background: url("https://cs.h5.hongkzh.com/imgs/happyi/index/happyi-newmore.png") no-repeat center;
 		background-size: 1.23rem 1.23rem;
+	}
+
+	.deliverGoods-btn {
+		/* position: fixed; */
+		left: 50%;
+		/* bottom: 0.5rem; */
+		margin-left: -46%;
+		display: block;
+		width: 92%;
+		height: 0.98rem;
+		line-height: 0.98rem;
+		text-align: center;
+		background-color: #8f8f94;
+		border-radius: 0.1rem;
+		font-size: 0.32rem;
+		color: #ffffff;
 	}
 </style>

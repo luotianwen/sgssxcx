@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<div class="refundInfo-top">
-			<view class="refundInfo-topp"> 快递单号: {{orderNumber}}</view>
 			<view class="refundInfo-topp"> 快递名称: {{courier}}</view>
+			<view class="refundInfo-topp"> 快递单号: {{orderNumber}}</view>
 		</div>
 		<div class="refundInfo logistics">
 			<div id="canvas"></div>
@@ -22,6 +22,7 @@
 </template>
  
 <script>
+		import service from '../../service.js';
 	export default {
 		data() {
 			return {
@@ -31,8 +32,8 @@
 			}
 		},
 		onLoad(d) {
-			this.orderNumber = d.expressName;
-			this.courier = d.invoiceNo;
+			this.orderNumber = d.invoiceNo;
+			this.courier = d.expressName;
 			this.getInfos();
 		},
 		methods: {
@@ -46,8 +47,10 @@
 						courierNumber: _this.orderNumber 
 					},
 					success: (data) => {
+						//console.log('success' + JSON.stringify(data));
+						console.log('success' +  (data.data.data));
 						if (data.statusCode == 200 && data.data.code == 0) {
-							_this.item=JSON.parse(data.data.data.data);
+							 _this.item=JSON.parse(data.data.data).data;
 						}
 						uni.hideLoading();
 					},
@@ -64,7 +67,7 @@
 <style>
 	.refundInfo-top {
 		padding: 20upx 0 0rem 0rem;
-		font-size: 20upx;
+		font-size: 28upx;
 		color: #333333;
 		background: #fff;
 	}

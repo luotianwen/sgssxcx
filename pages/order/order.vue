@@ -8,9 +8,9 @@
 			<swiper-item v-for="(tab,index1) in newsitems" :key="index1">
 				<scroll-view class="list" scroll-y @scrolltolower="loadMore(index1)">
 					 
-						<div class="confirmOrder-centList" v-for="(newsitem,index2) in tab.data" :key="index2" @tap="goDetail(newsitem)">
-							<div class="centList-title"><span class="headName">{{newsitem.orderNumber}}</span><span class="titleState">{{states[""+newsitem.state]}}</span></div>
-							<div class="confirmOrder-listCent">
+						<div class="confirmOrder-centList" v-for="(newsitem,index2) in tab.data" :key="index2" >
+							<div @tap="goDetail(newsitem)" class="centList-title"><span class="headName">{{newsitem.orderNumber}}</span><span class="titleState">{{states[""+newsitem.state]}}</span></div>
+							<div @tap="goDetail(newsitem)" class="confirmOrder-listCent">
 								<div class="centList-cent clearfix" v-for="(sub,index3) in newsitem.subList" :key="index3">
 									<image :src="sub.logo"  class="centList-centImg" />
 									 
@@ -26,10 +26,10 @@
 								<!-- 10待付款20已付款30已发货40已取消50已完成 -->
 								<div class="buttState6 clearfix">
 									  <span class="buttState-btn" v-if="newsitem.state==10"  @tap="goPay(newsitem)">支付订单</span>
-									  <span class="buttState-btn" v-if="newsitem.state==50" @tap="goApplyAfter(newsitem)" >申请售后</span>
+									  <span class="buttState-btn" v-if="newsitem.state==50&&newsitem.salesId==null" @tap="goApplyAfter(newsitem)" >申请售后</span>
 									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goOrderOk(newsitem)">确认收货</span>
 									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goLogistics(newsitem)">查看物流</span>
-									  <span class="buttState-btn" v-if="newsitem.state==40||newsitem.state==50"  @tap="goDelete(newsitem,index1,index2)" >删除订单</span>
+									  <span class="buttState-btn" v-if="newsitem.state==40"  @tap="goDelete(newsitem,index1,index2)" >删除订单</span>
 								</div>
 							</div>
 						</div>
@@ -99,7 +99,10 @@
 			this.newsitems = []
 
 		},
-
+        onShow() {
+        	
+        	
+        },
 		onLoad() {
 			let ary = [];
 			for (let i = 0, length = this.tabBars.length; i < length; i++) {
@@ -109,16 +112,15 @@
 					contentText: this.contentText,
 					data: []
 				};
-
+			
 				ary.push(aryItem);
 			}
 			console.log(JSON.stringify(ary));
 			this.newsitems = ary;
-
+			
 			if (service.getUser().hasLogin) {
 				this.getOrderList(0);
 			}
-
 		},
 		methods: {
 			goOrderOk:function(order){
@@ -137,6 +139,9 @@
 									uni.hideLoading();
 									if (data.statusCode == 200 && data.data.code == 0) {
 										 order.state=50;
+										 uni.showToast({
+										 	title:'操作成功' 
+										 })
 									}
 									else{
 										uni.showToast({
@@ -170,6 +175,9 @@
 									uni.hideLoading();
 									if (data.statusCode == 200 && data.data.code == 0) {
 										  _this.newsitems[index1].data.splice(index2,1);
+										   uni.showToast({
+										  	title:'操作成功' 
+										  })
 									}
 									else{
 										uni.showToast({
@@ -244,6 +252,7 @@
 				if (!service.getUser().hasLogin) {
 					return;
 				}
+				
 				let _this = this;
 				uni.request({
 					url: service.orderList(),
@@ -300,11 +309,13 @@
 				if (this.newsitems[e].loadingType !== 0) {
 					return;
 				}
-
-				setTimeout(() => {
+				uni.showLoading({
+					title:"数据加载中..."
+				})
+				 
 					this.newsitems[e].pageNumber++;
 					this.getOrderList(e);
-				}, 1000);
+				 	uni.hideLoading();
 			},
 
 			async changeTab(e) {
@@ -450,45 +461,7 @@
 		color: #999999;
 	}
 
-	.myOrder-tab {
-		position: fixed;
-		top: 0upx;
-		left: 0;
-		width: 100%;
-		z-index: 100;
-		height: 0.82rem;
-		line-height: 0.82rem;
-		font-size: 0.28rem;
-		color: #7c7c7c;
-		border-bottom: 1px solid #e2e2e2;
-		background: #fff;
-		white-space: nowrap;
-		overflow: hidden;
-		overflow-x: scroll;
-		/* 1 */
-		-webkit-backface-visibility: hidden;
-		-webkit-perspective: 1000;
-		-webkit-overflow-scrolling: touch;
-		/* 2 */
-		text-align: justify;
-		/* 3 */
-	}
-
-	.myOrder-tab span {
-		margin-left: 0.45rem;
-		display: inline-block;
-		height: 0.78rem;
-		border-bottom: 0.04rem solid transparent;
-	}
-
-	.myOrder-tab .active {
-		color: #000;
-		border-bottom-color: #0092FF;
-	}
-
-	.myOrder-tab::-webkit-scrollbar {
-		display: none;
-	}
+	 
 
 	.confirmOrder-cent {
 		margin-top: 80upx;
