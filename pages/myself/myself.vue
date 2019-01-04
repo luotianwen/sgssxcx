@@ -46,7 +46,8 @@
 				uerInfo: {},
 				orders: 0,
 				afterOrders: 0,
-				coupons: 0
+				coupons: 0,
+				login:false
 			}
 		},
 		onLoad(d) {
@@ -80,6 +81,7 @@
 							d.hasLogin = true;
 							service.setUser(d);
 							this.uerInfo = d;
+							this.login = true;
 						}
 					},
 					fail: (data, code) => {
@@ -99,9 +101,19 @@
 				})
 			},
 			goAddress: function() {
-				uni.navigateTo({
-					url: "../address/address"
-				})
+				if (!this.login) {
+					uni.showToast({
+						icon: 'none',
+						title: '请登录'
+					})
+					return;
+				} 
+				
+					uni.navigateTo({
+						url: "../address/address"
+					})
+				 
+				
 			},
 			goOrder: function() {
 				if (!service.getUser().hasLogin) {

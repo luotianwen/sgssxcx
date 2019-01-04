@@ -1,70 +1,217 @@
 <template>
-	<view class="">
-		<div id="refundInfo">
-			<div class="refundInfo-top">
-				<p><strong>订单编号:</strong>11597661575</p>
-				<p><strong>退款进度:</strong><span>退款中</span></p>
-			</div>
-			<div class="refundInfo">
-				<div id="canvas" style="height: 223.234px;"></div>
-				<div class="refundInfo-cent">
-					<!---->
-					<div class="refundInfo-list">
-						<div class="list-cent">
-							<h6><b class="listB"></b>商家同意退款，系统退款中</h6>
-							<p class="list-data"></p>
-							<p>将原路退回至买家的付款账户</p>
-						</div>
-					</div>
-					<!---->
-					<!---->
-					<!---->
-					<!---->
-					<!---->
-					<!---->
-					<!---->
-					<div class="refundInfo-list">
-						<div class="list-cent">
-							<h6><b class="listB"></b>买家提交退货物流，待商家处理。</h6>
-							<p class="list-data">2018-11-19 19:07:25</p>
-							<p>退货物流单号：455875887558875</p>
-							<p>物流公司：中通</p>
-						</div>
-						<!---->
-					</div>
-					<!---->
-					<!---->
-					<!---->
-					<!---->
-					<div class="refundInfo-list">
-						<div class="list-cent">
-							<h6><b class="listB"></b>买家申请<span>退货退款</span>，待商家处理</h6>
-							<p class="list-data">2018-11-19 19:02:08</p>
-							<p>退款类型：退货退款</p>
-							<p>退款原因：材质与商品描述不符</p>
-							<p>退款联系人：小花</p>
-							<p>联系方式：13254125235</p>
-						</div>
-						<!---->
-					</div>
-				</div>
-			</div>
-			<div class="confirmOrder-footer"><strong class="footer-btn1">订单详情</strong></div>
-			<!---->
-			<div id="mask" style="display: none;">
-				<div id="popup-frame">
-					<h6>确定取消退款吗？</h6>
-					<div class="frameBtn clearfix"><span>取消</span> <span>确定</span></div>
-				</div>
-			</div>
-			<div id="prompt-view">
-				<!---->
-			</div> 
-		</div>
+	 
+		<view id="refundInfo">
+			 <div class="refundInfo-top">
+				 <!-- 10申请中 20同意退货 30 同意换货 40拒绝退货 50拒绝换货 60 售后完成 -->
+            <p><strong>订单编号:</strong>{{afterInfo.orderNumber}}</p>
+            <p v-if="afterInfo.state==10"><strong>退款进度:</strong><span>申请{{type[""+afterInfo.type]}}</span></p>
+            
+            <p v-else><strong>退款进度:</strong><span>{{states[""+afterInfo.state]}}</span></p>
+        </div>
+        <div class="refundInfo">
+            <div id="canvas"></div>
+            <div class="refundInfo-cent">
+                <div class="refundInfo-list" v-if="afterInfo.state==60&&afterInfo.type==1">
+                    <div class="list-cent">
+                        <h6><b class="listB"></b>售后退款成功</h6>
+                        <p class="list-data">{{afterInfo.updateDate}}</p>
+                        <p>退款金额共计:¥{{afterInfo.returnAmount}}元，已退款至买家账户</p>
+                    </div>
+                </div>
+								<div class="refundInfo-list" v-if="afterInfo.state==60&&afterInfo.type==2">
+								    <div class="list-cent">
+								        <h6><b class="listB"></b>售后换货成功</h6>
+								        <p class="list-data">{{afterInfo.updateDate}}</p>
+								    </div>
+								</div>
+                <div class="refundInfo-list" v-if="afterInfo.exchangeExpressName!=null">
+                    <div class="list-cent">
+                        <h6><b class="listB"></b>同意换货，换货单号信息</h6>
+                        <p class="list-data">{{afterInfo.exchangeTime}}</p>
+                       <p>换货物流单号：{{afterInfo.exchangeInvoiceNo}}</p>
+                       <p>物流公司：{{afterInfo.exchangeExpressName}}</p>
+											 <p>换货运费：{{afterInfo.exchangeFreight}}</p>
+                    </div>
+										 <div class="list-btn clearfix" >
+										    <span @tap="goLogistics(afterInfo.exchangeInvoiceNo,afterInfo.exchangeExpressName)">跟踪物流</span>
+										</div>
+                </div>
+             
+                <div class="refundInfo-list" v-if="afterInfo.state==40">
+                    <div class="list-cent">
+                        <h6><b class="listB"></b>商家拒绝退货，商品将原路寄回。</h6>
+                        <p class="list-data">{{afterInfo.updateDate}}</p>
+                        <p>拒绝原因：{{afterInfo.refuseContent}}</p>
+                    </div>
+                </div>
+								<div class="refundInfo-list" v-if="afterInfo.state==50">
+								    <div class="list-cent">
+								        <h6><b class="listB"></b>商家拒绝换货，商品将原路寄回。</h6>
+								        <p class="list-data">{{afterInfo.updateDate}}</p>
+								        <p>拒绝原因：{{afterInfo.refuseContent}}</p>
+								    </div>
+								</div>
+                <div class="refundInfo-list" v-if="afterInfo.returnExpressName!=null">
+                    <div class="list-cent">
+                        <h6><b class="listB"></b>买家提交退货物流，待商家处理。</h6>
+                        <p class="list-data">{{afterInfo.returnTime}}</p>
+                        <p>退货物流单号：{{afterInfo.returnInvoiceNo}}</p>
+                        <p>物流公司：{{afterInfo.returnExpressName}}</p>
+                    </div>
+                    <div class="list-btn clearfix" >
+                        <span @tap="goLogistics(afterInfo.returnInvoiceNo,afterInfo.returnExpressName)">跟踪物流</span>
+                    </div>
+                </div>
+                <div class="refundInfo-list" v-if="afterInfo.returnConsignee!=null">
+                    <div class="list-cent">
+                        <h6><b class="listB"></b>请买家退回商品，并提交物流单号。</h6>
+                        <p class="list-data">{{afterInfo.updateDate}}</p>
+                        <p>收货人：{{afterInfo.returnConsignee}}</p>
+                        <p>联系电话：{{afterInfo.returnPhone}}</p>
+                        <p>退货地址：{{afterInfo.returnAddress}}</p>
+                    </div>
+                    <div class="list-btn clearfix" v-if="afterInfo.returnAddress!=null&&afterInfo.returnExpressName==null">
+                        <span @tap="returnExpress(afterInfo)">填写物流</span>
+                    </div>
+                </div>
+                
+                
+                <div class="refundInfo-list">
+                    <div class="list-cent">
+                        <h6><b class="listB"></b>买家申请<span>{{type[afterInfo.type]}}</span>，待平台处理</h6>
+                        <p class="list-data">{{afterInfo.applyTime}}</p>
+                        <p>退款类型：{{type[afterInfo.type]}}</p>
+                        <p>退款原因：{{afterInfo.content}}</p>
+                    </div>
+                    
+                        <div class="list-btn clearfix" v-if="afterInfo.type==2&&afterInfo.state==10">
+                            <span @tap="goCancel(afterInfo)">取消换货</span>
+                        </div>
+                        <div class="list-btn clearfix" v-if="afterInfo.type==1&&afterInfo.state==10">
+                            <span @tap="goCancel(afterInfo)">取消退货</span>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="confirmOrder-footer">
+            <strong class="footer-btn1" @tap="goDetail()">订单详情</strong>
+        </div>
+	 
 	</view>
 </template>
 
 <script>
+	import service from '../../service.js';
+	 
+	export default {
+		 
+		data() {
+			return {
+				type: {
+					"1": "申请退货",					
+					"2": "换货"		
+				},
+				states: {
+					"10": "申请退货",
+					"12": "申请换货",
+					"20": "同意退货",
+					"30": "同意换货",
+					"50": "拒绝换货",
+					"60": "售后完成",
+					"40": "拒绝退货"
+				},
+				afterOrderId:"",
+				afterInfo: {}
+			}
+		},
+		onShow() {
+			this.afterOrderList();
+		},
+		onLoad(d) {
+			this.afterOrderId=d.afterOrderId;
+			//this.afterOrderList();
+		},
+		  
+		methods: {
+			goLogistics: function(returnInvoiceNo,returnExpressName) {
+				uni.navigateTo({
+					url: "../order/logistics?expressName="+returnExpressName+"&invoiceNo="+returnInvoiceNo
+				})
+			},
+			goCancel:function(newsitems){
+				
+						let _this=this;
+					uni.showModal({
+						content: '确认要取消？',
+						success: (res) => {
+							if (res.confirm) {
+								uni.request({
+									url: service.cancelAfterOrder(),
+									data: {
+										tokenId: service.getUser().tokenId,
+										afterOrderId:newsitems.afterOrderId
+									},
+									success: (data) => { 
+										uni.hideLoading();
+										if (data.statusCode == 200 && data.data.code == 0) {
+											  uni.showToast({
+											  	title: '操作成功',
+													duration:3000,
+											  	success() {
+											  	 uni.navigateBack({
+											  	 	delta:1
+											  	 })
+											  	}
+											  })
+										}
+										else{
+											uni.showToast({
+												title:data.data.msg 
+											})
+										}
+										
+									},
+									fail: (data, code) => {
+										console.log('fail' + JSON.stringify(data));
+										uni.hideLoading();
+									}
+								})
+							}
+						}
+					})
+			},
+			afterOrderList:function(){
+				let _this=this;
+				uni.request({
+					url: service.afterOrderDetail(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						afterOrderId: this.afterOrderId
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							 _this.afterInfo=data.data.data
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			},
+			returnExpress:function(newsitems){
+				 uni.navigateTo({
+				 	url:"../service/deliverGoods?afterOrderId="+newsitems.afterOrderId
+				 })
+			  
+			},
+			goDetail:function(){
+				uni.navigateTo({
+					url: "../order/orderDetail?orderNumber="+this.afterInfo.orderNumber
+				})
+			} 
+			}
+		}
 </script>
 
 <style>

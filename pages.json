@@ -111,7 +111,7 @@
 			"path": "pages/brand/search",
 			"style": {
 				"navigationBarTitleText": "品牌搜索" ,
-				 "enablePullDownRefresh": true
+				 "enablePullDownRefresh": true 
 			}
 		},
 		{
@@ -119,6 +119,12 @@
 			"style": {
 				"navigationBarTitleText": "售后管理" ,
 				 "enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/service/deliverGoods",
+			"style": {
+				"navigationBarTitleText": "售后填写快递"  
 			}
 		},
 		{

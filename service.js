@@ -64,11 +64,27 @@ const cancelOrder=function(){
 const afterOrderList=function(){
 	return httpUrl + "shop/afterOrderList";
 }
+const afterOrderDetail=function(){
+	return httpUrl + "shop/afterOrderDetail";
+}
+
 const cancelAfterOrder=function(){
 	return httpUrl + "shop/cancelAfterOrder";
 }
+const getExpress=function(){
+	return httpUrl + "shop/getExpress";
+}
+const returnExpress=function(){
+	return httpUrl + "shop/returnExpress";
+}
+const addresslist=function(){
+	return httpUrl + "user/addresslist";
+}
+const removeAddreee=function(){
+	return httpUrl + "user/removeAddreee";
+}
 const USERS_KEY = 'SGSS_USERS_KEY';
-
+ 
 const getUser = function () {
     let ret = '';
     ret = uni.getStorageSync(USERS_KEY);
@@ -109,5 +125,10 @@ export default {
 	orderDetail,
 	cancelOrder,
 	afterOrderList,
-	cancelAfterOrder
+	cancelAfterOrder,
+	afterOrderDetail,
+	getExpress,
+	returnExpress,
+	addresslist,
+	removeAddreee
 }
