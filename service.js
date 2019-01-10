@@ -80,8 +80,46 @@ const returnExpress=function(){
 const addresslist=function(){
 	return httpUrl + "user/addresslist";
 }
-const removeAddreee=function(){
-	return httpUrl + "user/removeAddreee";
+const removeAddress=function(){
+	return httpUrl + "user/deleteAddress";
+}
+const saveAddress=function(){
+	return httpUrl + "user/saveAddress";
+}
+const getCouponList=function(){
+	return httpUrl + "user/getCouponList";
+}
+const removeCoupon=function(){
+	return httpUrl + "user/removeCoupon";
+}
+const feedback=function(){
+	return httpUrl + "user/feedback";
+}
+
+const bindPhone=function(){
+	return httpUrl + "user/bindPhone";
+}
+const verificationBind=function(){
+	return httpUrl + "user/verificationBind";
+}
+const getUserData=function(){
+	return httpUrl+"user/getUserData";
+}
+const brandList=function(){
+	return httpUrl+"shop/brandList";
+}
+const indexData=function(){
+	return httpUrl+"shop/indexData";
+}
+const hotData=function(){
+	return httpUrl+"shop/hotData";
+}
+const getSearchGoods=function(){
+	return httpUrl+"shop/getSearchGoods";
+}
+
+const getCartData=function(){
+	return httpUrl+"shop/getCartData";
 }
 const USERS_KEY = 'SGSS_USERS_KEY';
  
@@ -130,5 +168,17 @@ export default {
 	getExpress,
 	returnExpress,
 	addresslist,
-	removeAddreee
+	removeAddress,
+	saveAddress,
+	getCouponList,
+	removeCoupon,
+	feedback,
+	bindPhone,
+	verificationBind,
+	getUserData,
+	brandList,
+	indexData,
+	hotData,
+	getSearchGoods,
+	getCartData
 }

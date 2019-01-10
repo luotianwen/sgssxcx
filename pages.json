@@ -30,6 +30,12 @@
 				 "enablePullDownRefresh": true
 			}
 		}, 
+		{
+			"path": "pages/search/search1",
+			"style": {
+				"navigationBarTitleText": "搜索"  
+			}
+		},
 		{ 
 			"path": "pages/category/search",
 			"style": {
@@ -130,8 +136,7 @@
 		{
 			"path": "pages/coupon/coupon",
 			"style": {
-				"navigationBarTitleText": "优惠券" ,
-				 "enablePullDownRefresh": true
+				"navigationBarTitleText": "优惠券"  
 			}
 		},
 		{
@@ -144,6 +149,12 @@
 			"path": "pages/myself/newPhone",
 			"style": {
 				"navigationBarTitleText": "绑定手机" 
+			}
+		},
+		{
+			"path": "pages/myself/verification",
+			"style": {
+				"navigationBarTitleText": "验证码" 
 			}
 		},
 		{

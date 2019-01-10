@@ -100,7 +100,9 @@
 
 		},
         onShow() {
-        	
+        	if (service.getUser().hasLogin) {
+        		this.getOrderList(0);
+        	}
         	
         },
 		onLoad() {
@@ -118,9 +120,7 @@
 			console.log(JSON.stringify(ary));
 			this.newsitems = ary;
 			
-			if (service.getUser().hasLogin) {
-				this.getOrderList(0);
-			}
+			
 		},
 		methods: {
 			goOrderOk:function(order){

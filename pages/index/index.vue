@@ -3,14 +3,14 @@
 		<page-head :title="title"></page-head>
 		<view class="page-body">
 			<view class="purchase-header">
-				<view class="header-sear" @click=goSearch()>请输入商品名称</view><strong class="header-news">14</strong> <span class="header-cart"
-				 @click=goCart()></span>
+				<view class="header-sear" @tap="goSearch()">请输入商品名称</view><strong class="header-news">{{cartCount}}</strong> <span class="header-cart"
+				 @tap="goCart()"></span>
 			</view>
 			<view class="page-section page-section-spacing swiper">
 				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;">
 					<swiper-item v-for="item in itemList" :key="item">
 						<view class="swiper-item  ">
-							<image :src="item" style="width: 100%;" />
+							<image :src="item.logo" style="width: 100%;" />
 						</view>
 					</swiper-item>
 
@@ -30,19 +30,12 @@
 
 		<view>
 			<div class="purchase-nav  ">
-				<span @click="goBrandSearch()" style="background-image: url( );">阿迪</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png);">Nike</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp5.png);">彪马</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp1.png);">李宁</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp2.png);">汉道</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp7.png);">卡帕</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png);">匡威</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png);">特步</span>
-				<span style="background-image: url(http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp6.png);">狼爪</span>
+				<span @click="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}" >{{value.name}}</span>
+				 
 			</div>
 		</view>
-		<view>
-			<div class="purchase-band"><span style="float: left;font-size: 30upx; "> 商品列表</span> </div>
+		<view style="">
+			<div class="purchase-band"><span style="float: left;font-size: 30upx;width: 100%; "> 商品列表</span> </div>
 		</view>
 		<view class="uni-list">
 			<view class="goodsList-cent  ">
@@ -71,11 +64,9 @@
 		data() {
 			return {
 				title: 'swiper',
-				itemList: [
-					'http://yoyound.com/images/201802/source_img/1991_P_1517735808303.jpg',
-					'http://yoyound.com/images/201802/goods_img/1983_P_1517723513939.jpg',
-					'http://www.yoyound.com/images/201809/thumb_img/6256_thumb_G_1536824618570.jpg'
+				itemList: [					 
 				],
+				brands:[],
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
@@ -84,6 +75,7 @@
 				listData: [],
 				loadingType: 0,
 				pageNumber: 1,
+				cartCount:0,
 				contentText: {
 					contentdown: "上拉显示更多",
 					contentrefresh: "正在加载...",
@@ -91,9 +83,17 @@
 				}
 			}
 		}, 
+		onShow(){
+			/* this.pageNumber = 1;
+			this.loadingType=0;
+			this.listData = [];
+			this.getList(); */
+			this.getCartData();
+		},
 		onLoad() {
-			service.removeUser();
-			this.getList();
+			//service.removeUser();
+			 this.getList();
+			this.indexData();
 		},
 		onUnload() {
 
@@ -123,6 +123,47 @@
 			}, 300);
 		},
 		methods: {
+			getCartData(){
+				let _this=this;
+				if (!service.getUser().hasLogin) {
+					return ;
+					}
+				uni.request({
+					url: service.getCartData(),
+					 data: {
+					 	tokenId: service.getUser().tokenId
+					 },
+					success: (data) => {
+						console.log(JSON.stringify(data.data.data))
+						if (data.statusCode == 200 && data.data.code == 0) {
+							 _this.cartCount=data.data.data;
+							 
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			},
+			indexData() {
+			
+				uni.request({
+					url: service.indexData(),
+					 
+					success: (data) => {
+						console.log(JSON.stringify(data.data.data))
+						if (data.statusCode == 200 && data.data.code == 0) {
+							let _data=data.data.data;
+							 this.itemList=_data.carousels;
+							 this.brands=_data.brands;
+							 
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			},
 			getList() {
 
 				uni.request({
@@ -151,14 +192,14 @@
 					url: "../brand/brandList"
 				})
 			},
-			goBrandSearch: function() {
-				uni.navigateTo({
-					url: "../brand/search"
+			goBrandSearch: function(item) {
+					uni.navigateTo({
+					url: "../brand/search?brandId="+item.brandId+"&title="+item.name
 				})
 			},
 			goSearch: function() {
 				uni.navigateTo({
-					url: "../search/search"
+					url: "../search/search1"
 				})
 			},
 			goCart: function() {
@@ -249,7 +290,7 @@
 
 	.purchase-header .header-cart {
 		right: 0.3rem;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-cart.png) no-repeat center;
+		background: url(http://127.0.0.1:8082/static/images/cart1.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 
@@ -263,7 +304,7 @@
 		font-size: 0.26rem;
 		color: #999;
 		border-radius: 0.3rem;
-		background: #eeeeee url(https://cs.h5.hongkzh.com/imgs/see/index/seeIndex-sear.png) no-repeat 1.75rem center;
+		background: #eeeeee url(http://127.0.0.1:8082/static/images/search.png) no-repeat 1.75rem center;
 		background-size: 0.35rem 0.35rem;
 	}
 
@@ -318,7 +359,7 @@
 		margin-top: 40upx;
 		padding-top: 102upx;
 		float: left;
-		width: 130upx;
+		width: 25%;
 		text-align: center;
 		font-size: 22upx;
 		color: #666666;

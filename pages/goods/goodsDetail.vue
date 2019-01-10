@@ -1,6 +1,9 @@
 <template>
 	<view id="goodsDetails">
-
+			<view class="purchase-header">
+				 <strong class="header-news">{{cartCount}}</strong> <span class="header-cart"
+				 @tap="goCart()"></span>
+			</view>
 		<view class="page-section page-section-spacing swiper">
 			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;">
 				<swiper-item v-for="item in data.images" :key="item">
@@ -23,8 +26,12 @@
 				<rich-text class="richText" :nodes="data.details"></rich-text>
 			</view>
 		</view>
-		<view class="goodsDetails-butt"><a class="goodsDetails-buttBtn" @click="addCart()">加入购物车</a> <a class="goodsDetails-buttColor"
-			 @click="buy()">立即购买</a></view>
+		<view class="goodsDetails-butt">
+			
+			<a class="goodsDetails-buttBtn" @click="addCart()">加入购物车</a> 
+			<a class="goodsDetails-buttColor"  @click="buy()">立即购买</a>
+			<!-- <a class="goodsDetails-buttBtn1" @click="goCart()">购物车</a> -->
+		</view>
 
 
 		<view class="goodsDetails-choice" v-show="show">
@@ -84,9 +91,12 @@
 				skuId: "",
 				hasLogin: false,
 				type: 0,
+				cartCount:0
 			}
 		},
-
+         onShow() {
+         	this.getCartData();
+         },
 		onLoad(d) {
 
 			uni.setNavigationBarTitle({
@@ -96,7 +106,28 @@
 			this.getDetail();
 		},
 		methods: {
-
+				getCartData(){
+				let _this=this;
+				if (!service.getUser().hasLogin) {
+					return ;
+					}
+				uni.request({
+					url: service.getCartData(),
+					 data: {
+					 	tokenId: service.getUser().tokenId
+					 },
+					success: (data) => {
+						console.log(JSON.stringify(data.data.data))
+						if (data.statusCode == 200 && data.data.code == 0) {
+							 _this.cartCount=data.data.data;
+							 
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+			},
 
 			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
 				//service.removeUser();
@@ -193,6 +224,11 @@
 					this.number++;
 				}
 			},
+			goCart: function() {
+				uni.switchTab({
+					url: "../cart/cart"
+				})
+			},
 			addCart: function() {
 				this.type = 0;
 				if (this.show) {
@@ -210,6 +246,7 @@
 						uni.hideLoading();
 					} else {
 						uni.showToast({
+							icon:'none',
 							title: "请选择商品"
 						})
 					}
@@ -237,6 +274,7 @@
 
 					} else {
 						uni.showToast({
+							icon:'none',
 							title: "请选择商品"
 						})
 					}
@@ -310,6 +348,63 @@
 </script>
 
 <style>
+	
+	.purchase-header {
+		padding: 0.2rem 0;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1000;
+		width: 100%;
+		height: 0.71rem;
+	}
+	
+	.purchase-header span {
+		position: absolute;
+		top: 0.2rem;
+		display: block;
+		z-index: 1000;
+		width: 0.76rem;
+		height: 0.76rem;
+		border-radius: 50%;
+	}
+	
+	.purchase-header .header-cart {
+		right: 0.3rem;
+		background: url(http://127.0.0.1:8082/static/images/cart1.png) no-repeat center;
+		background-size: 100% 100%;
+	}
+	
+	.purchase-header .header-sear {
+		margin: 0.06rem 0 0 0.3rem;
+		padding-left: 0.6rem;
+		width: 5rem;
+		height: 0.6rem;
+		line-height: 0.6rem;
+		text-align: center;
+		font-size: 0.26rem;
+		color: #999;
+		border-radius: 0.3rem;
+		background: #eeeeee url(http://127.0.0.1:8082/static/images/search.png) no-repeat 1.75rem center;
+		background-size: 0.35rem 0.35rem;
+	}
+	
+	.purchase-header .header-news {
+		display: block;
+		position: absolute;
+		top: 0.2rem;
+		right: 0.12rem;
+		z-index: 1001;
+		height: 0.26rem;
+		line-height: 0.26rem;
+		padding: 0 0.1rem;
+		font-size: 0.2rem;
+		color: #FFFFFF;
+		background: #EF593C;
+		border-radius: 100px;
+	}
+	
+	
 	#goodsDetails {
 		position: relative;
 		padding-bottom: 0.98rem;
@@ -415,7 +510,7 @@
 	.goodsDetails-butt .goodsDetails-buttColor {
 		color: #333;
 	}
-
+ 
 
 
 

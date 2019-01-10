@@ -1,11 +1,10 @@
 <template>
-	<view class="">
-		<view>
+		<view id="goodsList">
 			<view class="goodsList-header">
 				<view class="newProduct-screen  ">
-					<view :class="['newProduct-screenspan',{'active':sortData==1}]" @click="getSelet(1)">热销</view>
-					<view :class="['newProduct-screenspan',{'active':sortData==2}]" @click="getSelet(2)">综合</view>
-					<view :class="['newProduct-screenspan',{'active':sortData==3}]" @click="getSelet(3)">价格
+					<view :class="['newProduct-screenspan',{'active':sortData==1}]" @click="getSelet(1)">销量</view>
+					<view :class="['newProduct-screenspan',{'active':sortData==2}]" @click="getSelet(2)">时间</view>
+					<view :class="['newProduct-screenspan',{'active':sortData==3||sortData==4}]" @click="getSelet(3)">价格
 						<view class="collage-icon" v-if="sortValue=='asc'"></view>
 						<view class="collage-icon1" v-else-if="sortValue=='desc'"></view>
 						<view class="collage-icon2" v-else></view>
@@ -24,7 +23,6 @@
 				<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
 			</view>
 		</view>
-	</view>
 </template>
 
 <script>
@@ -96,6 +94,7 @@
 					this.sortId = "3";
 					if (this.sortValue == "asc") {
 						this.sortValue = "desc";
+						this.sortId = "4";
 					} else if (this.sortValue == "desc") {
 						this.sortValue = "asc";
 					} else {
@@ -116,7 +115,7 @@
 					data: {
 						categoryId: this.categoryId,
 						pageNumber: this.pageNumber,
-						sortData: this.sortData
+						orderby: this.sortId
 					},
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
@@ -143,8 +142,7 @@
 	.active {
 		color: #558ef0;
 	}
-
-	.goodsList-header {
+#goodsList .goodsList-header {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -153,21 +151,22 @@
 		border-bottom: 1px solid #f1f1f1;
 		background: #fefefe;
 	}
+	 
 
 	.discount-sears {
 		right: 0.2rem;
 	}
-
-	.newProduct-screen {
-		margin-top: 0.19rem;
+.newProduct-screen {
+		/* 	position:fixed; */
+		/* margin-top: 0.89rem; */
 		height: 0.82rem;
 		line-height: 0.82rem;
 		font-size: 0.28rem;
 		color: #333333;
 		text-align: center;
 		overflow: hidden;
+		background-color: #fff;
 	}
-
 	.newProduct-screenspan {
 		float: left;
 		width: 33%;
@@ -197,22 +196,23 @@
 	}
 
 	.newProduct-screen .collage-icon {
-		background: url("http://127.0.0.1:8082/static/images/up.png") no-repeat center;
+		background: url("http://127.0.0.1:8082/static/images/collage-icon.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
 	.newProduct-screen .collage-icon1 {
-		background: url("http://127.0.0.1:8082/static/images/down.png") no-repeat center;
+		background: url("http://127.0.0.1:8082/static/images/collage-icon1.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
 	.newProduct-screen .collage-icon2 {
 		background: url("http://127.0.0.1:8082/static/images/collage-icon2.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
-	}
+	} 
 
+	
 	.goodsList-cent {
-		margin-top: 120upx;
+		margin-top: 0.75rem;
 		padding: 0.3rem 0 0.2rem;
 		background: #fff;
 		font-size: 0;

@@ -1,14 +1,16 @@
 <template>
 	<view class="">
-		<div id="setUpPwd">
-			<div class="circleBar-top"> 完成</strong></div>
-			<div class="setUpPwd-title">新密码</div>
+		 
+			 
+			<div class="setUpPwd-title">设置密码</div>
 			<div class="setUpPwd-cent">
 				<div><input type="password" placeholder="6-16位密码、数字+字母"></div>
 				<div><input type="password" placeholder="再次输入密码"></div>
 			</div>
-			 
-		</div>
+			 <view class="btn-area" id="buttonContainer">
+			  <button type="primary" @tap="onSave">保存</button>
+			  	</view>
+	 
 	</view>
 </template>
  

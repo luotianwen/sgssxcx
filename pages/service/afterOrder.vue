@@ -66,8 +66,15 @@
 				afterOrders: []
 			}
 		},
-		onLoad() {
+		onShow() {
+			this.pageNumber=1;
+			this.loadingType=0;
+			
 			this.afterOrderList();
+			
+		},
+		onLoad() {
+			//this.afterOrderList();
 		},
 		onReachBottom() {
 
@@ -83,7 +90,7 @@
 		},
 		onPullDownRefresh() {
 			console.log('onPullDownRefresh');
-			this.listData = [];
+			this.afterOrders = [];
 			setTimeout(() => {
 				this.pageNumber = 1;
 				this.afterOrderList();

@@ -14,7 +14,7 @@
             <view class="uni-uploader">
                 <view class="uni-uploader-head">
                     <view class="uni-uploader-title">点击预览图片</view>
-                    <view class="uni-uploader-info">{{imageList.length}}/8</view>
+                    <view class="uni-uploader-info">{{imageList.length}}/1</view>
                 </view>
                 <view class="uni-uploader-body">
                     <view class="uni-uploader__files">
@@ -24,7 +24,7 @@
                                 <view class="close-view" @click="close(index)">x</view>
                             </view>
                         </block>
-                        <view class="uni-uploader__input-box" v-show="imageList.length < 8">
+                        <view class="uni-uploader__input-box" v-show="imageList.length < 2">
                         	<view class="uni-uploader__input" @tap="chooseImg"></view>
                         </view>
                     </view>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+	import service from '../../service.js';
     export default {
         data() {
             return {
@@ -53,17 +54,7 @@
             }
         },
         onLoad() {
-            /* let deviceInfo = {
-                appid: plus.runtime.appid,
-                imei: plus.device.imei, //设备标识
-                p: plus.os.name === "Android" ? "a" : "i", //平台类型，i表示iOS平台，a表示Android平台。
-                md: plus.device.model, //设备型号
-                app_version: plus.runtime.version,
-                plus_version: plus.runtime.innerVersion, //基座版本号
-                os: plus.os.version,
-                net: "" + plus.networkinfo.getCurrentType()
-            }
-            this.sendDate = Object.assign(deviceInfo, this.sendDate); */
+        	this.sendDate.tokenId=service.getUser().tokenId;
         },
         methods: {
             close(e){
@@ -93,17 +84,36 @@
                     urls: this.imageList
                 });
             },
-            send() { //发送反馈
-                console.log(JSON.stringify(this.sendDate));
+            send() { 
+				let content=this.sendDate.content;
+				if(content.length==0){
+					uni.showToast({
+						icon:'none',
+						title:'反馈的意见和建议必须填写'
+					})
+					return;
+				}
+				if(this.imageList.length==0){
+					uni.showToast({
+						icon:'none',
+						title:'图片必须选择'
+					})
+					return;
+				}
+				
+				//发送反馈
+               
                 let imgs = this.imageList.map((value) => {
                     return {
-                        name: "uni-app.feedback",
+                        name: "feedbacks",
                         uri: value
                     }
                 })
-                uni.uploadFile({
-                    url: "https://service.dcloud.net.cn/feedback",
-                    files: imgs,
+				 console.log(imgs);
+                  uni.uploadFile({
+                    url: service.feedback(),
+					name: imgs[0].name,
+                    filePath: imgs[0].uri,
                     formData: this.sendDate,
                     success: (res) => {
                         if (res.statusCode === 200) {
@@ -121,7 +131,7 @@
                     fail: (res) => {
                         console.log(res)
                     }
-                });
+                });  
             }
         }
     }

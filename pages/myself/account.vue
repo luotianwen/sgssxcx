@@ -1,18 +1,32 @@
 <template>
 	<view>
-		<div id="security">
 			 
 			<div class="happyiIndex-list">
-				<div class="listCent" @click="goNewPhone()">手机号 <a class="happyi-left">绑定手机</a></div>
-				<div class="listCent"  @click="goNewPassword()">登录密码 <a  class="happyi-left"> 设置密码</a></div>
+				<div class="listCent" @click="goNewPhone()">手机号 <a class="happyi-left">{{vphone}}</a></div>
+				<!-- <div class="listCent"  @click="goNewPassword()">登录密码 <a  class="happyi-left"> 设置密码</a></div> -->
 			</div>
 			 
-		</div>
 	</view> 
 </template>
 
 <script>
+	import service from '../../service.js';
 	export default {
+		data(){
+			return{
+				phone:"",
+				vphone:"绑定手机"
+			}
+		},
+		onShow(){
+			let _user=service.getUser();
+			console.log(JSON.stringify(_user));
+			if(_user.hasLogin){
+				if(_user.phone!=null){
+				this.vphone="更改手机号";
+				}
+			}
+		},
 		methods: {
 			goNewPhone:function(){
 				uni.navigateTo({
