@@ -3,11 +3,11 @@
 		<page-head :title="title"></page-head>
 		<view class="page-body">
 			<view class="purchase-header">
-				<view class="header-sear" @tap="goSearch()">请输入商品名称</view><strong class="header-news">{{cartCount}}</strong> <span
-				 class="header-cart" @tap="goCart()"></span>
+				<view class="header-sear" @tap="goSearch()">请输入商品名称</view><strong class="header-news">{{cartCount}}</strong> <span class="header-cart"
+				 @tap="goCart()"></span>
 			</view>
-			<view class="page-section page-section-spacing swiper" style="background-color: #fff;">
-				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;width: 96%;padding-left: 2%;">
+			<view class="page-section page-section-spacing swiper">
+				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;">
 					<swiper-item v-for="item in itemList" :key="item">
 						<view class="swiper-item  ">
 							<image :src="item.logo" style="width: 100%;" />
@@ -17,38 +17,32 @@
 				</swiper>
 			</view>
 		</view>
-
-		<view style="margin-top: 0.2rem;">
-			<view class="rectangle3"><view class="rectangle3center"  > <image src="../../static/img/i1.png" class="rectangle3img"  ></image>  <view class="rectangle3code"> 运动户外</view> </view> </view>
-			<view class="rectangle3"><view class="rectangle3center"  > <image src="../../static/img/i2.png" class="rectangle3img"  ></image>  <view class="rectangle3code"> 健康生活</view> </view></view>
-			<view class="rectangle3"><view class="rectangle3center"  > <image src="../../static/img/i3.png" class="rectangle3img"  ></image>  <view class="rectangle3code"> 悠氧播报</view> </view></view>
-		</view>
-		<view style="margin-top: 0.2rem;">
-			<view class="combinedShape "> 优惠券 </view>
-			<view class="combinedShape "> 优惠券 </view>
-		</view>
-		<view class="uni-list">
-			<view class="goodsList-cent1" >
-				<view style="width: 100%;" > 
-					<view class="brands1"> 品牌馆 </view> 
-					<view class="brandsmore " @tap="goBrandList()">更多 </view>
-				</view>
-				<view style="padding-top: 10px;">
-					<view class="rectangle-4"   @tap="goBrandSearch(value)" v-for="(value,key) in brands"
-					 :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}">
-						<!-- {{value.name}} -->
-					</view>
-
-				</view>
+		<view>
+			<view class="consult "><span>运动户外</span><span>健康生活</span><span>悠氧播报</span> </view>
+			<view class="header-butt "><a>优惠券 <span>满300减50</span></a> <a>优惠券<i></i> <span>满100减20</span></a>
 			</view>
 		</view>
-		 
+
+		<div class="purchase-band">
+			<span style="float: left;font-size: 30upx; "> 品牌馆</span>
+			<span style="float: right;font-size: 30upx; " @click="goBrandList()">更多</span>
+		</div>
+
+		<view>
+			<div class="purchase-nav  ">
+				<span @click="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}" >{{value.name}}</span>
+				 
+			</div>
+		</view>
+		<view style="">
+			<div class="purchase-band"><span style="float: left;font-size: 30upx;width: 100%; "> 商品列表</span> </div>
+		</view>
 		<view class="uni-list">
 			<view class="goodsList-cent  ">
 
 				<view v-for="(value,key) in listData" :key="key" @click="goDetail(value)" class="goodsList-list">
 					<image class="follow-centImg" :src="value.logo"></image>
-
+					 
 					<view class="follow-centImgh6">{{value.name}}</view>
 					<view class="goodsList-listp">销量： {{value.sales}}</view>
 					<view class="goodsList-listp">售价：¥{{value.price}}</view>
@@ -70,8 +64,9 @@
 		data() {
 			return {
 				title: 'swiper',
-				itemList: [],
-				brands: [],
+				itemList: [					 
+				],
+				brands:[],
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
@@ -80,15 +75,15 @@
 				listData: [],
 				loadingType: 0,
 				pageNumber: 1,
-				cartCount: 0,
+				cartCount:0,
 				contentText: {
 					contentdown: "上拉显示更多",
 					contentrefresh: "正在加载...",
 					contentnomore: "没有更多数据了"
 				}
 			}
-		},
-		onShow() {
+		}, 
+		onShow(){
 			/* this.pageNumber = 1;
 			this.loadingType=0;
 			this.listData = [];
@@ -96,8 +91,8 @@
 			this.getCartData();
 		},
 		onLoad() {
-			 service.removeUser();
-			this.getList();
+			 //service.removeUser();
+			 this.getList();
 			this.indexData();
 		},
 		onUnload() {
@@ -128,21 +123,21 @@
 			}, 300);
 		},
 		methods: {
-			getCartData() {
-				let _this = this;
+			getCartData(){
+				let _this=this;
 				if (!service.getUser().hasLogin) {
-					return;
-				}
+					return ;
+					}
 				uni.request({
 					url: service.getCartData(),
-					data: {
-						tokenId: service.getUser().tokenId
-					},
+					 data: {
+					 	tokenId: service.getUser().tokenId
+					 },
 					success: (data) => {
 						console.log(JSON.stringify(data.data.data))
 						if (data.statusCode == 200 && data.data.code == 0) {
-							_this.cartCount = data.data.data;
-
+							 _this.cartCount=data.data.data;
+							 
 						}
 					},
 					fail: (data, code) => {
@@ -151,17 +146,17 @@
 				})
 			},
 			indexData() {
-
+			
 				uni.request({
 					url: service.indexData(),
-
+					 
 					success: (data) => {
 						console.log(JSON.stringify(data.data.data))
 						if (data.statusCode == 200 && data.data.code == 0) {
-							let _data = data.data.data;
-							this.itemList = _data.carousels;
-							this.brands = _data.brands;
-
+							let _data=data.data.data;
+							 this.itemList=_data.carousels;
+							 this.brands=_data.brands;
+							 
 						}
 					},
 					fail: (data, code) => {
@@ -198,8 +193,8 @@
 				})
 			},
 			goBrandSearch: function(item) {
-				uni.navigateTo({
-					url: "../brand/search?brandId=" + item.brandId + "&title=" + item.name
+					uni.navigateTo({
+					url: "../brand/search?brandId="+item.brandId+"&title="+item.name
 				})
 			},
 			goSearch: function() {
@@ -218,86 +213,15 @@
 				uni.navigateTo({
 					url: "../goods/goodsDetail?goodsId=" + e.goodId + "&name=" + e.name
 				})
-			}
+			} 
 		}
 	}
 </script>
 
 <style>
-	.rectangle-4 {
-		width: 23.5%;
-		height: 90px;
-		background-color: #ffffff;
-		border: solid 1px #c0cdda;
-		float: left;
-	}
-
-	.rectangle4 {
-		width: 88px;
-		height: 90px;
-		border: 1px solid #c0cdda;
-		background: #ffffff;
-		color: #011959;
-		font-family: PingFangSC;
-		font-size: 12px;
-		font-style: normal;
-		font-stretch: normal;
-		font-weight: 500;
-		line-height: 16px;
-		text-align: center;
-		text-transform: none;
-		text-decoration: none;
-		letter-spacing: 0px;
-	}
-
-	.brands1 {
-		position: relative;
-        top:0;
-		width: 36px;
-		height: 16px;
-		color: #011959;
-		 
-		font-size: 12px;
-		font-style: normal;
-		font-stretch: normal;
-		font-weight: 500;
-		line-height: 16px;
-		text-align: center;
-		text-transform: none;
-		text-decoration: none;
-		letter-spacing: 0px;
-		 
-		 
-	}
-
-	.brandsmore {
-		margin-top: 0.16rem;
-		  top:0;
-		width: 23px;
-		height: 17px;
-		 position: absolute;
-		font-size: 12px;
-		font-weight: normal;
-		font-stretch: normal;
-		letter-spacing: -1px;
-		color: #011959;
-		right: 3%;
-		/*  float: right;  */
-		 /* margin-right: 3% */  
-	}
-
-
-    .goodsList-cent1 {
-		margin-top: 0.16rem;
-		/* padding: 0.1rem 0 0; */
-		background: #fff;
-		font-size: 0;
-		margin-left: 3%;
-	}
-
 	.goodsList-cent {
-		margin-top: 0.3rem;
-		padding: 0 0 0.2rem;
+		margin-top: 0.1rem;
+		padding: 0.3rem 0 0.2rem;
 		background: #fff;
 		font-size: 0;
 	}
@@ -333,7 +257,7 @@
 		white-space: inherit;
 	}
 
-
+	 
 
 	.goodsList-listp {
 		margin: 55upx 0;
@@ -345,37 +269,35 @@
 	}
 
 	.purchase-header {
-		/* padding: 0.2rem 0; */
-		/* position: fixed; */
-		padding-left: 2%;
+		padding: 0.2rem 0;
+		position: fixed;
 		top: 0;
 		left: 0;
-		/* z-index: 1000; */
+		z-index: 1000;
 		width: 100%;
 		height: 0.71rem;
-		background-color: #FFFFFF;
 	}
 
 	.purchase-header span {
 		position: absolute;
-		top: 0;
+		top: 0.2rem;
 		display: block;
 		z-index: 1000;
-		width: 0.60rem;
-		height: 0.60rem;
+		width: 0.76rem;
+		height: 0.76rem;
 		border-radius: 50%;
 	}
 
 	.purchase-header .header-cart {
-		right: 0.4rem;
+		right: 0.3rem;
 		background: url(http://127.0.0.1:8082/static/images/cart1.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 
 	.purchase-header .header-sear {
-		/* margin: 0.06rem 0 0 0.3rem; */
+		margin: 0.06rem 0 0 0.3rem;
 		padding-left: 0.6rem;
-		width: 75%;
+		width: 5rem;
 		height: 0.6rem;
 		line-height: 0.6rem;
 		text-align: center;
@@ -389,10 +311,9 @@
 	.purchase-header .header-news {
 		display: block;
 		position: absolute;
-		top: 0;
-		/* top: 0.2rem; */
+		top: 0.2rem;
 		right: 0.12rem;
-		/* z-index: 1001; */
+		z-index: 1001;
 		height: 0.26rem;
 		line-height: 0.26rem;
 		padding: 0 0.1rem;
@@ -402,48 +323,10 @@
 		border-radius: 100px;
 	}
 
-	.rectangle3center{
-		padding: 15px 30px;
-	}
-	.rectangle3img{
-		width: 40px;height: 40px;
-	}
-	
-	.rectangle3code{
-		width: 45px;
-		height: 17px;
-		 
-		font-size: 12px;
-		font-weight: normal;
-		font-stretch: normal;
-		letter-spacing: -1px;
-		color: #7c8895;
-	}
-	.rectangle3 {
-		/* position: absolute;*/
-		margin-top: 20upx;
-		margin-left: 2.5%;
-		width: 110px;
-		height: 94px;
-		border: 0.5px solid #c0cdda;
-		background: #ffffff;
-		box-shadow: 0px 1px 3px 0px #c0cdda;
-		float: left;
-	}
 
-	.combinedShape {
-		margin-left: 3%;
-		margin-top: 20upx;
-		width: 169px;
-		height: 64px;
-		background: url(http://127.0.0.1:8082/static/images/ic.png) no-repeat 0.25rem center;
-		box-shadow: 0px 1px 3px 0px #c0cdda;
-		float: left;
-	    border-radius: 5px;
-	}
 
 	.page-body-info {
-		background-color: #fff;
+		background-color: transparent;
 	}
 
 	.page-body-content {
@@ -484,7 +367,59 @@
 		background-size: 100upx 100upx;
 	}
 
+	.consult {
+		/* margin-bottom: 60upx; */
+		width: 100%;
+		/* height: 60upx; */
+		font-size: 0;
+		text-align: center;
+		background-color: #fff;
+	}
 
+	.consult span {
+		float: left;
+		padding-top: 6%;
+		text-align: center;
+		width: 33%;
+		display: block;
+		padding-left: 1upx;
+		font-size: 30upx;
+		color: #666;
+		border: #333333;
+		height: 80upx;
+		border-color: #007AFF;
+		/* background-color: #F0AD4E; */
+	}
+
+	.header-butt {
+		margin-bottom: 20upx;
+		width: 100%;
+		height: 120upx;
+		font-size: 0;
+		background-color: #fff;
+		border-color: #1AAD19;
+	}
+
+	.header-butt a {
+		float: left;
+		padding-top: 3%;
+		width: 50%;
+		text-align: center;
+	}
+
+	.header-butt a strong {
+		position: relative;
+		margin-top: 0.2rem;
+		font-size: 0.3rem;
+		color: #333;
+		font-weight: inherit;
+	}
+
+	.header-butt a span {
+		display: block;
+		font-size: 0.26rem;
+		color: #666;
+	}
 
 	.swiper-item {
 		display: block;

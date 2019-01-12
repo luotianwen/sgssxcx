@@ -3,18 +3,19 @@
 
 		<view class="confirmOrder-address">
 			<view class="address-bg"></view>
-			<view class="address-cent" v-show="!show">
+			<view class="address-cent" v-show="!show" @tap="addAddress()">
 				<view class="address-centh6">请选择地址</view>
 				<view class="address-left"></view>
 			</view>
-			<view class="address-cent" v-show="show" v-if=data.address>
+			<view class="address-cent" v-show="show" v-if=data.address >
 				<view class="address-centh6">
 					<view class="address-name">{{data.address.consignee||''}} {{data.address.phone||''}}</view>
 				</view>
 				<view class="address-centp">{{data.address.provinceName}}{{data.address.cityName}}{{data.address.areaName}}{{data.address.address}}</view>
-				<view class="address-left"></view>
+				<view class="address-left" @tap="chioceAddress()" ></view>
 			</view>
 		</view>
+		<view class="mask" v-show="showMask" @click="hide"></view>
 		<view class="confirmOrder-cent">
 			<view class="confirmOrder-centList">
 
@@ -26,7 +27,7 @@
 								<view class="centList-centRighth6">{{item.name}}
 									<view class="centRight-h6 centRight-h6span">×{{item.number}}</view>
 								</view>
-								<view class="centList-centRightp">{{item.spec1}} &nbsp; {{item.spec1}}</view>
+								<view class="centList-centRightp">{{item.spec1}} &nbsp; {{item.spec2}}</view>
 								<view class="happyi-mon">
 									<view class="happyi-monspan">¥{{item.price}}</view>
 								</view>
@@ -38,12 +39,12 @@
 
 				<view class="centList-butt">
 					<span class="centList-buttLeft">优惠券</span>
-					<span    >可用折扣券{{data.coupons}}张</span>
-					<strong class="centList-buttRight" @click="getMyCouponsByProductId(list)"></strong>
+					<span @tap="chioceVoucher()">{{coupons}}</span>
+					<strong class="centList-buttRight" @click="chioceVoucher()"></strong>
 				</view>
 				<view class="centList-butt">
 					<span class="centList-buttLeft"> 运费 </span>
-					<span  >{{data.freight}}</span>
+					<span>{{data.freight}}</span>
 				</view>
 			</view>
 		</view>
@@ -58,14 +59,38 @@
 
 
 
+		<div class="address-cent1" v-show="showAddress">
 
-		<div id="voucher" class="">
-			<h6 class="confirmPayment-title"><strong class="goods-totalRight"></strong> 优惠券<span></span></h6>
-			<div class="voucher-cent"></div>
+			<view class="address-list" v-for="(item, index) in addresss" :key="index" @tap="chioceAddressOk(item)">
+				<view class="address-listLeft">
+					<div class="address-listCent">
+						<h6><span class="address-default" v-if="item.isDefault==1">默认</span> <span class="address-listName">{{item.consignee}}</span>
+							{{item.phone}}</h6>
+						<p>{{item.provinceName}}{{item.cityName}}{{item.areaName}}{{item.address}}</p>
+					</div>
+				</view>
+
+			</view>
+
 		</div>
-		<div id="prompt-view">
-			<!---->
+
+		<div id="voucher" v-show="showVoucher">
+			<h6 class="confirmPayment-title"><strong class="goods-totalRight"></strong> 优惠券 </h6>
+			<div class="voucher-cent">
+				<div class="coupon-list" v-for="(newsitem,index2) in vouchers" :key="index2">
+					<strong :class="newsitem.state==1? 'coupon-icon' :newsitem.state==2? 'coupon-icon2' : 'coupon-icon1'"></strong>
+					<!-- <strong class="coupon-txt">{{newsitem.name}}</strong> -->
+					<image class="slide-img" src="http://127.0.0.1:8082/static/images/timg.jpg"></image>
+
+					<h6>满{{newsitem.full}}减{{newsitem.reduction}}</h6>
+					<!-- 	<p>有效期{{newsitem.beginDate}}至{{newsitem.endDate}}</p> -->
+					<div class="list-butt">有效期{{newsitem.beginDate}}至{{newsitem.endDate}}<span class="list-btn" v-if="newsitem.state==1"
+						 @tap="voucherOk(newsitem)">立即使用</span>
+					</div>
+				</div>
+			</div>
 		</div>
+
 
 	</view>
 </template>
@@ -77,40 +102,133 @@
 
 		data() {
 			return {
+				showAddress: false,
+				showVoucher: false,
 				show: false,
 				data: {
 					"product": 0,
 					"total": 0,
 					"coupon": 0,
-					"freight": 0, 
+					"freight": 0,
 				},
-				addressId:"",
-				cartId:"",
-				couponId:""
+				addressId: "",
+				cartId: "",
+				couponId: "",
+				addresss: [],
+				coupons: "选择优惠券",
+				showMask: false,
+				vouchers: []
 			}
 		},
+		onBackPress() {
+				console.log("onBackPress");
+			this.hide();
+			return true;
 
+		},
 		onLoad(d) {
 			this.cartId = d.cartId;
-            this.getPreorder();
+			this.getPreorder();
 		},
 		methods: {
+			hide() {
+				this.showMask = false;
+				this.showAddress = false;
+				this.showVoucher = false;
+			},
+			voucherOk: function(e) {
+
+				this.couponId = e.couponId;
+				this.hide();
+				this.coupons = e.name;
+				this.getPreorder();
+			},
+			chioceAddressOk: function(e) {
+				//console.log(JSON.stringify(e));
+				this.addressId=e.addressId;
+				this.hide();
+				this.data.address=e;
+				//console.log(JSON.stringify(this.data.address));
+				this.hide();
+				this.getPreorder();
+			},
+			addAddress: function() {
+				uni.navigateTo({
+					url: "../address/addAddress"
+				})
+			},
+			chioceAddress: function() {
+				this.showMask = true;
+				this.showAddress = true;
+				let _this = this;
+				uni.request({
+					url: service.addresslist(),
+					data: {
+						tokenId: service.getUser().tokenId 
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+				
+							_this.addresss = data.data.data;
+				
+						}
+				
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+				
+					}
+				})
+			},
+			chioceVoucher: function() {
+				this.showMask = true
+				this.showVoucher = true;
+				let _this = this;
+				uni.request({
+					url: service.getCouponList(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						pageNumber: 1,
+						type: 1
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							let _datas = data.data.data.list;
+							_datas.forEach(function(_data) {
+								_data.beginDate = _data.beginDate.substring(0, 10);
+								_data.endDate = _data.endDate.substring(0, 10);
+							}, this)
+
+							_this.vouchers = _datas;
+
+							//console.log(JSON.stringify(_this.vouchers));
+
+						}
+
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+
+					}
+				})
+			},
 			getPreorder: function() {
-                let _this=this;
+				let _this = this;
 				uni.request({
 					url: service.preorder(),
 					data: {
 						tokenId: service.getUser().tokenId,
-						addressId:_this.addressId,
-						cartId:_this.cartId,
-						couponId:_this.couponId
+						addressId: _this.addressId,
+						cartId: _this.cartId,
+						couponId: _this.couponId
 					},
 					success: (data) => {
+						console.log("ddd" + JSON.stringify(data.data.data));
 						if (data.statusCode == 200 && data.data.code == 0) {
 							_this.data = data.data.data;
-							if(_this.data.address){
-								_this.show=true;
-								_this.addressId=_this.data.address.addressId;
+							if (_this.data.address) {
+								_this.show = true;
+								_this.addressId = _this.data.address.addressId;
 							}
 						}
 						uni.hideLoading();
@@ -121,87 +239,86 @@
 					}
 				})
 			},
-			submitOrder:function(){
+			submitOrder: function() {
 				uni.showLoading({
 					title: '提交中'
 				});
-				let _this=this; 
+				let _this = this;
 				uni.request({
 					url: service.saveOrder(),
 					data: {
 						tokenId: service.getUser().tokenId,
-						addressId:_this.addressId,
-						cartId:_this.cartId,
-						couponId:_this.couponId
+						addressId: _this.addressId,
+						cartId: _this.cartId,
+						couponId: _this.couponId
 					},
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
 							_this.pay(data.data.data.ordersId);
-							
+
 							/* uni.navigateTo({
 							 	url:"../order/order"
-							 }) */ 
+							 }) */
 						}
-						
-					}, 
+
+					},
 					fail: (data, code) => {
 						console.log('fail' + JSON.stringify(data));
 						uni.hideLoading();
 					}
 				})
 			},
-			pay:function(ordersId){
-				let _this=this;
+			pay: function(ordersId) {
+				let _this = this;
 				uni.request({
 					url: service.orderPay(),
 					data: {
 						tokenId: service.getUser().tokenId,
-						ordersId:ordersId,
-						type:1
+						ordersId: ordersId,
+						type: 1
 					},
-					success: (data) => { 
+					success: (data) => {
 						uni.hideLoading();
 						if (data.statusCode == 200 && data.data.code == 0) {
-							uni.requestPayment({ 
-								provider: 'wxpay', 
+							uni.requestPayment({
+								provider: 'wxpay',
 								timeStamp: data.data.data.timeStamp,
 								nonceStr: data.data.data.nonceStr,
 								package: data.data.data.package,
 								signType: 'MD5',
 								paySign: data.data.data.sign,
-								success: function (res) {
-									
+								success: function(res) {
+
 									console.log('success:' + JSON.stringify(res));
 									uni.navigateTo({
-										url:"../order/order"
+										url: "../order/order"
 									})
 								},
-								fail: function (err) {
+								fail: function(err) {
 									console.log('fail:' + JSON.stringify(err));
 									uni.navigateTo({
-										url:"../order/order"
+										url: "../order/order"
 									})
 								}
 							});
-							
+
 							/* uni.navigateTo({
 								url:"../order/order"
 							}) */
-						}
-						else{
+						} else {
 							uni.showToast({
-								title:data.data.msg 
+								title: data.data.msg
 							})
 						}
-						
+
 					},
 					fail: (data, code) => {
 						console.log('fail' + JSON.stringify(data));
 						uni.hideLoading();
 					}
 				})
-				
-				
+
+
 			}
 		}
 	}
@@ -224,6 +341,29 @@
 		background-size: 100% 0.1rem;
 	}
 
+
+	.address-list {
+		position: relative;
+		width: 100%;
+		font-size: 0.3rem;
+		color: #333;
+		border-bottom: 1px solid #e2e2e2;
+		overflow: hidden;
+	}
+
+	.address-list .address-listLeft {
+		float: left;
+		position: relative;
+		padding: 0.35rem 0 0 0.3rem;
+		height: 1.2rem;
+		z-index: 100;
+		width: 96%;
+		background: #fff;
+		-webkit-transition: all 0.3s;
+		transition: all 0.3s;
+	}
+
+	 
 	.address-cent {
 		position: relative;
 		padding: 0.3rem 0 0 0.3rem;
@@ -298,7 +438,7 @@
 		border: solid 1px #eeeeee;
 	}
 
-	 
+
 
 
 	.centList-centRight {
@@ -336,62 +476,25 @@
 		left: 0;
 		bottom: 0;
 		font-size: 0.3rem;
-		 
+
 	}
 
 	.centList-centRight .happyi-monspan {
 		font-size: 0.24rem;
 	}
 
-	.centList-describe {
-		margin-top: 0.2rem;
-		width: 75%;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		font-size: 0.2rem;
-		color: #999;
-	}
 
-	.centList-data {
-		position: absolute;
-		bottom: 0.2rem;
-		right: 0.3rem;
-	}
 
-	.centList-data p {
-		margin-top: 0.2rem;
-		text-align: center;
-		font-size: 0.2rem;
-		color: #333333;
-	}
 
-	.centList-data1 {
-		bottom: 0.79rem;
-	}
 
-	.centList-Btn,
-	.centList-Btnactive {
-		display: block;
-		width: 1.88rem;
-		height: 0.6rem;
-		line-height: 0.6rem;
-		text-align: center;
-		border: 1px solid transparent;
-		border-radius: 0.08rem;
-		font-size: 0.24rem;
-		color: #666666;
-	}
+
+
 
 	.centList-Btn {
 		border-color: #666;
 	}
 
-	.centList-Btnactive {
-		border-color: #d45048;
-		background: #d45048;
-		color: #fff;
-	}
+
 
 	.goods-total,
 	.freight-total,
@@ -410,7 +513,7 @@
 		border-bottom: 1px solid #e2e2e2;
 	}
 
-	 
+
 
 	.centList-butt .centList-buttRight {
 		position: absolute;
@@ -453,7 +556,7 @@
 		width: 40%;
 		height: 100%;
 		text-align: center;
-		background: #CDC8B1;
+		background: #e05e55;
 		font-size: 0.32rem;
 		color: #ffffff;
 	}
@@ -478,33 +581,56 @@
 
 	.confirmOrder-footer span {
 		font-size: 0.32rem;
-		 
+
 	}
 
-	div#mask {
-		display: none;
+	.mask {
+		position: fixed;
+		z-index: 998;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, .3);
 	}
-
-
-	.maskShow {
-		display: block !important;
-	}
-
-
-
-	#voucher {
-		display: none;
+	.address-cent1 {
 		position: fixed;
 		left: 0;
 		bottom: 0;
-		z-index: 2000;
+		z-index: 999;
 		width: 100%;
-
+		overflow-y: scroll;
+		/* border:1px solid #000; */
+		/* opacity: 0.6; */
 		height: 8rem;
 		background: #F5F5F5;
+
+		background-color: #ffffff;
+		-webkit-box-shadow: 0 0 30upx rgba(0, 0, 0, .1);
+		box-shadow: 0 0 30upx rgba(0, 0, 0, .1);
+		border-radius: 10upx;
+	}
+
+	#voucher {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		z-index: 999;
+		width: 100%;
+		overflow-y: scroll;
+		/* border:1px solid #000; */
+		/* opacity: 0.6; */
+		height: 8rem;
+		background: #F5F5F5;
+
+		background-color: #ffffff;
+		-webkit-box-shadow: 0 0 30upx rgba(0, 0, 0, .1);
+		box-shadow: 0 0 30upx rgba(0, 0, 0, .1);
+		border-radius: 10upx;
 	}
 
 	#voucher .confirmPayment-title {
+		padding-left: 0.3rem;
 		background: #fff;
 	}
 
@@ -512,23 +638,55 @@
 		left: 0.3rem;
 	}
 
-	.voucher-cent {
+	/* .voucher-cent {
 		padding: 0.12rem 0.3rem 0.3rem;
 	}
+ */
 
 	.coupon-list {
 		position: relative;
-		margin-top: 0.18rem;
-		padding-top: 0.5rem;
-		height: 1.9rem;
-		background: url(http://127.0.0.1:8082/static/images/purchase-bg.png) no-repeat center;
+		/* 	margin-top: 0.18rem;
+	 	padding-top: 0.35rem; */
+		height: 2.6rem;
+		background: url("http://127.0.0.1:8082/static/images/coupon.png") no-repeat center;
+		background-size: 100% 100%;
+	}
+
+	.coupon-list .slide-img,
+	.coupon-list .coupon-icon,
+	.coupon-list .coupon-icon1,
+	.coupon-list .coupon-icon2 {
+		position: absolute;
+		display: block;
+	}
+
+	.coupon-list .coupon-icon,
+	.coupon-list .coupon-icon1,
+	.coupon-list .coupon-icon2 {
+		top: 0.19rem;
+		right: 0.19rem;
+		z-index: 10;
+		width: 1.6rem;
+		height: 1.4rem;
+	}
+
+	.coupon-list .coupon-icon {
+		background: url("http://127.0.0.1:8082/static/images/coupon-wgq.png") no-repeat center;
+		background-size: 100% 100%;
+	}
+
+	.coupon-list .coupon-icon1 {
+		background: url("http://127.0.0.1:8082/static/images/coupon-ygq.png") no-repeat center;
+		background-size: 100% 100%;
+	}
+
+	.coupon-list .coupon-icon2 {
+		background: url("http://127.0.0.1:8082/static/images/coupon-yjy.png") no-repeat center;
 		background-size: 100% 100%;
 	}
 
 	.coupon-list .slide-img {
-		position: absolute;
-		display: block;
-		top: 0.5rem;
+		top: 0.34rem;
 		left: 0.34rem;
 		width: 1.4rem;
 		height: 1.4rem;
@@ -541,7 +699,7 @@
 	.coupon-list p {
 		position: relative;
 		z-index: 11;
-		padding: 0 0.2rem 0 2.14rem;
+		padding: 0.3rem 0.2rem 0 2.04rem;
 	}
 
 	.coupon-list h6 {
@@ -553,7 +711,13 @@
 		color: #333333;
 	}
 
-
+	.coupon-list .purchase-icon2 {
+		margin: 0.12rem 0 0.08rem;
+		display: block;
+		width: 0.76rem;
+		height: 0.32rem;
+		background-size: 0.76rem 0.32rem;
+	}
 
 	.coupon-list p {
 		font-size: 0.24rem;
@@ -576,9 +740,8 @@
 		margin-left: 0.05rem;
 		padding-left: 0.4rem;
 		font-size: 0.28rem;
-		 
-		/* background: url(https://cs.h5.hongkzh.com/imgs/purchase/goodsDetails/goodsDetails-icon.png) no-repeat left center;
-		background-size: 0.3rem 0.3rem; */
+		color: #EF593C;
+		background-size: 0.3rem 0.3rem;
 		vertical-align: -0.01rem;
 	}
 
@@ -595,8 +758,8 @@
 	}
 
 	.coupon-list .list-btn {
-		color: #EF593C;
-		border: 1px solid #EF593C;
+		color: #CDC8B1;
+		border: 1px solid #CDC8B1;
 	}
 
 	.coupon-list .list-btn1 {
@@ -607,21 +770,16 @@
 	.coupon-list .coupon-lableIcon,
 	.coupon-list .coupon-txt {
 		position: absolute;
-		left: 0;
+		left: 0.04rem;
 		display: block;
 		width: 1.09rem;
 		height: 1.09rem;
 	}
 
-	.coupon-list .coupon-lableIcon {
-		top: 0;
-		z-index: 10;
-		/* background: url(https://cs.h5.hongkzh.com/imgs/purchase/coupon/coupon-lableIcon.png) no-repeat center; */
-		background-size: 100% 100%;
-	}
+
 
 	.coupon-list .coupon-txt {
-		top: 0.02rem;
+		top: 0.06rem;
 		z-index: 100;
 		text-align: center;
 		font-size: 0.32rem;

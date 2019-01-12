@@ -500,15 +500,15 @@
 	}
 
 	.goodsDetails-butt .goodsDetails-buttBtn {
-		background: #CDC8B1;
+		background: #dec171;
 	}
 
 	.goodsDetails-butt .goodsDetails-buttBtn1 {
-		background: #2693e5;
+		background:#e05e55;
 	}
 
 	.goodsDetails-butt .goodsDetails-buttColor {
-		color: #333;
+		background:#e05e55;
 	}
  
 
@@ -632,11 +632,13 @@
 		padding: 0 0.35rem;
 		height: 0.6rem;
 		line-height: 0.6rem;
-		background: #CDC8B1;
+		background-color: #ffffff;
 		border-radius: 100px;
-		border: solid 1px #CDC8B1;
+		border: solid 1px #7c8895;
 		color: #666;
 		font-size: 0.28rem;
+		
+		 
 	}
 
 	.goodsDetails-choice .choice-butt .choice-buttDiv {
@@ -653,9 +655,9 @@
 	}
 
 	.goodsDetails-choice .choice-centactive {
-		background: #FFFFFF;
-		border: 1px solid #96B83F;
-		color: #96B83F;
+		background-color: #d3f0ee;
+		 color: #10aca4;
+	    border: solid 1px #10aca4;
 	}
 
 	.goodsDetails-choice .choice-butt {

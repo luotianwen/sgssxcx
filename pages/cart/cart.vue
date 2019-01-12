@@ -67,6 +67,20 @@
 				isCheckedAll: false
 			}
 		},
+		onShow() {
+			uni.showLoading({
+				title: '加载中'
+			});
+			//service.removeUser();
+			if (service.getUser().hasLogin) {
+				this.cartlist();
+			} else {
+				this.getUserInfo();
+			
+			}
+			this.ids=[];
+			this.isCheckedAll=false;
+		},
 		onLoad(d) {
 
 			uni.showLoading({
@@ -603,7 +617,7 @@
 		width: 2.2rem;
 		height: 100%;
 		text-align: center;
-		background: #CDC8B1;
+		background: #e05e55;
 		font-size: 0.32rem;
 		color: #ffffff;
 	}

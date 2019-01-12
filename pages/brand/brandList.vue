@@ -94,7 +94,7 @@
  
 	.apps-wrap {
 		font-size: 0;
-		padding: 0 .4688rem
+		padding: 0 .1rem
 	}
 
 	 
@@ -106,8 +106,8 @@
 	}
 
 	.app-portalimg {
-		width: 1rem;
-		height: 1rem
+		width: 1.5rem;
+		height:1.5rem
 	}
 
 	.app-portal p {

@@ -25,8 +25,8 @@
 							<div class="centList-butt" v-if="newsitem.state!=20">
 								<!-- 10待付款20已付款30已发货40已取消50已完成 -->
 								<div class="buttState6 clearfix">
-									  <span class="buttState-btn" v-if="newsitem.state==10"  @tap="goPay(newsitem)">支付订单</span>
-									  <span class="buttState-btn" v-if="newsitem.state==50&&newsitem.salesId==null" @tap="goApplyAfter(newsitem)" >申请售后</span>
+									  <span class="buttState-btn" style="background-color: #e05e55;color: #ffffff;" v-if="newsitem.state==10"  @tap="goPay(newsitem)">支付订单</span>
+									  <span class="buttState-btn" style="border: solid 1px #e05e55;color: #e05e55;" v-if="newsitem.state==50&&newsitem.salesId==null" @tap="goApplyAfter(newsitem)" >申请售后</span>
 									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goOrderOk(newsitem)">确认收货</span>
 									  <span class="buttState-btn" v-if="newsitem.state==30" @tap="goLogistics(newsitem)">查看物流</span>
 									  <span class="buttState-btn" v-if="newsitem.state==40"  @tap="goDelete(newsitem,index1,index2)" >删除订单</span>

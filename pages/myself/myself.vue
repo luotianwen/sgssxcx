@@ -14,16 +14,15 @@
 			</view>
 		</view>
 		<view class="happyiIndex-list">
-			<view class="listCent happyi-co2" @tap="goOrder()">我的订单<a class="happyi-left">{{orders}}</a></view>
-			<view class="listCent happyi-co3" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
+			<view class="listCent happyi-co1" @tap="goOrder()">我的订单<a class="happyi-left">{{orders}}</a></view>
+			<view class="listCent happyi-co2" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
 			<view class="listCent happyi-co4" @tap="goAddress()">收货地址 <a class="happyi-left"></a></view>
-			<view class="listCent happyi-co5" @tap="goCoupon()">我的券<a class="happyi-left">{{coupons}}</a></view>
-			<view class="listCent happyi-co6" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view>
-			<view class="listCent happyi-co7" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co3" @tap="goCoupon()">我的券<a class="happyi-left">{{coupons}}</a></view>
+			<view class="listCent happyi-co5" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view>
+			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
-
-			<view class="listCent  happyi-co10" style="padding 0 0 0 0.84rem ">
+			<view class="listCent  happyi-co7" style="padding 0 0 0 0.84rem ">
 
 				<button plain="true" open-type="contact" size="mini" style="border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					客服</button>
@@ -409,46 +408,46 @@
 	}
 
 	.happyiIndex-list .happyi-co1 {
-		background: url("http://127.0.0.1:8082/static/images/cart.png") no-repeat 0.25rem center;
-		background-size: 0.33rem 0.32rem;
+		background: url(http://127.0.0.1:8082/static/images/m1.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 
 	.happyiIndex-list .happyi-co2 {
-		background: url("http://127.0.0.1:8082/static/images/order.png") no-repeat 0.25rem center;
-		background-size: 0.28rem 0.29rem;
+		background: url(http://127.0.0.1:8082/static/images/m2.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 
 	.happyiIndex-list .happyi-co3 {
-		background: url("http://127.0.0.1:8082/static/images/after.png") no-repeat 0.25rem center;
-		background-size: 0.27rem 0.29rem;
+		background: url(http://127.0.0.1:8082/static/images/m3.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 	.happyiIndex-list .happyi-co4 {
-		background: url("http://127.0.0.1:8082/static/images/address.png") no-repeat 0.25rem center;
-		background-size: 0.29rem 0.25rem;
+		background: url(http://127.0.0.1:8082/static/images/m4.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 	 
 	.happyiIndex-list .happyi-co5 {
-		background: url("http://127.0.0.1:8082/static/images/coupons.png") no-repeat 0.25rem center;
-		background-size: 0.29rem 0.25rem;
+		background: url(http://127.0.0.1:8082/static/images/m5.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 	.happyiIndex-list .happyi-co6 {
-		background: url("http://127.0.0.1:8082/static/images/feedback.png") no-repeat 0.25rem center;
-		background-size: 0.29rem 0.25rem;
+		background:url(http://127.0.0.1:8082/static/images/m6.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 	.happyiIndex-list .happyi-co7 {
-		background: url("http://127.0.0.1:8082/static/images/safe.png") no-repeat 0.25rem center;
-		background-size: 0.29rem 0.25rem;
+		background: url(http://127.0.0.1:8082/static/images/m7.png) no-repeat 0.25rem center;
+		background-size: 0.4rem 0.4rem;
 	}
 	 .happyiIndex-list .happyi-co8 {
-	  	background: url("http://127.0.0.1:8082/static/images/distribution.png") no-repeat 0.25rem center;
-	  	background-size: 0.29rem 0.25rem;
+	  	background: url(http://127.0.0.1:8082/static/images/m8.png) no-repeat 0.25rem center;
+	  	background-size: 0.4rem 0.4rem;
 	  }
 	 .happyiIndex-list .happyi-co9 {
 	  	background: url("http://127.0.0.1:8082/static/images/about.png") no-repeat 0.25rem center;
-	  	background-size: 0.29rem 0.25rem;
+	  	background-size: 0.4rem 0.4rem;
 	  }
 	  .happyiIndex-list .happyi-co10 {
 	   	background: url("http://127.0.0.1:8082/static/images/about.png") no-repeat 0.25rem center;
-	   	background-size: 0.29rem 0.25rem;
+	   	background-size: 0.4rem 0.4rem;
 	   }
 </style>

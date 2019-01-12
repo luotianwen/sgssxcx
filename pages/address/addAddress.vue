@@ -77,13 +77,18 @@
 			this.areaId=d.areaId;
 			this.address=d.address;
 			 
-			this.addressId=d.addressId;
+			
 			let _isDefault=d.isDefault;
 			if(_isDefault==1){
 				this.isDefault='1';
 				this.state=true;
 			}
+			if(d.addressId){
+			   this.addressId=d.addressId;
+			}
+			if(d.provinceName){
 			this.area=d.provinceName+"-"+d.cityName+"-"+d.areaName;
+			}
 			 
 		},
 		methods: {
