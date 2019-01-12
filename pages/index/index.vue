@@ -19,30 +19,50 @@
 		</view>
 
 		<view style="margin-top: 0.2rem;">
-			<view class="rectangle3"><view class="rectangle3center"  > <image src="../../static/img/i1.png" class="rectangle3img"  ></image>  <view class="rectangle3code"> 运动户外</view> </view> </view>
-			<view class="rectangle3"><view class="rectangle3center"  > <image src="../../static/img/i2.png" class="rectangle3img"  ></image>  <view class="rectangle3code"> 健康生活</view> </view></view>
-			<view class="rectangle3"><view class="rectangle3center"  > <image src="../../static/img/i3.png" class="rectangle3img"  ></image>  <view class="rectangle3code"> 悠氧播报</view> </view></view>
+			<view class="rectangle3">
+				<view class="rectangle3center">
+					<image src="../../static/img/i1.png" class="rectangle3img"></image>
+					<view class="rectangle3code"> 运动户外</view>
+				</view>
+			</view>
+			<view class="rectangle3">
+				<view class="rectangle3center">
+					<image src="../../static/img/i2.png" class="rectangle3img"></image>
+					<view class="rectangle3code"> 健康生活</view>
+				</view>
+			</view>
+			<view class="rectangle3">
+				<view class="rectangle3center">
+					<image src="../../static/img/i3.png" class="rectangle3img"></image>
+					<view class="rectangle3code"> 悠氧播报</view>
+				</view>
+			</view>
 		</view>
 		<view style="margin-top: 0.2rem;">
-			<view class="combinedShape "> 优惠券 </view>
-			<view class="combinedShape "> 优惠券 </view>
+			<view class="combinedShape ">
+				<view style="width: 14px;	height: 48px; padding-left: 15px; padding-top: 7px; text-align: center;	font-size: 14px;	font-weight: normal;	font-stretch: normal;	line-height: 16px;	letter-spacing: -1px;color: #764500;">优惠券</view>
+				<view> 
+					<view style="position: relative;" > 满 399 </view>
+					<view style="position: relative;"  > 减 100 </view>
+				</view>
+			</view>
+			<view class="combinedShape "> </view>
 		</view>
 		<view class="uni-list">
-			<view class="goodsList-cent1" >
-				<view style="width: 100%;" > 
-					<view class="brands1"> 品牌馆 </view> 
+			<view class="goodsList-cent1">
+				<view style="width: 100%;">
+					<view class="brands1"> 品牌馆 </view>
 					<view class="brandsmore " @tap="goBrandList()">更多 </view>
 				</view>
 				<view style="padding-top: 10px;">
-					<view class="rectangle-4"   @tap="goBrandSearch(value)" v-for="(value,key) in brands"
-					 :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}">
+					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}">
 						<!-- {{value.name}} -->
 					</view>
 
 				</view>
 			</view>
 		</view>
-		 
+
 		<view class="uni-list">
 			<view class="goodsList-cent  ">
 
@@ -96,7 +116,7 @@
 			this.getCartData();
 		},
 		onLoad() {
-			 service.removeUser();
+			service.removeUser();
 			this.getList();
 			this.indexData();
 		},
@@ -252,11 +272,11 @@
 
 	.brands1 {
 		position: relative;
-        top:0;
+		top: 0;
 		width: 36px;
 		height: 16px;
 		color: #011959;
-		 
+
 		font-size: 12px;
 		font-style: normal;
 		font-stretch: normal;
@@ -266,16 +286,16 @@
 		text-transform: none;
 		text-decoration: none;
 		letter-spacing: 0px;
-		 
-		 
+
+
 	}
 
 	.brandsmore {
 		margin-top: 0.16rem;
-		  top:0;
+		top: 0;
 		width: 23px;
 		height: 17px;
-		 position: absolute;
+		position: absolute;
 		font-size: 12px;
 		font-weight: normal;
 		font-stretch: normal;
@@ -283,11 +303,11 @@
 		color: #011959;
 		right: 3%;
 		/*  float: right;  */
-		 /* margin-right: 3% */  
+		/* margin-right: 3% */
 	}
 
 
-    .goodsList-cent1 {
+	.goodsList-cent1 {
 		margin-top: 0.16rem;
 		/* padding: 0.1rem 0 0; */
 		background: #fff;
@@ -402,23 +422,26 @@
 		border-radius: 100px;
 	}
 
-	.rectangle3center{
+	.rectangle3center {
 		padding: 15px 30px;
 	}
-	.rectangle3img{
-		width: 40px;height: 40px;
+
+	.rectangle3img {
+		width: 40px;
+		height: 40px;
 	}
-	
-	.rectangle3code{
+
+	.rectangle3code {
 		width: 45px;
 		height: 17px;
-		 
+
 		font-size: 12px;
 		font-weight: normal;
 		font-stretch: normal;
 		letter-spacing: -1px;
 		color: #7c8895;
 	}
+
 	.rectangle3 {
 		/* position: absolute;*/
 		margin-top: 20upx;
@@ -436,10 +459,11 @@
 		margin-top: 20upx;
 		width: 169px;
 		height: 64px;
-		background: url(http://127.0.0.1:8082/static/images/ic.png) no-repeat 0.25rem center;
+		background: url(http://127.0.0.1:8082/static/images/ic.png) no-repeat center;
+		background-size: 100% 100%;
 		box-shadow: 0px 1px 3px 0px #c0cdda;
 		float: left;
-	    border-radius: 5px;
+		border-radius: 5px;
 	}
 
 	.page-body-info {
