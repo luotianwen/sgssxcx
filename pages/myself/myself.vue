@@ -24,9 +24,9 @@
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
 			<view class="listCent  happyi-co7" style="padding 0 0 0 0.84rem ">
 
-				<button plain="true" open-type="contact" size="mini" style="border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
+				<button plain="true" open-type="contact" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					客服</button>
-				<a class="happyi-left"></a>
+				  <a class="happyi-left"></a>  
 			</view>
 
 			<button class="deliverGoods-btn" type="primary" plain="true" v-show="!uerInfo.hasLogin" open-type="getUserInfo"

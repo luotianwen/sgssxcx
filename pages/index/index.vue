@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<page-head :title="title"></page-head>
+		<!-- <page-head :title="title"></page-head> -->
 		<view class="page-body">
 			<view class="purchase-header">
 				<view class="header-sear" @tap="goSearch()">请输入商品名称</view><strong class="header-news">{{cartCount}}</strong> <span
@@ -8,7 +8,7 @@
 			</view>
 			<view class="page-section page-section-spacing swiper" style="background-color: #fff;">
 				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;width: 96%;padding-left: 2%;">
-					<swiper-item v-for="item in itemList" :key="item">
+					<swiper-item v-for="item in carousels" :key="item">
 						<view class="swiper-item  ">
 							<image :src="item.logo" style="width: 100%;" />
 						</view>
@@ -39,20 +39,21 @@
 			</view>
 		</view>
 		<view style="margin-top: 0.2rem;">
-			<view class="combinedShape ">
-				<view style="width: 14px;	height: 48px; padding-left: 15px; padding-top: 7px; text-align: center;	font-size: 14px;	font-weight: normal;	font-stretch: normal;	line-height: 16px;	letter-spacing: -1px;color: #764500;">优惠券</view>
-				<view> 
-					<view style="position: relative;" > 满 399 </view>
-					<view style="position: relative;"  > 减 100 </view>
+
+			<view class="combinedShape"  @tap="goCoupon(value)" v-for="(value,key) in coupons" :key="key">
+				<view class="combinedShape-coupon">优惠券</view>
+				<view class="combinedShape-coupon-right">
+					<view class="combinedShape-coupon-right-top"> 满{{value.full}} </view>
+					<view class="combinedShape-coupon-right-bottom"> 减{{value.reduction}} </view>
 				</view>
 			</view>
-			<view class="combinedShape "> </view>
+			 
 		</view>
 		<view class="uni-list">
 			<view class="goodsList-cent1">
 				<view style="width: 100%;">
 					<view class="brands1"> 品牌馆 </view>
-					<view class="brandsmore " @tap="goBrandList()">更多 </view>
+					<view class="brandsmore " @tap="goBrandList()"><view class="brandsmore-more">更多</view></view>
 				</view>
 				<view style="padding-top: 10px;">
 					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}">
@@ -66,7 +67,7 @@
 		<view class="uni-list">
 			<view class="goodsList-cent  ">
 
-				<view v-for="(value,key) in listData" :key="key" @click="goDetail(value)" class="goodsList-list">
+				<view v-for="(value,key) in goodsData" :key="key" @click="goDetail(value)" class="goodsList-list">
 					<image class="follow-centImg" :src="value.logo"></image>
 
 					<view class="follow-centImgh6">{{value.name}}</view>
@@ -89,15 +90,14 @@
 		},
 		data() {
 			return {
-				title: 'swiper',
-				itemList: [],
+				carousels: [],
 				brands: [],
+				coupons: [],
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
 				duration: 500,
-				imgsrc: 'http://test2.img.hongkzh.com/userfiles/1/images/shop/hkShopCategory/2018/05/listp3.png',
-				listData: [],
+				goodsData: [],
 				loadingType: 0,
 				pageNumber: 1,
 				cartCount: 0,
@@ -111,18 +111,18 @@
 		onShow() {
 			/* this.pageNumber = 1;
 			this.loadingType=0;
-			this.listData = [];
+			this.goodsData = [];
 			this.getList(); */
 			this.getCartData();
 		},
 		onLoad() {
-			service.removeUser();
+			//service.removeUser();
 			this.getList();
 			this.indexData();
 		},
 		onUnload() {
 
-			this.listData = []
+			this.goodsData = []
 
 		},
 
@@ -140,7 +140,7 @@
 		},
 		onPullDownRefresh() {
 			console.log('onPullDownRefresh');
-			this.listData = [];
+			this.goodsData = [];
 			setTimeout(() => {
 				this.pageNumber = 1;
 				this.getList();
@@ -179,9 +179,9 @@
 						console.log(JSON.stringify(data.data.data))
 						if (data.statusCode == 200 && data.data.code == 0) {
 							let _data = data.data.data;
-							this.itemList = _data.carousels;
+							this.carousels = _data.carousels;
 							this.brands = _data.brands;
-
+							this.coupons = _data.coupons;
 						}
 					},
 					fail: (data, code) => {
@@ -198,7 +198,7 @@
 					},
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
-							this.listData = this.listData.length == 0 ? data.data.data.list : this.listData.concat(data.data.data.list);
+							this.goodsData = this.goodsData.length == 0 ? data.data.data.list : this.goodsData.concat(data.data.data.list);
 							if (data.data.data.lastPage) {
 								this.loadingType = 2;
 								return;
@@ -244,6 +244,36 @@
 </script>
 
 <style>
+	.brandsmore {
+		
+		
+		margin-top: 0.16rem;
+		top: 0;
+		width: 23px;
+		height: 17px;
+		position: absolute;
+		font-size: 12px;
+		font-weight: normal;
+		font-stretch: normal;
+		letter-spacing: -1px;
+		color: #011959;
+		right: 3%;
+		padding-right: 0.01rem;
+		/*  float: right;  */
+		/* margin-right: 3% */
+	}
+	  .brandsmore-more {
+		  position: absolute;
+		top: 0;
+		right: 0;
+		display:block;
+		width: .75rem;
+		/* padding-right: 0.48rem; */
+		height: 100%;
+		 
+		background: url("http://127.0.0.1:8082/static/images/left.png") no-repeat right center;
+		background-size: 0.48rem 0.48rem;
+	}
 	.rectangle-4 {
 		width: 23.5%;
 		height: 90px;
@@ -290,21 +320,7 @@
 
 	}
 
-	.brandsmore {
-		margin-top: 0.16rem;
-		top: 0;
-		width: 23px;
-		height: 17px;
-		position: absolute;
-		font-size: 12px;
-		font-weight: normal;
-		font-stretch: normal;
-		letter-spacing: -1px;
-		color: #011959;
-		right: 3%;
-		/*  float: right;  */
-		/* margin-right: 3% */
-	}
+	
 
 
 	.goodsList-cent1 {
@@ -464,6 +480,48 @@
 		box-shadow: 0px 1px 3px 0px #c0cdda;
 		float: left;
 		border-radius: 5px;
+	}
+
+	.combinedShape-coupon-right {
+		width: 60%;
+		float: left;
+		position: relative;
+		left: 50px;
+		top: -50px;
+		z-index: 1000;
+	}
+
+	.combinedShape-coupon-right-top {
+		font-size: 12px;
+		text-align: center;
+		font-weight: normal;
+		font-stretch: normal;
+		letter-spacing: -1px;
+		color: #764500;
+	}
+
+	.combinedShape-coupon-right-bottom {
+		margin-top: -10px;
+		font-size: 30px;
+		text-align: center;
+		font-weight: normal;
+		font-stretch: normal;
+		letter-spacing: -1px;
+		color: #ffffff;
+	}
+
+	.combinedShape-coupon {
+		width: 14px;
+		height: 48px;
+		padding-left: 15px;
+		padding-top: 7px;
+		text-align: center;
+		font-size: 14px;
+		font-weight: normal;
+		font-stretch: normal;
+		line-height: 16px;
+		letter-spacing: -1px;
+		color: #764500;
 	}
 
 	.page-body-info {
