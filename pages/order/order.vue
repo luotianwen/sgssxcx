@@ -213,7 +213,7 @@
 						if (data.statusCode == 200 && data.data.code == 0) {
 							uni.requestPayment({ 
 								provider: 'wxpay', 
-								timeStamp: data.data.data.timeStamp,
+								timeStamp: data.data.data.timeStamp+"",
 								nonceStr: data.data.data.nonceStr,
 								package: data.data.data.package,
 								signType: 'MD5',

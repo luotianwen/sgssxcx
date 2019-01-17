@@ -131,7 +131,7 @@
 	}
 
 	.nav-right-item image {
-		width: 100upx;
+		width: 100%;
 		height: 100upx;
 	}
 

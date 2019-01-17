@@ -1,18 +1,28 @@
 <template>
 	<view id="happyiIndex">
-		<view class="happyiIndex-header">
+		<view class="happyiIndex-header"  v-show="uerInfo.hasLogin">
 			<view class="header-bg" >
 				<image :src="uerInfo.hasLogin ? uerInfo.headImg :avatarUrl"></image>
 			</view>
 			<view class="header-bg1"></view>
 			<view class="header-info">
-				<view class="infoRight-title">{{uerInfo.hasLogin ? uerInfo.name : '您未登录'}}</view>
+				<view class="infoRight-title" >{{uerInfo.hasLogin ? uerInfo.name : ''}}</view>
+				 
+				
 
 				<view class="header-infoRight">
 					<image :src="uerInfo.hasLogin ? uerInfo.headImg :avatarUrl" class="header-infoLeft"></image>
 				</view>
-			</view>
+			</view> 
 		</view>
+		
+		<view class="happyiIndex-header" v-show="!uerInfo.hasLogin">
+			<view class="header-bg" >
+				<image :src="avatarUrl"></image>
+			</view>
+			<button  class="header-info" style="background:none;border:none;outline:none"  open-type="getUserInfo" @getuserinfo="onGotUserInfo"> 登录</button>
+		</view>
+		
 		<view class="happyiIndex-list">
 			<view class="listCent happyi-co1" @tap="goOrder()">我的订单<a class="happyi-left">{{orders}}</a></view>
 			<view class="listCent happyi-co2" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
@@ -29,9 +39,7 @@
 				  <a class="happyi-left"></a>  
 			</view>
 
-			<button class="deliverGoods-btn" type="primary" plain="true" v-show="!uerInfo.hasLogin" open-type="getUserInfo"
-			 @getuserinfo="onGotUserInfo">
-				登录</button>
+			  
 
 		</view>
 
@@ -50,7 +58,8 @@
 				orders: 0,
 				afterOrders: 0,
 				coupons: 0,
-				login: false
+				login: false,
+				code:"",
 			}
 		},
 		onLoad(d) {
@@ -62,7 +71,7 @@
 				this.getData();
 			} else {
 
-				//this.getUserInfo();
+				 this.getUserInfo();
 
 			}
 
@@ -94,14 +103,25 @@
 					}
 				})
 			},
+			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
+				let _this = this;
+				uni.login({
+					provider: 'weixin',
+					success: function(loginRes) {
+						_this.code=loginRes.code;
+					}
+				});
+			
+			},
 			onGotUserInfo: function(e) {
+				let _this=this;
 				let infoRes = e.detail;
-
+                console.log("userInfo   "+JSON.stringify(infoRes));
 				uni.request({
 					url: service.login(),
 					data: {
 						nickName: infoRes.userInfo.nickName,
-						openId: "11", //infoRes.userInfo.openId,
+						code: _this.code, //infoRes.userInfo.openId,
 						avatarUrl: infoRes.userInfo.avatarUrl
 					},
 					success: (data) => {
@@ -232,7 +252,7 @@
 		z-index: 99;
 		width: 100%;
 		height: 100%;
-		background-image: url("http://127.0.0.1:8082/static/images/star.png");
+		background-image: url("http://op.yoyound.com/static/images/star.png");
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		transform: scale(1.5, 1.5);
@@ -294,7 +314,7 @@
 		padding-right: 0.4rem;
 		width: 1.12rem;
 		height: 1.12rem;
-		background: url(http://127.0.0.1:8082/static/images/left1.png) no-repeat right center;
+		background: url(http://op.yoyound.com/static/images/left1.png) no-repeat right center;
 		background-size: 0.2rem 0.34rem;
 	}
 
@@ -399,7 +419,7 @@
 		height: 100%;
 		font-size: 0.28rem;
 		color: #f76654;
-		background: url("http://127.0.0.1:8082/static/images/left.png") no-repeat right center;
+		background: url("http://op.yoyound.com/static/images/left.png") no-repeat right center;
 		background-size: 0.48rem 0.48rem;
 	}
 
@@ -408,46 +428,46 @@
 	}
 
 	.happyiIndex-list .happyi-co1 {
-		background: url(http://127.0.0.1:8082/static/images/m1.png) no-repeat 0.25rem center;
+		background: url(http://op.yoyound.com/static/images/m1.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 
 	.happyiIndex-list .happyi-co2 {
-		background: url(http://127.0.0.1:8082/static/images/m2.png) no-repeat 0.25rem center;
+		background: url(http://op.yoyound.com/static/images/m2.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 
 	.happyiIndex-list .happyi-co3 {
-		background: url(http://127.0.0.1:8082/static/images/m3.png) no-repeat 0.25rem center;
+		background: url(http://op.yoyound.com/static/images/m3.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 	.happyiIndex-list .happyi-co4 {
-		background: url(http://127.0.0.1:8082/static/images/m4.png) no-repeat 0.25rem center;
+		background: url(http://op.yoyound.com/static/images/m4.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 	 
 	.happyiIndex-list .happyi-co5 {
-		background: url(http://127.0.0.1:8082/static/images/m5.png) no-repeat 0.25rem center;
+		background: url(http://op.yoyound.com/static/images/m5.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 	.happyiIndex-list .happyi-co6 {
-		background:url(http://127.0.0.1:8082/static/images/m6.png) no-repeat 0.25rem center;
+		background:url(http://op.yoyound.com/static/images/m6.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 	.happyiIndex-list .happyi-co7 {
-		background: url(http://127.0.0.1:8082/static/images/m7.png) no-repeat 0.25rem center;
+		background: url(http://op.yoyound.com/static/images/m7.png) no-repeat 0.25rem center;
 		background-size: 0.4rem 0.4rem;
 	}
 	 .happyiIndex-list .happyi-co8 {
-	  	background: url(http://127.0.0.1:8082/static/images/m8.png) no-repeat 0.25rem center;
+	  	background: url(http://op.yoyound.com/static/images/m8.png) no-repeat 0.25rem center;
 	  	background-size: 0.4rem 0.4rem;
 	  }
 	 .happyiIndex-list .happyi-co9 {
-	  	background: url("http://127.0.0.1:8082/static/images/about.png") no-repeat 0.25rem center;
+	  	background: url("http://op.yoyound.com/static/images/about.png") no-repeat 0.25rem center;
 	  	background-size: 0.4rem 0.4rem;
 	  }
 	  .happyiIndex-list .happyi-co10 {
-	   	background: url("http://127.0.0.1:8082/static/images/about.png") no-repeat 0.25rem center;
+	   	background: url("http://op.yoyound.com/static/images/about.png") no-repeat 0.25rem center;
 	   	background-size: 0.4rem 0.4rem;
 	   }
 </style>

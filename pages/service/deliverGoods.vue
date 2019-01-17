@@ -156,7 +156,7 @@
 		float: right;
 		padding-right: 0.5rem;
 		height: 100%;
-		background: url(http://127.0.0.1:8082/static/images/hotmore.png) no-repeat right center;
+		background: url(http://op.yoyound.com/static/images/hotmore.png) no-repeat right center;
 		background-size: 0.6rem 0.6rem;
 	}
 

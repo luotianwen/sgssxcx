@@ -80,7 +80,7 @@
 				<div class="coupon-list" v-for="(newsitem,index2) in vouchers" :key="index2">
 					<strong :class="newsitem.state==1? 'coupon-icon' :newsitem.state==2? 'coupon-icon2' : 'coupon-icon1'"></strong>
 					<!-- <strong class="coupon-txt">{{newsitem.name}}</strong> -->
-					<image class="slide-img" src="http://127.0.0.1:8082/static/images/timg.jpg"></image>
+					<image class="slide-img" src="http://op.yoyound.com/static/images/timg.jpg"></image>
 
 					<h6>满{{newsitem.full}}减{{newsitem.reduction}}</h6>
 					<!-- 	<p>有效期{{newsitem.beginDate}}至{{newsitem.endDate}}</p> -->
@@ -125,6 +125,9 @@
 			this.hide();
 			return true;
 
+		},
+		onShow(){
+			this.getPreorder();
 		},
 		onLoad(d) {
 			this.cartId = d.cartId;
@@ -282,7 +285,7 @@
 						if (data.statusCode == 200 && data.data.code == 0) {
 							uni.requestPayment({
 								provider: 'wxpay',
-								timeStamp: data.data.data.timeStamp,
+								timeStamp: data.data.data.timeStamp+"",
 								nonceStr: data.data.data.nonceStr,
 								package: data.data.data.package,
 								signType: 'MD5',
@@ -337,7 +340,7 @@
 	.address-bg {
 		width: 100%;
 		height: 0.1rem;
-		background: url(http://127.0.0.1:8082/static/images/address-icon.png) no-repeat left top;
+		background: url(http://op.yoyound.com/static/images/address-icon.png) no-repeat left top;
 		background-size: 100% 0.1rem;
 	}
 
@@ -404,7 +407,7 @@
 		margin-top: -0.24rem;
 		width: 0.48rem;
 		height: 0.48rem;
-		background: url(http://127.0.0.1:8082/static/images/left.png) no-repeat center;
+		background: url(http://op.yoyound.com/static/images/left.png) no-repeat center;
 		background-size: 0.48rem 0.48rem;
 	}
 
@@ -522,7 +525,7 @@
 		margin-top: -0.24rem;
 		width: 0.48rem;
 		height: 0.48rem;
-		background: url(http://127.0.0.1:8082/static/images/left.png) no-repeat center;
+		background: url(http://op.yoyound.com/static/images/left.png) no-repeat center;
 		background-size: 0.48rem 0.48rem;
 	}
 
@@ -648,7 +651,7 @@
 		/* 	margin-top: 0.18rem;
 	 	padding-top: 0.35rem; */
 		height: 2.6rem;
-		background: url("http://127.0.0.1:8082/static/images/coupon.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/coupon.png") no-repeat center;
 		background-size: 100% 100%;
 	}
 
@@ -671,17 +674,17 @@
 	}
 
 	.coupon-list .coupon-icon {
-		background: url("http://127.0.0.1:8082/static/images/coupon-wgq.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/coupon-wgq.png") no-repeat center;
 		background-size: 100% 100%;
 	}
 
 	.coupon-list .coupon-icon1 {
-		background: url("http://127.0.0.1:8082/static/images/coupon-ygq.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/coupon-ygq.png") no-repeat center;
 		background-size: 100% 100%;
 	}
 
 	.coupon-list .coupon-icon2 {
-		background: url("http://127.0.0.1:8082/static/images/coupon-yjy.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/coupon-yjy.png") no-repeat center;
 		background-size: 100% 100%;
 	}
 

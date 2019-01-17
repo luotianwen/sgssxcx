@@ -1,4 +1,5 @@
-const httpUrl = "http://127.0.0.1:8081/v1/";
+//const httpUrl = "http://127.0.0.1:8081/v1/";
+const httpUrl = "https://xcx.api.yoyound.com/v1/";
 const debug=true
  
 const getCategory = function() {
@@ -85,6 +86,9 @@ const removeAddress=function(){
 }
 const saveAddress=function(){
 	return httpUrl + "user/saveAddress";
+}
+const gainCouponById=function(){
+	return httpUrl + "user/gainCouponById";
 }
 const getCouponList=function(){
 	return httpUrl + "user/getCouponList";
@@ -180,5 +184,6 @@ export default {
 	indexData,
 	hotData,
 	getSearchGoods,
-	getCartData
+	getCartData,
+	gainCouponById
 }

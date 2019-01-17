@@ -220,7 +220,7 @@
 		margin-top: -0.3rem;
 		width: 0.35rem;
 		height: 0.45rem;
-		background: url(http://127.0.0.1:8082/static/images/wirt.png) no-repeat center;
+		background: url(http://op.yoyound.com/static/images/wirt.png) no-repeat center;
 		background-size: 0.35rem 0.45rem;
 	}
 

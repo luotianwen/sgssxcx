@@ -4,7 +4,7 @@
 			<view class="shoppingCart-list shoppingCart-list1">
 				<view class="shoppingCart-listCent">
 
-					<view class="list-cent" v-for="(item, index) in data" :key="index">
+					<view class="list-cent" v-for="(item, index) in data" :key="index" v-show="login">
 						<view :class="['list-centLeft',{'swipeleft':item.className}]" @touchstart="touchStart($event,index)" @touchmove="touchMove($event,index,item)">
 							<view class="shoppingCart-icon">
 								<input type="checkbox" :checked="item.state" @click='checkedOne(index,item)'>
@@ -35,13 +35,16 @@
 						</view>
 					</view>
 
-
+					<view v-show="!login" style="margin-top: 50%; ">
+						<button     open-type="getUserInfo" @getuserinfo="onGotUserInfo"> 登录</button>
+					</view>
 				</view>
 			</view>
 
 		</view>
 		<view class="shoppingCart-footer ">
-			<view class="shoppingCart-footerlabel"> <input type='checkbox' :checked="ids.length!=0&&ids.length === data.length" @click="getCheckedAll()">全选</view>
+			<view class="shoppingCart-footerlabel"> <input type='checkbox' :checked="ids.length!=0&&ids.length === data.length"
+				 @click="getCheckedAll()">全选</view>
 			<view class="shoppingCart-footerlabelstrong footer-btn" @click="settlement()">结算</view>
 			<view class="shoppingCart-footerspan">¥{{price}}</view>
 		</view>
@@ -64,22 +67,14 @@
 				X: "",
 				Y: "",
 				// 初始化全选按钮, 默认不选
-				isCheckedAll: false
+				isCheckedAll: false,
+				login:false
 			}
 		},
 		onShow() {
-			uni.showLoading({
-				title: '加载中'
-			});
-			//service.removeUser();
-			if (service.getUser().hasLogin) {
-				this.cartlist();
-			} else {
-				this.getUserInfo();
-			
-			}
-			this.ids=[];
-			this.isCheckedAll=false;
+			this.login=service.getUser().hasLogin;
+			this.ids = [];
+			this.isCheckedAll = false;
 		},
 		onLoad(d) {
 
@@ -96,11 +91,11 @@
 
 		},
 		onPullDownRefresh() {
-			
-			this.isCheckedAll=false;
-			this.ids=[];
+
+			this.isCheckedAll = false;
+			this.ids = [];
 			this.data = [];
-			this.price=0;
+			this.price = 0;
 			setTimeout(() => {
 				this.cartlist();
 				uni.stopPullDownRefresh();
@@ -140,7 +135,7 @@
 			settlement: function() {
 				if (this.ids.length > 0) {
 					uni.navigateTo({
-						url: "../order/preorder?cartId="+this.ids.join(",")
+						url: "../order/preorder?cartId=" + this.ids.join(",")
 					})
 
 				} else {
@@ -228,43 +223,40 @@
 					}
 				});
 			},
-			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
-				//service.removeUser();
-
+			onGotUserInfo: function(e) {
+				let _this=this;
+				let infoRes = e.detail;
+			    console.log("userInfo   "+JSON.stringify(infoRes));
+				uni.request({
+					url: service.login(),
+					data: {
+						nickName: infoRes.userInfo.nickName,
+						code: _this.code, //infoRes.userInfo.openId,
+						avatarUrl: infoRes.userInfo.avatarUrl
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							var d = data.data.data;
+							d.hasLogin = true;
+							service.setUser(d);
+							this.uerInfo = d;
+							this.login = true;
+							this.cartlist();
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+			
+					}
+				})
+			},
+			getUserInfo() { 
 				let _this = this;
-
 				uni.login({
 					provider: 'weixin',
 					success: function(loginRes) {
-						console.log(JSON.stringify(loginRes));
-						// 获取用户信息
-						uni.getUserInfo({
-							provider: 'weixin',
-							success: function(infoRes) {
-
-								uni.request({
-									url: service.login(),
-									data: {
-										nickName: infoRes.userInfo.nickName,
-										openId: "11", //infoRes.userInfo.openId,
-										avatarUrl: infoRes.userInfo.avatarUrl
-									},
-									success: (data) => {
-										if (data.statusCode == 200 && data.data.code == 0) {
-											var d = data.data.data;
-											d.hasLogin = true;
-											service.setUser(d);
-											_this.cartlist();
-										}
-
-									},
-									fail: (data, code) => {
-										console.log('fail' + JSON.stringify(data));
-
-									}
-								})
-							}
-						});
+						 _this.code=loginRes.code;
+						 uni.hideLoading();
 					}
 				});
 
@@ -342,7 +334,7 @@
 			},
 			goGoodDetail: function(item) {
 				uni.navigateTo({
-					url: "../goods/goodsDetail?goodsId="+item.goodsId+"&name="+item.name
+					url: "../goods/goodsDetail?goodsId=" + item.goodsId + "&name=" + item.name
 				})
 			}
 		}
@@ -604,7 +596,7 @@
 		/* 	padding-left: 0.65rem; */
 		font-size: 0.26rem;
 		color: #333333;
-		/* background: url(http://127.0.0.1:8082/static/images/nocheck.png) no-repeat left center; */
+		/* background: url(http://op.yoyound.com/static/images/nocheck.png) no-repeat left center; */
 		/* 	background-size: 0.5rem 0.5rem; */
 	}
 

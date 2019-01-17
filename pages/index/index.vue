@@ -18,7 +18,7 @@
 			</view>
 		</view>
 
-		<view style="margin-top: 0.2rem;">
+		<view style="margin-top: 0.2rem;margin-left: 2.5%;">
 			<view class="rectangle3">
 				<view class="rectangle3center">
 					<image src="../../static/img/i1.png" class="rectangle3img"></image>
@@ -40,24 +40,27 @@
 		</view>
 		<view style="margin-top: 0.2rem;">
 
-			<view class="combinedShape"  @tap="goCoupon(value)" v-for="(value,key) in coupons" :key="key">
+			<view class="combinedShape" @tap="goCoupon(value)" v-for="(value,key) in coupons" :key="key">
 				<view class="combinedShape-coupon">优惠券</view>
 				<view class="combinedShape-coupon-right">
 					<view class="combinedShape-coupon-right-top"> 满{{value.full}} </view>
 					<view class="combinedShape-coupon-right-bottom"> 减{{value.reduction}} </view>
 				</view>
 			</view>
-			 
+
 		</view>
 		<view class="uni-list">
 			<view class="goodsList-cent1">
 				<view style="width: 100%;">
 					<view class="brands1"> 品牌馆 </view>
-					<view class="brandsmore " @tap="goBrandList()"><view class="brandsmore-more">更多</view></view>
+					<view class="brandsmore " @tap="goBrandList()">
+						<view class="brandsmore-more">更多</view>
+					</view>
 				</view>
 				<view style="padding-top: 10px;">
-					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ')'}">
-						<!-- {{value.name}} -->
+					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ');background-position: center;background-repeat: no-repeat;background-size: 1005 100%'}">
+						<!-- {{value.name}}
+						<image :src="value.logo" style="width: 100%;height: 100%;"></image> -->
 					</view>
 
 				</view>
@@ -116,7 +119,7 @@
 			this.getCartData();
 		},
 		onLoad() {
-			//service.removeUser();
+			 service.removeUser();
 			this.getList();
 			this.indexData();
 		},
@@ -148,6 +151,38 @@
 			}, 300);
 		},
 		methods: {
+			goCoupon: function(coupon) {
+				let _this = this;
+				if (!service.getUser().hasLogin) {
+					return;
+				}
+				uni.request({
+					url: service.gainCouponById(),
+					data: {
+						tokenId: service.getUser().tokenId,
+						couponId: coupon.couponId
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							uni.showToast({
+								icon: 'success',
+								title: "领取成功"
+							})
+						}
+						else{
+							uni.showToast({
+								icon:'none',
+								title: data.data.msg
+							})
+						}
+
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+					}
+				})
+
+			},
 			getCartData() {
 				let _this = this;
 				if (!service.getUser().hasLogin) {
@@ -159,7 +194,7 @@
 						tokenId: service.getUser().tokenId
 					},
 					success: (data) => {
-						console.log(JSON.stringify(data.data.data))
+						 
 						if (data.statusCode == 200 && data.data.code == 0) {
 							_this.cartCount = data.data.data;
 
@@ -176,7 +211,7 @@
 					url: service.indexData(),
 
 					success: (data) => {
-						console.log(JSON.stringify(data.data.data))
+						 
 						if (data.statusCode == 200 && data.data.code == 0) {
 							let _data = data.data.data;
 							this.carousels = _data.carousels;
@@ -245,8 +280,8 @@
 
 <style>
 	.brandsmore {
-		
-		
+
+
 		margin-top: 0.16rem;
 		top: 0;
 		width: 23px;
@@ -262,18 +297,20 @@
 		/*  float: right;  */
 		/* margin-right: 3% */
 	}
-	  .brandsmore-more {
-		  position: absolute;
+
+	.brandsmore-more {
+		position: absolute;
 		top: 0;
 		right: 0;
-		display:block;
+		display: block;
 		width: .75rem;
 		/* padding-right: 0.48rem; */
 		height: 100%;
-		 
-		background: url("http://127.0.0.1:8082/static/images/left.png") no-repeat right center;
+
+		background: url("http://op.yoyound.com/static/images/left.png") no-repeat right center;
 		background-size: 0.48rem 0.48rem;
 	}
+
 	.rectangle-4 {
 		width: 23.5%;
 		height: 90px;
@@ -301,6 +338,7 @@
 	}
 
 	.brands1 {
+
 		position: relative;
 		top: 0;
 		width: 36px;
@@ -320,7 +358,7 @@
 
 	}
 
-	
+
 
 
 	.goodsList-cent1 {
@@ -372,7 +410,7 @@
 
 
 	.goodsList-listp {
-		margin: 55upx 0;
+		margin: 35upx 0;
 		font-size: 24upx;
 		color: #666;
 		overflow: hidden;
@@ -404,7 +442,7 @@
 
 	.purchase-header .header-cart {
 		right: 0.4rem;
-		background: url(http://127.0.0.1:8082/static/images/cart1.png) no-repeat center;
+		background: url(http://op.yoyound.com/static/images/cart1.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 
@@ -418,7 +456,7 @@
 		font-size: 0.26rem;
 		color: #999;
 		border-radius: 0.3rem;
-		background: #eeeeee url(http://127.0.0.1:8082/static/images/search.png) no-repeat 1.75rem center;
+		background: #eeeeee url(http://op.yoyound.com/static/images/search.png) no-repeat 1.75rem center;
 		background-size: 0.35rem 0.35rem;
 	}
 
@@ -439,7 +477,7 @@
 	}
 
 	.rectangle3center {
-		padding: 15px 30px;
+		padding: 10% 30%;
 	}
 
 	.rectangle3img {
@@ -461,8 +499,8 @@
 	.rectangle3 {
 		/* position: absolute;*/
 		margin-top: 20upx;
-		margin-left: 2.5%;
-		width: 110px;
+		/* margin-left: 2.5%; */
+		width: 32%;
 		height: 94px;
 		border: 0.5px solid #c0cdda;
 		background: #ffffff;
@@ -473,9 +511,10 @@
 	.combinedShape {
 		margin-left: 3%;
 		margin-top: 20upx;
-		width: 169px;
+		margin-bottom: 20upx;
+		width: 45.5%;
 		height: 64px;
-		background: url(http://127.0.0.1:8082/static/images/ic.png) no-repeat center;
+		background: url(http://op.yoyound.com/static/images/ic.png) no-repeat center;
 		background-size: 100% 100%;
 		box-shadow: 0px 1px 3px 0px #c0cdda;
 		float: left;

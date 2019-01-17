@@ -128,59 +128,7 @@
 					}
 				})
 			},
-
-			getUserInfo() { //获取用户信息api在微信小程序可直接使用，在5+app里面需要先登录才能调用
-				//service.removeUser();
-				 
-				let _this = this;
-
-				if (_this.hasLogin) {
-					return;
-				}
-
-
-				uni.login({
-					provider: 'weixin',
-					success: function(loginRes) {
-
-						// 获取用户信息
-						uni.getUserInfo({
-							provider: 'weixin',
-							success: function(infoRes) {
-								/* this.hasUserInfo = true;
-								 this.userInfo = infoRes.userInfo */
-								//console.log('用户昵称为：' + JSON.stringify(infoRes.userInfo));
-								//this.login();
-								uni.request({
-									url: service.login(),
-									data: {
-										nickName: infoRes.userInfo.nickName,
-										openId: "11", //infoRes.userInfo.openId,
-										avatarUrl: infoRes.userInfo.avatarUrl
-									},
-									success: (data) => {
-										if (data.statusCode == 200 && data.data.code == 0) {
-											var d = data.data.data;
-											d.hasLogin = true;
-											//console.log('用户昵称为：' + JSON.stringify(d));
-											//console.log('用户昵称为：' + d.nickname);
-											service.setUser(d);
-											_this.addCartToService();
-											_this.show = false;
-										}
-
-									},
-									fail: (data, code) => {
-										console.log('fail' + JSON.stringify(data));
-
-									}
-								})
-							}
-						});
-					}
-				});
-
-			},
+ 
 
 			//选择及时改变
 			getInfo: function(type, item) {
@@ -239,7 +187,11 @@
 							title: '加载中'
 						});
 						if (!this.hasLogin) {
-							this.getUserInfo();
+							 uni.showToast({
+							 	icon: 'none',
+							 	title: '请登录'
+							 })
+							 return ;
 						} else {
 							this.addCartToService();
 						}
@@ -265,7 +217,11 @@
 							title: '加载中'
 						});
 						if (!this.hasLogin) {
-							this.getUserInfo();
+							uni.showToast({
+								icon: 'none',
+								title: '请登录'
+							})
+							return;
 						} else {
 							this.addCartToService()
 						}
@@ -371,7 +327,7 @@
 	
 	.purchase-header .header-cart {
 		right: 0.3rem;
-		background: url(http://127.0.0.1:8082/static/images/cart1.png) no-repeat center;
+		background: url(http://op.yoyound.com/static/images/cart1.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 	
@@ -385,7 +341,7 @@
 		font-size: 0.26rem;
 		color: #999;
 		border-radius: 0.3rem;
-		background: #eeeeee url(http://127.0.0.1:8082/static/images/search.png) no-repeat 1.75rem center;
+		background: #eeeeee url(http://op.yoyound.com/static/images/search.png) no-repeat 1.75rem center;
 		background-size: 0.35rem 0.35rem;
 	}
 	

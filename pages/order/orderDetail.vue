@@ -109,7 +109,7 @@
 						if (data.statusCode == 200 && data.data.code == 0) {
 							uni.requestPayment({
 								provider: 'wxpay',
-								timeStamp: data.data.data.timeStamp,
+								timeStamp: data.data.data.timeStamp+"",
 								nonceStr: data.data.data.nonceStr,
 								package: data.data.data.package,
 								signType: 'MD5',
@@ -294,7 +294,7 @@
 	.address-bg {
 		width: 100%;
 		height: 0.1rem;
-		background: url(http://127.0.0.1:8082/static/images/address-icon.png) no-repeat left top;
+		background: url(http://op.yoyound.com/static/images/address-icon.png) no-repeat left top;
 		background-size: 100% 0.1rem;
 	}
 

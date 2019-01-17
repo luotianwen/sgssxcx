@@ -204,17 +204,17 @@
 	}
 
 	.newProduct-screen .collage-icon {
-		background: url("http://127.0.0.1:8082/static/images/collage-icon.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/collage-icon.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
 	.newProduct-screen .collage-icon1 {
-		background: url("http://127.0.0.1:8082/static/images/collage-icon1.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/collage-icon1.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
 	.newProduct-screen .collage-icon2 {
-		background: url("http://127.0.0.1:8082/static/images/collage-icon2.png") no-repeat center;
+		background: url("http://op.yoyound.com/static/images/collage-icon2.png") no-repeat center;
 		background-size: 0.24rem 0.24rem;
 	}
 
@@ -270,7 +270,7 @@
 	}
 
 	.goodsList-listp {
-		margin: 55upx 0;
+		margin: 35upx 0;
 		font-size: 24upx;
 		color: #666;
 		overflow: hidden;
