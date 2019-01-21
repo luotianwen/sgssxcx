@@ -299,9 +299,11 @@
 								},
 								fail: function(err) {
 									console.log('fail:' + JSON.stringify(err));
-									uni.navigateTo({
-										url: "../order/order"
+									uni.showModal({
+										content: "支付失败,原因为: " + err.errMsg,
+										showCancel: false
 									})
+									 
 								}
 							});
 

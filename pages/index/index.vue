@@ -119,7 +119,7 @@
 			this.getCartData();
 		},
 		onLoad() {
-			 service.removeUser();
+		    //service.removeUser();
 			this.getList();
 			this.indexData();
 		},
@@ -154,6 +154,10 @@
 			goCoupon: function(coupon) {
 				let _this = this;
 				if (!service.getUser().hasLogin) {
+					uni.showModal({
+						content: "请登录领取优惠券",
+						showCancel: false
+					});
 					return;
 				}
 				uni.request({
@@ -513,7 +517,7 @@
 		margin-top: 20upx;
 		margin-bottom: 20upx;
 		width: 45.5%;
-		height: 64px;
+		height: 120upx;
 		background: url(http://op.yoyound.com/static/images/ic.png) no-repeat center;
 		background-size: 100% 100%;
 		box-shadow: 0px 1px 3px 0px #c0cdda;

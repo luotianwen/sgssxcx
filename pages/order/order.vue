@@ -117,7 +117,7 @@
 			
 				ary.push(aryItem);
 			}
-			console.log(JSON.stringify(ary));
+			 
 			this.newsitems = ary;
 			
 			
@@ -211,13 +211,15 @@
 					success: (data) => { 
 						uni.hideLoading();
 						if (data.statusCode == 200 && data.data.code == 0) {
+							let _data=data.data.data;
+							console.log("data"+JSON.stringify(_data))
 							uni.requestPayment({ 
 								provider: 'wxpay', 
-								timeStamp: data.data.data.timeStamp+"",
-								nonceStr: data.data.data.nonceStr,
-								package: data.data.data.package,
+								timeStamp: _data.timeStamp,
+								nonceStr:  _data.nonceStr,
+								package:  _data.package,
 								signType: 'MD5',
-								paySign: data.data.data.sign,
+								paySign:  _data.sign,
 								success: function (res) {
 									
 									console.log('success:' + JSON.stringify(res));
@@ -225,7 +227,10 @@
 								},
 								fail: function (err) {
 									console.log('fail:' + JSON.stringify(err));
-									 
+									uni.showModal({
+										content: "支付失败,原因为: " + err.errMsg,
+										showCancel: false
+									})
 								}
 							});
 							
@@ -305,7 +310,7 @@
 
 			 
 			loadMore(e) {
-				console.log('loadMore' + this.newsitems[e].loadingType);
+				 
 				if (this.newsitems[e].loadingType !== 0) {
 					return;
 				}
@@ -320,7 +325,7 @@
 
 			async changeTab(e) {
 				let index = e.target.current;
-				console.log("changeTab index" + index);
+				 
 				//this.newsitems[index].pageNumber = 1;
 				this.newsitems[index].loadingType = 0;
 				if (index == 0) {
@@ -373,7 +378,7 @@
 			async tapTab(e) { //点击tab-bar
 
 				let index = e.target.dataset.current;
-				console.log(this.tabIndex + "tapTab index" + index);
+				 
 				if (this.tabIndex === e.target.dataset.current) {
 					return false;
 				} else {

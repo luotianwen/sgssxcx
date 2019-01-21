@@ -28,7 +28,13 @@
 			<view class="listCent happyi-co2" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
 			<view class="listCent happyi-co4" @tap="goAddress()">收货地址 <a class="happyi-left"></a></view>
 			<view class="listCent happyi-co3" @tap="goCoupon()">我的券<a class="happyi-left">{{coupons}}</a></view>
-			<view class="listCent happyi-co5" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view>
+			<!-- <view class="listCent happyi-co5" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view> -->
+			<view class="listCent  happyi-co5" style="padding 0 0 0 0.84rem ">
+			
+				<button plain="true" open-type="feedback" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
+					反馈</button>
+				 <!-- <a class="happyi-left"></a>  -->
+			</view>
 			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
@@ -36,7 +42,7 @@
 
 				<button plain="true" open-type="contact" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					客服</button>
-				  <a class="happyi-left"></a>  
+				 <!-- <a class="happyi-left"></a>  -->
 			</view>
 
 			  
@@ -143,10 +149,10 @@
 
 			goAccount: function() {
 				if (!this.login) {
-					uni.showToast({
-						icon: 'none',
-						title: '请登录'
-					})
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
 					return;
 				}
 				uni.navigateTo({
@@ -155,10 +161,10 @@
 			},
 			goAddress: function() {
 				if (!this.login) {
-					uni.showToast({
-						icon: 'none',
-						title: '请登录'
-					})
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
 					return;
 				}
 
@@ -170,10 +176,10 @@
 			},
 			goOrder: function() {
 				if (!this.login) {
-					uni.showToast({
-						icon: 'none',
-						title: '请登录'
-					})
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
 					return;
 				}
 				uni.navigateTo({
@@ -204,10 +210,10 @@
 			},
 			goCoupon: function() {
 				if (!this.login) {
-					uni.showToast({
-						icon: 'none',
-						title: '请登录'
-					})
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
 					return;
 				}
 				uni.navigateTo({
@@ -216,10 +222,10 @@
 			},
 			goAfterOrder: function() {
 				if (!this.login) {
-					uni.showToast({
-						icon: 'none',
-						title: '请登录'
-					})
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
 					return;
 				}
 				uni.navigateTo({
