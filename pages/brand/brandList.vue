@@ -94,7 +94,7 @@
  
 	.apps-wrap {
 		font-size: 0;
-		padding: 0 .1rem
+		padding: 0 12upx
 	}
 
 	 
@@ -106,20 +106,20 @@
 	}
 
 	.app-portalimg {
-		width: 1.5rem;
-		height:1.5rem
+		width: 148upx;  
+		height:148upx
 	}
 
 	.app-portal p {
 		font-family: PingFangSC-Regular;
-		font-size: 0.25rem;
+		font-size: 24upx;
 		color: #333;
 		text-align: center;
 		overflow: hidden;
 		-o-text-overflow: ellipsis;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		margin: .125rem 0 .2rem;
+		margin: 15upx 0 23upx;
 
 	}
 </style>

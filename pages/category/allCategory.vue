@@ -80,7 +80,17 @@
 			},
 			 
 		},
+		onShareAppMessage() {
+			return {
+				title:  "悠氧商城",
+				path: '/pages/index/index',
+				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+			}
+		},
 		onLoad: function () {
+			  uni.showShareMenu({
+			       withShareTicket: true
+			   });
 			this.getCategory();
 			this.height = uni.getSystemInfoSync().windowHeight ;
 			 

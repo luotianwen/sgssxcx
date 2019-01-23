@@ -66,7 +66,7 @@
 
 <style>
 	.refundInfo-top {
-		padding: 20upx 0 0rem 0rem;
+		padding: 20upx 0 0 0;
 		font-size: 28upx;
 		color: #333333;
 		background: #fff;
@@ -75,67 +75,67 @@
 	.refundInfo-topp {
 		position: relative;
 		padding: 0 20upx 0 30upx;
-		margin-bottom: 0.05rem;
+		margin-bottom: 6upx;
 	}
 
 	.refundInfo-top strong {
 		position: absolute;
 		top: 0;
 		left: 0;
-		margin-right: 0.1rem;
+		margin-right: 12upx;
 	}
 
 	.refundInfo-top span {
-		margin-right: 0.1rem;
+		margin-right: 12upx;
 		color: #d45048;
 	}
 
 	.refundInfo {
 		position: relative;
-		margin-top: 0.2rem;
-		padding-left: 0.6rem;
+		margin-top: 24upx;
+		padding-left: 70upx;
 		overflow: hidden;
 		background: #fff;
 	}
 
 	#canvas {
 		position: absolute;
-		top: 0.55rem;
-		left: 0.345rem;
+		top: 64upx;
+		left: 40upx;
 		width: 10%;
 		height: 80%;
 		border-left: 1px solid #e2e2e2;
 	}
 
 	.refundInfo-list {
-		padding-top: 0.4rem;
+		padding-top: 47upx;
 		border-top: 1px solid #e2e2e2;
 	}
 
 	.refundInfo-listh6 {
 		position: relative;
-		font-size: 0.28rem;
+		font-size:32upx;
 		color: #333;
 	}
 
 	.refundInfo-listb {
 		position: absolute;
-		top: 0.15rem;
-		left: -0.28rem;
-		display: block;
-		width: 0.09rem;
-		height: 0.09rem;
+		top: 18upx;
+		left: -32upx	;
+			display: block;
+		width: 10upx;
+		height: 10upx;
 		background-color: #999999;
 	}
 
 	.refundInfo-listp {
-		margin-bottom: 0.08rem;
-		font-size: 0.24rem;
+		margin-bottom: 9upx;
+		font-size: 24upx;
 		color: #999;
 	}
 
 	.refundInfo-list .list-cent {
-		padding: 0 0.3rem 0.4rem 0;
+		padding: 0 35upx 47upx 0;
 	}
 
 	.refundInfo-list .list-centImg {
@@ -151,9 +151,9 @@
 
 	.refundInfo-list .list-centImg strong {
 		display: inline-block;
-		margin-right: 0.08rem;
-		width: 1.04rem;
-		height: 1.04rem;
+		margin-right: 9upx;
+		width: 121upx;
+		height: 121upx;
 		background-size: 100% 100%;
 	}
 
@@ -162,31 +162,31 @@
 	}
 
 	.refundInfo-list .list-data {
-		margin: 0.08rem 0 0.2rem;
+		margin: 9upx 0 24upx;
 	}
 
 	.refundInfo-list .list-btn {
-		padding: 0.2rem 0.3rem 0.2rem 0;
+		padding: 24upx 35upx 24upx 0;
 		text-align: right;
 		font-size: 0;
 		border-top: 1px solid #e2e2e2;
 	}
 
 	.refundInfo-list .list-btn span {
-		margin-left: 0.2rem;
+		margin-left: 24upx;
 		display: inline-block;
-		width: 1.75rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		width: 204upx;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #333;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 		border: 1px solid #cccccc;
 	}
 
 	.refundInfo-list .list-btn .spanBtn {
-		width: 2.3rem;
+		width: 269upx;
 	}
 
 	.refundInfo-list:first-child {
@@ -194,10 +194,10 @@
 	}
 
 	.refundInfo-list:first-child b {
-		top: 0.16rem;
-		left: -0.3rem;
-		width: 0.11rem;
-		height: 0.11rem;
+		top: 18upx;
+		left: -35upx;
+		width: 13upx;
+		height: 13upx;
 		background-color: #f76654;
 	}
 
@@ -208,12 +208,12 @@
 		z-index: 500;
 		padding: 0 4%;
 		width: 92%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 114upx;
+		line-height: 114upx;
 		border-top: 1px solid #eee;
 		background: #fff;
 		color: #333333;
-		font-size: 0.26rem;
+		font-size: 26upx;
 	}
 
 	.confirmOrder-footer strong {
@@ -221,16 +221,16 @@
 	}
 
 	.confirmOrder-footer .footer-btn {
-		margin: 0.2rem 0 0 0.2rem;
+		margin: 24upx 0 0 24upx;
 		float: right;
-		width: 2.16rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		width: 252upx;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
 		color: #ffffff;
 		background-color: #d45048;
 		border: 1px solid #d45048;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 	}
 
 	.confirmOrder-footer .footer-btn2 {
@@ -239,66 +239,65 @@
 	}
 
 	.confirmOrder-footer .footer-btn1 {
-		margin: 0.2rem 0 0 0.2rem;
+		margin: 24upx 0 0 24upx;
 		float: right;
 		display: block;
-		width: 1.75rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		width: 204upx;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 		border: 1px solid #cccccc;
 	}
 
 	.confirmOrder-footer .money {
 		display: inline-block;
-		padding-left: 0.3rem;
+		padding-left: 35upx;
 		color: #f44834;
-		background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-mons.png) no-repeat left 0.33rem;
-		background-size: 0.28rem 0.28rem;
-	}
-
+		background: url(https://cs.h5.hongkzh.com/imgs/purchase/index/purchase-mons.png) no-repeat left 38upx;
+		background-size: 32upx 32upx
+}
 	#refuseRefund {
-		padding-top: 1.09rem;
+		padding-top: 127upx;
 	}
 
 	.refuseRefund-cent {
-		padding: 0.3rem;
+		padding: 35upx;
 		background: #fff;
 		font-size: 0;
 	}
 
 	.refuseRefund-cent textarea {
-		height: 5.5rem;
+		height: 643upx;
 		width: 100%;
 		resize: none;
 		border: none;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #333333;
 	}
 
 	.refuseRefund-butt {
-		padding: 0 0.3rem 0.3rem;
-		margin-top: 0.2rem;
+		padding: 0 35upx 35upx;
+		margin-top: 24upx;
 		background: #fff;
 	}
 
 	.refuseRefund-butt p {
-		margin-bottom: 0.05rem;
-		font-size: 0.26rem;
+		margin-bottom: 6upx;
+		font-size: 26upx;
 		color: #cccccc;
 	}
 
 	.refuseRefund-title {
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 35upx;
 		color: #333;
 	}
 
 	.refuseRefund-img {
-		margin-bottom: 0.25rem;
-		height: 1.4rem;
+		margin-bottom: 27upx;
+		height: 163upx;
 		font-size: 0;
 		white-space: nowrap;
 		overflow: hidden;
@@ -313,11 +312,11 @@
 	}
 
 	.refuseRefund-img span {
-		margin-right: 0.2rem;
+		margin-right: 24upx;
 		position: relative;
 		display: inline-block;
-		width: 1.4rem;
-		height: 1.4rem;
+		width: 163upx;
+		height: 163upx;
 		background: url(" https://cs.h5.hongkzh.com/imgs/see/userPage/addGoods-icon.png") no-repeat;
 		background-size: 100%;
 	}
@@ -346,15 +345,15 @@
 	}
 
 	.refuseRefund-btn {
-		margin: 0.4rem auto;
+		margin: 47upx auto;
 		display: block;
 		width: 92%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 114upx;
+		line-height: 114upx;
 		text-align: center;
 		background-color: #e2e2e2;
-		border-radius: 0.1rem;
-		font-size: 0.32rem;
+		border-radius: 12upx;
+		font-size: 32upx;
 		color: #ffffff;
 	}
 
@@ -364,25 +363,25 @@
 
 	#popup-frame {
 		background: #fff;
-		border-radius: 0.1rem;
+		border-radius: 12upx
 	}
 
 	.complaint {
-		margin-bottom: 0.2rem;
-		padding: 0 0.1rem 0 0.3rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
+		margin-bottom: 24upx;
+		padding: 0 12upx0 35upx;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 35upx;
 		color: #333333;
 		background: #fff;
 	}
 
 	.complaint span {
 		float: right;
-		padding-right: 0.5rem;
+		padding-right: 58upx;
 		height: 100%;
 		background: url(https://cs.h5.hongkzh.com/imgs/see/selfMedia/selfMedia-hotmore.png) no-repeat right center;
-		background-size: 0.6rem 0.6rem;
+		background-size: 70upx 70upx;
 	}
 
 	.ios-select-widget-box ul li.at {
@@ -391,6 +390,6 @@
 	}
 
 	.logistics .list-data {
-		margin: 0.08rem 0 0;
+		margin: 9upx 0 0;
 	}
 </style>

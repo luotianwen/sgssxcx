@@ -50,15 +50,15 @@
   padding: 0.9rem 0 1rem;
 } 
 .happyiIndex-list {
-  margin-bottom: 0.2rem;
+  margin-bottom: 24upx;
   background: #fff;
 }
 .happyiIndex-list .listCent {
   position: relative;
-  padding: 0 0.3rem;
+  padding: 0 35upx;
   height: 0.99rem;
   line-height: 0.99rem;
-  font-size: 0.3rem;
+  font-size: 35upx;
   color: #333;
   border-bottom: 1px solid #e2e2e2;
 }
@@ -68,11 +68,11 @@
 .happyiIndex-list .happyi-left {
   position: absolute;
   top: 0;
-  right: 0.2rem;
+  right: 24upx;
   padding-right: 0.48rem;
   height: 100%;
-  font-size: 0.28rem;
-  color: #999;
+  font-size: 32upx; 
+	 color: #999;
   background: url("https://cs.h5.hongkzh.com/imgs/happyi/index/happyi-left.png") no-repeat right center;
   background-size: 0.48rem 0.48rem;
 }
@@ -80,7 +80,7 @@
   height: 0.99rem;
   line-height: 0.99rem;
   text-align: center;
-  font-size: 0.3rem;
+  font-size: 35upx;
   color: #EF593C;
   background: #fff;
 }
@@ -92,7 +92,7 @@
   border-bottom: none;
 }
 #setUpPwd .happyiIndex-list {
-  margin-top: 0.2rem;
+  margin-top: 24upx;
 }
 input::-webkit-input-placeholder {
   color: #cacaca;
@@ -110,7 +110,7 @@ input:-ms-input-placeholder {
   color: #cacaca;
 }
 .setUpPwd-title {
-  padding: 0 0.3rem;
+  padding: 0 35upx;
   height: 0.8rem;
   line-height: 0.9rem;
   font-size: 0.26rem;
@@ -120,11 +120,11 @@ input:-ms-input-placeholder {
   background: #fff;
 }
 .setUpPwd-cent div {
-  padding: 0 0.3rem;
+  padding: 0 35upx;
   height: 1rem;
   line-height: 1rem;
-  font-size: 0.28rem;
-  border-bottom: 1px solid #e2e2e2;
+  font-size: 32upx; 
+	 border-bottom: 1px solid #e2e2e2;
 }
 .setUpPwd-cent div:last-child {
   border-bottom: none;
@@ -136,27 +136,27 @@ input:-ms-input-placeholder {
   background: transparent;
 }
 .replaceTel-title {
-  padding: 0.2rem 0.3rem;
+  padding: 24upx 35upx;
   font-size: 0.26rem;
   color: #666666;
 }
 .replaceTel-tel {
-  font-size: 0.28rem;
-  color: #999;
+  font-size: 32upx ; 
+	color: #999;
 }
 .replaceTel-tel span {
   display: inline-block;
   width: 1.85rem;
-  font-size: 0.3rem;
+  font-size: 35upx;
 }
 .replaceTel-tel1 > span {
   display: inline-block;
   width: 1.8rem;
-  font-size: 0.3rem;
+  font-size: 35upx;
 }
 .replaceTel-tel1 > span span {
   font-family: "宋体";
-  font-size: 0.2rem;
+  font-size: 24upx;
   color: #cacaca;
 }
 .loginIndex-btn1,
@@ -187,7 +187,7 @@ input:-ms-input-placeholder {
   margin-bottom: 0;
 }
 .privacySetup-title {
-  padding: 0 0.3rem;
+  padding: 0 35upx;
   height: 0.6rem;
   line-height: 0.6rem;
   font-size: 0.26rem;
@@ -210,7 +210,7 @@ input:-ms-input-placeholder {
   float: left;
   position: relative;
   z-index: 100;
-  padding: 0.2rem 0.32rem 0.23rem 0.24rem;
+  padding: 24upx 0.32rem 0.23rem 0.24rem;
   display: block;
   width: 92.5%;
   height: 0.96rem;
@@ -235,7 +235,7 @@ input:-ms-input-placeholder {
 .friendsList-list .friendsList-more {
   position: absolute;
   top: 0;
-  right: 0.2rem;
+  right: 24upx;
   display: inline-block;
   width: 0.6rem;
   height: 100%;
@@ -253,9 +253,9 @@ input:-ms-input-placeholder {
   background-size: 100%;
 }
 .friendsList-list .list-topGrade {
-  margin-left: 0.2rem;
+  margin-left: 24upx;
   display: inline-block;
-  padding: 0 0.1rem 0 0.29rem;
+  padding: 0 12upx0 0.29rem;
   height: 0.25rem;
   line-height: 0.25rem;
   border-radius: 6px;
@@ -263,11 +263,11 @@ input:-ms-input-placeholder {
   color: #fff;
 }
 .friendsList-list .friendsList-boy {
-  background: #83c6ff url("https://cs.h5.hongkzh.com/imgs/friend/index/friendsList-boy.png") no-repeat 0.1rem center;
+  background: #83c6ff url("https://cs.h5.hongkzh.com/imgs/friend/index/friendsList-boy.png") no-repeat 12upxcenter;
   background-size: 0.18rem 0.18rem;
 }
 .friendsList-list .friendsList-girl {
-  background: #ff8397 url("https://cs.h5.hongkzh.com/imgs/friend/index/friendsList-girl.png") no-repeat 0.1rem center;
+  background: #ff8397 url("https://cs.h5.hongkzh.com/imgs/friend/index/friendsList-girl.png") no-repeat 12upxcenter;
   background-size: 0.18rem 0.22rem;
 }
 .friendsList-list .sl-opts {
@@ -279,12 +279,12 @@ input:-ms-input-placeholder {
   line-height: 1.4rem;
   width: 20%;
   text-align: center;
-  font-size: 0.28rem;
-  color: #fff;
+  font-size: 32upx ;
+	 color: #fff;
   background-color: #F95F61;
 }
 #authentication .listCent {
-  margin-left: 0.3rem;
+  margin-left: 35upx;
   padding-left: 0;
 }
 #authentication .list-text {
@@ -304,7 +304,7 @@ input:-ms-input-placeholder {
 }
 .authentication-mirror {
   position: relative;
-  margin: 0 0.3rem;
+  margin: 0 35upx;
   height: 4rem;
   text-align: center;
   background: #f1f1f1;
@@ -337,7 +337,7 @@ input:-ms-input-placeholder {
   font-family: "宋体";
 }
 .authentication-mirror p {
-  font-size: 0.2rem;
+  font-size: 24upx;
   color: #666;
 }
 .authentication-txt {
@@ -345,11 +345,11 @@ input:-ms-input-placeholder {
   height: 1.2rem;
   line-height: 1.2rem;
   text-align: center;
-  font-size: 0.3rem;
+  font-size: 35upx;
   color: #333;
 }
 .authentication-txt a {
-  margin-left: 0.1rem;
+  margin-left: 12upx;
   color: #4090f7;
 }
 .provingMode .ios-select-widget-box .cover-area1,
@@ -363,17 +363,17 @@ input:-ms-input-placeholder {
   color: #0092ff;
 }
 .audit {
-  padding: 3rem 0.3rem 1rem;
+  padding: 3rem 35upx 1rem;
   text-align: center;
   background: #fff;
 }
 .audit h6 {
-  margin: 0.3rem 0 0.2rem;
+  margin: 35upx 0 24upx;
   font-size: 0.4rem;
   color: #333;
 }
 .audit p {
-  font-size: 0.3rem;
+  font-size: 35upx;
   color: #666;
 }
 .audit .audit-icon,

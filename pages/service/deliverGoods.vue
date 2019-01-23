@@ -126,15 +126,15 @@
 
 <style>
 	.deliverGoods-cent {
-		margin-top: 0.2rem;
-		padding-left: 0.3rem;
+		margin-top: 24upx;
+		padding-left: 35upx;
 		background: #fff;
 	}
 
 	.deliverGoods-cent div {
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 35upx;
 		color: #333333;
 		border-top: 1px solid #e2e2e2;
 	}
@@ -145,7 +145,7 @@
 
 	.deliverGoods-cent input {
 		float: right;
-		padding-right: 0.3rem;
+		padding-right: 35upx;
 		height: 96%;
 		text-align: right;
 		border: none;
@@ -154,25 +154,25 @@
 
 	.deliverGoods-cent span {
 		float: right;
-		padding-right: 0.5rem;
+		padding-right: 58upx;
 		height: 100%;
 		background: url(http://op.yoyound.com/static/images/hotmore.png) no-repeat right center;
-		background-size: 0.6rem 0.6rem;
+		background-size: 70upx 70upx;
 	}
 
 	.deliverGoods-btn {
 		position: fixed;
 		left: 50%;
-		bottom: 0.5rem;
+		bottom: 58upx;
 		margin-left: -46%;
 		display: block;
 		width: 92%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 114upx;
+		line-height: 114upx;
 		text-align: center;
 		background-color: #8f8f94;
-		border-radius: 0.1rem;
-		font-size: 0.32rem;
+		border-radius: 12upx;
+		font-size: 32upx;
 		color: #ffffff;
 	}
 </style>

@@ -157,9 +157,9 @@
 	.newProduct-screen {
 		/* 	position:fixed; */
 		/* margin-top: 0.89rem; */
-		height: 0.82rem;
-		line-height: 0.82rem;
-		font-size: 0.28rem;
+		height: 76upx;
+		line-height: 76upx;
+		font-size: 32upx;
 		color: #333333;
 		text-align: center;
 		overflow: hidden;
@@ -176,8 +176,8 @@
 	}
 
 	.newProduct-screen strong {
-		margin-left: 0.05rem;
-		vertical-align: -0.21rem;
+		margin-left: 6upx;
+		vertical-align: -24upx;
 		width: 0;
 		height: 0;
 		border-style: solid;
@@ -189,32 +189,32 @@
 	.newProduct-screen .collage-icon1,
 	.newProduct-screen .collage-icon2 {
 		display: inline-block;
-		width: 0.24rem;
-		height: 0.24rem;
-		vertical-align: -0.04rem;
+		width: 28upx;
+		height: 28upx;
+		vertical-align: -5upx;
 	}
 .active {
 		color: #558ef0;
 	}
 	.newProduct-screen .collage-icon {
 		background: url("http://op.yoyound.com/static/images/collage-icon.png") no-repeat center;
-		background-size: 0.24rem 0.24rem;
+		background-size: 28upx 28upx;
 	}
 
 	.newProduct-screen .collage-icon1 {
 		background: url("http://op.yoyound.com/static/images/collage-icon1.png") no-repeat center;
-		background-size: 0.24rem 0.24rem;
+		background-size: 28upx 28upx;
 	}
 
 	.newProduct-screen .collage-icon2 {
 		background: url("http://op.yoyound.com/static/images/collage-icon2.png") no-repeat center;
-		background-size: 0.24rem 0.24rem;
+		background-size: 28upx 28upx;
 	}
 
 
 	.goodsList-cent {
-		margin-top: 0.75rem;
-		padding: 0.3rem 0 0.2rem;
+		margin-top: 76upx;
+		padding: 35upx 0 24upx;
 		background: #fff;
 		font-size: 0;
 	}
@@ -222,16 +222,16 @@
 	.goodsList-list {
 		display: block;
 		position: relative;
-		margin-bottom: 0.3rem;
-		padding: 0 0.3rem 0 2.9rem;
-		height: 2.4rem;
+		/* margin-bottom: 35upx; */
+		padding: 0 35upx 0 35upx;
+		height: 270upx;
 		font-size: 0;
 	}
 
 	.goodsList-list .follow-centImg {
 		position: absolute;
 		top: 0;
-		left: 0.3rem;
+		left: 35upx;
 		width: 240upx;
 		height: 240upx;
 		background-position: center center;
@@ -239,31 +239,33 @@
 	}
 
 	.goodsList-listh6 {
-		padding-top: 0.05rem;
-		font-size: 0.3rem;
+		padding-left: 250upx;
+		/* padding-top: 6upx; */
+		font-size: 30upx;
 		color: #333333;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		-webkit-line-clamp: 3;
 		white-space: inherit;
 	}
 
 	.goodsList-list span {
 		display: inline-block;
-		margin: 0.25rem 0;
-		padding: 0 0.1rem;
-		height: 0.3rem;
-		line-height: 0.3rem;
-		font-size: 0.2rem;
+		margin: 29upx 0;
+		padding: 0 17upx;
+		height: 35upx;
+		line-height: 35upx;
+		font-size: 24upx;
 		/* color: #fff; */
 		/* background: #FC8872; */
 		border-radius: 100px;
 	}
 
    .goodsList-listp {
-		margin: 35upx 0;
+	   padding-left: 250upx;
+		margin: 8upx 0;
 		font-size: 24upx;
 		color: #666;
 		overflow: hidden;

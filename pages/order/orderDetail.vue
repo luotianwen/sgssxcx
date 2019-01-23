@@ -50,7 +50,7 @@
 		</view>
 		<div class="confirmOrder-footer">应付: <span class="money">¥{{newsitems.totalPrice}}</span>
 
-			<strong class="footer-btn1" v-if="newsitems.state==10" @tap="goPay()">支付订单</strong>
+			<strong class="footer-btn1" style="background-color: #e05e55;color: #ffffff;" v-if="newsitems.state==10" @tap="goPay()">支付订单</strong>
 			<strong class="footer-btn1" v-if="newsitems.state==10" @tap="cancel()">取消订单</strong>
 			<strong class="footer-btn1" v-if="newsitems.state==30" @tap="goOrderOk()">确认收货</strong>
 			 <strong class="footer-btn1" v-if="newsitems.state==40"  @tap="goDelete()" >删除订单</strong>
@@ -284,80 +284,80 @@
 
 <style>
 	/* 	#myOrderInfo { 
-  padding: 0.89rem 0 0.98rem;
+  padding: 0.89rem 0 114upx;
 } */
 	.confirmOrder-address {
-		height: 1.6rem;
+		height: 187upx;
 		width: 100%;
 	}
 
 	.address-bg {
 		width: 100%;
-		height: 0.1rem;
+		height: 0.117upx;
 		background: url(http://op.yoyound.com/static/images/address-icon.png) no-repeat left top;
-		background-size: 100% 0.1rem;
+		background-size: 100% 0.117upx;
 	}
 
 	.address-cent {
 		position: relative;
-		padding: 0.3rem 0 0 0.3rem;
-		height: 1.2rem;
+		padding: 35upx 0 0 35upx;
+		height: 140upx;
 		background-color: #fffde5;
 	}
 
 	.address-centh6 {
-		margin-bottom: 0.1rem;
-		font-size: 0.3rem;
+		margin-bottom: 0.117upx;
+		font-size: 35upx;
 		font-weight: inherit;
 		color: #333;
 	}
 
 	.address-cent .default-icon {
-		margin-right: 0.25rem;
-		width: 0.7rem;
-		height: 0.32rem;
+		margin-right: 29upx;
+		width: 81upx;
+		height: 37upx;
 		background-color: #d45048;
-		border-radius: 0.04rem;
+		border-radius: 5upx;
 		color: #ffffff;
-		font-size: 0.22rem;
+		font-size:  22upx;
 	}
 
 	.address-cent .address-name {
-		margin-right: 0.25rem;
+		margin-right: 29upx;
 	}
 
 	.address-centp {
-		font-size: 0.26rem;
+		font-size: 26upx;;
 		color: #999;
 	}
 
 	  
 	.confirmOrder-describe {
 		position: relative;
-		padding: 0.3rem;
-		margin-top: 0.2rem;
+		padding: 35upx;
+		margin-top: 24upx;
 		background: #fff;
 	}
 
 	.confirmOrder-describe h6 {
-		margin-bottom: 0.1rem;
-		font-size: 0.3rem;
+		margin-bottom: 0.117upx;
+		font-size: 35upx;
 		font-weight: inherit;
 		color: #333;
 	}
 
 	.confirmOrder-describe p {
-		font-size: 0.26rem;
+		font-size: 26upx;;
 		color: #999;
 	}
  
 	.confirmOrder-centList {
-		margin-top: 0.2rem;
+		margin-top: 5upx;
 		background: #fff;
 	}
 
 	.confirmOrder-listCent {
-		padding-left: 0.3rem;
+		padding-left: 35upx;
 	}
 
 	.confirmOrder-listCent .centList-cent:first-child {
@@ -365,11 +365,11 @@
 	}
 
 	.centList-title {
-		padding-right: 0.3rem;
-		margin-left: 0.3rem;
-		height: 0.8rem;
-		line-height: 0.8rem;
-		font-size: 0.26rem;
+		padding-right: 35upx;
+		margin-left: 35upx;
+		height: 94upx;
+		line-height: 94upx;
+		font-size: 26upx;;
 		color: #333333;
 		border-bottom: 1px solid #e2e2e2;
 	}
@@ -384,15 +384,15 @@
 
 	.centList-cent {
 		position: relative;
-		padding: 0.2rem 0.3rem 0.2rem 0;
+		padding: 24upx 35upx 24upx 0;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
 	.centList-centImg {
 		position: relative;
 		float: left;
-		width: 1.6rem;
-		height: 1.6rem;
+		width: 187upx;
+		height: 187upx;
 		background-size: 100% 100%;
 		border: solid 1px #eeeeee;
 	}
@@ -402,70 +402,69 @@
 		top: 0;
 		right: 0;
 		display: block;
-		width: 0.62rem;
-		height: 0.62rem;
+		width: 72upx;
+		height: 72upx;
 	}
 
 	  
 
 	.centList-centRight {
 		position: relative;
-		margin-left: 1.8rem;
-		height: 1.6rem;
+		margin-left: 210upx;
+		height: 200upx;
 	}
 
 	.centList-centRight h6 {
-		margin-bottom: 0.05rem;
+		margin-bottom: 6upx;;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.28rem;
+		font-size: 28upx;
 		color: #333333;
 	}
 
 	.centList-centRight .centRight-h6 {
 		float: right;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #666;
 	}
 
 	.centList-centRight .centRight-h6 span {
-		margin-right: 0.05rem;
-		vertical-align: -0.01rem;
+		margin-right: 6upx; 
 	}
 
 	.centList-centRight p {
-		font-size: 0.24rem;
+		font-size: 24upx;
 	}
 
 	.centList-centRight .happyi-mon {
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #EF593C;
 	}
 
 	.centList-describe {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		width: 75%;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.2rem;
+		font-size: 24upx;
 		color: #999;
 	}
 
 	.centList-Btn,
 	.centList-Btnactive {
 		display: block;
-		width: 1.88rem;
-		height: 0.6rem;
-		line-height: 0.6rem;
+		width: 220upx;
+		height: 70upx;
+		line-height: 70upx;
 		text-align: center;
 		border: 1px solid transparent;
-		border-radius: 0.08rem;
-		font-size: 0.24rem;
+		border-radius: 9upx;
+		font-size: 24upx;
 		color: #666666;
 	}
 
@@ -480,11 +479,11 @@
 	}
 
 	.centList-butt {
-		padding-right: 0.3rem;
-		height: 0.8rem;
-		line-height: 0.8rem;
+		padding-right: 35upx;
+		height: 94upx;
+		line-height: 94upx;
 		text-align: right;
-		font-size: 0.26rem;
+		font-size: 26upx;;
 		color: #666;
 	}
 
@@ -495,10 +494,10 @@
 
 	.goods-total,
 	.freight-total {
-		padding: 0 0.3rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
+		padding: 0 35upx;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 35upx;
 		color: #333;
 		background: #fff;
 	}
@@ -510,7 +509,7 @@
 	}
 
 	.goods-total {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
@@ -519,15 +518,15 @@
 	}
 
 	.myOrderInfo-info {
-		margin-top: 0.2rem;
-		padding-left: 0.3rem;
-		font-size: 0.26rem;
+		margin-top: 24upx;
+		padding-left: 35upx;
+		font-size: 26upx;;
 		background: #fff;
 	}
 
 	.myOrderInfo-info strong {
 		display: inline-block;
-		width: 1.6rem;
+		width: 187upx;
 		color: #333;
 	}
 
@@ -537,13 +536,13 @@
 
 	.myOrderInfo-info .myOrderInfo-infoTop,
 	.myOrderInfo-info .myOrderInfo-infoCent {
-		padding: 0.3rem 0;
+		padding: 35upx 0;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
 	.myOrderInfo-info .myOrderInfo-infoTop p,
 	.myOrderInfo-info .myOrderInfo-infoCent p {
-		margin-bottom: 0.15rem;
+		margin-bottom: 18upx;
 	}
 
 	.myOrderInfo-info .myOrderInfo-infoTop p:last-child,
@@ -554,30 +553,30 @@
 	 
 
 	.myOrderInfo-info .myOrderInfo-total {
-		height: 1rem;
-		line-height: 1rem;
+		height: 117upx;
+		line-height: 117upx;
 	}
 
 	.myOrderInfo-info .myOrderInfo-total span {
 		height: 100%;
 		color: #d45048;
-		background-position: left 0.35rem;
+		background-position: left 41upx;
 	}
 
 	.myOrderInfo-butt,
 	.myOrderInfo-butt1 {
-		margin: 0.2rem 0;
-		height: 1rem;
-		line-height: 1rem;
+		margin: 24upx 0;
+		height: 117upx;
+		line-height: 117upx;
 		text-align: center;
 		background: #fff;
-		font-size: 0.28rem;
+		font-size: 28upx;
 		color: #333;
 	}
  
 	.myOrderInfo-butt1 {
 		position: relative;
-		padding: 0 0.9rem;
+		padding: 0 105upx;
 	}
 
 	.myOrderInfo-butt1 .butt-kefu {
@@ -590,12 +589,12 @@
 
 	.myOrderInfo-butt1 strong {
 		position: absolute;
-		top: 0.3rem;
+		top: 35upx;
 		left: 49.9%;
 		display: inline-block;
 		border-left: 1px solid #999;
-		height: 0.4rem;
-		vertical-align: -0.05rem;
+		height: 47upx;
+		vertical-align: -6upx;;
 	}
 
 	.confirmOrder-footer {
@@ -605,12 +604,12 @@
 		z-index: 500;
 		padding: 0 4%;
 		width: 92%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 114upx;
+		line-height: 114upx;
 		border-top: 1px solid #ccc;
 		background: #fff;
-		color: #333333;
-		font-size: 0.26rem;
+		color: #333333; 
+		font-size: 26upx;
 	}
 
 	.confirmOrder-footer strong {
@@ -618,16 +617,16 @@
 	}
 
 	.confirmOrder-footer .footer-btn {
-		margin: 0.2rem 0 0 0.2rem;
+		margin: 24upx 0 0 24upx;
 		float: right;
 		width: 2.16rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
 		/* color: #ffffff;
 		background-color: #d45048; 
 		border: 1px solid #d45048; */
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 	}
 
 	.confirmOrder-footer .footer-btn2 {
@@ -636,14 +635,14 @@
 	}
 
 	.confirmOrder-footer .footer-btn1 {
-		margin: 0.2rem 0 0 0.2rem;
+		margin: 24upx 0 0 24upx;
 		float: right;
 		display: block;
-		width: 1.75rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		width: 205upx;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 		border: 1px solid #cccccc;
 	}
 

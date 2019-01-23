@@ -331,26 +331,26 @@
 
 <style>
 	#confirmOrder {
-		padding: 0rem 0 1.5rem;
+		padding: 0  0 176upx;
 	}
 
 	.confirmOrder-address {
-		height: 1.6rem;
+		height: 187upx;
 		width: 100%;
 	}
 
 	.address-bg {
 		width: 100%;
-		height: 0.1rem;
+		height: 12upx;
 		background: url(http://op.yoyound.com/static/images/address-icon.png) no-repeat left top;
-		background-size: 100% 0.1rem;
+		background-size: 100% 12upx;
 	}
 
 
 	.address-list {
 		position: relative;
 		width: 100%;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #333;
 		border-bottom: 1px solid #e2e2e2;
 		overflow: hidden;
@@ -359,8 +359,8 @@
 	.address-list .address-listLeft {
 		float: left;
 		position: relative;
-		padding: 0.35rem 0 0 0.3rem;
-		height: 1.2rem;
+		padding: 41upx 0 0 35upx;
+		height: 140upx;
 		z-index: 100;
 		width: 96%;
 		background: #fff;
@@ -371,50 +371,50 @@
 	 
 	.address-cent {
 		position: relative;
-		padding: 0.3rem 0 0 0.3rem;
-		height: 1.2rem;
+		padding: 35upx 0 0 35upx;
+		height: 140upx;
 		background-color: #fffde5;
 	}
 
 	.address-centh6 {
-		margin-bottom: 0.1rem;
-		font-size: 0.3rem;
+		margin-bottom: 12upx;
+		font-size: 35upx;
 		font-weight: inherit;
 		color: #333;
 	}
 
 	.address-cent .default-icon {
-		margin-right: 0.25rem;
-		width: 0.7rem;
-		height: 0.32rem;
+		margin-right: 29upx;
+		width: 82upx;
+		height: 37upx;
 		background-color: #d45048;
-		border-radius: 0.04rem;
+		border-radius: 5upx;
 		color: #ffffff;
-		font-size: 0.22rem;
+		font-size: 22upx;
 	}
 
 	.address-cent .address-name {
-		margin-right: 0.25rem;
+		margin-right: 29upx;
 	}
 
 	.address-centp {
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #999;
 	}
 
 	.address-cent .address-left {
 		position: absolute;
 		top: 50%;
-		right: 0.25rem;
-		margin-top: -0.24rem;
-		width: 0.48rem;
-		height: 0.48rem;
+		right: 29upx;
+		margin-top: -28upx;
+		width: 56upx;
+		height: 56upx;
 		background: url(http://op.yoyound.com/static/images/left.png) no-repeat center;
-		background-size: 0.48rem 0.48rem;
+		background-size: 56upx 56upx;
 	}
 
 	.confirmOrder-centList {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		background: #fff;
 	}
 
@@ -428,8 +428,8 @@
 	}
 
 	.centList-centCent {
-		margin-left: 0.3rem;
-		padding: 0.2rem 0.3rem 0.2rem 0;
+		margin-left: 35upx;
+		padding: 24upx 35upx 24upx 0;
 		border-top: 1px solid #e2e2e2;
 		border-bottom: 1px solid #e2e2e2;
 	}
@@ -437,8 +437,8 @@
 	.centList-centImg {
 		position: relative;
 		float: left;
-		width: 1.6rem;
-		height: 1.6rem;
+		width: 187upx;
+		height: 187upx;
 		background-size: 100% 100%;
 		border: solid 1px #eeeeee;
 	}
@@ -448,44 +448,44 @@
 
 	.centList-centRight {
 		position: relative;
-		margin-left: 1.8rem;
-		height: 1.6rem;
+		margin-left: 210upx;
+		height: 187upx;
 	}
 
 	.centList-centRighth6 {
-		margin-bottom: 0.05rem;
+		margin-bottom: 6upx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.28rem;
-		color: #333333;
+		font-size: 28upx;
+		color: #333333;		 
 	}
 
 	.centList-centRight .centRight-h6 {
 		float: right;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #666;
 	}
 
 	.centList-centRight .centRight-h6span {
-		margin-right: 0.05rem;
-		vertical-align: -0.01rem;
+		margin-right: 6upx;
+		vertical-align: -1upx;
 	}
 
 	.centList-centRightp {
-		font-size: 0.24rem;
+		font-size: 24upx;
 	}
 
 	.centList-centRight .happyi-mon {
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		font-size: 0.3rem;
+		font-size: 35upx;
 
 	}
 
 	.centList-centRight .happyi-monspan {
-		font-size: 0.24rem;
+		font-size: 24upx;
 	}
 
 
@@ -504,11 +504,11 @@
 	.goods-total,
 	.freight-total,
 	.centList-butt {
-		margin-left: 0.3rem;
-		padding-right: 0.3rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.24rem;
+		margin-left: 35upx;
+		padding-right: 35upx;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 24upx;
 		color: #333;
 		background: #fff;
 	}
@@ -523,17 +523,17 @@
 	.centList-butt .centList-buttRight {
 		position: absolute;
 		top: 50%;
-		right: 0.25rem;
-		margin-top: -0.24rem;
-		width: 0.48rem;
-		height: 0.48rem;
+		right: 29upx;
+		margin-top: -28upx;
+		width: 56upx;
+		height: 56upx;
 		background: url(http://op.yoyound.com/static/images/left.png) no-repeat center;
-		background-size: 0.48rem 0.48rem;
+		background-size: 56upx 56upx;
 	}
 
 	.centList-buttLeft {
 		display: inline-block;
-		width: 0.9rem;
+		width: 105upx;
 
 		color: #333;
 	}
@@ -548,12 +548,12 @@
 		left: 0;
 		z-index: 500;
 		width: 100%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 114upx;
+		line-height: 114upx;
 		border-top: 1px solid #fefefe;
 		background: #fff;
 		color: #333333;
-		font-size: 0.28rem;
+		font-size: 28upx;
 	}
 
 	.confirmOrder-footer .footer-btn {
@@ -562,7 +562,7 @@
 		height: 100%;
 		text-align: center;
 		background: #e05e55;
-		font-size: 0.32rem;
+		font-size: 37upx;
 		color: #ffffff;
 	}
 
@@ -580,12 +580,12 @@
 		top: 0;
 		left: 25%;
 		width: 30%;
-		padding: 0.1rem 0 0 4%;
-		line-height: 0.4rem;
+		padding: 12upx 0 0 4%;
+		line-height: 47upx;
 	}
 
 	.confirmOrder-footer span {
-		font-size: 0.32rem;
+		font-size: 37upx;
 
 	}
 
@@ -607,7 +607,7 @@
 		overflow-y: scroll;
 		/* border:1px solid #000; */
 		/* opacity: 0.6; */
-		height: 8rem;
+		height: 936upx;
 		background: #F5F5F5;
 
 		background-color: #ffffff;
@@ -625,7 +625,7 @@
 		overflow-y: scroll;
 		/* border:1px solid #000; */
 		/* opacity: 0.6; */
-		height: 8rem;
+		height: 936upx;
 		background: #F5F5F5;
 
 		background-color: #ffffff;
@@ -635,24 +635,24 @@
 	}
 
 	#voucher .confirmPayment-title {
-		padding-left: 0.3rem;
+		padding-left: 35upx;
 		background: #fff;
 	}
 
 	#voucher .goods-totalRight {
-		left: 0.3rem;
+		left: 35upx;
 	}
 
 	/* .voucher-cent {
-		padding: 0.12rem 0.3rem 0.3rem;
+		padding: 14upx 35upx 35upx;
 	}
  */
 
 	.coupon-list {
 		position: relative;
-		/* 	margin-top: 0.18rem;
-	 	padding-top: 0.35rem; */
-		height: 2.6rem;
+		/* 	margin-top: 0.1936upx;
+	 	padding-top: 41upx; */
+		height: 304upx;
 		background: url("http://op.yoyound.com/static/images/coupon.png") no-repeat center;
 		background-size: 100% 100%;
 	}
@@ -668,11 +668,11 @@
 	.coupon-list .coupon-icon,
 	.coupon-list .coupon-icon1,
 	.coupon-list .coupon-icon2 {
-		top: 0.19rem;
-		right: 0.19rem;
+		top: 22upx;
+		right: 22upx;
 		z-index: 10;
-		width: 1.6rem;
-		height: 1.4rem;
+		width: 187upx;
+		height: 163upx;
 	}
 
 	.coupon-list .coupon-icon {
@@ -691,10 +691,10 @@
 	}
 
 	.coupon-list .slide-img {
-		top: 0.34rem;
-		left: 0.34rem;
-		width: 1.4rem;
-		height: 1.4rem;
+		top: 40upx;
+		left: 40upx;
+		width: 163upx;
+		height: 163upx;
 		background: #eee;
 		background-size: 100% 100%;
 	}
@@ -704,62 +704,62 @@
 	.coupon-list p {
 		position: relative;
 		z-index: 11;
-		padding: 0.3rem 0.2rem 0 2.04rem;
+		padding: 35upx 24upx 0 238upx;
 	}
 
 	.coupon-list h6 {
-		margin-top: 0.04rem;
+		margin-top: 5upx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #333333;
 	}
 
 	.coupon-list .purchase-icon2 {
-		margin: 0.12rem 0 0.08rem;
+		margin: 14upx 0 9upx;
 		display: block;
-		width: 0.76rem;
-		height: 0.32rem;
-		background-size: 0.76rem 0.32rem;
+		width: 88upx;
+		height: 37upx;
+		background-size: 88upx 37upx;
 	}
 
 	.coupon-list p {
-		font-size: 0.24rem;
+		font-size: 24upx;
 		color: #666;
 	}
 
 	.coupon-list .list-butt {
 		position: absolute;
 		left: 0;
-		bottom: 0.1rem;
+		bottom: 12upx;
 		padding: 0 4.5%;
 		width: 91%;
-		height: 0.8rem;
-		line-height: 0.8rem;
-		font-size: 0.26rem;
+		height: 94upx;
+		line-height: 94upx;
+		font-size: 26upx;
 		color: #666;
 	}
 
 	.coupon-list .list-buttMoney {
-		margin-left: 0.05rem;
-		padding-left: 0.4rem;
-		font-size: 0.28rem;
+		margin-left: 6upx;
+		padding-left: 47upx;
+		font-size: 28upx;
 		color: #EF593C;
-		background-size: 0.3rem 0.3rem;
-		vertical-align: -0.01rem;
+		background-size: 35upx 35upx;
+		vertical-align: -1upx;
 	}
 
 	.coupon-list .list-btn,
 	.coupon-list .list-btn1 {
-		margin: 0.15rem 0 0 0.2rem;
+		margin: 18upx 0 0 24upx;
 		float: right;
-		width: 1.3rem;
-		height: 0.5rem;
-		line-height: 0.5rem;
+		width: 152upx;
+		height: 58upx;
+		line-height: 58upx;
 		text-align: center;
-		border-radius: 0.05rem;
-		font-size: 0.24rem;
+		border-radius: 6upx;
+		font-size: 24upx;
 	}
 
 	.coupon-list .list-btn {
@@ -775,19 +775,19 @@
 	.coupon-list .coupon-lableIcon,
 	.coupon-list .coupon-txt {
 		position: absolute;
-		left: 0.04rem;
+		left: 5upx;
 		display: block;
-		width: 1.09rem;
-		height: 1.09rem;
+		width: 128upx;
+		height: 128upx;
 	}
 
 
 
 	.coupon-list .coupon-txt {
-		top: 0.06rem;
+		top: 7upx;
 		z-index: 100;
 		text-align: center;
-		font-size: 0.32rem;
+		font-size: 37upx;
 		color: #fff;
 		transform: rotate(-45deg);
 		-ms-transform: rotate(-45deg);

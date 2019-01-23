@@ -199,39 +199,39 @@
 <style>
 	.applyRefund-top {
 
-		margin: 0.3rem;
-		height: 1.4rem;
-		font-size: 0.28rem;
+		margin: 35upx;
+		height: 163upx;
+		font-size: 32upx;
 		color: #333;
 		background-color: #f5f5f5;
 	}
 
 	.applyRefund-topdiv {
-		margin-bottom: 0.1rem;
+		margin-bottom: 12upx;
 	}
 
 	.applyRefund-topp {
-		margin-bottom: 0.08rem;
+		margin-bottom: 9upx;
 	}
 
 	.deliverGoods-cent {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		background: #fff;
 		border-top: 1px solid #e2e2e2;
 	}
 
 	.deliverGoods-centdiv {
-		padding-left: 0.3rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
+		padding-left: 35upx;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 35upx;
 		color: #333333;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
 	.deliverGoods-centstrong {
 		float: left;
-		margin-right: 0.2rem;
+		margin-right: 24upx;
 		font-weight: inherit;
 	}
 
@@ -248,27 +248,27 @@
 	.deliverGoods-centspan {
 		float: right;
 		margin-right: 1%;
-		padding-right: 0.5rem;
+		padding-right: 58upx;
 		height: 100%;
 		width: 68%;
 		color: #666;
 		background: url(http://op.yoyound.com/static/images/hotmore.png) no-repeat right center;
-		background-size: 0.6rem 0.6rem;
+		background-size: 70upx 70upx;
 	}
 
 	.deliverGoods-btn {
 		position: fixed;
 		left: 50%;
-		bottom: 0.5rem;
+		bottom: 58upx;
 		margin-left: -46%;
 		display: block;
 		width: 92%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 114upx;
+		line-height: 114upx;
 		text-align: center;
 		background-color: #8f8f94;
-		border-radius: 0.1rem;
-		font-size: 0.32rem;
+		border-radius: 12upx;
+		font-size: 32upx;
 		color: #ffffff;
 	}
 </style>

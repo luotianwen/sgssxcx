@@ -4,8 +4,8 @@
 				 <strong class="header-news">{{cartCount}}</strong> <span class="header-cart"
 				 @tap="goCart()"></span>
 			</view>
-		<view class="page-section page-section-spacing swiper">
-			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;">
+		<view class=" page-section-spacing swiper">
+			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 480upx;">
 				<swiper-item v-for="item in data.images" :key="item">
 					<view class="swiper-item  ">
 						<image :src="item" style="width: 100%;" />
@@ -39,8 +39,8 @@
 			<view class="choice-top goodsDetails-choicediv">
 				<image :src="data.logo" class="choice-topstrong"></image>
 				<view class="choice-topmt choice-topp goodsDetails-choicep">价格：&yen; {{price}} </view>
-				<view class="choice-topp">已选：{{spec1}}&nbsp;&nbsp; {{spec2}} </view>
-				<view class="choice-topp stocks">库存：{{stock}}</view>
+				<view class="choice-topp goodsDetails-choicep ">已选：{{spec1}}&nbsp;&nbsp; {{spec2}} </view>
+				<view class="choice-topp goodsDetails-choicep stocks">库存：{{stock}}</view>
 				<!---->
 			</view>
 			<view class="goodsDetails-choiceCent goodsDetails-choicediv">
@@ -97,8 +97,17 @@
          onShow() {
          	this.getCartData();
          },
+		 onShareAppMessage() {
+		 	return {
+		 		title:  this.data.name,
+		 		path: '/pages/index/index',
+		 		imageUrl:this.data.images[0]
+		 	}
+		 },
 		onLoad(d) {
-
+			wx.showShareMenu({
+			  withShareTicket: true
+			});
 			uni.setNavigationBarTitle({
 				title: d.name
 			})
@@ -178,8 +187,16 @@
 				})
 			},
 			addCart: function() {
+				
 				this.type = 0;
 				if (this.show) {
+					if(this.number> this.stock){
+						uni.showModal({
+							content: "库存不够",
+							showCancel: false
+						});
+						return;
+					}
 					if (this.skuId.length > 0) {
 						this.hasLogin = service.getUser().hasLogin;
 
@@ -208,7 +225,15 @@
 			},
 			buy: function() {
 				this.type = 1;
+				
 				if (this.show) {
+					if(this.number> this.stock){
+						uni.showModal({
+							content: "库存不够",
+							showCancel: false
+						});
+						return;
+					}
 					if (this.skuId.length > 0) {
 
 						this.hasLogin = service.getUser().hasLogin;
@@ -306,58 +331,82 @@
 <style>
 	
 	.purchase-header {
-		padding: 0.2rem 0;
+		/* padding-left: 2%; */
 		position: fixed;
 		top: 0;
 		left: 0;
 		z-index: 1000;
 		width: 100%;
-		height: 0.71rem;
+		height: 84upx;
 	}
 	
 	.purchase-header span {
 		position: absolute;
-		top: 0.2rem;
+		top: 0;
 		display: block;
 		z-index: 1000;
-		width: 0.76rem;
-		height: 0.76rem;
+		width:  70upx;
+		height: 70upx;
 		border-radius: 50%;
 	}
 	
 	.purchase-header .header-cart {
-		right: 0.3rem;
+		right: 47upx;
 		background: url(http://op.yoyound.com/static/images/cart1.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 	
 	.purchase-header .header-sear {
-		margin: 0.06rem 0 0 0.3rem;
-		padding-left: 0.6rem;
+		padding-left: 70upx;
+		width: 72%;
+		height: 70upx;
+		line-height: 70upx;
+		text-align: center;
+		font-size: 30upx;
+		color: #999;
+		border-radius: 35upx;
+		background: #eeeeee url(http://op.yoyound.com/static/images/search.png) no-repeat 205upx center;
+		background-size: 41upx 41upx;
+		/* margin: 0.06rem 0 0 0.351upx;
+		padding-left: 70upx;
 		width: 5rem;
-		height: 0.6rem;
-		line-height: 0.6rem;
+		height: 70upx;
+		line-height: 70upx;
 		text-align: center;
 		font-size: 0.26rem;
 		color: #999;
-		border-radius: 0.3rem;
+		border-radius: 0.351upx;
 		background: #eeeeee url(http://op.yoyound.com/static/images/search.png) no-repeat 1.75rem center;
-		background-size: 0.35rem 0.35rem;
+		background-size: 41upx 41upx; */
 	}
 	
 	.purchase-header .header-news {
-		display: block;
+		/* display: block;
 		position: absolute;
-		top: 0.2rem;
-		right: 0.12rem;
+		top: 0.243upx;
+		right: 0.1243upx;
 		z-index: 1001;
 		height: 0.26rem;
 		line-height: 0.26rem;
-		padding: 0 0.1rem;
-		font-size: 0.2rem;
+		padding: 0 12upx;
+		font-size: 0.243upx;
 		color: #FFFFFF;
 		background: #EF593C;
-		border-radius: 100px;
+		border-radius: 100px; */
+		
+		display: block;
+		position: absolute;
+		top: 0;
+		/* top: 0.243upx; */
+		right: 14upx;
+		/* z-index: 1001; */
+		height: 30upx;
+		line-height: 30upx;
+		padding: 0 12upx;
+		font-size: 23upx;
+		color: #FFFFFF;
+		background: #EF593C;
+		border-radius: 117upx;
 	}
 	
 	
@@ -370,7 +419,7 @@
 
 
 	.goodsDetails-title {
-		padding: 0.2rem 0.3rem 0;
+		padding: 23upx 35upx 0;
 		background: #fff;
 	}
 
@@ -381,30 +430,30 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 		white-space: inherit;
-		font-size: 0.36rem;
+		font-size: 36upx;
 		color: #333333;
 	}
 
 	.goodsDetails-title strong {
-		margin: 0 0.08rem;
-		font-size: 0.45rem;
+		margin: 0 10upx;
+		font-size: 53upx;
 	}
 
 	.goodsDetails-title .title-money {
-		height: 1.1rem;
-		line-height: 1.1rem;
-		font-size: 0.28rem;
+		height: 129upx;
+		line-height: 129upx;
+		font-size: 28upx;
 		color: #999;
 	}
 
 	.goodsDetails-title .title-moneyNum {
-		font-size: 0.5rem;
+		font-size: 28upx;
 		/* color: #EF593C; */
 	}
 
 	.goodsDetails-title .title-moneyNum span {
-		margin-right: 0.08rem;
-		font-size: 0.3rem;
+		margin-right: 10upx;
+		font-size: 28upx;
 	}
 
 
@@ -414,7 +463,7 @@
 	}
 
 	.goodsDetails-top {
-		padding-left: 0.3rem;
+		padding-left: 28upx;
 		background: #fff;
 	}
 
@@ -428,8 +477,8 @@
 		left: 0;
 		bottom: 0;
 		z-index: 2000;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 85upx;
+		line-height: 85upx;
 		width: 100%;
 		background: #fff;
 		text-align: right;
@@ -441,14 +490,14 @@
 		position: absolute;
 		top: 0;
 		display: block;
-		width: 1rem;
+		width: 117upx;
 		height: 100%;
 		border-right: 1px solid #e2e2e2;
 	}
 
 	.goodsDetails-butt a {
 		float: right;
-		font-size: 0.3rem;
+		font-size: 28upx;
 		color: #fff;
 		width: 50%;
 		height: 100%;
@@ -471,21 +520,21 @@
 
 
 	.goodsDetails-Btn1 {
-		margin-top: 0.89rem;
+		margin-top: 105upx;
 	}
 
 	.goodsDetails-InfoCent {
-		padding-bottom: 0.1rem;
+		padding-bottom: 12upx;
 		background: #fff;
 	}
 
 	.goodsDetails-InfoCent .InfoCent-text {
-		margin: 0 0 0.2rem 0.3rem;
+		margin: 0 0 0.243upx 0.351upx;
 	}
 
 	.goodsDetails-InfoCent .InfoCent-text li {
-		height: 0.8rem;
-		line-height: 0.8rem;
+		height: 94upx;
+		line-height: 94upx;
 		border-bottom: 1px solid #eee;
 		font-size: 0.228rem;
 		color: #333333;
@@ -493,62 +542,62 @@
 
 	.goodsDetails-InfoCent .InfoCent-text span {
 		display: inline-block;
-		width: 2.03rem;
+		width: 2.0351upx;
 		color: #999;
 	}
 
 	.goodsDetails-InfoCent .InfoCent-Img {
-		padding: 0.2rem;
-		font-size: 0.3rem;
+		padding: 0.243upx;
+		font-size: 0.351upx;
 		color: #333;
 	}
 
 	.goodsDetails-InfoCent .InfoCent-Img img {
 		display: block;
 		width: 100% !important;
-		min-height: 3rem;
+		min-height: 351upx;
 		height: auto !important;
 	}
 
 	.goodsDetails-choice {
-		padding: 0.4rem 0;
+		padding: 47upx 0;
 		position: fixed;
 		left: 0;
-		bottom: 0.99rem;
+		bottom: 85upx;
 		z-index: 2000;
 		width: 100%;
 		background: #fff;
 	}
 
 	.goodsDetails-choicediv {
-		margin: 0 0.3rem;
+		margin: 0 35upx;
 		overflow: hidden;
 	}
 
 	.goodsDetails-choice .goodsDetails-choiceCent {
-		height: 4.5rem;
+		/* height: 330upx; */
 		overflow-y: auto;
 	}
 
 	.goodsDetails-choicep {
-		font-size: 0.3rem;
+		font-size: 28upx;
 		color: #333333;
 	}
 
 	.goodsDetails-choice p {
-		font-size: 0.3rem;
+		font-size: 28upx;
 		color: #333333;
 	}
 
 	.goodsDetails-choice .goodsDetails-choiceBtn {
 		position: absolute;
-		top: 0.1rem;
-		right: 0.3rem;
-		font-size: 0.6rem;
+		top: 12upx;
+		right: 35upx;
+		font-size: 70upx;
 	}
 
 	.goodsDetails-choice .choice-top .choice-topmt {
-		padding-top: 0.15rem;
+		padding-top: 18upx;
 	}
 
 	.goodsDetails-choice .choice-top .stocks {
@@ -557,14 +606,14 @@
 
 	.goodsDetails-choice .choice-topstrong {
 		float: left;
-		width: 2rem;
-		height: 2rem;
+		width: 243upx;
+		height: 243upx;
 		background-size: 100% 100%;
 	}
 
 	.goodsDetails-choice .choice-topp {
-		margin-top: 0.05rem;
-		padding-left: 2.18rem;
+		margin-top: 6upx;
+		padding-left: 255upx;
 	}
 
 	.goodsDetails-choice .choice-cent,
@@ -573,26 +622,26 @@
 	}
 
 	.goodsDetails-choice .choice-cent {
-		padding-bottom: 0.1rem;
+		padding-bottom: 12upx;
 		border-bottom: 1px solid #f1f1f1;
 	}
 
 	.goodsDetails-choice .choice-centp {
-		height: 0.8rem;
-		line-height: 0.8rem;
+		height: 94upx;
+		line-height: 94upx;
 	}
 
 	.goodsDetails-choice .choice-centspan {
 		display: inline-block;
-		margin: 0 0.1rem 0.2rem 0;
-		padding: 0 0.35rem;
-		height: 0.6rem;
-		line-height: 0.6rem;
+		/* margin: 0 12upx 0.243upx 0; */
+		padding: 0 30upx;
+		height: 50upx;
+		line-height: 50upx;
 		background-color: #ffffff;
 		border-radius: 100px;
 		border: solid 1px #7c8895;
 		color: #666;
-		font-size: 0.28rem;
+		font-size: 28upx;
 		
 		 
 	}
@@ -601,13 +650,13 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 3rem;
-		height: 0.64rem;
-		line-height: 0.64rem;
+		width: 351upx;
+		height: 75upx;
+		line-height: 75upx;
 		border: 1px solid #eee;
 		text-align: center;
 		color: #666;
-		font-size: 0.28rem;
+		font-size: 33upx;
 	}
 
 	.goodsDetails-choice .choice-centactive {
@@ -618,42 +667,42 @@
 
 	.goodsDetails-choice .choice-butt {
 		position: relative;
-		margin-top: 0.2rem;
+		margin-top: 0.243upx;
 	}
 
 	.goodsDetails-choice .choice-buttp {
-		height: 0.68rem;
-		line-height: 0.68rem;
+		height: 80upx;
+		line-height: 80upx;
 	}
 
 	.goodsDetails-choice .choice-butt .choice-buttview {
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 3rem;
-		height: 0.64rem;
-		line-height: 0.64rem;
+		width: 351upx;
+		height: 75upx;
+		line-height: 75upx;
 		border: 1px solid #eee;
 		text-align: center;
 		color: #666;
-		font-size: 0.28rem;
+		font-size: 33upx;
 	}
 
 	.goodsDetails-choice .choice-butt input {
 		float: left;
-		width: 1.2rem;
+		width: 40%;
 		height: 95%;
 		background: none;
 		border: none;
-		font-size: 0.2rem;
+		font-size: 24upx;
 		text-align: center;
 	}
 
 	.goodsDetails-choice .choice-buttspan {
 		display: inline-block;
-		width: 0.75rem;
+		width: 87upx;
 		height: 100%;
-		font-size: 0.5rem;
+		font-size: 59upx;
 	}
 
 	.goodsDetails-choice .choice-butt .choice-buttBtn1 {

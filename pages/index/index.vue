@@ -7,18 +7,17 @@
 				 class="header-cart" @tap="goCart()"></span>
 			</view>
 			<view class="page-section page-section-spacing swiper" style="background-color: #fff;">
-				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 240px;width: 96%;padding-left: 2%;">
+				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 475upx;width: 96%;padding-left: 2%;">
 					<swiper-item v-for="item in carousels" :key="item">
 						<view class="swiper-item  ">
 							<image :src="item.logo" style="width: 100%;" />
 						</view>
 					</swiper-item>
-
 				</swiper>
 			</view>
 		</view>
 
-		<view style="margin-top: 0.2rem;margin-left: 2.5%;">
+		<view style="margin-left: 2.5%;">
 			<view class="rectangle3">
 				<view class="rectangle3center">
 					<image src="../../static/img/i1.png" class="rectangle3img"></image>
@@ -38,7 +37,7 @@
 				</view>
 			</view>
 		</view>
-		<view style="margin-top: 0.2rem;">
+		<view >
 
 			<view class="combinedShape" @tap="goCoupon(value)" v-for="(value,key) in coupons" :key="key">
 				<view class="combinedShape-coupon">优惠券</view>
@@ -71,7 +70,7 @@
 			<view class="goodsList-cent  ">
 
 				<view v-for="(value,key) in goodsData" :key="key" @click="goDetail(value)" class="goodsList-list">
-					<image class="follow-centImg" :src="value.logo"></image>
+					  <image class="follow-centImg" :src="value.logo"></image> 
 
 					<view class="follow-centImgh6">{{value.name}}</view>
 					<view class="goodsList-listp">销量： {{value.sales}}</view>
@@ -118,7 +117,17 @@
 			this.getList(); */
 			this.getCartData();
 		},
+		onShareAppMessage() {
+			return {
+				title:  "悠氧商城",
+				path: '/pages/index/index',
+				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+			}
+		},
 		onLoad() {
+			wx.showShareMenu({
+			  withShareTicket: true
+			});
 		    //service.removeUser();
 			this.getList();
 			this.indexData();
@@ -307,12 +316,12 @@
 		top: 0;
 		right: 0;
 		display: block;
-		width: .75rem;
+		width: 80upx;
 		/* padding-right: 0.48rem; */
 		height: 100%;
 
 		background: url("http://op.yoyound.com/static/images/left.png") no-repeat right center;
-		background-size: 0.48rem 0.48rem;
+		background-size: 50upx 50upx;
 	}
 
 	.rectangle-4 {
@@ -345,15 +354,15 @@
 
 		position: relative;
 		top: 0;
-		width: 36px;
-		height: 16px;
+		width: 75upx;
+		height: 19upx;
 		color: #011959;
 
-		font-size: 12px;
+		font-size: 25upx;  
 		font-style: normal;
 		font-stretch: normal;
 		font-weight: 500;
-		line-height: 16px;
+		line-height: 19upx;
 		text-align: center;
 		text-transform: none;
 		text-decoration: none;
@@ -366,16 +375,16 @@
 
 
 	.goodsList-cent1 {
-		margin-top: 0.16rem;
-		/* padding: 0.1rem 0 0; */
+		margin-top: 19upx;
+		/* padding: 12upx0 0; */
 		background: #fff;
 		font-size: 0;
 		margin-left: 3%;
 	}
 
 	.goodsList-cent {
-		margin-top: 0.3rem;
-		padding: 0 0 0.2rem;
+		margin-top: 25upx;
+		padding: 0 0 23upx;
 		background: #fff;
 		font-size: 0;
 	}
@@ -383,16 +392,16 @@
 	.goodsList-list {
 		display: block;
 		position: relative;
-		margin-bottom: 0.3rem;
-		padding: 0 0.3rem 0 2.9rem;
-		height: 2.4rem;
+		/* margin-bottom: 35upx; */
+		padding: 0 35upx 0 35upx;
+		height: 280upx;
 		font-size: 0;
 	}
 
 	.goodsList-list .follow-centImg {
 		position: absolute;
 		top: 0;
-		left: 0.3rem;
+		left: 35upx;
 		width: 240upx;
 		height: 240upx;
 		background-position: center center;
@@ -400,21 +409,23 @@
 	}
 
 	.follow-centImgh6 {
-		padding-top: 0.05rem;
-		font-size: 0.3rem;
+		padding-left: 250upx;
+		 
+		font-size: 35upx;
 		color: #333333;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		-webkit-line-clamp: 3;
 		white-space: inherit;
 	}
 
 
 
 	.goodsList-listp {
-		margin: 35upx 0;
+		padding-left: 250upx;
+		margin: 7upx 0;
 		font-size: 24upx;
 		color: #666;
 		overflow: hidden;
@@ -423,14 +434,14 @@
 	}
 
 	.purchase-header {
-		/* padding: 0.2rem 0; */
+		/* padding: 24upx 0; */
 		/* position: fixed; */
 		padding-left: 2%;
 		top: 0;
 		left: 0;
 		/* z-index: 1000; */
 		width: 100%;
-		height: 0.71rem;
+		height: 84upx;
 		background-color: #FFFFFF;
 	}
 
@@ -439,45 +450,45 @@
 		top: 0;
 		display: block;
 		z-index: 1000;
-		width: 0.60rem;
-		height: 0.60rem;
+		width:  70upx;
+		height: 70upx;
 		border-radius: 50%;
 	}
 
 	.purchase-header .header-cart {
-		right: 0.4rem;
+		right: 47upx;
 		background: url(http://op.yoyound.com/static/images/cart1.png) no-repeat center;
 		background-size: 100% 100%;
 	}
 
 	.purchase-header .header-sear {
-		/* margin: 0.06rem 0 0 0.3rem; */
-		padding-left: 0.6rem;
-		width: 75%;
-		height: 0.6rem;
-		line-height: 0.6rem;
+		/* margin: 0.06rem 0 0 35upx; */
+		padding-left: 70upx;
+		width: 72%;
+		height: 70upx;
+		line-height: 70upx;
 		text-align: center;
-		font-size: 0.26rem;
+		font-size: 30upx;
 		color: #999;
-		border-radius: 0.3rem;
-		background: #eeeeee url(http://op.yoyound.com/static/images/search.png) no-repeat 1.75rem center;
-		background-size: 0.35rem 0.35rem;
+		border-radius: 35upx;
+		background: #eeeeee url(http://op.yoyound.com/static/images/search.png) no-repeat 205upx center;
+		background-size: 41upx 41upx;
 	}
 
 	.purchase-header .header-news {
 		display: block;
 		position: absolute;
 		top: 0;
-		/* top: 0.2rem; */
-		right: 0.12rem;
+		/* top: 24upx; */
+		right: 14upx;
 		/* z-index: 1001; */
-		height: 0.26rem;
-		line-height: 0.26rem;
-		padding: 0 0.1rem;
-		font-size: 0.2rem;
+		height: 30upx;
+		line-height: 30upx;
+		padding: 0 12upx;
+		font-size: 23upx;
 		color: #FFFFFF;
 		background: #EF593C;
-		border-radius: 100px;
+		border-radius: 117upx;
 	}
 
 	.rectangle3center {
@@ -485,15 +496,15 @@
 	}
 
 	.rectangle3img {
-		width: 40px;
-		height: 40px;
+		width: 75upx;
+		height: 75upx;
 	}
 
 	.rectangle3code {
-		width: 45px;
-		height: 17px;
+		width: 152upx;
+		height: 19upx;
 
-		font-size: 12px;
+		font-size: 25upx;
 		font-weight: normal;
 		font-stretch: normal;
 		letter-spacing: -1px;
@@ -505,7 +516,7 @@
 		margin-top: 20upx;
 		/* margin-left: 2.5%; */
 		width: 32%;
-		height: 94px;
+		height: 150upx;
 		border: 0.5px solid #c0cdda;
 		background: #ffffff;
 		box-shadow: 0px 1px 3px 0px #c0cdda;

@@ -179,7 +179,7 @@
 	.circleBar-top .seeIndex-setUp {
 		position: absolute;
 		top: 0;
-		right: 0.2rem;
+		right: 24upx;
 		font-weight: inherit;
 	}
 
@@ -194,7 +194,7 @@
 	.address-list {
 		position: relative;
 		width: 100%;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #333;
 		border-bottom: 1px solid #e2e2e2;
 		overflow: hidden;
@@ -203,7 +203,7 @@
 	.address-list .address-listLeft {
 		float: left;
 		position: relative;
-		padding: 0.35rem 0 0 0.3rem;
+		padding: 0.35rem 0 0 35upx;
 		height: 1.2rem;
 		z-index: 100;
 		width: 96%;
@@ -217,7 +217,7 @@
 		top: 50%;
 		right: 0.35rem;
 		display: block;
-		margin-top: -0.3rem;
+		margin-top: -35upx;
 		width: 0.35rem;
 		height: 0.45rem;
 		background: url(http://op.yoyound.com/static/images/wirt.png) no-repeat center;
@@ -227,8 +227,8 @@
 	.address-listName {
 		font-weight: bold;
 		max-width: 48%;
-		margin-right: 0.2rem;
-		font-size: 0.3rem;
+		margin-right: 24upx;
+		font-size: 35upx;
 		display: inline-block;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -236,7 +236,7 @@
 	}
 
 	.address-default {
-		margin-right: 0.2rem;
+		margin-right: 24upx;
 		display: inline-block;
 		width: 0.7rem;
 		height: 0.32rem;
@@ -254,14 +254,14 @@
 	}
 
 	.address-listCent p {
-		margin-top: 0.05rem;
+		margin-top: 6upx;
 		font-size: 0.26rem;
 		color: #999;
 	}
 
 	.address-listCent h6 {
 		position: relative;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #000;
 	}
 
@@ -273,10 +273,10 @@
 	.addAddress-cent,
 	.addAddress-butt,
 	.addAddress-default {
-		margin-top: 0.2rem;
-		padding-left: 0.3rem;
+		margin-top: 24upx;
+		padding-left: 35upx;
 		background: #fff;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #ccc;
 	}
 
@@ -294,12 +294,12 @@
 
 	.addAddress-top input,
 	.addAddress-cent input {
-		margin: 0 0.2rem 0;
+		margin: 0 24upx 0;
 		width: 80.5%;
 		height: 0.6rem;
 		background: transparent;
 		border: none;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #999;
 	}
 
@@ -323,7 +323,7 @@
 	}
 
 	.addAddress-region {
-		padding: 0.3rem 0;
+		padding: 35upx 0;
 	}
 
 	.addAddress-region>span {
@@ -371,11 +371,11 @@
 
 	.address-cent1 .address-listLeft h6 {
 		margin-bottom: 0.08rem;
-		font-size: 0.3rem;
+		font-size: 35upx;
 	}
 
 	.address-cent1 .returnAddress-default {
-		margin-right: 0.1rem;
+		margin-right: 12upx;
 		display: inline-block;
 		width: 0.7rem;
 		height: 0.32rem;
@@ -388,7 +388,7 @@
 	}
 
 	.address-cent1 .returnAddress-listName {
-		margin-right: 0.1rem;
+		margin-right: 12upx;
 	}
 
 	.address-cent1 .sl-opts {

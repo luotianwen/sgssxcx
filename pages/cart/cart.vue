@@ -75,19 +75,29 @@
 			this.login=service.getUser().hasLogin;
 			this.ids = [];
 			this.isCheckedAll = false;
-		},
-		onLoad(d) {
-
-			uni.showLoading({
-				title: '加载中'
-			});
-			//service.removeUser();
 			if (service.getUser().hasLogin) {
 				this.cartlist();
 			} else {
 				this.getUserInfo();
-
+			
 			}
+		},
+		onShareAppMessage() {
+			return {
+				title:  "悠氧商城",
+				path: '/pages/index/index',
+				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+			}
+		},
+		onLoad(d) {
+             uni.showShareMenu({
+                    withShareTicket: true
+                });
+			uni.showLoading({
+				title: '加载中'
+			});
+			//service.removeUser();
+			
 
 		},
 		onPullDownRefresh() {
@@ -352,7 +362,7 @@
 	}
 
 	.shoppingCart-list {
-		margin-bottom: 0.2rem;
+		margin-bottom: 24upx;
 		background: #fff;
 	}
 
@@ -384,7 +394,7 @@
 	}
 
 	.list-cent .shoppingCart-input {
-		width: 0.55rem;
+		width: 64upx;
 		z-index: 100;
 		opacity: 0;
 	}
@@ -392,16 +402,16 @@
 
 
 	.list-cent1 .list-centClose {
-		height: 2.8rem;
+		height: 327upx;
 	}
 
 	.list-cent2 .list-centClose {
-		height: 2.5rem;
+		height: 293upx;
 	}
 
 	.list-centLeft {
 		position: relative;
-		padding: 0.3rem 0.5rem 0.3rem 0.7rem;
+		padding: 35upx 58upx 10upx 82upx;
 		z-index: 200;
 		background: #fff;
 		-webkit-transition: all 0.3s;
@@ -413,12 +423,12 @@
 		top: 0;
 		right: 0;
 		display: table;
-		min-height: 1.95rem;
+		min-height: 228upx;
 		width: 15%;
 		text-align: center;
 		background-color: #F95F61;
 		color: #fff;
-		font-size: 0.3rem;
+		font-size: 35upx
 	}
 
 	.list-centClosespan {
@@ -435,13 +445,13 @@
 	.shoppingCart-input,
 	.addGoods-icon1 {
 		position: absolute;
-		left: 0.09rem;
+		left: 11upx;
 		top: 50%;
 		z-index: 100;
 		display: block;
-		margin-top: -0.3rem;
-		/* padding-left: 0.5rem; */
-		height: 0.6rem;
+		margin-top: -35upx;
+		 
+		height: 7upx;
 	}
 
 
@@ -450,8 +460,8 @@
 	.centRight-img {
 		position: relative;
 		float: left;
-		width: 1.6rem;
-		height: 1.6rem;
+		width: 187upx;
+		height: 187upx;
 		background-size: 100% 100%;
 		border: solid 1px #eeeeee;
 	}
@@ -461,40 +471,40 @@
 		top: 0;
 		right: 0;
 		display: block;
-		width: 0.62rem;
-		height: 0.62rem;
+		width: 73upx;
+		height: 73upx;
 	}
 
 	.centRight-cent {
 		position: relative;
-		margin-left: 1.8rem;
-		padding-right: 0.2rem;
-		height: 1.6rem;
+		margin-left: 211upx;
+		padding-right: 24upx;
+		height: 187upx;
 	}
 
 	.centRight-centh6 {
-		margin-bottom: 0.05rem;
+		margin-bottom: 6upx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.28rem;
+		font-size: 24upx;
 		color: #333333;
 	}
 
 	.centRight-centp {
-		font-size: 0.24rem;
+		font-size:  24upx;
 	}
 
 	.centRight-cent p span {
 		display: inline-block;
-		margin: 0 0.1rem;
-		height: 0.25rem;
+		margin: 0 12upx;
+		height: 30upx;
 		border-left: 1px solid #ccc;
-		vertical-align: -0.02rem;
+		vertical-align: -3upx;
 	}
 
 	.centRight-cent p strong {
-		margin: 0 0.1rem;
+		margin: 0 12upx;
 		color: #f44834;
 	}
 
@@ -502,59 +512,59 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		font-size: 0.26rem;
+		font-size: 30upx;
 		color: #333333;
 	}
 
 	.centRight-cent .happyi-mon {
-		margin-left: 0.1rem;
+		margin-left: 12upx;
 		color: #EF593C;
 	}
 
 	.centRight-describe {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		width: 75%;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.2rem;
+		font-size: 24upx;
 		color: #999;
 	}
 
 	.list-centData {
 		position: absolute;
-		bottom: 0.3rem;
-		right: 0.2rem;
-		width: 1.9rem;
+		bottom: 35upx;
+		right: 24upx;
+		width: 222upx;
 	}
 
 	.list-centData p {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		width: 100%;
 		text-align: center;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.2rem;
+		font-size: 24upx;
 		color: #999;
 	}
 
 	.list-centData1 {
-		bottom: 0.89em;
+		bottom: 104upx;
 	}
 
 	.centData-num {
-		height: 0.4rem;
-		line-height: 0.4rem;
+		height: 47upx;
+		line-height: 47upx;
 		border: solid 1px #cccccc;
-		border-radius: 0.04rem;
+		border-radius: 5upx;
 		color: #666;
 	}
 
 	.centData-numspan {
-		width: 0.5rem;
+		width: 58upx;
 		height: 100%;
-		font-size: 0.5rem;
+		font-size: 58upx;
 	}
 
 	.centData-num .centData-reduce {
@@ -569,11 +579,11 @@
 
 	.centData-num input {
 		float: left;
-		width: 0.6rem;
+		width: 40%;
 		height: 95%;
 		background: none;
 		border: none;
-		font-size: 0.2rem;
+		font-size: 24upx;
 		text-align: center;
 	}
 
@@ -584,8 +594,8 @@
 		z-index: 500;
 		padding-left: 3%;
 		width: 97%;
-		height: 0.98rem;
-		line-height: 0.98rem;
+		height: 90upx;
+		line-height: 90upx;
 		border-top: 1px solid #fefefe;
 		background: #fff;
 		font-size: 0;
@@ -594,43 +604,43 @@
 	.shoppingCart-footerlabel {
 		display: inline-block;
 		/* 	padding-left: 0.65rem; */
-		font-size: 0.26rem;
+		font-size: 24upx;
 		color: #333333;
 		/* background: url(http://op.yoyound.com/static/images/nocheck.png) no-repeat left center; */
-		/* 	background-size: 0.5rem 0.5rem; */
+		/* 	background-size: 58upx 58upx; */
 	}
 
 	.shoppingCart-footerlabelstrong {
-		margin: 0 0.05rem;
+		margin: 0 6upx;
 	}
 
 	.shoppingCart-footer .footer-btn {
 		float: right;
-		width: 2.2rem;
+		width: 258upx;
 		height: 100%;
 		text-align: center;
 		background: #e05e55;
-		font-size: 0.32rem;
+		font-size: 37upx;
 		color: #ffffff;
 	}
 
 	.shoppingCart-footerspan {
-		margin-right: 0.3rem;
+		margin-right: 35upx;
 		float: right;
-		font-size: 0.26rem;
+		font-size: 24upx;
 		color: #EF593C;
 	}
 
 	.shoppingCart-footer .footer-btn1 {
-		margin: 0.2rem 0.3rem 0;
+		margin: 24upx 35upx 0;
 		float: right;
-		width: 1.75rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		width: 205upx;
+		/* height: 0.54rem;
+		line-height: 0.54rem; */
 		text-align: center;
-		font-size: 0.24rem;
+		font-size:  24upx;
 		color: #333333;
 		border: 1px solid #CCCCCC;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 	}
 </style>

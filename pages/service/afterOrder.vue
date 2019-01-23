@@ -180,13 +180,13 @@
 <style>
 	.myOrder-tab {
 		position: fixed;
-		/* top: 0.89rem; */
+		
 		left: 0;
 		width: 100%;
 		z-index: 100;
-		height: 0.82rem;
-		line-height: 0.82rem;
-		font-size: 0.28rem;
+		height: 96upx;
+		line-height: 96upx;
+		font-size: 32upx;		
 		color: #7c7c7c;
 		border-bottom: 1px solid #e2e2e2;
 		background: #fff;
@@ -203,10 +203,10 @@
 	}
 
 	.myOrder-tab span {
-		margin-left: 0.45rem;
+		margin-left: 52upx;
 		display: inline-block;
-		height: 0.78rem;
-		border-bottom: 0.04rem solid transparent;
+		height: 91upx;
+		border-bottom: 5upx solid transparent;
 	}
 
 	.myOrder-tab .active {
@@ -219,25 +219,25 @@
 	}
 
 	.confirmOrder-centList {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		background: #fff;
 	}
 
 	.centList-title {
-		padding-right: 0.3rem;
-		margin-left: 0.3rem;
-		height: 0.8rem;
-		line-height: 0.8rem;
-		font-size: 0.26rem;
+		padding-right: 35upx;
+		margin-left: 35upx;
+		height: 94upx;
+		line-height: 94upx;
+		font-size: 26upx;
 		color: #333333;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
 	.centList-title .headImg {
-		margin: 0 0.1rem 0 0.2rem;
+		margin: 0 12upx0 24upx;
 		display: inline-block;
-		width: 0.36rem;
-		height: 0.36rem;
+		width: 42upx;
+		height: 42upx;
 		border-radius: 50%;
 		vertical-align: middle;
 		background-size: 100% 100%;
@@ -253,15 +253,15 @@
 
 	.centList-cent {
 		position: relative;
-		padding: 0.2rem 0.3rem;
+		padding: 24upx 35upx;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
 	.centList-centImg {
 		position: relative;
 		float: left;
-		width: 1.6rem;
-		height: 1.6rem;
+		width: 187upx;
+		height: 187upx;
 		background-size: 100% 100%;
 		border: solid 1px #eeeeee;
 	}
@@ -271,53 +271,53 @@
 		top: 0;
 		right: 0;
 		display: block;
-		width: 0.62rem;
-		height: 0.62rem;
+		width: 72upx;
+		height: 72upx;
 	}
 
 	.centList-centRight {
 		position: relative;
-		margin-left: 1.8rem;
-		height: 1.6rem;
+		margin-left: 210upx;
+		height: 187upx;
 	}
 
 	.centList-centRight h6 {
-		margin-bottom: 0.05rem;
+		margin-bottom: 6upx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.28rem;
-		color: #333333;
+		font-size: 32upx;
+				color: #333333;
 	}
 
 	.centList-centRight .centRight-h6 {
 		float: right;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #666;
 	}
 
 	.centList-centRight .centRight-h6 span {
-		margin-right: 0.05rem;
-		vertical-align: -0.01rem;
+		margin-right: 6upx;
+		vertical-align: -1upx;
 	}
 
 	.centList-centRight p {
-		font-size: 0.24rem;
+		font-size: 24upx;
 	}
 
 	.centList-centRight .happyi-mon {
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #EF593C;
 	}
 
 	.centList-butt {
-		padding: 0 0.3rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.26rem;
+		padding: 0 35upx;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 26upx;
 		color: #666;
 	}
 
@@ -332,36 +332,36 @@
 	}
 
 	.centList-butt .buttState-btn {
-		margin: 0.2rem 0 0 0.2rem;
+		margin: 24upx 0 0 24upx;
 		float: right;
 		display: block;
-		width: 1.75rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		width: 204upx;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 		border: 1px solid #cccccc;
 	}
 
 	.buttState1 .integral .happyi-mon {
-		margin-left: 0.1rem;
+		margin-left: 12upx;
 	}
 
 	.buttState1 .btn {
 		float: right;
-		margin-top: 0.2rem;
-		width: 2.16rem;
-		height: 0.54rem;
-		line-height: 0.54rem;
+		margin-top: 24upx;
+		width: 252upx;
+		height: 63upx;
+		line-height: 63upx;
 		text-align: center;
 		color: #ffffff;
 		background-color: #d45048;
 		border: 1px solid #d45048;
-		border-radius: 0.08rem;
+		border-radius: 9upx;
 	}
 
 	.buttState1 .btn strong {
-		margin-left: 0.05rem;
+		margin-left: 6upx;
 	}
 
 	.buttState1 .btn1 {
@@ -371,16 +371,16 @@
 
 	.goods-total,
 	.freight-total {
-		padding: 0 0.3rem;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.3rem;
+		padding: 0 35upx;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 35upx;
 		color: #333;
 		background: #fff;
 	}
 
 	.goods-total {
-		margin-top: 0.2rem;
+		margin-top: 24upx;
 		border-bottom: 1px solid #e2e2e2;
 	}
 
@@ -389,7 +389,6 @@
 	}
 
 	#refundAfterSale {
-		/* padding-top: 0.89rem;
-  overflow: hidden; */
+		 
 	}
 </style>

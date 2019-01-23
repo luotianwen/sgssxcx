@@ -352,8 +352,8 @@
 		z-index: 100;
 		height: 0.82rem;
 		line-height: 0.82rem;
-		font-size: 0.28rem;
-		color: #333;
+		font-size: 32upx;
+			color: #333;
 		background: #fff;
 	}
 
@@ -382,7 +382,7 @@
 	}
 
 	.myCoupon {
-		padding: 80upx 0.3rem 0;
+		padding: 80upx 35upx 0;
 	}
 
 	.coupon-list {
@@ -441,7 +441,7 @@
 	.coupon-list p {
 		position: relative;
 		z-index: 11;
-		padding: 0 0.2rem 0 2.04rem;
+		padding: 0 24upx 0 2.04rem;
 	}
 
 	.coupon-list h6 {
@@ -449,7 +449,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		color: #333333;
 	}
 
@@ -469,7 +469,7 @@
 	.coupon-list .list-butt {
 		position: absolute;
 		left: 0;
-		bottom: 0.1rem;
+		bottom: 12upx;
 		padding: 0 4.5%;
 		width: 91%;
 		height: 0.8rem;
@@ -479,23 +479,23 @@
 	}
 
 	.coupon-list .list-buttMoney {
-		margin-left: 0.05rem;
+		margin-left: 6upx;
 		padding-left: 0.4rem;
-		font-size: 0.28rem;
-		color: #EF593C;
-		background-size: 0.3rem 0.3rem;
+		font-size: 32upx;
+				color: #EF593C;
+		background-size: 35upx 35upx;
 		vertical-align: -0.01rem;
 	}
 
 	.coupon-list .list-btn,
 	.coupon-list .list-btn1 {
-		margin: 0.15rem 0 0 0.2rem;
+		margin: 0.15rem 0 0 24upx;
 		float: right;
 		width: 1.3rem;
 		height: 0.5rem;
 		line-height: 0.5rem;
 		text-align: center;
-		border-radius: 0.05rem;
+		border-radius: 6upx;
 		font-size: 0.24rem;
 	}
 
@@ -546,13 +546,13 @@
 	}
 
 	.coupon-lable {
-		margin: 0.1rem 0 0.1rem 2.04rem;
+		margin: 12upx0 112upx.04rem;
 		display: inline-block;
 		padding: 0 0.08rem;
 		height: 0.32rem;
 		line-height: 0.32rem;
 		text-align: center;
-		font-size: 0.2rem;
+		font-size: 24upx;
 		color: #EF593C;
 		border: 1px solid #EF593C;
 		border-radius: 0.03rem;

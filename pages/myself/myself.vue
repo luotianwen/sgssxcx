@@ -29,7 +29,7 @@
 			<view class="listCent happyi-co4" @tap="goAddress()">收货地址 <a class="happyi-left"></a></view>
 			<view class="listCent happyi-co3" @tap="goCoupon()">我的券<a class="happyi-left">{{coupons}}</a></view>
 			<!-- <view class="listCent happyi-co5" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view> -->
-			<view class="listCent  happyi-co5" style="padding 0 0 0 0.84rem ">
+			<view class="listCent  happyi-co5" style="padding 0 0 0 98upx ">
 			
 				<button plain="true" open-type="feedback" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					反馈</button>
@@ -38,7 +38,7 @@
 			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
-			<view class="listCent  happyi-co7" style="padding 0 0 0 0.84rem ">
+			<view class="listCent  happyi-co7" style="padding 0 0 0 98upx ">
 
 				<button plain="true" open-type="contact" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					客服</button>
@@ -68,9 +68,18 @@
 				code:"",
 			}
 		},
+		onShareAppMessage() {
+			return {
+				title:  "悠氧商城",
+				path: '/pages/index/index',
+				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+			}
+		},
 		onLoad(d) {
 			console.log(JSON.stringify(service.getUser()));
-
+			uni.showShareMenu({
+                    withShareTicket: true
+                });
 			if (service.getUser().hasLogin) {
 				this.login = true;
 				this.uerInfo = service.getUser();
@@ -244,7 +253,7 @@
 
 	.happyiIndex-header {
 		position: relative;
-		padding-top: 0.05rem;
+		padding-top: 6upx;
 		width: 100%;
 		height: 200upx;
 		color: #fff;
@@ -282,16 +291,16 @@
 	.header-top {
 		position: relative;
 		z-index: 100;
-		margin: 0 0.21rem 0 0.37rem;
-		height: 0.56rem;
-		line-height: 0.56rem;
+		margin: 0 25upx 0 43upx;
+		height: 65upx;
+		line-height: 65upx;
 		font-size: 13px;
 	}
 
 	 
 
 	.header-topDetailed {
-		padding-left: 0.32rem;
+		padding-left: 37upx;
 		border-left: 1px solid #fff;
 	}
 
@@ -301,14 +310,14 @@
 	.header-info {
 		position: relative;
 		z-index: 100;
-		margin: 0.45rem 0 0.38rem;
-		padding: 0 0.4rem 0 0.3rem;
+		margin: 52upx 0 44upx;
+		padding: 0 46upx 0 35upx;
 	}
 
 	.header-info .infoRight-title {
-		margin-bottom: 0.05rem;
-		padding-top: 0.1rem;
-		font-size: 0.4rem;
+		margin-bottom: 6upx;
+		padding-top: 12upx;
+		font-size: 46upx;
 		font-weight: inherit;
 	}
 
@@ -316,12 +325,12 @@
 	.header-infoRight {
 		position: absolute;
 		top: 0;
-		right: 0.25rem;
-		padding-right: 0.4rem;
-		width: 1.12rem;
-		height: 1.12rem;
+		right: 30upx;
+		padding-right: 46upx;
+		width: 131upx;
+		height: 131upx;
 		background: url(http://op.yoyound.com/static/images/left1.png) no-repeat right center;
-		background-size: 0.2rem 0.34rem;
+		background-size: 24upx 40upx;
 	}
 
 	.header-infoRight input,
@@ -330,9 +339,9 @@
 		top: 0;
 		left: 0;
 		display: block;
-		width: 1.12rem;
-		height: 1.12rem;
-		border: 0.04rem solid #fff;
+		width: 131upx;
+		height: 131upx;
+		border: 5upx solid #fff;
 	}
 
 	.header-infoRight img {
@@ -349,9 +358,9 @@
 
 	.header-infoLeft {
 		display: block;
-		width: 1.12rem;
-		height: 1.12rem;
-		border: 0.04rem solid #fff;
+		width: 131upx;
+		height: 131upx;
+		border: 5upx solid #fff;
 		background-size: 100% 100%;
 		border-radius: 50%;
 	}
@@ -359,9 +368,9 @@
 	  
 
 	.header-butt {
-		margin-bottom: 0.2rem;
+		margin-bottom: 24upx;
 		width: 100%;
-		height: 1.2rem;
+		height: 140upx;
 		font-size: 0;
 		background-color: #fff;
 	}
@@ -375,40 +384,40 @@
 
 	.header-butt a strong {
 		position: relative;
-		margin-top: 0.2rem;
-		font-size: 0.3rem;
+		margin-top: 24upx;
+		font-size: 35upx;
 		color: #333;
 		font-weight: inherit;
 	}
 
 	.header-butt a strong i {
 		position: absolute;
-		top: 0.04rem;
-		right: -0.1rem;
-		width: 0.08rem;
-		height: 0.08rem;
+		top: 5upx;
+		right: -12upx;
+		width: 9upx;
+		height: 9upx;
 		background-color: #ea3e27;
 		border-radius: 50%;
 	}
 
 	.header-butt a span {
 		display: block;
-		font-size: 0.26rem;
+		font-size: 30upx;
 		color: #666;
 	}
   
 
 	.happyiIndex-list {
-		margin-bottom: 0.2rem;
+		margin-bottom: 24upx;
 		background: #fff;
 	}
 
 	.happyiIndex-list .listCent {
 		position: relative;
-		padding: 0 0.3rem 0 0.84rem;
-		height: 0.99rem;
-		line-height: 0.99rem;
-		font-size: 0.3rem;
+		padding: 0 35upx 0 98upx;
+		height: 97upx;
+		line-height: 97upx;
+		font-size: 35upx;
 		color: #333;
 		border-bottom: 1px solid #e2e2e2;
 	}
@@ -420,13 +429,13 @@
 	.happyiIndex-list .happyi-left {
 		position: absolute;
 		top: 0;
-		right: 0.2rem;
-		padding-right: 0.48rem;
+		right: 24upx;
+		padding-right: 56upx;
 		height: 100%;
-		font-size: 0.28rem;
+		font-size: 33upx;
 		color: #f76654;
 		background: url("http://op.yoyound.com/static/images/left.png") no-repeat right center;
-		background-size: 0.48rem 0.48rem;
+		background-size: 56upx 56upx;
 	}
 
 	.happyiIndex-list .happyi-co3 .happyi-left {
@@ -434,46 +443,46 @@
 	}
 
 	.happyiIndex-list .happyi-co1 {
-		background: url(http://op.yoyound.com/static/images/m1.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background: url(http://op.yoyound.com/static/images/m1.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 
 	.happyiIndex-list .happyi-co2 {
-		background: url(http://op.yoyound.com/static/images/m2.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background: url(http://op.yoyound.com/static/images/m2.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 
 	.happyiIndex-list .happyi-co3 {
-		background: url(http://op.yoyound.com/static/images/m3.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background: url(http://op.yoyound.com/static/images/m3.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 	.happyiIndex-list .happyi-co4 {
-		background: url(http://op.yoyound.com/static/images/m4.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background: url(http://op.yoyound.com/static/images/m4.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 	 
 	.happyiIndex-list .happyi-co5 {
-		background: url(http://op.yoyound.com/static/images/m5.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background: url(http://op.yoyound.com/static/images/m5.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 	.happyiIndex-list .happyi-co6 {
-		background:url(http://op.yoyound.com/static/images/m6.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background:url(http://op.yoyound.com/static/images/m6.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 	.happyiIndex-list .happyi-co7 {
-		background: url(http://op.yoyound.com/static/images/m7.png) no-repeat 0.25rem center;
-		background-size: 0.4rem 0.4rem;
+		background: url(http://op.yoyound.com/static/images/m7.png) no-repeat 30upx center;
+		background-size: 46upx 46upx;
 	}
 	 .happyiIndex-list .happyi-co8 {
-	  	background: url(http://op.yoyound.com/static/images/m8.png) no-repeat 0.25rem center;
-	  	background-size: 0.4rem 0.4rem;
+	  	background: url(http://op.yoyound.com/static/images/m8.png) no-repeat 30upx center;
+	  	background-size: 46upx 46upx;
 	  }
 	 .happyiIndex-list .happyi-co9 {
-	  	background: url("http://op.yoyound.com/static/images/about.png") no-repeat 0.25rem center;
-	  	background-size: 0.4rem 0.4rem;
+	  	background: url("http://op.yoyound.com/static/images/about.png") no-repeat 30upx center;
+	  	background-size: 46upx 46upx;
 	  }
 	  .happyiIndex-list .happyi-co10 {
-	   	background: url("http://op.yoyound.com/static/images/about.png") no-repeat 0.25rem center;
-	   	background-size: 0.4rem 0.4rem;
+	   	background: url("http://op.yoyound.com/static/images/about.png") no-repeat 30upx center;
+	   	background-size: 46upx 46upx;
 	   }
 </style>

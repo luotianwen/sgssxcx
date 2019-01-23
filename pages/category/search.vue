@@ -1,28 +1,28 @@
 <template>
-		<view id="goodsList">
-			<view class="goodsList-header">
-				<view class="newProduct-screen  ">
-					<view :class="['newProduct-screenspan',{'active':sortData==1}]" @click="getSelet(1)">销量</view>
-					<view :class="['newProduct-screenspan',{'active':sortData==2}]" @click="getSelet(2)">时间</view>
-					<view :class="['newProduct-screenspan',{'active':sortData==3||sortData==4}]" @click="getSelet(3)">价格
-						<view class="collage-icon" v-if="sortValue=='asc'"></view>
-						<view class="collage-icon1" v-else-if="sortValue=='desc'"></view>
-						<view class="collage-icon2" v-else></view>
+	<view id="goodsList">
+		<view class="goodsList-header">
+			<view class="newProduct-screen  ">
+				<view :class="['newProduct-screenspan',{'active':sortData==1}]" @click="getSelet(1)">销量</view>
+				<view :class="['newProduct-screenspan',{'active':sortData==2}]" @click="getSelet(2)">时间</view>
+				<view :class="['newProduct-screenspan',{'active':sortData==3||sortData==4}]" @click="getSelet(3)">价格
+					<view class="collage-icon" v-if="sortValue=='asc'"></view>
+					<view class="collage-icon1" v-else-if="sortValue=='desc'"></view>
+					<view class="collage-icon2" v-else></view>
 
-					</view>
 				</view>
-			</view>
-			<view class="goodsList-cent  ">
-
-				<view @click="goGoodDetail(item)" class="goodsList-list" v-for="item in listData" :key="item">
-					<image class="follow-centImg" lazy-load :src="item.logo"></image>
-					<view class="follow-centImgh6">{{item.name}}</view>
-					<view class="goodsList-listp">销量： {{item.sales}}</view>
-					<view class="goodsList-listp">售价：¥{{item.price}}</view>
-				</view>
-				<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
 			</view>
 		</view>
+		<view class="goodsList-cent  ">
+
+			<view @click="goGoodDetail(item)" class="goodsList-list" v-for="item in listData" :key="item">
+				<image class="follow-centImg" lazy-load :src="item.logo"></image>
+				<view class="follow-centImgh6">{{item.name}}</view>
+				<view class="goodsList-listp">销量： {{item.sales}}</view>
+				<view class="goodsList-listp">售价：¥{{item.price}}</view>
+			</view>
+			<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -142,7 +142,8 @@
 	.active {
 		color: #558ef0;
 	}
-#goodsList .goodsList-header {
+
+	#goodsList .goodsList-header {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -151,22 +152,24 @@
 		border-bottom: 1px solid #f1f1f1;
 		background: #fefefe;
 	}
-	 
+
 
 	.discount-sears {
-		right: 0.2rem;
+		right: 24upx;
 	}
-.newProduct-screen {
+
+	.newProduct-screen {
 		/* 	position:fixed; */
-		/* margin-top: 0.89rem; */
-		height: 0.82rem;
-		line-height: 0.82rem;
-		font-size: 0.28rem;
+		/* margin-top: 104upx; */
+		height: 76upx;
+		line-height: 76upx;
+		font-size: 32upx;
 		color: #333333;
 		text-align: center;
 		overflow: hidden;
 		background-color: #fff;
 	}
+
 	.newProduct-screenspan {
 		float: left;
 		width: 33%;
@@ -177,8 +180,8 @@
 	}
 
 	.newProduct-screenstrong {
-		margin-left: 0.05rem;
-		vertical-align: -0.21rem;
+		margin-left: 6upx;
+		vertical-align: -24upx;
 		width: 0;
 		height: 0;
 		border-style: solid;
@@ -190,30 +193,30 @@
 	.newProduct-screen .collage-icon1,
 	.newProduct-screen .collage-icon2 {
 		display: inline-block;
-		width: 0.24rem;
-		height: 0.24rem;
-		vertical-align: -0.04rem;
+		width: 28upx;
+		height: 28upx;
+		vertical-align: -5upx;
 	}
 
 	.newProduct-screen .collage-icon {
 		background: url("http://op.yoyound.com/static/images/collage-icon.png") no-repeat center;
-		background-size: 0.24rem 0.24rem;
+		background-size: 28upx 28upx;
 	}
 
 	.newProduct-screen .collage-icon1 {
 		background: url("http://op.yoyound.com/static/images/collage-icon1.png") no-repeat center;
-		background-size: 0.24rem 0.24rem;
+		background-size: 28upx 28upx;
 	}
 
 	.newProduct-screen .collage-icon2 {
 		background: url("http://op.yoyound.com/static/images/collage-icon2.png") no-repeat center;
-		background-size: 0.24rem 0.24rem;
-	} 
+		background-size: 28upx 28upx;
+	}
 
-	
+
 	.goodsList-cent {
-		margin-top: 0.75rem;
-		padding: 0.3rem 0 0.2rem;
+		margin-top: 76upx;
+		padding: 35upx 0 24upx;
 		background: #fff;
 		font-size: 0;
 	}
@@ -221,16 +224,16 @@
 	.goodsList-list {
 		display: block;
 		position: relative;
-		margin-bottom: 30upx;
-		padding: 0 30upx 0 290upx;
-		height: 2.4rem;
+		/* margin-bottom: 35upx; */
+		padding: 0 35upx 0 35upx;
+		height: 270upx;
 		font-size: 0;
 	}
 
 	.goodsList-list .follow-centImg {
 		position: absolute;
 		top: 0;
-		left: 30upx;
+		left: 35upx;
 		width: 240upx;
 		height: 240upx;
 		background-position: center center;
@@ -238,6 +241,7 @@
 	}
 
 	.follow-centImgh6 {
+		padding-left: 250upx;
 		padding-top: 5upx;
 		font-size: 30upx;
 		color: #333333;
@@ -245,13 +249,14 @@
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		-webkit-line-clamp: 3;
 		white-space: inherit;
 	}
 
 
 	.goodsList-listp {
-		margin: 35upx 0;
+		padding-left: 250upx;
+		margin: 8upx 0;
 		font-size: 24upx;
 		color: #666;
 		overflow: hidden;

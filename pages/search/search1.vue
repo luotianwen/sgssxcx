@@ -9,7 +9,8 @@
 
 		<div class="citySearch citySearch-hot">
 			<h6 class="citySearch-title">热门搜索</h6>
-			<div class="historyRecord clearfix"><span   @tap="searchContent(item.name)" v-for="(item, index) in listData" :key="index" >{{item.name}}</span> </div>
+			<div class="historyRecord clearfix"><span @tap="searchContent(item.name)" v-for="(item, index) in listData" :key="index">{{item.name}}</span>
+			</div>
 		</div>
 
 	</view>
@@ -21,12 +22,12 @@
 </template>
 
 <script>
-		import service from '../../service.js';
+	import service from '../../service.js';
 	export default {
 		data() {
 			return {
 				listData: [],
-				name: "" 
+				name: ""
 			}
 		},
 		onLoad() {
@@ -41,16 +42,16 @@
 
 
 		methods: {
-			 clear:function(){
-				 this.name="";
-			 },
+			clear: function() {
+				this.name = "";
+			},
 			getList() {
-					uni.request({
+				uni.request({
 					url: service.hotData(),
-					 
+
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
-							this.listData =data.data.data;
+							this.listData = data.data.data;
 						}
 					},
 					fail: (data, code) => {
@@ -59,13 +60,13 @@
 				})
 			},
 			searchContent: function(title) {
-				let _title=title||this.name;
-				  if(undefined==_title||_title.length==0){
+				let _title = title || this.name;
+				if (undefined == _title || _title.length == 0) {
 					return;
-				}  
-				 uni.navigateTo({
-				 	url: "../search/search?title="+_title
-				 })
+				}
+				uni.navigateTo({
+					url: "../search/search?title=" + _title
+				})
 			},
 
 
@@ -76,88 +77,89 @@
 <style>
 	page {
 		background-color: #fff;
-		 
+
 	}
+
 	.recruitScreen-header {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 79.1%;
-		padding: 0.18rem 1.2rem 0.14rem 0.3rem;
-		height: 0.6rem;
-		line-height: 0.6rem;
-		font-size: 0.28rem;
+		padding: 21upx 140upx 16upx 35upx;
+		height: 70upx;
+		line-height: 70upx;
+		font-size: 33upx;
 		background: #fff;
 		border-bottom: 1px solid #f1f1f1;
 	}
 
 	.header-left {
 		position: relative;
-		height: 0.6rem;
-		line-height: 0.6rem;
-		background: #EEEEEE url(http://op.yoyound.com/static/images/search.png) no-repeat 0.25rem center;
-		background-size: 0.35rem 0.35rem;
+		height: 70upx;
+		line-height: 70upx;
+		background: #EEEEEE url(http://op.yoyound.com/static/images/search.png) no-repeat 29upx center;
+		background-size: 40upx 40upx;
 		border-radius: 100px;
 	}
 
 	.header-left input {
-		margin-left: 0.68rem;
+		margin-left: 79upx;
 		width: 75%;
-		height: 0.5rem;
+		height: 59upx;
 		background: transparent;
 		border: none;
-		font-size: 0.3rem;
+		font-size: 30upx;
 		color: #666;
 		vertical-align: middle;
 	}
 
 	.header-left input::-webkit-input-placeholder {
-		font-size: 0.26rem;
+		font-size: 24upx;
 		color: #999999;
 	}
 
 	.header-left input::-moz-placeholder {
 		/* Mozilla Firefox 19+ */
-		font-size: 0.26rem;
+		font-size: 24upx;
 		color: #999999;
 	}
 
 	.header-left input:-moz-placeholder {
 		/* Mozilla Firefox 4 to 18 */
-		font-size: 0.26rem;
+		font-size: 24upx;
 		color: #999999;
 	}
 
 	.header-left input:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		font-size: 0.26rem;
+		font-size: 24upx;
 		color: #999999;
 	}
 
 	.header-leftLeft {
 		display: block;
 		position: absolute;
-		top: 0.27rem;
-		left: 0.3rem;
-		width: 1.35rem;
-		height: 0.38rem;
-		line-height: 0.38rem;
+		top: 32upx;
+		left: 35upx;
+		width: 157upx;
+		height: 44upx;
+		line-height: 44upx;
 		text-align: center;
 		color: #4090f7;
 		border-right: 1px solid #eee;
 	}
 
 	.header-leftLeft span {
-		margin-left: 0.05rem;
+		margin-left: 7upx;
 		color: #ccc;
 	}
 
 	.header-right {
 		position: absolute;
 		top: 0;
-		right: 0.3rem;
-		font-size: 0.32rem;
-		line-height: 0.9rem;
+		right: 35upx;
+		font-size: 37upx;
+		line-height: 105upx;
 		height: 100%;
 		color: #999;
 	}
@@ -165,51 +167,51 @@
 	.recruitScreen-reset {
 		position: absolute;
 		top: 0;
-		right: 0.15rem;
-		width: 0.42rem;
+		right: 17upx;
+		width: 49upx;
 		height: 100%;
 		background: url("http://op.yoyound.com/static/images/clear.png") no-repeat center;
-		background-size: 0.42rem 0.42rem;
+		background-size: 49upx 49upx;
 	}
 
 	#citySearch {
-		padding-top: 0.9rem;
+		padding-top: 105upx;
 	}
 
 	.citySearch {
-		padding-bottom: 0.2rem;
+		padding-bottom: 24upx;
 	}
 
 	.citySearch-title {
-		padding: 0 0.3rem;
-		height: 0.9rem;
-		line-height: 0.9rem;
-		font-size: 0.28rem;
+		padding: 0 35upx;
+		height: 105upx;
+		line-height: 105upx;
+		font-size: 33upx;
 		color: #333;
 	}
 
 
 	.historyRecord {
-		padding: 0 0.3rem 0 0.1rem;
+		padding: 0 35upx 0 12upx;
 		font-size: 0;
-		background:#fff;
+		background: #fff;
 	}
 
 	.historyRecord span {
 		float: left;
-		margin: 0 0 0.2rem 0.2rem;
-		padding: 0 0.25rem;
-		height: 0.5rem;
-		line-height: 0.5rem;
+		margin: 0 0 24upx 24upx;
+		padding: 0 29upx;
+		height: 59upx;
+		line-height: 59upx;
 		color: #333;
-		font-size: 0.24rem;
+		font-size: 24upx;
 		background: #F5F5F5;
-		border-radius: 0.25rem;
+		border-radius: 29upx;
 	}
 
 	.citySearch-hot {
 		border-top: 1px solid #e2e2e2;
-		background:#fff;
+		background: #fff;
 	}
 
 	.citySearch-hot .citySearch-title {
@@ -218,23 +220,23 @@
 
 
 	.historyList {
-		
+
 		position: fixed;
-		top: 0.94rem;
+		top: 110upx;
 		left: 0;
 		z-index: 100;
 		padding: 0 4%;
 		width: 93%;
-		height: 92.85vh;
+		height: 92.85upx;
 		overflow-y: auto;
 		background: #fff;
 	}
 
 	.historyList .record-list {
-		height: 0.89rem;
-		line-height: 0.89rem;
+		height: 104upx;
+		line-height: 104upx;
 		color: #666666;
-		font-size: 0.3rem;
+		font-size: 35upx;
 		border-bottom: 1px solid #e2e2e2;
 	}
 

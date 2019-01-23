@@ -1,118 +1,33 @@
 <template>
-	<view class="about">
-		<view class="content">
-			<view class="qrcode">
-				<image src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/app_download.png" @longtap="save"></image>
-				<text>扫码添加客服</text>
-			</view>
-			<view class="desc">
-				 
-				关于商城说明
-			</view>
-			<!-- <button type="primary" @tap="share">分享</button> -->
+		<view class="content">我们只做品牌正品，我们一切的付出与努力只为创造完美的购物体验！
+YOYOUND SPORT 运用创新化的商业理念，通过现代电子商务模式与传统零售业进行创新性融合，运用网络技术与国际、国内优质合作伙伴进行商务对接，以先进的直销营销思维，配合高效完善的物流系统，真正做到物美价廉，快捷便利的为消费者提供高品质正品授权的运动户外产品，逐步成为优质的运动户外用品商城！
+			 <button type="primary" open-type="share">分享</button>  
 		</view>
 		 
-	</view>
 </template>
 
 <script>
 	export default {
 		data(){
 			return {
-				providerList:[],
-				version:''
+				 
+			}
+		},
+		onShareAppMessage() {
+			return {
+				title:  "悠氧商城",
+				path: '/pages/index/index',
+				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
 			}
 		},
 		onLoad() {
-		 
-			uni.getProvider({
-				service: 'share',
-				success: (e) => {
-					let data = [];
-					for (let i = 0; i < e.provider.length; i++) {
-						switch (e.provider[i]) {
-							case 'weixin':
-								data.push({
-									name: '分享到微信好友',
-									id: 'weixin'
-								})
-								data.push({
-									name: '分享到微信朋友圈',
-									id: 'weixin',
-									type: 'WXSenceTimeline'
-								})
-								break;
-							case 'qq':
-								data.push({
-									name: '分享到QQ',
-									id: 'qq'
-								})
-								break;
-							default:
-								break;
-						}
-					}
-					this.providerList = data;
-				},
-				fail: (e) => {
-					console.log('获取登录通道失败'+ JSON.stringify(e));
-				}
-			});
+		 uni.showShareMenu({
+                    withShareTicket: true
+                });
+			 
 		},
 		methods:{
-			save(){
-				uni.showActionSheet({
-					itemList:['保存图片到相册'],
-					success: () => {
-						plus.gallery.save('https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/app_download.png', function() {
-							uni.showToast({
-								title:'保存成功',
-								icon:'none'
-							})
-						}, function() {
-							uni.showToast({
-								title:'保存失败，请重试！',
-								icon:'none'
-							})
-						});
-					}
-				})
-			},
-			share(e) {
-				if (this.providerList.length === 0) {
-					uni.showModal({
-						title: '当前环境无分享渠道!',
-						showCancel: false
-					})
-					return;
-				}
-				let itemList = this.providerList.map(function (value) {
-					return value.name
-				})
-				uni.showActionSheet({
-					itemList: itemList,
-					success: (res) => {
-						uni.share({
-							provider: this.providerList[res.tapIndex].id,
-							scene: this.providerList[res.tapIndex].type && this.providerList[res.tapIndex].type === 'WXSenceTimeline' ? 'WXSenceTimeline' : "WXSceneSession",
-							type: 0,
-							title:'欢迎体验uni-app',
-							summary: 'uni-app 是一个使用 Vue.js 开发跨平台应用的前端框架',
-							imageUrl:'https://img-cdn-qiniu.dcloud.net.cn/uploads/nav_menu/8.jpg',
-							href:"https://m3w.cn/uniapp",
-							success: (res) => {
-								console.log("success:" + JSON.stringify(res));
-							},
-							fail: (e) => {
-								uni.showModal({
-									content: e.errMsg,
-									showCancel:false
-								})
-							}
-						});
-					}
-				})
-			}
+			  
 		}
 	}
 </script>
@@ -127,41 +42,18 @@
 		min-height: 100%;
 		background-color: #FFFFFF;
 	}
-	image{
-		width: 400upx;
-		height: 400upx;
-	}
-	.about{
-		flex-direction: column;
-		flex: 1;
-	}
+	 
+	 
 	.content{
 		flex: 1;
-		padding: 30upx;
-		flex-direction: column;
-		justify-content: center;
+		padding:0 30upx 30upx 30upx;
+		 flex-direction: column;
+		justify-content: center;  
 	}
-	.qrcode{
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-	}
-	.desc{
-		margin-top: 30upx;
-		display: block;
-	}
-	.code{
-		color: #e96900;	
-		background-color: #f8f8f8;
-	}
+	 
 	button{
 		width: 100%;
 		margin-top: 40upx;
 	}
-	.version{
-		height: 80upx;
-		line-height: 80upx;
-		justify-content: center;
-		color: #ccc;
-	}
+	 
 </style>
