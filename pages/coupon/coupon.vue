@@ -350,8 +350,8 @@
 		left: 0;
 		width: 100%;
 		z-index: 100;
-		height: 0.82rem;
-		line-height: 0.82rem;
+		height: 96upx;
+		line-height: 96upx;
 		font-size: 32upx;
 			color: #333;
 		background: #fff;
@@ -360,9 +360,9 @@
 	.myPost-tab>span {
 		float: left;
 		width: 33%;
-		height: 0.78rem;
+		height: 91upx;
 		text-align: center;
-		border-bottom: 0.04rem solid transparent;
+		border-bottom: 5upx solid transparent;
 	}
 
 	.myPost-tab>span span {
@@ -378,7 +378,7 @@
 	}
 
 	#myCoupon {
-		padding: 0 0 1rem;
+		padding: 0 0 117upx;
 	}
 
 	.myCoupon {
@@ -387,9 +387,9 @@
 
 	.coupon-list {
 		position: relative;
-		margin-top: 0.18rem;
-		padding-top: 0.35rem;
-		height: 2.6rem;
+		margin-top: 21upx;
+		padding-top: 41upx;
+		height: 304upx;
 		background: url("http://op.yoyound.com/static/images/coupon.png") no-repeat center;
 		background-size: 100% 100%;
 	}
@@ -405,11 +405,11 @@
 	.coupon-list .coupon-icon,
 	.coupon-list .coupon-icon1,
 	.coupon-list .coupon-icon2 {
-		top: 0.19rem;
-		right: 0.19rem;
+		top: 22upx;
+		right: 22upx;
 		z-index: 10;
-		width: 1.6rem;
-		height: 1.4rem;
+		width: 187upx;
+		height: 163upx;
 	}
 
 	.coupon-list .coupon-icon {
@@ -428,10 +428,10 @@
 	}
 
 	.coupon-list .slide-img {
-		top: 0.34rem;
-		left: 0.34rem;
-		width: 1.4rem;
-		height: 1.4rem;
+		top: 39upx;
+		left: 39upx;
+		width: 163upx;
+		height: 163upx;
 		background: #eee;
 		background-size: 100% 100%;
 	}
@@ -441,11 +441,11 @@
 	.coupon-list p {
 		position: relative;
 		z-index: 11;
-		padding: 0 24upx 0 2.04rem;
+		padding: 0 24upx 0 238upx;
 	}
 
 	.coupon-list h6 {
-		margin-top: 0.04rem;
+		margin-top: 5upx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -454,15 +454,15 @@
 	}
 
 	.coupon-list .purchase-icon2 {
-		margin: 0.12rem 0 0.08rem;
+		margin: 14upx 0 9upx;
 		display: block;
-		width: 0.76rem;
-		height: 0.32rem;
-		background-size: 0.76rem 0.32rem;
+		width: 89upx;
+		height: 37upx;
+		background-size: 89upx 37upx;
 	}
 
 	.coupon-list p {
-		font-size: 0.24rem;
+		font-size: 24upx;
 		color: #666;
 	}
 
@@ -472,31 +472,31 @@
 		bottom: 12upx;
 		padding: 0 4.5%;
 		width: 91%;
-		height: 0.8rem;
-		line-height: 0.8rem;
-		font-size: 0.26rem;
+		height: 96upx;
+		line-height: 96upx;
+		font-size: 26upx;
 		color: #666;
 	}
 
 	.coupon-list .list-buttMoney {
 		margin-left: 6upx;
-		padding-left: 0.4rem;
+		padding-left: 46upx;
 		font-size: 32upx;
 				color: #EF593C;
 		background-size: 35upx 35upx;
-		vertical-align: -0.01rem;
+		vertical-align: -1upx;
 	}
 
 	.coupon-list .list-btn,
 	.coupon-list .list-btn1 {
-		margin: 0.15rem 0 0 24upx;
+		margin: 18upx 0 0 24upx;
 		float: right;
-		width: 1.3rem;
-		height: 0.5rem;
-		line-height: 0.5rem;
+		width: 152upx;
+		height: 58upx;
+		line-height: 58upx;
 		text-align: center;
 		border-radius: 6upx;
-		font-size: 0.24rem;
+		font-size: 24upx;
 	}
 
 	.coupon-list .list-btn {
@@ -512,19 +512,19 @@
 	.coupon-list .coupon-lableIcon,
 	.coupon-list .coupon-txt {
 		position: absolute;
-		left: 0.04rem;
+		left: 5upx;
 		display: block;
-		width: 1.09rem;
-		height: 1.09rem;
+		width: 127upx;
+		height: 127upx;
 	}
 
 	 
 
 	.coupon-list .coupon-txt {
-		top: 0.06rem;
+		top: 7upx;
 		z-index: 100;
 		text-align: center;
-		font-size: 0.32rem;
+		font-size: 32upx;
 		color: #fff;
 		transform: rotate(-45deg);
 		-ms-transform: rotate(-45deg);
@@ -546,16 +546,16 @@
 	}
 
 	.coupon-lable {
-		margin: 12upx0 112upx.04rem;
+		margin: 12upx 0 112upx 5upx;
 		display: inline-block;
-		padding: 0 0.08rem;
-		height: 0.32rem;
-		line-height: 0.32rem;
+		padding: 0 9upx;
+		height: 37upx;
+		line-height: 37upx;
 		text-align: center;
 		font-size: 24upx;
 		color: #EF593C;
 		border: 1px solid #EF593C;
-		border-radius: 0.03rem;
+		border-radius: 4upx;
 	}
 
 	.myCoupon-footer {
@@ -564,9 +564,9 @@
 		bottom: 0;
 		z-index: 1000;
 		width: 100%;
-		height: 1rem;
-		line-height: 1rem;
-		font-size: 0.32rem;
+		height: 117upx;
+		line-height: 117upx;
+		font-size: 32upx;
 		background: #fff;
 	}
 

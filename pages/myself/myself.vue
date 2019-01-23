@@ -31,7 +31,7 @@
 			<!-- <view class="listCent happyi-co5" @tap="goFeedback()"> 反馈 <a class="happyi-left"></a></view> -->
 			<view class="listCent  happyi-co5" style="padding 0 0 0 98upx ">
 			
-				<button plain="true" open-type="feedback" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
+				<button plain="true" open-type="feedback" size="mini" style="margin-top:10upx;  border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					反馈</button>
 				 <!-- <a class="happyi-left"></a>  -->
 			</view>
@@ -40,7 +40,7 @@
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
 			<view class="listCent  happyi-co7" style="padding 0 0 0 98upx ">
 
-				<button plain="true" open-type="contact" size="mini" style=" border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
+				<button plain="true" open-type="contact" size="mini" style="margin-top:10upx; border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					客服</button>
 				 <!-- <a class="happyi-left"></a>  -->
 			</view>

@@ -46,7 +46,7 @@ YOYOUND SPORT 运用创新化的商业理念，通过现代电子商务模式与
 	 
 	.content{
 		flex: 1;
-		padding:0 30upx 30upx 30upx;
+		padding:0 30upx 430upx 30upx;
 		 flex-direction: column;
 		justify-content: center;  
 	}

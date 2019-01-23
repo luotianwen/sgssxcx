@@ -167,11 +167,11 @@
 		left: 0;
 		z-index: 1000;
 		width: 100%;
-		height: 0.89rem;
-		line-height: 0.89rem;
+		height: 104upx;
+		line-height: 104upx;
 		background: #fff;
 		text-align: center;
-		font-size: 0.34rem;
+		font-size: 32upx;
 		color: #333;
 		float: right;
 	}
@@ -203,8 +203,8 @@
 	.address-list .address-listLeft {
 		float: left;
 		position: relative;
-		padding: 0.35rem 0 0 35upx;
-		height: 1.2rem;
+		padding: 40upx 0 0 35upx;
+		height: 140upx;
 		z-index: 100;
 		width: 96%;
 		background: #fff;
@@ -215,13 +215,13 @@
 	.address-list .address-modify {
 		position: absolute;
 		top: 50%;
-		right: 0.35rem;
+		right: 40upx;
 		display: block;
 		margin-top: -35upx;
-		width: 0.35rem;
-		height: 0.45rem;
+		width: 40upx;
+		height: 52upx;
 		background: url(http://op.yoyound.com/static/images/wirt.png) no-repeat center;
-		background-size: 0.35rem 0.45rem;
+		background-size: 40upx 52upx;
 	}
 
 	.address-listName {
@@ -238,24 +238,24 @@
 	.address-default {
 		margin-right: 24upx;
 		display: inline-block;
-		width: 0.7rem;
-		height: 0.32rem;
-		line-height: 0.32rem;
+		width: 82upx;
+		height: 37upx;
+		line-height: 37upx;
 		text-align: center;
 		background-color: #CDC8B1;
-		border-radius: 0.04rem;
-		font-size: 0.26rem;
+		border-radius: 5upx;
+		font-size: 26upx;
 		color: #fff;
-		vertical-align: 0.02rem;
+		vertical-align: 2upx;
 	}
 
 	.address-listCent {
-		padding-right: 0.8rem;
+		padding-right: 94upx;
 	}
 
 	.address-listCent p {
 		margin-top: 6upx;
-		font-size: 0.26rem;
+		font-size: 26upx;
 		color: #999;
 	}
 
@@ -296,7 +296,7 @@
 	.addAddress-cent input {
 		margin: 0 24upx 0;
 		width: 80.5%;
-		height: 0.6rem;
+		height: 70upx;
 		background: transparent;
 		border: none;
 		font-size: 35upx;
@@ -308,8 +308,8 @@
 	.addAddress-data,
 	.addAddress-address,
 	.addAddress-default {
-		height: 1rem;
-		line-height: 1rem;
+		height: 117upx;
+		line-height: 117upx;
 	}
 
 	.addAddress-name input,
@@ -332,7 +332,7 @@
 	}
 
 	.addAddress-region .pc-box {
-		margin: 0 0.25rem;
+		margin: 0 29upx;
 		display: inline-block;
 		font-weight: inherit;
 		width: 72%;
@@ -347,8 +347,8 @@
 		top: 0;
 		right: 0;
 		display: block;
-		height: 1.56rem;
-		line-height: 1.56rem;
+		height: 182upx;
+		line-height: 182upx;
 		width: 15%;
 		text-align: center;
 	}
@@ -366,24 +366,24 @@
 	}
 
 	.address-cent1 .address-listLeft {
-		height: 1.15rem;
+		height: 134upx;
 	}
 
 	.address-cent1 .address-listLeft h6 {
-		margin-bottom: 0.08rem;
+		margin-bottom: 9upx;
 		font-size: 35upx;
 	}
 
 	.address-cent1 .returnAddress-default {
 		margin-right: 12upx;
 		display: inline-block;
-		width: 0.7rem;
-		height: 0.32rem;
-		line-height: 0.32rem;
+		width: 82upx;
+		height: 37upx;
+		line-height: 37upx;
 		text-align: center;
 		background-color: #d45048;
-		border-radius: 0.04rem;
-		font-size: 0.22rem;
+		border-radius: 5upx;
+		font-size: 22upx;
 		color: #fff;
 	}
 
@@ -392,7 +392,7 @@
 	}
 
 	.address-cent1 .sl-opts {
-		height: 1.5rem;
-		line-height: 1.5rem;
+		height: 176upx;
+		line-height: 176upx;
 	}
 </style>

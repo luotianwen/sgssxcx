@@ -1,20 +1,13 @@
 <template>
-
+ 
 	<view class="page-section">
-		<view class="uni-list" style="padding-top: 10upx;">
+		<view class="uni-list" style="padding-top: 20upx;">
 			<view class="uni-list-cell">
-				<input class="uni-input" focus type="number" v-model="vphone" placeholder="输入手机号" />
+				<input class="uni-input" style="width: 60%; margin-left:5%;" focus type="number" v-model="vphone" placeholder="输入手机号" />
+				<button type="primary" @tap="onSave()">发送验证码</button>
 			</view>
 		</view>
-		<view class="btn-area" id="buttonContainer">
-			<button type="primary" @tap="onSave()">发送验证码</button>
-		</view>
-		
-	<!-- 	<view class="uni-list" style="padding-top: 10upx;">
-			<view class="uni-list-cell">
-				<input class="uni-input"     v-model="verification" placeholder="输入验证码" />
-			</view>
-		</view> -->
+	 
 	</view>
 
 
@@ -43,17 +36,22 @@
 			onSave: function() {
 				let _vphone = this.vphone;
 				if (_vphone.length == 0) {
-					uni.showToast({
+					/* uni.showToast({
 						title: "手机号必填",
 						icon: "none"
+					}); */
+					uni.showModal({
+						content: "手机号必填",
+						showCancel: false
 					});
 					return;
 				}
 				if (_vphone == this.phone) {
-					uni.showToast({
-						title: "新手机号与原手机号一样",
-						icon: "none"
+					uni.showModal({
+						content: "新手机号与原手机号一样",
+						showCancel: false
 					});
+					
 					return;
 				}
 			uni.showLoading({
