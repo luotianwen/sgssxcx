@@ -84,7 +84,7 @@
 			return {
 				title:  "悠氧商城",
 				path: '/pages/index/index',
-				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
 			}
 		},
 		onLoad: function () {

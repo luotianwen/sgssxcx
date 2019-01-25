@@ -121,15 +121,15 @@
 			return {
 				title:  "悠氧商城",
 				path: '/pages/index/index',
-				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
 			}
 		},
 		onLoad() {
 			const updateManager = uni.getUpdateManager();
 			updateManager.onCheckForUpdate(function (res) {
 			  // 请求完新版本信息的回调
-			  console.log(res.hasUpdate);
 			  if(res.hasUpdate){
+				  service.removeUser();
 				  updateManager.onUpdateReady(function (res) {
 				    uni.showModal({
 				  	title: '更新提示',
@@ -160,7 +160,7 @@
 			wx.showShareMenu({
 			  withShareTicket: true
 			});
-		    //service.removeUser();
+		     
 			this.getList();
 			this.indexData();
 		},

@@ -17,7 +17,7 @@ YOYOUND SPORT 运用创新化的商业理念，通过现代电子商务模式与
 			return {
 				title:  "悠氧商城",
 				path: '/pages/index/index',
-				imageUrl:'http://yoyound.com/themes/pc_paleng_moban/images/logo.gif'
+				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
 			}
 		},
 		onLoad() {

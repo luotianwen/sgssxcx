@@ -4,8 +4,8 @@
 				 <strong class="header-news">{{cartCount}}</strong> <span class="header-cart"
 				 @tap="goCart()"></span>
 			</view>
-		<view class=" page-section-spacing swiper">
-			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 480upx;">
+		<view class=" page-section-spacing swiper" style="background: #fff;">
+			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 480upx;padding-left: 10px;padding-right: 10px;">
 				<swiper-item v-for="item in data.images" :key="item">
 					<view class="swiper-item  ">
 						<image :src="item" style="width: 100%;" />
@@ -524,40 +524,18 @@
 	}
 
 	.goodsDetails-InfoCent {
-		padding-bottom: 12upx;
+		padding-bottom: 42upx;
 		background: #fff;
 	}
-
-	.goodsDetails-InfoCent .InfoCent-text {
-		margin: 0 0 0.243upx 0.351upx;
-	}
-
-	.goodsDetails-InfoCent .InfoCent-text li {
-		height: 94upx;
-		line-height: 94upx;
-		border-bottom: 1px solid #eee;
-		font-size: 0.228rem;
-		color: #333333;
-	}
-
-	.goodsDetails-InfoCent .InfoCent-text span {
-		display: inline-block;
-		width: 2.0351upx;
-		color: #999;
-	}
+ 
 
 	.goodsDetails-InfoCent .InfoCent-Img {
-		padding: 0.243upx;
-		font-size: 0.351upx;
+		padding: 10upx;
+		font-size: 24upx;
 		color: #333;
 	}
 
-	.goodsDetails-InfoCent .InfoCent-Img img {
-		display: block;
-		width: 100% !important;
-		min-height: 351upx;
-		height: auto !important;
-	}
+	 
 
 	.goodsDetails-choice {
 		padding: 47upx 0;
@@ -627,8 +605,8 @@
 	}
 
 	.goodsDetails-choice .choice-centp {
-		height: 94upx;
-		line-height: 94upx;
+		height: 50upx;
+		line-height: 50upx;
 	}
 
 	.goodsDetails-choice .choice-centspan {
@@ -651,8 +629,8 @@
 		top: 0;
 		right: 0;
 		width: 351upx;
-		height: 75upx;
-		line-height: 75upx;
+		height: 50upx;
+		line-height:50upx;
 		border: 1px solid #eee;
 		text-align: center;
 		color: #666;
@@ -671,8 +649,8 @@
 	}
 
 	.goodsDetails-choice .choice-buttp {
-		height: 80upx;
-		line-height: 80upx;
+		height: 50upx;
+		line-height: 50upx;
 	}
 
 	.goodsDetails-choice .choice-butt .choice-buttview {
@@ -680,8 +658,8 @@
 		top: 0;
 		right: 0;
 		width: 351upx;
-		height: 75upx;
-		line-height: 75upx;
+		height: 50upx;
+		line-height: 50upx;
 		border: 1px solid #eee;
 		text-align: center;
 		color: #666;

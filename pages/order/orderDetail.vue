@@ -129,6 +129,7 @@
 							}) */
 						} else {
 							uni.showToast({
+								icon:'none',
 								title: data.data.msg
 							})
 						}
@@ -185,6 +186,7 @@
 									if (data.statusCode == 200 && data.data.code == 0) {
 										  
 										  uni.showToast({
+											  icon:'none',
 										  	title: '操作成功',
 										  	success() {
 										  		uni.navigateBack({
@@ -195,6 +197,7 @@
 									}
 									else{
 										uni.showToast({
+											icon:'none',
 											title:data.data.msg 
 										})
 									}
@@ -230,10 +233,12 @@
 									if (data.statusCode == 200 && data.data.code == 0) {
 										_this.newsitems.state = 50;
 										uni.showToast({
+											icon:'none',
 											title: '操作成功'
 										})
 									} else {
 										uni.showToast({
+											icon:'none',
 											title: data.data.msg
 										})
 									}
@@ -265,6 +270,15 @@
 									console.log(JSON.stringify(data.data.data))
 									if (data.statusCode == 200 && data.data.code == 0) {
 										_this.newsitems.state = 40;
+										uni.showToast({
+											icon:'none',
+											title: '操作成功'
+										})
+									}else{
+										uni.showToast({
+											icon:'none',
+											title:"取消失败"
+										})
 									}
 
 								},
