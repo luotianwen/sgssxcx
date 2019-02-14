@@ -1,13 +1,11 @@
 <template>
-	<view>
-		<div class="apps-wrap">
-			<a class="app-portal" v-for="(item, index) in listData" :key="index" @tap="search(item)"> 
-			<image class="app-portalimg" :src="item.logo" />
-				<p>{{item.name}}</p>
-			</a>
+		<view class="apps-wrap">
+			<view class="app-portal" v-for="(item, index) in listData" :key="index" @tap="search(item)"> 
+			  <image class="app-portalimg" :src="item.logo" />  
+				<view class="app-portalp">{{item.name}}</view>
+			  </view>  
 
-		</div>
-	</view>
+		</view>
 </template>
 
 <script>
@@ -101,17 +99,17 @@
 	.app-portal {
 		padding-top: 10px;
 		width: 25%;
+		height: 148rpx;
 		text-align: center;
 		display: inline-block
 	}
 
 	.app-portalimg {
-		width: 148upx;  
-		height:148upx
+		width: 70%;  
+		height:70%
 	}
 
-	.app-portal p {
-		font-family: PingFangSC-Regular;
+	.app-portalp {
 		font-size: 24upx;
 		color: #333;
 		text-align: center;

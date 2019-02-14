@@ -57,9 +57,9 @@
 					</view>
 				</view>
 				<view style="padding-top: 10px;">
-					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" v-bind:style="{backgroundImage:'url(' + value.logo + ');background-position: center;background-repeat: no-repeat;background-size: 1005 100%'}">
-						<!-- {{value.name}}
-						<image :src="value.logo" style="width: 100%;height: 100%;"></image> -->
+					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" >
+						<!-- {{value.name}} v-bind:style="{backgroundImage:'url(' + value.logo + ');background-position: center;background-repeat: no-repeat;background-size: 1005 100%'}"-->
+						<image :src="value.logo" style="width: 100%;height: 100%;"></image>
 					</view>
 
 				</view>
@@ -115,6 +115,7 @@
 			this.loadingType=0;
 			this.goodsData = [];
 			this.getList(); */
+			this.indexData();
 			this.getCartData();
 		},
 		onShareAppMessage() {
@@ -357,8 +358,8 @@
 	}
 
 	.rectangle-4 {
-		width: 23.5%;
-		height: 90px;
+		width: 175upx;
+		height: 175upx;
 		background-color: #ffffff;
 		border: solid 1px #c0cdda;
 		float: left;

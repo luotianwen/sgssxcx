@@ -132,17 +132,19 @@
 		display: block;
 	}
 	.nav-right-item {
-		width: 28%;
-		height: 220upx;
+		width: 29%;
+		/* height: 220upx; */
 		float: left;
 		text-align: center;
-		padding: 11upx;
+		padding-top: 15upx;
+		padding-left: 15upx;
+		/* padding: 11upx; */
 		font-size: 28upx;
 	}
 
 	.nav-right-item image {
-		width: 100%;
-		height: 100upx;
+		width: 140upx;
+		height: 140upx;
 	}
 
 	.active {
