@@ -33,7 +33,7 @@
 			
 				<button plain="true" open-type="feedback" size="mini" style="margin-top:10upx;  border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					反馈</button>
-				 <!-- <a class="happyi-left"></a>  -->
+				 <!-- <a class="happyi-left"></a>  --> 
 			</view>
 			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>

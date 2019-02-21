@@ -18,7 +18,7 @@
 		</view>
 
 		<view style="margin-left: 2.5%;">
-			<view class="rectangle3">
+			<view class="rectangle3" @tap="openydhw()">
 				<view class="rectangle3center">
 					<image src="../../static/img/i1.png" class="rectangle3img"></image>
 					<view class="rectangle3code"> 运动户外</view>
@@ -48,7 +48,7 @@
 			</view>
 
 		</view>
-		<view class="uni-list">
+		<view  class="uni-list" >
 			<view class="goodsList-cent1">
 				<view style="width: 100%;">
 					<view class="brands1"> 品牌馆 </view>
@@ -66,7 +66,7 @@
 			</view>
 		</view>
 
-		<view class="uni-list">
+		<view style="position:relative ;width:100%; border: 0upx;">
 			<view class="goodsList-cent  ">
 
 				<view v-for="(value,key) in goodsData" :key="key" @click="goDetail(value)" class="goodsList-list">
@@ -117,15 +117,6 @@
 			this.getList(); */
 			this.indexData();
 			this.getCartData();
-		},
-		onShareAppMessage() {
-			return {
-				title:  "悠氧商城",
-				path: '/pages/index/index',
-				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
-			}
-		},
-		onLoad() {
 			const updateManager = uni.getUpdateManager();
 			updateManager.onCheckForUpdate(function (res) {
 			  // 请求完新版本信息的回调
@@ -155,6 +146,16 @@
 					});
 			  }
 			});
+		},
+		onShareAppMessage() {
+			return {
+				title:  "悠氧商城",
+				path: '/pages/index/index',
+				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
+			}
+		},
+		onLoad() {
+			
 	
 			
 			
@@ -193,6 +194,9 @@
 			}, 300);
 		},
 		methods: {
+			openydhw:function(){
+				
+			},
 			goCoupon: function(coupon) {
 				let _this = this;
 				if (!service.getUser().hasLogin) {
