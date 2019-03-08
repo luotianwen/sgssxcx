@@ -17,27 +17,27 @@
 			</view>
 		</view>
 
-		<view style="margin-left: 2.5%;">
-			<view class="rectangle3" @tap="openydhw()">
+		<view>
+			<view class="rectangle3" @tap="openydhw(1)">
 				<view class="rectangle3center">
 					<image src="../../static/img/i1.png" class="rectangle3img"></image>
 					<view class="rectangle3code"> 运动户外</view>
 				</view>
 			</view>
-			<view class="rectangle3">
+			<view class="rectangle3" @tap="openydhw(2)">
 				<view class="rectangle3center">
 					<image src="../../static/img/i2.png" class="rectangle3img"></image>
 					<view class="rectangle3code"> 健康生活</view>
 				</view>
 			</view>
-			<view class="rectangle3">
+			<view class="rectangle3" @tap="openydhw(3)">
 				<view class="rectangle3center">
 					<image src="../../static/img/i3.png" class="rectangle3img"></image>
 					<view class="rectangle3code"> 悠氧播报</view>
 				</view>
 			</view>
 		</view>
-		<view >
+		<view>
 
 			<view class="combinedShape" @tap="goCoupon(value)" v-for="(value,key) in coupons" :key="key">
 				<view class="combinedShape-coupon">优惠券</view>
@@ -48,7 +48,7 @@
 			</view>
 
 		</view>
-		<view  class="uni-list" >
+		<view class="uni-list">
 			<view class="goodsList-cent1">
 				<view style="width: 100%;">
 					<view class="brands1"> 品牌馆 </view>
@@ -57,20 +57,20 @@
 					</view>
 				</view>
 				<view style="padding-top: 10px;">
-					<view class="rectangle-4" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key" >
+					<view class="app-portal" @tap="goBrandSearch(value)" v-for="(value,key) in brands" :key="key">
 						<!-- {{value.name}} v-bind:style="{backgroundImage:'url(' + value.logo + ');background-position: center;background-repeat: no-repeat;background-size: 1005 100%'}"-->
-						<image :src="value.logo" style="width: 100%;height: 100%;"></image>
+						<image :src="value.logo" class="app-portalimg"></image>
 					</view>
 
 				</view>
 			</view>
 		</view>
 
-		<view style="position:relative ;width:100%; border: 0upx;">
+		<view style="position:relative ;width:100%; border: 0upx;background: #ffffff;">
 			<view class="goodsList-cent  ">
 
 				<view v-for="(value,key) in goodsData" :key="key" @click="goDetail(value)" class="goodsList-list">
-					  <image class="follow-centImg" :src="value.logo"></image> 
+					<image class="follow-centImg" :src="value.logo"></image>
 
 					<view class="follow-centImgh6">{{value.name}}</view>
 					<view class="goodsList-listp">销量： {{value.sales}}</view>
@@ -94,6 +94,7 @@
 			return {
 				carousels: [],
 				brands: [],
+				weixin:[],
 				coupons: [],
 				indicatorDots: true,
 				autoplay: true,
@@ -117,52 +118,52 @@
 			this.getList(); */
 			this.indexData();
 			this.getCartData();
-			const updateManager = uni.getUpdateManager();
-			updateManager.onCheckForUpdate(function (res) {
-			  // 请求完新版本信息的回调
-			  if(res.hasUpdate){
-				  service.removeUser();
-				  updateManager.onUpdateReady(function (res) {
-				    uni.showModal({
-				  	title: '更新提示',
-				  	content: '新版本已经准备好，是否重启应用？',
-				  	success(res) {
-				  	  if (res.confirm) {
-				  		// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-				  		updateManager.applyUpdate();
-				  	  }
-				  	}
-				    });
-				  
-				  });
-				  updateManager.onUpdateFailed(function (res) {
-					  // 新的版本下载失败
-					  uni.showModal({
-						title: '提示',
-						content: '检查到有新版本，但下载失败，请检查网络设置',
-						showCancel: false,
-					  })
-			
-					});
-			  }
-			});
+			/* console.log("userInfo   "+JSON.stringify(service.getUser())); */
 		},
 		onShareAppMessage() {
 			return {
-				title:  "悠氧商城",
+				title: "悠氧运动户外-综合网购首选-正品低价、品质保障、配送及时、轻松购物",
 				path: '/pages/index/index',
-				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
+				imageUrl: ''
 			}
 		},
 		onLoad() {
-			
-	
-			
-			
-			wx.showShareMenu({
-			  withShareTicket: true
+             const updateManager = uni.getUpdateManager();
+			updateManager.onCheckForUpdate(function(res) {
+				// 请求完新版本信息的回调
+				if (res.hasUpdate) {
+					service.removeUser();
+					updateManager.onUpdateReady(function(res) {
+						uni.showModal({
+							title: '更新提示',
+							content: '新版本已经准备好，是否重启应用？',
+							success(res) {
+								if (res.confirm) {
+									// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+									updateManager.applyUpdate();
+								}
+							}
+						});
+
+					});
+					updateManager.onUpdateFailed(function(res) {
+						// 新的版本下载失败
+						uni.showModal({
+							title: '提示',
+							content: '检查到有新版本，但下载失败，请检查网络设置',
+							showCancel: false,
+						})
+
+					});
+				}
 			});
-		     
+
+
+
+			wx.showShareMenu({
+				withShareTicket: true
+			});
+
 			this.getList();
 			this.indexData();
 		},
@@ -180,9 +181,9 @@
 			console.log('onReachBottom');
 			this.loadingType = 1;
 			setTimeout(() => {
-				this.pageNumber++;
+				this.pageNumber++; 
 				this.getList();
-			}, 300);
+			}, 300); 
 		},
 		onPullDownRefresh() {
 			console.log('onPullDownRefresh');
@@ -193,8 +194,16 @@
 				uni.stopPullDownRefresh();
 			}, 300);
 		},
-		methods: {
-			openydhw:function(){
+		methods: { 
+			openydhw: function(i) { 
+				var _wx=this.weixin[i-1];
+				//console.log(_wx.url)
+				//console.log(_wx.name)
+				let _url=encodeURIComponent(_wx.url);
+				let _name=encodeURIComponent(_wx.name);
+				uni.navigateTo({
+					url: "../index/webview?name="+_name+"&url="+ _url
+				})
 				
 			},
 			goCoupon: function(coupon) {
@@ -218,10 +227,9 @@
 								icon: 'success',
 								title: "领取成功"
 							})
-						}
-						else{
+						} else {
 							uni.showToast({
-								icon:'none',
+								icon: 'none',
 								title: data.data.msg
 							})
 						}
@@ -244,7 +252,7 @@
 						tokenId: service.getUser().tokenId
 					},
 					success: (data) => {
-						 
+
 						if (data.statusCode == 200 && data.data.code == 0) {
 							_this.cartCount = data.data.data;
 
@@ -261,12 +269,13 @@
 					url: service.indexData(),
 
 					success: (data) => {
-						 
+
 						if (data.statusCode == 200 && data.data.code == 0) {
 							let _data = data.data.data;
 							this.carousels = _data.carousels;
 							this.brands = _data.brands;
 							this.coupons = _data.coupons;
+							this.weixin=_data.weixin;
 						}
 					},
 					fail: (data, code) => {
@@ -329,6 +338,13 @@
 </script>
 
 <style>
+	page {
+		  background-color: #FFFFFF; 
+		height: 100%;
+		font-size: 32upx;
+		line-height: 1.6;
+	}
+		
 	.brandsmore {
 
 
@@ -361,12 +377,25 @@
 		background-size: 50upx 50upx;
 	}
 
+	.app-portal {
+		padding-top: 2upx;
+		width: 175upx;
+		height: 175upx;
+		text-align: center;
+		display: inline-block
+	}
+
 	.rectangle-4 {
 		width: 175upx;
 		height: 175upx;
 		background-color: #ffffff;
 		border: solid 1px #c0cdda;
 		float: left;
+	}
+
+	.app-portalimg {
+		width: 150upx;
+		height: 150upx
 	}
 
 	.rectangle4 {
@@ -395,7 +424,7 @@
 		height: 19upx;
 		color: #011959;
 
-		font-size: 25upx;  
+		font-size: 25upx;
 		font-style: normal;
 		font-stretch: normal;
 		font-weight: 500;
@@ -420,9 +449,10 @@
 	}
 
 	.goodsList-cent {
-		margin-top: 25upx;
+		  margin-top: 25upx; 
+		/* padding-top: 25upx; */
 		padding: 0 0 23upx;
-		background: #fff;
+		background: #ffffff;
 		font-size: 0;
 	}
 
@@ -447,7 +477,7 @@
 
 	.follow-centImgh6 {
 		padding-left: 250upx;
-		 
+
 		font-size: 24upx;
 		color: #333333;
 		overflow: hidden;
@@ -487,7 +517,7 @@
 		top: 0;
 		display: block;
 		z-index: 1000;
-		width:  70upx;
+		width: 70upx;
 		height: 70upx;
 		border-radius: 50%;
 	}
@@ -533,8 +563,8 @@
 	}
 
 	.rectangle3img {
-		width: 75upx;
-		height: 75upx;
+		width: 120upx;
+		height: 120upx;
 	}
 
 	.rectangle3code {
@@ -544,17 +574,17 @@
 		font-size: 25upx;
 		font-weight: normal;
 		font-stretch: normal;
-		letter-spacing: -1px;
+		/* letter-spacing: -1px; */
 		color: #7c8895;
 	}
 
 	.rectangle3 {
 		/* position: absolute;*/
-		margin-top: 20upx;
+		/* margin-top: 20upx; */
 		/* margin-left: 2.5%; */
-		width: 32%;
-		height: 150upx;
-		border: 0.5px solid #c0cdda;
+		width: 33.333%;
+		height: 220upx;
+		/* border: 0.5px solid #c0cdda; */
 		background: #ffffff;
 		box-shadow: 0px 1px 3px 0px #c0cdda;
 		float: left;

@@ -69,7 +69,7 @@
 		onShow() {
 			this.pageNumber=1;
 			this.loadingType=0;
-			
+			this.afterOrders = [];
 			this.afterOrderList();
 			
 		},

@@ -1,6 +1,6 @@
 //const httpUrl = "http://127.0.0.1:8081/v1/";
 const httpUrl = "https://xcx.api.yoyound.com/v1/";
-const debug=true
+const debug=false
  
 const getCategory = function() {
 	return httpUrl + "shop/allCategory";
@@ -121,10 +121,20 @@ const hotData=function(){
 const getSearchGoods=function(){
 	return httpUrl+"shop/getSearchGoods";
 }
+const getAgentStock=function(){
+	return httpUrl+"shop/getAgentStock";
+}
 
 const getCartData=function(){
 	return httpUrl+"shop/getCartData";
 }
+const getUserAgentData=function(){
+	return httpUrl+"user/getUserAgentData";
+}
+const saveUserAgentData=function(){
+	return httpUrl+"user/saveUserAgentData";
+}
+
 const USERS_KEY = 'SGSS_USERS_KEY';
  
 const getUser = function () {
@@ -135,14 +145,22 @@ const getUser = function () {
     }
     return JSON.parse(ret);
 }
-
+const setAgent = function (agentId) {
+    uni.setStorageSync('agentId',agentId);
+}
+const getAgent = function () {
+	return uni.getStorageSync('agentId');
+}
 const setUser = function (userInfo) {
     uni.setStorageSync(USERS_KEY, JSON.stringify(userInfo));
 }
 const removeUser = function (userInfo) {
     uni.removeStorageSync(USERS_KEY);
 }
+ 
 export default {
+	setAgent,
+	getAgent,
 	getCategory,
 	getSubCategory,
 	getCategoryGoods,
@@ -185,5 +203,8 @@ export default {
 	hotData,
 	getSearchGoods,
 	getCartData,
-	gainCouponById
+	gainCouponById,
+	getUserAgentData,
+	saveUserAgentData,
+	getAgentStock
 }

@@ -4,8 +4,7 @@
 
 			<view class="applyRefund-top">
 				<view class="applyRefund-topdiv">温馨提示：</view>
-				<view class="applyRefund-topp">· 申请退货时，先和客服沟通。确认退货下条件。</view>
-				<view class="applyRefund-topp">· 申请换货时，先和客服沟通。确认换后的货是否有库存。</view>
+				<view class="applyRefund-topp">· 申请退货/换货时，先和客服沟通。确认退换货条件和库存。</view> 
 			</view>
 			<!---->
 			<view class="deliverGoods-cent">
@@ -126,9 +125,9 @@
 							uni.showToast({
 								title: '操作成功',
 								success() {
-									uni.navigateBack({
-											delta: 1
-									});
+									uni.navigateTo({
+										url: "../service/afterOrder"
+									})
 								}
 							})
 						} else {

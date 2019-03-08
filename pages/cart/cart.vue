@@ -84,7 +84,7 @@
 		},
 		onShareAppMessage() {
 			return {
-				title:  "悠氧商城",
+				title:  "悠氧运动户外-综合网购首选-正品低价、品质保障、配送及时、轻松购物",
 				path: '/pages/index/index',
 				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
 			}
@@ -242,7 +242,8 @@
 					data: {
 						nickName: infoRes.userInfo.nickName,
 						code: _this.code, //infoRes.userInfo.openId,
-						avatarUrl: infoRes.userInfo.avatarUrl
+						avatarUrl: infoRes.userInfo.avatarUrl,
+						agentId:service.getAgent()
 					},
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {

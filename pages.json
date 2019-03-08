@@ -8,6 +8,12 @@
 			}
 		},
 		{
+			"path": "pages/index/webview",
+			"style": {
+				"navigationBarTitleText": "信息" 
+				}
+		},
+		{
 			"path": "pages/category/allCategory",
 			"style": {
 				"navigationBarTitleText": "悠氧分类" ,
@@ -101,6 +107,12 @@
 			}
 		},
 		{
+			"path": "pages/distribution/price",
+			"style": {
+				"navigationBarTitleText": "分销商品价格" 
+			}
+		},
+		{
 			"path": "pages/goods/goodsDetail",
 			"style": {
 				"navigationBarTitleText": "商品详情" 
@@ -186,19 +198,7 @@
 			"style": {
 				"navigationBarTitleText": "申请售后" 
 			}
-		},
-		{
-			"path": "pages/test/slidelist",
-			"style": {
-				"navigationBarTitleText": "侧滑" 
-			}
-		},
-		{
-			"path": "pages/test/tabbar",
-			"style": {
-				"navigationBarTitleText": "tab" 
-			}
-		}
+		} 
 	],
 	"tabBar": {
 		"color": "#7a7e83",

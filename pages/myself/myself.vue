@@ -36,7 +36,8 @@
 				 <!-- <a class="happyi-left"></a>  --> 
 			</view>
 			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
-			<view class="listCent happyi-co8" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co8" v-show="vshow!=1" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co8" v-show="vshow==1"  @tap="goDistributionPrice()">查询分销价格<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
 			<view class="listCent  happyi-co7" style="padding 0 0 0 98upx ">
 
@@ -66,37 +67,55 @@
 				coupons: 0,
 				login: false,
 				code:"",
+				vshow:"0"
 			}
 		},
 		onShareAppMessage() {
 			return {
-				title:  "悠氧商城",
+				title:  "悠氧运动户外-综合网购首选-正品低价、品质保障、配送及时、轻松购物",
 				path: '/pages/index/index',
 				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
 			}
 		},
 		onLoad(d) {
-			console.log(JSON.stringify(service.getUser()));
+			
 			uni.showShareMenu({
                     withShareTicket: true
                 });
+			
+
+		},
+		onShow() {
 			if (service.getUser().hasLogin) {
 				this.login = true;
 				this.uerInfo = service.getUser();
 				this.getData();
 			} else {
-
+			
 				 this.getUserInfo();
-
+			
 			}
-
-		},
-		onShow() {
-			if (service.getUser().hasLogin) {
-				this.getData();
-			}
+			this.getAgentData();
 		},
 		methods: {
+			getAgentData: function() {
+				let _this = this;
+				uni.request({
+					url: service.getUserAgentData(),
+					data: {
+						tokenId: _this.uerInfo.tokenId
+					},
+					success: (data) => {
+						if (data.statusCode == 200 && data.data.code == 0) {
+							_this.vshow = data.data.data.vshow;
+						}
+					},
+					fail: (data, code) => {
+						console.log('fail' + JSON.stringify(data));
+			
+					}
+				})
+			},
 			getData: function() {
 				let _this = this;
 				uni.request({
@@ -137,7 +156,8 @@
 					data: {
 						nickName: infoRes.userInfo.nickName,
 						code: _this.code, //infoRes.userInfo.openId,
-						avatarUrl: infoRes.userInfo.avatarUrl
+						avatarUrl: infoRes.userInfo.avatarUrl,
+						agentId:service.getAgent()
 					},
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
@@ -207,7 +227,26 @@
 					url: "../customerService/index"
 				})
 			},
+			goDistributionPrice: function() {
+				if (!this.login) {
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
+					return;
+				}
+				uni.navigateTo({
+					url: "../distribution/price"
+				})
+			},
 			goDistribution: function() {
+				if (!this.login) {
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
+					return;
+				}
 				uni.navigateTo({
 					url: "../distribution/index"
 				})

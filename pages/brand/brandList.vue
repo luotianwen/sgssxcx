@@ -105,8 +105,8 @@
 	}
 
 	.app-portalimg {
-		width: 70%;  
-		height:70%
+		width: 120upx;  
+		height:120upx
 	}
 
 	.app-portalp {

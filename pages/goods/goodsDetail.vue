@@ -91,7 +91,9 @@
 				skuId: "",
 				hasLogin: false,
 				type: 0,
-				cartCount:0
+				cartCount:0,
+				agentId:"",
+				 
 			}
 		},
          onShow() {
@@ -100,8 +102,8 @@
 		 onShareAppMessage() {
 		 	return {
 		 		title:  this.data.name,
-		 		path: '/pages/index/index',
-		 		imageUrl:this.data.images[0]
+		 		path: "/pages/goods/goodsDetail?goodsId=" + this.goodsId + "&name=" + this.data.name+"&agentId="+this.agentId,
+		 		imageUrl:''//this.data.images[0]
 		 	}
 		 },
 		onLoad(d) {
@@ -113,6 +115,16 @@
 			})
 			this.goodsId = d.goodsId;
 			this.getDetail();
+			
+			if(d.agentId!=undefined&&d.agentId!=""){
+				console.log(JSON.stringify(d));
+				//this.userAgentId=d.agentId;
+				service.setAgent(d.agentId);
+			}
+			if (service.getUser().hasLogin){
+			    this.agentId=service.getUser().tokenId;
+			 }
+			 //console.log("this.agentId"+this.agentId);
 		},
 		methods: {
 				getCartData(){
@@ -478,12 +490,13 @@
 		bottom: 0;
 		z-index: 2000;
 		height: 85upx;
-		line-height: 85upx;
+		line-height: 85upx;  
 		width: 100%;
 		background: #fff;
 		text-align: right;
 		border-top: 1px solid #eee;
 		font-size: 0;
+		margin-bottom: 5upx;
 	}
 
 	.goodsDetails-butt>span {
