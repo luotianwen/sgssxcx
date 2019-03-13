@@ -1,5 +1,5 @@
-//const httpUrl = "http://127.0.0.1:8081/v1/";
-const httpUrl = "https://xcx.api.yoyound.com/v1/";
+const httpUrl = "http://127.0.0.1:8081/v1/";
+//const httpUrl = "https://xcx.api.yoyound.com/v1/";
 const debug=false
  
 const getCategory = function() {
@@ -134,6 +134,9 @@ const getUserAgentData=function(){
 const saveUserAgentData=function(){
 	return httpUrl+"user/saveUserAgentData";
 }
+const agentOrderList=function(){
+	return httpUrl+"shop/agentOrderList";
+}
 
 const USERS_KEY = 'SGSS_USERS_KEY';
  
@@ -159,6 +162,7 @@ const removeUser = function (userInfo) {
 }
  
 export default {
+	agentOrderList,
 	setAgent,
 	getAgent,
 	getCategory,

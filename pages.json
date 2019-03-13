@@ -113,6 +113,29 @@
 			}
 		},
 		{
+			"path": "pages/distribution/money",
+			"style": {
+				"navigationBarTitleText": "分销提现" 
+			}
+		},
+		{
+			"path": "pages/distribution/cash",
+			"style": {
+				"navigationBarTitleText": "分销提现" 
+			}
+		},
+		{
+			"path": "pages/distribution/hisCash",
+			"style": {
+				"navigationBarTitleText": "提现历史" 
+			}
+		},{
+			"path": "pages/distribution/cashNotice",
+			"style": {
+				"navigationBarTitleText": "分销规则" 
+			}
+		},
+		{
 			"path": "pages/goods/goodsDetail",
 			"style": {
 				"navigationBarTitleText": "商品详情" 

@@ -38,6 +38,7 @@
 			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" v-show="vshow!=1" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" v-show="vshow==1"  @tap="goDistributionPrice()">查询分销价格<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co8" v-show="vshow==1"  @tap="goDistributionMoney()">分销提现<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
 			<view class="listCent  happyi-co7" style="padding 0 0 0 98upx ">
 
@@ -225,6 +226,18 @@
 			goCustomerService: function() {
 				uni.navigateTo({
 					url: "../customerService/index"
+				})
+			},
+			goDistributionMoney: function() {
+				if (!this.login) {
+					uni.showModal({
+						content: "请登录",
+						showCancel: false
+					});
+					return;
+				}
+				uni.navigateTo({
+					url: "../distribution/money"
 				})
 			},
 			goDistributionPrice: function() {
