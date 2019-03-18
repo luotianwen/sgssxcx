@@ -128,6 +128,7 @@
 			}
 		},
 		onLoad() {
+			 service.removeUser();
              const updateManager = uni.getUpdateManager();
 			updateManager.onCheckForUpdate(function(res) {
 				// 请求完新版本信息的回调

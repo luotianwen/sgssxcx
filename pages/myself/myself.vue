@@ -34,11 +34,11 @@
 				<button plain="true" open-type="feedback" size="mini" style="margin-top:10upx;  border-color: #FFFFFF; font-size: 15px;text-align:left ;padding-left: 0px;">
 					反馈</button>
 				 <!-- <a class="happyi-left"></a>  --> 
-			</view>
+			</view><!--  -->
 			<view class="listCent happyi-co6" @tap="goAccount()">账号安全<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" v-show="vshow!=1" @tap="goDistribution()">申请分销<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co8" v-show="vshow==1"  @tap="goDistributionPrice()">查询分销价格<a class="happyi-left"></a></view>
-			<view class="listCent happyi-co8" v-show="vshow==1"  @tap="goDistributionMoney()">分销提现<a class="happyi-left"></a></view>
+			<view class="listCent happyi-co8" v-show="vshow==1"   @tap="goDistributionMoney()">分销提现<a class="happyi-left"></a></view>
 			<view class="listCent happyi-co9" @tap="goAbout()">关于<a class="happyi-left"></a></view>
 			<view class="listCent  happyi-co7" style="padding 0 0 0 98upx ">
 
@@ -91,12 +91,13 @@
 				this.login = true;
 				this.uerInfo = service.getUser();
 				this.getData();
+				
 			} else {
 			
 				 this.getUserInfo();
 			
 			}
-			this.getAgentData();
+			
 		},
 		methods: {
 			getAgentData: function() {
@@ -130,6 +131,7 @@
 							_this.orders = d.orders;
 							_this.afterOrders = d.afterOrders;
 							_this.coupons = d.coupons;
+							_this.getAgentData();
 						}
 					},
 					fail: (data, code) => {

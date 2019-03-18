@@ -93,9 +93,7 @@
              uni.showShareMenu({
                     withShareTicket: true
                 });
-			uni.showLoading({
-				title: '加载中'
-			});
+			
 			//service.removeUser();
 			
 
@@ -325,7 +323,9 @@
 				this.getPrices();
 			},
 			cartlist: function() {
-
+uni.showLoading({
+				title: '加载中'
+			});
 				uni.request({
 					url: service.cartList(),
 					data: {

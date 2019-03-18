@@ -533,6 +533,7 @@
 
 	.myOrderInfo-info {
 		margin-top: 24upx;
+		margin-bottom: 70upx;
 		padding-left: 35upx;
 		font-size: 26upx;;
 		background: #fff;
@@ -618,8 +619,8 @@
 		z-index: 500;
 		padding: 0 4%;
 		width: 92%;
-		height: 114upx;
-		line-height: 114upx;
+		height: 84upx;
+		line-height:84upx;
 		border-top: 1px solid #ccc;
 		background: #fff;
 		color: #333333; 
@@ -631,7 +632,7 @@
 	}
 
 	.confirmOrder-footer .footer-btn {
-		margin: 24upx 0 0 24upx;
+		margin: 14upx 0 0 14upx;
 		float: right;
 		width: 2.16rem;
 		height: 63upx;
@@ -649,7 +650,7 @@
 	}
 
 	.confirmOrder-footer .footer-btn1 {
-		margin: 24upx 0 0 24upx;
+		margin: 14upx 0 0 14upx;
 		float: right;
 		display: block;
 		width: 205upx;

@@ -5,15 +5,16 @@
 				<view class="shoppingCart-listCent">
 
 					<view class="list-cent" v-for="(item, index) in data" :key="index" v-show="login">
-						<view  class=" list-centLeft "  >
+						<view class=" list-centLeft ">
 							<view class="shoppingCart-icon">
-								<input type="checkbox" :checked="item.state" :disabled="item.state" @click='checkedOne(index,item)'>
+								<input type="checkbox" :checked="item.state" @click='checkedOne(index,item)'>
 							</view>
-							<view class="list-centRight "> 
-								<image class="centRight-img" :src="item.logo"></image>
+							<view class="list-centRight ">
+								<image class="centRight-img" :src="item.headImg"></image>
 								<view class="centRight-cent">
-									<view class="centRight-centh6">{{item.name}}</view>
-									<view class="centRight-centp">{{item.spec1}} &nbsp; {{item.spec2}}</view>
+									<view class="centRight-centh6">{{item.nickname}}</view>
+									<view class="centRight-centp">订单号:{{item.orderNumber}} </view>
+									<view class="centRight-centp">完成时间:{{item.payTime}}</view>
 									<view class="centRight-centdiv">可提现:<span class="happyi-mon">¥{{item.price}}</span></view>
 								</view>
 							</view>
@@ -25,14 +26,18 @@
 		<view class="shoppingCart-footer ">
 			<view class="shoppingCart-footerlabel"> <input type='checkbox' :checked="ids.length!=0&&ids.length === data.length"
 				 @click="getCheckedAll()">全选</view>
-			<view class="shoppingCart-footerlabelstrong footer-btn" @click="settlement()">提现</view>
+			<view class="shoppingCart-footerlabelstrong footer-btn" @click="withdrawal()">提现</view>
 			<view class="shoppingCart-footerspan">¥{{price}}</view>
 		</view>
 	</view>
 </template>
 <script>
 	import service from '../../service.js';
+	import loadMore from '../../components/load-more.vue'
 	export default {
+		components: {
+			loadMore
+		},
 		data() {
 			return {
 				data: [],
@@ -40,36 +45,36 @@
 				ids: [],
 				// 初始化全选按钮, 默认不选
 				isCheckedAll: false,
-				login:false
+				login: false,
+				contentText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				},
 			}
 		},
 		onShow() {
-			this.login=service.getUser().hasLogin;
+			this.login = service.getUser().hasLogin;
 			this.ids = [];
 			this.isCheckedAll = false;
 			if (service.getUser().hasLogin) {
 				this.cartlist();
-			} else {
-				this.getUserInfo();
-			
 			}
 		},
 		onShareAppMessage() {
 			return {
-				title:  "悠氧运动户外-综合网购首选-正品低价、品质保障、配送及时、轻松购物",
+				title: "悠氧运动户外-综合网购首选-正品低价、品质保障、配送及时、轻松购物",
 				path: '/pages/index/index',
-				imageUrl:'http://yoyound.com/images/logo5_4.jpg'
+				imageUrl: 'http://yoyound.com/images/logo5_4.jpg'
 			}
 		},
 		onLoad(d) {
-             uni.showShareMenu({
-                    withShareTicket: true
-                });
-			uni.showLoading({
-				title: '加载中'
+			uni.showShareMenu({
+				withShareTicket: true
 			});
+			 
 			//service.removeUser();
-			
+
 
 		},
 		onPullDownRefresh() {
@@ -85,25 +90,53 @@
 		},
 		methods: {
 
-			 
-			settlement: function() {
-				if (this.ids.length > 0) {
-					uni.navigateTo({
-						url: "../order/preorder?cartId=" + this.ids.join(",")
-					})
 
+			withdrawal: function() {
+				if (this.ids.length > 0) {
+					let _orderNumber = this.ids.join(",");
+					uni.showLoading({
+						title: '申请中'
+					});
+					uni.request({ 
+						url: service.agentWithdrawal(),
+						data: {
+							tokenId: service.getUser().tokenId,
+							orderNumber:_orderNumber
+						},
+						success: (data) => {
+							if (data.statusCode == 200 && data.data.code == 0) {
+								  uni.showToast({
+								 	title:'申请成功',success() {
+								 		uni.navigateTo({
+								 			url: "../distribution/hisCash"
+								 		})
+								 	} 
+								 })
+							} else {
+								uni.showToast({
+									title: data.data.msg,
+									icon: 'none'
+								})
+							}
+							uni.hideLoading();
+						},
+						fail: (data, code) => {
+							console.log('fail' + JSON.stringify(data));
+							uni.hideLoading();
+						}
+					})
 				} else {
 					uni.showToast({
-						title: '请选择商品',
-						duration: 2000
+						title: '请选择订单',
+						icon: 'none'
 					});
 				}
 			},
-			  
+
 			checkedOne: function(index, item) {
 				var self = this;
 				setTimeout(function() {
-					let id = item.cartId;
+					let id = item.orderNumber;
 					item.state = !item.state;
 					let idIndex = self.ids.indexOf(id);
 					//console.log(idIndex);
@@ -125,11 +158,9 @@
 				this.price = 0;
 				let _this = this;
 				this.data.forEach(function(cart) {
-					if (cart.number < 1) {
-						cart.number = 1;
-					}
+
 					if (cart.state) {
-						_this.price = _this.price + (cart.number * cart.price);
+						_this.price = _this.price + cart.price;
 					}
 
 				}, this)
@@ -141,7 +172,7 @@
 					this.ids = []
 					this.data.forEach(function(cart) {
 						cart.state = true;
-						this.ids.push(cart.cartId)
+						this.ids.push(cart.orderNumber)
 					}, this)
 				} else {
 					this.ids = [];
@@ -162,6 +193,11 @@
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
 							this.data = data.data.data;
+						} else {
+							uni.showToast({
+								title: data.data.msg,
+								icon: 'none'
+							})
 						}
 						uni.hideLoading();
 					},
@@ -170,20 +206,21 @@
 						uni.hideLoading();
 					}
 				})
-			} 
-			 
+			}
+
 		}
 	}
 </script>
 
 <style>
 	.shoppingCarttop {
-		padding: 20upx 10upx 10upx;
+		padding: 0upx 10upx 10upx;
 	}
 
 
 	.shoppingCart {
 		overflow: hidden;
+		margin-bottom: 90upx;
 	}
 
 	.shoppingCart-list {
@@ -275,7 +312,7 @@
 		z-index: 100;
 		display: block;
 		margin-top: -35upx;
-		 
+
 		height: 7upx;
 	}
 
@@ -289,6 +326,7 @@
 		height: 187upx;
 		background-size: 100% 100%;
 		border: solid 1px #eeeeee;
+		border-radius: 50%;
 	}
 
 	.centRight-img span {
@@ -317,7 +355,7 @@
 	}
 
 	.centRight-centp {
-		font-size:  24upx;
+		font-size: 24upx;
 	}
 
 	.centRight-cent p span {
@@ -463,7 +501,7 @@
 		/* height: 0.54rem;
 		line-height: 0.54rem; */
 		text-align: center;
-		font-size:  24upx;
+		font-size: 24upx;
 		color: #333333;
 		border: 1px solid #CCCCCC;
 		border-radius: 9upx;

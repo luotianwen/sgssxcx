@@ -2,7 +2,7 @@
 	<div>
 		<view class="uni-list-cell">
 			<input class="uni-input" style="width: 60%; margin-left:5%;" focus v-model="articleno" placeholder="输入货号" />
-			<button type="primary" @tap="query()">查询</button>
+			<button type="default" @tap="query()"  >查询</button>
 		</view>
 		<view class="uni-list">
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover">
