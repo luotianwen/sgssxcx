@@ -300,7 +300,7 @@
 								fail: function(err) {
 									console.log('fail:' + JSON.stringify(err));
 									uni.showModal({
-										content: "支付失败,原因为: " + err.errMsg,
+										content: "支付失败",
 										showCancel: false
 									})
 									 

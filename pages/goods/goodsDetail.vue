@@ -5,10 +5,10 @@
 				 @tap="goCart()"></span>
 			</view>
 		<view class=" page-section-spacing swiper" style="background: #fff;">
-			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 480upx;padding-left: 10px;padding-right: 10px;">
+			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 640upx;width: 96%;padding-left: 2%;">
 				<swiper-item v-for="item in data.images" :key="item">
 					<view class="swiper-item  ">
-						<image :src="item" style="width: 100%;" />
+						<image :src="item" style="width: 100%;height: 640upx;" />
 					</view>
 				</swiper-item>
 			</swiper>
@@ -341,7 +341,19 @@
 </script>
 
 <style>
-	
+	 
+	 
+	 .swiper-item {
+	 	display: block;
+	 	width: 100%;
+	 	text-align: center;
+	 }
+	 
+	 .swiper-list {
+	 	/* margin-top: 40upx; */
+	 	margin-bottom: 0;
+	 }
+	 
 	.purchase-header {
 		/* padding-left: 2%; */
 		position: fixed;
@@ -551,7 +563,7 @@
 	 
 
 	.goodsDetails-choice {
-		padding: 47upx 0;
+		padding: 10upx 0;
 		position: fixed;
 		left: 0;
 		bottom: 85upx;
@@ -642,8 +654,8 @@
 		top: 0;
 		right: 0;
 		width: 351upx;
-		height: 50upx;
-		line-height:50upx;
+		height: 40upx;
+		line-height:40upx;
 		border: 1px solid #eee;
 		text-align: center;
 		color: #666;
