@@ -341,7 +341,7 @@
 	}
 
 	.address-centp {
-		font-size: 26upx;;
+		font-size: 30upx;;
 		color: #999;
 	}
 
@@ -361,7 +361,7 @@
 	}
 
 	.confirmOrder-describe p {
-		font-size: 26upx;;
+		font-size: 30upx;;
 		color: #999;
 	}
  
@@ -383,7 +383,7 @@
 		margin-left: 35upx;
 		height: 94upx;
 		line-height: 94upx;
-		font-size: 26upx;;
+		font-size: 30upx;;
 		color: #333333;
 		border-bottom: 1px solid #e2e2e2;
 	}
@@ -433,13 +433,13 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 28upx;
+		font-size: 30upx;
 		color: #333333;
 	}
 
 	.centList-centRight .centRight-h6 {
 		float: right;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #666;
 	}
 
@@ -448,14 +448,14 @@
 	}
 
 	.centList-centRight p {
-		font-size: 24upx;
+		font-size: 30upx;
 	}
 
 	.centList-centRight .happyi-mon {
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #EF593C;
 	}
 
@@ -465,7 +465,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999;
 	}
 
@@ -478,7 +478,7 @@
 		text-align: center;
 		border: 1px solid transparent;
 		border-radius: 9upx;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #666666;
 	}
 
@@ -497,7 +497,7 @@
 		height: 94upx;
 		line-height: 94upx;
 		text-align: right;
-		font-size: 26upx;;
+		font-size: 30upx;;
 		color: #666;
 	}
 
@@ -535,7 +535,7 @@
 		margin-top: 24upx;
 		margin-bottom: 70upx;
 		padding-left: 35upx;
-		font-size: 26upx;;
+		font-size: 30upx;;
 		background: #fff;
 	}
 
@@ -585,7 +585,7 @@
 		line-height: 117upx;
 		text-align: center;
 		background: #fff;
-		font-size: 28upx;
+		font-size: 30upx;
 		color: #333;
 	}
  
@@ -624,7 +624,7 @@
 		border-top: 1px solid #ccc;
 		background: #fff;
 		color: #333333; 
-		font-size: 26upx;
+		font-size: 30upx;
 	}
 
 	.confirmOrder-footer strong {

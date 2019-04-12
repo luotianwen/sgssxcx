@@ -115,31 +115,31 @@
 		height: 59upx;
 		background: transparent;
 		border: none;
-		font-size: 30upx;
+		/* font-size: 30upx; */
 		color: #666;
 		vertical-align: middle;
 	}
 
 	.header-left input::-webkit-input-placeholder {
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999999;
 	}
 
 	.header-left input::-moz-placeholder {
 		/* Mozilla Firefox 19+ */
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999999;
 	}
 
 	.header-left input:-moz-placeholder {
 		/* Mozilla Firefox 4 to 18 */
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999999;
 	}
 
 	.header-left input:-ms-input-placeholder {
 		/* Internet Explorer 10-11 */
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999999;
 	}
 
@@ -211,7 +211,7 @@
 		height: 59upx;
 		line-height: 59upx;
 		color: #333;
-		font-size: 24upx;
+		font-size: 30upx;
 		background: #F5F5F5;
 		border-radius: 29upx;
 	}

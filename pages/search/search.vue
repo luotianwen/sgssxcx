@@ -248,7 +248,7 @@
 	.goodsList-listh6 {
 		padding-left: 250upx;
 		/* padding-top: 6upx; */
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333333;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -264,7 +264,7 @@
 		padding: 0 17upx;
 		height: 35upx;
 		line-height: 35upx;
-		font-size: 24upx;
+		font-size: 30upx;
 		/* color: #fff; */
 		/* background: #FC8872; */
 		border-radius: 100px;
@@ -273,7 +273,7 @@
    .goodsList-listp {
 	   padding-left: 250upx;
 		margin: 20upx 0;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #666;
 		overflow: hidden;
 		text-overflow: ellipsis;

@@ -5,10 +5,10 @@
 				 @tap="goCart()"></span>
 			</view>
 		<view class=" page-section-spacing swiper" style="background: #fff;">
-			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 640upx;width: 96%;padding-left: 2%;">
+			<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 700upx;width: 96%;padding-left: 2%;">
 				<swiper-item v-for="item in data.images" :key="item">
 					<view class="swiper-item  ">
-						<image :src="item" style="width: 100%;height: 640upx;" />
+						<image :src="item" style="width: 100%;height: 700upx;" />
 					</view>
 				</swiper-item>
 			</swiper>
@@ -466,18 +466,18 @@
 	.goodsDetails-title .title-money {
 		height: 129upx;
 		line-height: 129upx;
-		font-size: 28upx;
+		font-size: 30upx;
 		color: #999;
 	}
 
 	.goodsDetails-title .title-moneyNum {
-		font-size: 28upx;
+		font-size: 30upx;
 		/* color: #EF593C; */
 	}
 
 	.goodsDetails-title .title-moneyNum span {
 		margin-right: 10upx;
-		font-size: 28upx;
+		font-size: 30upx;
 	}
 
 
@@ -501,14 +501,14 @@
 		left: 0;
 		bottom: 0;
 		z-index: 2000;
-		height: 85upx;
-		line-height: 85upx;  
+		height: 100upx;
+		line-height: 100upx;  
 		width: 100%;
 		background: #fff;
 		text-align: right;
 		border-top: 1px solid #eee;
 		font-size: 0;
-		margin-bottom: 5upx;
+		/* margin-bottom: 5upx; */
 	}
 
 	.goodsDetails-butt>span {
@@ -522,7 +522,7 @@
 
 	.goodsDetails-butt a {
 		float: right;
-		font-size: 28upx;
+		font-size: 36upx;
 		color: #fff;
 		width: 50%;
 		height: 100%;
@@ -556,7 +556,7 @@
 
 	.goodsDetails-InfoCent .InfoCent-Img {
 		padding: 10upx;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333;
 	}
 
@@ -583,12 +583,12 @@
 	}
 
 	.goodsDetails-choicep {
-		font-size: 28upx;
+		font-size: 30upx;
 		color: #333333;
 	}
 
 	.goodsDetails-choice p {
-		font-size: 28upx;
+		font-size: 30upx;
 		color: #333333;
 	}
 
@@ -644,7 +644,7 @@
 		border-radius: 100px;
 		border: solid 1px #7c8895;
 		color: #666;
-		font-size: 28upx;
+		font-size: 30upx;
 		
 		 
 	}
@@ -697,7 +697,7 @@
 		height: 95%;
 		background: none;
 		border: none;
-		font-size: 24upx;
+		font-size: 30upx;
 		text-align: center;
 	}
 

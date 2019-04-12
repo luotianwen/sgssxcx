@@ -67,7 +67,7 @@
 <style>
 	.refundInfo-top {
 		padding: 20upx 0 0 0;
-		font-size: 28upx;
+		font-size: 30upx;
 		color: #333333;
 		background: #fff;
 	}
@@ -130,7 +130,7 @@
 
 	.refundInfo-listp {
 		margin-bottom: 9upx;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999;
 	}
 
@@ -179,7 +179,7 @@
 		height: 63upx;
 		line-height: 63upx;
 		text-align: center;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #333;
 		border-radius: 9upx;
 		border: 1px solid #cccccc;
@@ -213,7 +213,7 @@
 		border-top: 1px solid #eee;
 		background: #fff;
 		color: #333333;
-		font-size: 26upx;
+		font-size: 30upx;
 	}
 
 	.confirmOrder-footer strong {
@@ -284,7 +284,7 @@
 
 	.refuseRefund-butt p {
 		margin-bottom: 6upx;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #cccccc;
 	}
 

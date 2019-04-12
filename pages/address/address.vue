@@ -244,7 +244,7 @@
 		text-align: center;
 		background-color: #CDC8B1;
 		border-radius: 5upx;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #fff;
 		vertical-align: 2upx;
 	}
@@ -255,7 +255,7 @@
 
 	.address-listCent p {
 		margin-top: 6upx;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #999;
 	}
 

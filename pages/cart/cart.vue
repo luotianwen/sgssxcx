@@ -488,12 +488,12 @@ uni.showLoading({
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333333;
 	}
 
 	.centRight-centp {
-		font-size:  24upx;
+		font-size:  30upx;
 	}
 
 	.centRight-cent p span {
@@ -528,13 +528,13 @@ uni.showLoading({
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999;
 	}
 
 	.list-centData {
 		position: absolute;
-		bottom: 35upx;
+		bottom: 10upx;
 		right: 24upx;
 		width: 222upx;
 	}
@@ -546,7 +546,7 @@ uni.showLoading({
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #999;
 	}
 
@@ -584,7 +584,7 @@ uni.showLoading({
 		height: 95%;
 		background: none;
 		border: none;
-		font-size: 24upx;
+		font-size: 30upx;
 		text-align: center;
 	}
 
@@ -605,7 +605,7 @@ uni.showLoading({
 	.shoppingCart-footerlabel {
 		display: inline-block;
 		/* 	padding-left: 0.65rem; */
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333333;
 		/* background: url(http://op.yoyound.com/static/images/nocheck.png) no-repeat left center; */
 		/* 	background-size: 58upx 58upx; */
@@ -628,7 +628,7 @@ uni.showLoading({
 	.shoppingCart-footerspan {
 		margin-right: 35upx;
 		float: right;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #EF593C;
 	}
 

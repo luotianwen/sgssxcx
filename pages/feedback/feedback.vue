@@ -143,7 +143,7 @@
     }
 
     .input-view {
-        font-size: 28upx;
+        font-size: 30upx;
     }
     .close-view{
         text-align: center;line-height:14px;height: 16px;width: 16px;border-radius: 50%;background: #FF5053;color: #FFFFFF;position: absolute;top: -6px;right: -4px;font-size: 12px;

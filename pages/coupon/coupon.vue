@@ -462,7 +462,7 @@
 	}
 
 	.coupon-list p {
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #666;
 	}
 
@@ -474,7 +474,7 @@
 		width: 91%;
 		height: 96upx;
 		line-height: 96upx;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #666;
 	}
 
@@ -496,7 +496,7 @@
 		line-height: 58upx;
 		text-align: center;
 		border-radius: 6upx;
-		font-size: 24upx;
+		font-size: 30upx;
 	}
 
 	.coupon-list .list-btn {
@@ -552,7 +552,7 @@
 		height: 37upx;
 		line-height: 37upx;
 		text-align: center;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #EF593C;
 		border: 1px solid #EF593C;
 		border-radius: 4upx;

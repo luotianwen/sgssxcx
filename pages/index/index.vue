@@ -354,7 +354,7 @@
 		width: 23px;
 		height: 17px;
 		position: absolute;
-		font-size: 12px;
+		
 		font-weight: normal;
 		font-stretch: normal;
 		letter-spacing: -1px;
@@ -373,7 +373,7 @@
 		width: 80upx;
 		/* padding-right: 0.48rem; */
 		height: 100%;
-
+		font-size: 12px;
 		background: url("http://op.yoyound.com/static/images/left.png") no-repeat right center;
 		background-size: 50upx 50upx;
 	}
@@ -421,11 +421,11 @@
 
 		position: relative;
 		top: 0;
-		width: 75upx;
+		width: 100upx;
 		height: 19upx;
 		color: #011959;
 
-		font-size: 25upx;
+		font-size: 35upx;
 		font-style: normal;
 		font-stretch: normal;
 		font-weight: 500;
@@ -479,7 +479,7 @@
 	.follow-centImgh6 {
 		padding-left: 250upx;
 
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333333;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -493,8 +493,8 @@
 
 	.goodsList-listp {
 		padding-left: 250upx;
-		margin: 21upx 0;
-		font-size: 24upx;
+		/* margin: 21upx 0; */
+		font-size: 30upx;
 		color: #666;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -572,7 +572,7 @@
 		width: 152upx;
 		height: 19upx;
 
-		font-size: 25upx;
+		font-size: 35upx;
 		font-weight: normal;
 		font-stretch: normal;
 		/* letter-spacing: -1px; */

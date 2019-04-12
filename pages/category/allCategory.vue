@@ -116,7 +116,7 @@
 		height: 100upx;
 		border-right: solid 1px #E0E0E0;
 		border-bottom: solid 1px #E0E0E0;
-		font-size: 30upx;
+		/* font-size: 30upx; */
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -139,7 +139,7 @@
 		padding-top: 15upx;
 		padding-left: 15upx;
 		/* padding: 11upx; */
-		font-size: 28upx;
+		/* font-size: 30upx; */
 	}
 
 	.nav-right-item image {

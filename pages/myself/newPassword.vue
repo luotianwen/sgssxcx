@@ -195,7 +195,7 @@
 
 	.replaceTel-tel1>span span {
 		font-family: "宋体";
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #cacaca;
 	}
 
@@ -403,7 +403,7 @@
 	}
 
 	.authentication-mirror p {
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #666;
 	}
 

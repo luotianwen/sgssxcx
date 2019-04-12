@@ -110,7 +110,7 @@
 	}
 
 	.app-portalp {
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333;
 		text-align: center;
 		overflow: hidden;

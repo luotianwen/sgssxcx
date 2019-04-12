@@ -232,7 +232,7 @@
 					}
 
 					.message {
-						font-size: 24rpx;
+						font-size: 30rpx;
 						color: #7c8489;
 					}
 				}

@@ -228,7 +228,7 @@
 		margin-left: 35upx;
 		height: 94upx;
 		line-height: 94upx;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #333333;
 		border-bottom: 1px solid #e2e2e2;
 	}
@@ -292,7 +292,7 @@
 
 	.centList-centRight .centRight-h6 {
 		float: right;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #666;
 	}
 
@@ -302,14 +302,14 @@
 	}
 
 	.centList-centRight p {
-		font-size: 24upx;
+		font-size: 30upx;
 	}
 
 	.centList-centRight .happyi-mon {
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #EF593C;
 	}
 
@@ -317,7 +317,7 @@
 		padding: 0 35upx;
 		height: 117upx;
 		line-height: 117upx;
-		font-size: 26upx;
+		font-size: 30upx;
 		color: #666;
 	}
 

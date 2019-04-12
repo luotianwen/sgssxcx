@@ -250,7 +250,7 @@
 	.follow-centImgh6 {
 		padding-left: 250upx;
 		padding-top: 5upx;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #333333;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -264,7 +264,7 @@
 	.goodsList-listp {
 		padding-left: 250upx;
 		margin: 20upx 0;
-		font-size: 24upx;
+		font-size: 30upx;
 		color: #666;
 		overflow: hidden;
 		text-overflow: ellipsis;
