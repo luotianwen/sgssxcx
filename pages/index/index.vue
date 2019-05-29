@@ -7,7 +7,7 @@
 				 class="header-cart" @tap="goCart()"></span>
 			</view>
 			<view class="page-section page-section-spacing swiper" style="background-color: #fff;">
-				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 475upx;width: 96%;padding-left: 2%;">
+				<swiper :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" style="height: 580upx;width: 96%;padding-left: 2%;">
 					<swiper-item v-for="item in carousels" :key="item">
 						<view class="swiper-item  ">
 							<image :src="item.logo" style="width: 100%;" />
@@ -53,7 +53,7 @@
 				<view style="width: 100%;">
 					<view class="brands1"> 品牌馆 </view>
 					<view class="brandsmore " @tap="goBrandList()">
-						<view class="brandsmore-more">更多</view>
+						<view class="brandsmore-more"></view>
 					</view>
 				</view>
 				<view style="padding-top: 10px;">
@@ -128,7 +128,7 @@
 			}
 		},
 		onLoad() {
-			 //service.removeUser();
+			 // service.removeUser();
              const updateManager = uni.getUpdateManager();
 			updateManager.onCheckForUpdate(function(res) {
 				// 请求完新版本信息的回调
@@ -381,7 +381,7 @@
 	.app-portal {
 		padding-top: 2upx;
 		width: 175upx;
-		height: 175upx;
+		height: 100upx;
 		text-align: center;
 		display: inline-block
 	}
@@ -395,13 +395,13 @@
 	}
 
 	.app-portalimg {
-		width: 150upx;
-		height: 150upx
+		width: 88upx;
+		height: 88upx
 	}
 
 	.rectangle4 {
 		width: 88px;
-		height: 90px;
+		height: 120px;
 		border: 1px solid #c0cdda;
 		background: #ffffff;
 		color: #011959;
@@ -425,7 +425,7 @@
 		height: 19upx;
 		color: #011959;
 
-		font-size: 35upx;
+		font-size: 25upx;
 		font-style: normal;
 		font-stretch: normal;
 		font-weight: 500;
@@ -564,19 +564,19 @@
 	}
 
 	.rectangle3img {
-		width: 120upx;
-		height: 120upx;
+		width: 80upx;
+		height: 80upx;
 	}
 
 	.rectangle3code {
 		width: 152upx;
 		height: 19upx;
 
-		font-size: 35upx;
+		font-size: 24upx;
 		font-weight: normal;
 		font-stretch: normal;
 		/* letter-spacing: -1px; */
-		color: #7c8895;
+		/* color: #7c8895; */
 	}
 
 	.rectangle3 {
@@ -584,7 +584,7 @@
 		/* margin-top: 20upx; */
 		/* margin-left: 2.5%; */
 		width: 33.333%;
-		height: 220upx;
+		/* height: 220upx; */
 		/* border: 0.5px solid #c0cdda; */
 		background: #ffffff;
 		box-shadow: 0px 1px 3px 0px #c0cdda;

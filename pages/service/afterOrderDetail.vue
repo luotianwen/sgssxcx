@@ -490,7 +490,7 @@
   float: right;
   padding-right: 58upx;
   height: 100%;
-  background: url( https://cs.h5.hongkzh.com/imgs/see/selfMedia/selfMedia-hotmore.png) no-repeat right center;
+  background: url("https://cs.h5.hongkzh.com/imgs/see/selfMedia/selfMedia-hotmore.png") no-repeat right center;
   background-size: 70upx 70upx;
 }
 .ios-select-widget-box ul li.at {

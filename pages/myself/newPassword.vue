@@ -290,7 +290,7 @@
 		display: inline-block;
 		width: 0.6rem;
 		height: 100%;
-		background: url(https://cs.h5.hongkzh.com/imgs/see/selfMedia/selfMedia-hotmore.png) no-repeat center;
+		background: url("https://cs.h5.hongkzh.com/imgs/see/selfMedia/selfMedia-hotmore.png") no-repeat center;
 		background-size: 0.6rem 0.6rem;
 	}
 

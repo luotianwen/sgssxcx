@@ -27,7 +27,8 @@
 								<view class="centList-centRighth6">{{item.name}}
 									<view class="centRight-h6 centRight-h6span">×{{item.number}}</view>
 								</view>
-								<view class="centList-centRightp">{{item.spec1}} &nbsp; {{item.spec2}}</view>
+								<view class="centList-centRightp" v-if="item.spec2">{{item.spec1}} &nbsp;  {{item.spec2}}</view>
+								<view class="centList-centRightp" v-else >{{item.spec1}} &nbsp;</view> 
 								<view class="happyi-mon">
 									<view class="happyi-monspan">¥{{item.price}}</view>
 								</view>

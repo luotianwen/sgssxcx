@@ -99,18 +99,18 @@
 	.app-portal {
 		padding-top: 10px;
 		width: 25%;
-		height: 148rpx;
+		height: 168rpx;
 		text-align: center;
 		display: inline-block
 	}
 
 	.app-portalimg {
-		width: 120upx;  
-		height:120upx
+		width: 88upx;  
+		height:88upx
 	}
 
 	.app-portalp {
-		font-size: 30upx;
+		font-size: 24upx;
 		color: #333;
 		text-align: center;
 		overflow: hidden;

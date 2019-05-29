@@ -22,7 +22,11 @@
 			</view>
 			<button  class="header-info" style="background:none;border:none;outline:none"  open-type="getUserInfo" @getuserinfo="onGotUserInfo"> 登录</button>
 		</view>
-		
+		<uni-popup :show="!uerInfo.hasLogin" position="middle" mode="fixed"  >
+			<view class="center-box">
+				<button  type="primary"  open-type="getUserInfo" @getuserinfo="onGotUserInfo">微信授权</button>
+			 </view>
+		</uni-popup>
 		<view class="happyiIndex-list">
 			<view class="listCent happyi-co1" @tap="goOrder()">我的订单<a class="happyi-left">{{orders}}</a></view>
 			<view class="listCent happyi-co2" @tap="goAfterOrder()">退换/售后<a class="happyi-left">{{afterOrders}}</a></view>
@@ -57,8 +61,12 @@
 </template>
 
 <script>
+	import uniPopup from '@/components/uni-popup.vue'
 	import service from '../../service.js';
 	export default {
+		components: {
+			uniPopup
+		},
 		data() {
 			return {
 				avatarUrl: '',
@@ -304,7 +312,10 @@
 
 <style>
 	 
-
+.center-box {
+		width: 500upx;
+	/* 	height: 500upx; */
+	}
 	.happyiIndex-header {
 		position: relative;
 		padding-top: 6upx;

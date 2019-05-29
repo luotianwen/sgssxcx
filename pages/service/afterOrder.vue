@@ -17,7 +17,8 @@
 
 						<div class="centList-centRight">
 							<h6 class="clearfix">{{sub.name}}<span class="centRight-h6"><span>×</span>{{sub.number}}</span></h6>
-							<p>{{sub.spec1}} &nbsp; {{sub.spec2}}</p>
+							 <p v-if="sub.spec2">{{sub.spec1}} &nbsp; {{sub.spec2}}</p>
+							<p v-else >{{sub.spec1}} &nbsp; </p>
 							<div class="happyi-mon"><span>¥</span>{{sub.price}}</div>
 						</div>
 					</div>

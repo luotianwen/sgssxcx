@@ -16,7 +16,8 @@
 
 								<view class="centRight-cent">
 									<view class="centRight-centh6">{{item.name}}</view>
-									<view class="centRight-centp">{{item.spec1}} &nbsp; {{item.spec2}}</view>
+									   <view class="centRight-centp" v-if="item.spec2">{{item.spec1}} &nbsp;  {{item.spec2}}</view>
+										<view class="centRight-centp" v-else >{{item.spec1}} &nbsp;</view>
 									<view class="centRight-centdiv">应付:<span class="happyi-mon">¥{{item.price}}</span></view>
 								</view>
 							</view>
@@ -35,9 +36,16 @@
 						</view>
 					</view>
 
-					<view v-show="!login" style="margin-top: 50%; ">
+					<!-- <view v-show="!login" style="margin-top: 50%; ">
 						<button     open-type="getUserInfo" @getuserinfo="onGotUserInfo"> 登录</button>
 					</view>
+					 -->
+					<uni-popup :show="!login" position="middle" mode="fixed"  >
+						<view class="center-box">
+							<button  type="primary"  open-type="getUserInfo" @getuserinfo="onGotUserInfo">微信授权</button>
+						 </view>
+					</uni-popup>
+					
 				</view>
 			</view>
 
@@ -50,11 +58,15 @@
 		</view>
 
 	</view>
-</template>
+</template> 
 
 <script>
+	import uniPopup from '@/components/uni-popup.vue'
 	import service from '../../service.js';
 	export default {
+		components: {
+			uniPopup 
+		},
 		data() {
 			return {
 				data: [],
@@ -353,6 +365,10 @@ uni.showLoading({
 </script>
 
 <style>
+	.center-box {
+		width: 500upx;
+	/* 	height: 500upx; */
+	}
 	.shoppingCarttop {
 		padding: 20upx 10upx 10upx;
 	}

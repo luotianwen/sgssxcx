@@ -4,7 +4,7 @@
 		<view class="uni-list" style="padding-top: 20upx;">
 			<view class="uni-list-cell">
 				<input class="uni-input" style="width: 60%; margin-left:5%;" focus type="number" v-model="vphone" placeholder="输入手机号" />
-				<button type="primary" @tap="onSave()">发送验证码</button>
+				<button type="primary" @tap="onSave()" style="font-size: 30upx;">发送验证码</button>
 			</view>
 		</view>
 	 

@@ -48,14 +48,14 @@
 					<view class="choice-centp goodsDetails-choicep">{{data.spec1}}</view>
 					<view v-for="specc1 in data.spec1s" :key="specc1" :class="['choice-centspan',{'choice-centactive':spec1==specc1}]"
 					 @click="getInfo(1,specc1)"> {{specc1}}</view>
-				</view>
-				<div class="choice-cent">
+				</view> 
+				<div class="choice-cent" v-show="spec22">
 					<view class="choice-centp goodsDetails-choicep">{{data.spec2}}</view>
 					<view v-for="specc2 in data.spec2s" :key="specc2" :class="['choice-centspan',{'choice-centactive':spec2==specc2}]"
 					 @click="getInfo(2,specc2)">{{specc2}}</view>
 				</div>
 				<div class="choice-butt">
-					<view class="choice-buttp goodsDetails-choicep">购买数量</view>
+					<view class="choice-buttp goodsDetails-choicep">数量</view>
 					<div class="choice-buttDiv  ">
 						<view class="choice-buttspan choice-buttBtn1" @click="getReduce()">－</view> <input type="number" v-model="number"
 						 name="num">
@@ -93,6 +93,7 @@
 				type: 0,
 				cartCount:0,
 				agentId:"",
+				spec22:false
 				 
 			}
 		},
@@ -159,7 +160,7 @@
 					this.spec2 = item;
 				}
 
-				if (this.spec1.length > 0 && this.spec2.length > 0) {
+				if (this.spec1.length > 0 ) {
 					this.getSkuInfo();
 				}
 			},
@@ -171,11 +172,18 @@
 				for (var s in skus) {
 					// console.log(skus[s].spec1+"spec1"+(skus[s].spec1==this.spec1)+"  "+this.spec1);
 					//console.log(skus[s].spec2+"spec2"+(skus[s].spec2==this.spec2)+"  "+this.spec2);
-					if (skus[s].spec1 == this.spec1 && skus[s].spec2 == this.spec2) {
+					if(skus[s].spec1 == this.spec1&&this.spec22&& skus[s].spec2 == this.spec2){
+					//if (skus[s].spec1 == this.spec1 && skus[s].spec2 == this.spec2) {
 						this.skuId = skus[s].skuId;
 						this.stock = skus[s].stock;
 						this.price = skus[s].price;
 						break;
+					}
+					if(skus[s].spec1 == this.spec1 && !this.spec22){
+						this.skuId = skus[s].skuId;
+						this.stock = skus[s].stock;
+						this.price = skus[s].price;
+						 break;
 					}
 				}
 			},
@@ -329,6 +337,10 @@
 					success: (data) => {
 						if (data.statusCode == 200 && data.data.code == 0) {
 							this.data = data.data.data;
+							if(this.data.spec2!=null ){
+							    this.spec22=true;
+							}
+							console.log("this.spec22"+this.spec22);
 						}
 					},
 					fail: (data, code) => {
@@ -566,7 +578,7 @@
 		padding: 10upx 0;
 		position: fixed;
 		left: 0;
-		bottom: 85upx;
+		bottom: 100upx;
 		z-index: 2000;
 		width: 100%;
 		background: #fff;
@@ -625,13 +637,13 @@
 	}
 
 	.goodsDetails-choice .choice-cent {
-		padding-bottom: 12upx;
+		padding-bottom: 20upx;
 		border-bottom: 1px solid #f1f1f1;
 	}
 
 	.goodsDetails-choice .choice-centp {
-		height: 50upx;
-		line-height: 50upx;
+		height: 80upx;
+		line-height: 80upx;
 	}
 
 	.goodsDetails-choice .choice-centspan {
@@ -654,8 +666,8 @@
 		top: 0;
 		right: 0;
 		width: 351upx;
-		height: 40upx;
-		line-height:40upx;
+		height: 60upx;
+		line-height:60upx;
 		border: 1px solid #eee;
 		text-align: center;
 		color: #666;
@@ -670,7 +682,8 @@
 
 	.goodsDetails-choice .choice-butt {
 		position: relative;
-		margin-top: 0.243upx;
+		margin-top: 40upx;
+		margin-bottom:40upx
 	}
 
 	.goodsDetails-choice .choice-buttp {
